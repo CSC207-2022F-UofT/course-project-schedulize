@@ -1,4 +1,4 @@
-package UI;
+package Config;
 
 /**
  * A PathManager class, following a Singleton design pattern for flexibility in refactoring
