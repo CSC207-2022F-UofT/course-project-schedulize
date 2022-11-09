@@ -62,13 +62,12 @@ public class LoginUI extends JFrame {
      */
     private void setDefaultIcons() {
         // set Frame icon
-        String baseDir = System.getProperty("user.dir");
-        String filePath = baseDir.concat("\\Icons\\acorn.png");
+        String filePath = PathManager.getIconDirectory().concat("\\acorn.png");
         Image icon = Toolkit.getDefaultToolkit().getImage(filePath);
         this.setIconImage(icon);
 
         // set password visibility icon
-        filePath = baseDir.concat("\\Icons\\eye.png");
+        filePath = PathManager.getIconDirectory().concat("\\eye.png");
         icon = Toolkit.getDefaultToolkit().getImage(filePath);
         pwVisibility.setIcon(new ImageIcon(icon));
     }
@@ -126,14 +125,13 @@ public class LoginUI extends JFrame {
         pwVisibility.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                String baseDir = System.getProperty("user.dir");
                 if (pwIsVisible) {
-                    String filePath = baseDir.concat("\\Icons\\eye.png");
+                    String filePath = PathManager.getIconDirectory().concat("\\eye.png");
                     pwVisibility.setIcon(new ImageIcon(filePath));
                     passwordField.setEchoChar('*');
                     pwIsVisible = false;
                 } else {
-                    String filePath = baseDir.concat("\\Icons\\eye-close.png");
+                    String filePath = PathManager.getIconDirectory().concat("\\eye-close.png");
                     pwVisibility.setIcon(new ImageIcon(filePath));
                     passwordField.setEchoChar((char) 0);
                     pwIsVisible = true;
