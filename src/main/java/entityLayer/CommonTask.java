@@ -24,10 +24,23 @@ public class CommonTask implements Task {
     /* ************ *\
     *  Constructors  *
     \* ************ */
+    /**
+     * Constructs a CommonTask object with the provided name and description, setting its completion to 0
+     *
+     * @param name this CommonTask's name
+     * @param description this CommonTask's description
+     */
     public CommonTask(String name, String description) {
         this(name, description, 0);
     }
 
+    /**
+     * Constructs a CommonTask object with the provided name, description, and completion.
+     *
+     * @param name this CommonTask's name
+     * @param description this CommonTask's description
+     * @param completion this CommonTask's completion
+     */
     public CommonTask(String name, String description, int completion) {
         this.name = name;
         this.description = description;
@@ -35,6 +48,24 @@ public class CommonTask implements Task {
         this.id = taskCount++;
     }
 
+    /* ************* *\
+    *  Functionality  *
+    \* ************* */
+    /**
+     * Returns whether this CommonTask's completion is set to 100.
+     *
+     * @return true if this CommonTask is complete, false otherwise.
+     */
+    @Override
+    public boolean isComplete() {
+        return this.completion == 100;
+    }
+
+    /* **************** *\
+    *  Attribute Access  *
+    \* **************** */
+
+    // Getters
     /**
      * Get this CommonTask's completion level.
      *
@@ -42,7 +73,7 @@ public class CommonTask implements Task {
      */
     @Override
     public int getCompletion() {
-        return 0;
+        return this.completion;
     }
 
     /**
@@ -52,7 +83,7 @@ public class CommonTask implements Task {
      */
     @Override
     public String getName() {
-        return null;
+        return this.name;
     }
 
     /**
@@ -62,7 +93,7 @@ public class CommonTask implements Task {
      */
     @Override
     public String getDescription() {
-        return null;
+        return this.description;
     }
 
     /**
@@ -72,9 +103,10 @@ public class CommonTask implements Task {
      */
     @Override
     public int getId() {
-        return 0;
+        return this.id;
     }
 
+    // Setters
     /**
      * Sets this CommonTask's completion attribute to the passed number.
      * If the attempted value is out of bounds (i.e. less than 0, greater than 100) return false. True otherwise.
@@ -84,7 +116,11 @@ public class CommonTask implements Task {
      */
     @Override
     public boolean setCompletion(int completion) {
-        return false;
+        if (completion < 0 || completion > 100) {
+            return false;
+        }
+        this.completion = completion;
+        return true;
     }
 
     /**
@@ -105,15 +141,5 @@ public class CommonTask implements Task {
     @Override
     public void setDescription(String description) {
 
-    }
-
-    /**
-     * Returns whether this CommonTask's completion is set to 100.
-     *
-     * @return true if this CommonTask is complete, false otherwise.
-     */
-    @Override
-    public boolean isComplete() {
-        return false;
     }
 }
