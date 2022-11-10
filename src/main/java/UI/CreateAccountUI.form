@@ -46,7 +46,9 @@
             <preferred-size width="150" height="-1"/>
           </grid>
         </constraints>
-        <properties/>
+        <properties>
+          <echoChar value="*"/>
+        </properties>
       </component>
       <component id="9ff4d" class="javax.swing.JLabel" binding="passwordLabel">
         <constraints>
@@ -62,7 +64,9 @@
             <preferred-size width="150" height="-1"/>
           </grid>
         </constraints>
-        <properties/>
+        <properties>
+          <echoChar value="*"/>
+        </properties>
       </component>
       <component id="ecdca" class="javax.swing.JLabel" binding="repeatPasswordLabel">
         <constraints>

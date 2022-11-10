@@ -1,5 +1,7 @@
 package UI;
 
+import Config.PathManager;
+
 import javax.swing.*;
 import java.awt.*;
 
@@ -11,6 +13,11 @@ import java.awt.*;
  * @author David Adler
  */
 public abstract class CentralWindow extends JFrame {
+
+    public CentralWindow() {
+        this.setFrameIcon();
+    }
+
     /**
      * Centers the JFrame window on the screen
      */
@@ -19,5 +26,15 @@ public abstract class CentralWindow extends JFrame {
         int x = (int) ((dimension.getWidth() - this.getWidth()) / 2);
         int y = (int) ((dimension.getHeight() - this.getHeight()) / 2);
         this.setLocation(x, y);
+    }
+
+    /**
+     * Sets the icon for this Frame
+     */
+    private void setFrameIcon() {
+        // set Frame icon
+        String filePath = PathManager.getIconDirectory().concat("\\acorn.png");
+        Image icon = Toolkit.getDefaultToolkit().getImage(filePath);
+        this.setIconImage(icon);
     }
 }

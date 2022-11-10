@@ -32,8 +32,6 @@ public class LoginUI extends CentralWindow {
         super();
         // configure default frame attributes
         this.configureFrame();
-        // set Icons
-        this.setDefaultIcons();
         // center frame on screen
         this.centreWindow();
         // set event listeners
@@ -51,6 +49,8 @@ public class LoginUI extends CentralWindow {
         this.setTitle("Schedulize Login");
         // set Frame window size
         this.setSize(350, 300);
+        // set Icons
+        this.setDefaultIcons();
         // disable resizability
         this.setResizable(false);
         // set close operation
@@ -60,17 +60,12 @@ public class LoginUI extends CentralWindow {
     }
 
     /**
-     * Sets the default icons for all aspects of this window
+     * Sets the default icons for all UI components in this Frame
      */
     private void setDefaultIcons() {
-        // set Frame icon
-        String filePath = PathManager.getIconDirectory().concat("\\acorn.png");
-        Image icon = Toolkit.getDefaultToolkit().getImage(filePath);
-        this.setIconImage(icon);
-
         // set password visibility icon
-        filePath = PathManager.getIconDirectory().concat("\\eye.png");
-        icon = Toolkit.getDefaultToolkit().getImage(filePath);
+        String filePath = PathManager.getIconDirectory().concat("\\eye.png");
+        Image icon = Toolkit.getDefaultToolkit().getImage(filePath);
         pwVisibility.setIcon(new ImageIcon(icon));
     }
 
