@@ -19,14 +19,27 @@ public class CreateAccountUI extends CentralWindow {
     private JLabel repeatPasswordLabel;
     private JPanel mainPanel;
     private JLabel suggestPwLabel;
-    private JLabel pwVisibility;
 
+    /**
+     * Default constructor for the create account window
+     */
     public CreateAccountUI() {
         super();
+        this.setPasswordFieldSize();
         this.configureFrame();
         this.setVisible(true);
         this.centreWindow();
         this.setListeners();
+    }
+
+    /**
+     * Set the password field's size so that it matches other components
+     */
+    private void setPasswordFieldSize() {
+        // set the input field size
+        this.passwordField.reconfigureFieldSize(190, 10);
+        // set the label size
+        this.passwordField.reconfigureLabelSize(130, 10);
     }
 
     /**
