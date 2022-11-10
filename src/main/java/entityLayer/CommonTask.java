@@ -3,7 +3,7 @@ package entityLayer;
 /**
  * A CommonTask class, implements the Task interface.
  * Created: 10/31/2022
- * Last updated: 11/4/2022
+ * Last updated: 11/10/2022
  * 
  * @author MMachadoUofT
  */
@@ -162,7 +162,7 @@ public class CommonTask implements Task {
      */
     @Override
     public void setName(String name) {
-
+        this.name = name;
     }
 
     /**
@@ -172,6 +172,6 @@ public class CommonTask implements Task {
      */
     @Override
     public void setDescription(String description) {
-
+        this.description = description;
     }
 }

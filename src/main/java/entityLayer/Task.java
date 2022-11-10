@@ -3,7 +3,7 @@ package entityLayer;
 /**
  * A Task interface, implemented by the CommonTask class. Meant as a layer of abstraction.
  * Created: 10/31/22
- * Last updated: 11/4/2022
+ * Last updated: 11/10/2022
  *
  * @author MMachadoUofT
  */
