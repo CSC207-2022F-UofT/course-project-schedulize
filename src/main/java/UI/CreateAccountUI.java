@@ -1,6 +1,8 @@
 package UI;
 
 import javax.swing.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 /**
  * A class that contains the GUI for creating a new account
@@ -21,6 +23,7 @@ public class CreateAccountUI extends CentralWindow {
     private JLabel suggestPwLabel;
     private JButton createAccountButton;
     private JLabel login;
+    private JFrame loginWindow;
 
     /**
      * Default constructor for the create account window
@@ -29,7 +32,7 @@ public class CreateAccountUI extends CentralWindow {
         super();
         this.setPasswordFieldSize();
         this.configureFrame();
-        this.setVisible(true);
+        this.setVisible(false);
         this.centreWindow();
         this.setListeners();
     }
@@ -64,10 +67,28 @@ public class CreateAccountUI extends CentralWindow {
      * Connects all action listeners for this window
      */
     private void setListeners() {
+        this.loginListener();
     }
 
-    // TODO: Delete During Deployment
-    public static void main(String[] args) {
-        JFrame window = new CreateAccountUI();
+    /**
+     * Set the login window used when toggling between this screen and the login screen
+     * @param window a JFrame representing a login window
+     */
+    public void setLoginWindow(JFrame window) {
+        this.loginWindow = window;
+    }
+
+    /**
+     * Action Listener for login label clicked
+     */
+    private void loginListener() {
+        JFrame createAccountWindow = this;
+        login.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                createAccountWindow.setVisible(false);
+                loginWindow.setVisible(true);
+            }
+        });
     }
 }

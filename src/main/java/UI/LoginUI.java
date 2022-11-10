@@ -18,12 +18,15 @@ public class LoginUI extends CentralWindow {
     private JLabel createAccount;
     private JLabel errorLabel;
     private PasswordField passwordField;
+    private JFrame createAccountWindow;
 
     /**
      * Default constructor for Login UI
      */
-    public LoginUI() {
+    public LoginUI(JFrame createAccountWindow) {
         super();
+        // connect the create account window
+        this.createAccountWindow = createAccountWindow;
         // configure default frame attributes
         this.configureFrame();
         // center frame on screen
@@ -76,17 +79,21 @@ public class LoginUI extends CentralWindow {
      * Action Listener for createAccount label clicked
      */
     private void createAccountListener() {
+        JFrame loginWindow = this;
         createAccount.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                // TODO: Connect to CreateAccount UI
-                System.out.println("reached!");
+                loginWindow.setVisible(false);
+                createAccountWindow.setVisible(true);
             }
         });
     }
 
     // TODO: Delete for Deployment
     public static void main(String[] args) {
-        JFrame window = new LoginUI();
+        CreateAccountUI createAccountWindow = new CreateAccountUI();
+        JFrame mainWindow = new LoginUI(createAccountWindow);
+
+        createAccountWindow.setLoginWindow(mainWindow);
     }
 }
