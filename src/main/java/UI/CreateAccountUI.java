@@ -1,25 +1,19 @@
 package UI;
 
-import Config.PathManager;
-
 import javax.swing.*;
-import java.awt.*;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
+
 
 public class CreateAccountUI extends CentralWindow {
     private JTextField emailField;
     private JLabel emailLabel;
     private JTextField usernameField;
     private JLabel usernameLabel;
-    private JPasswordField passwordField;
+    private PasswordField passwordField;
     private JPasswordField confirmPasswordField;
-    private JLabel passwordLabel;
     private JLabel repeatPasswordLabel;
     private JPanel mainPanel;
     private JLabel suggestPwLabel;
     private JLabel pwVisibility;
-    private boolean pwIsVisible;
 
     public CreateAccountUI() {
         super();
@@ -27,7 +21,6 @@ public class CreateAccountUI extends CentralWindow {
         this.setVisible(true);
         this.centreWindow();
         this.setListeners();
-        pwIsVisible = false;
     }
 
     /**
@@ -38,8 +31,6 @@ public class CreateAccountUI extends CentralWindow {
         this.setTitle("Schedulize New User Registration");
         // set Frame window size
         this.setSize(400, 300);
-        // set Icons
-        this.setDefaultIcons();
         // disable resizability
         this.setResizable(false);
         // set close operation
@@ -49,39 +40,6 @@ public class CreateAccountUI extends CentralWindow {
     }
 
     private void setListeners() {
-        this.pwVisibilityListener();
-    }
-
-    /**
-     * Sets the default icons for all UI components in this Frame
-     */
-    private void setDefaultIcons() {
-        // set password visibility icon
-        String filePath = PathManager.getIconDirectory().concat("\\eye.png");
-        Image icon = Toolkit.getDefaultToolkit().getImage(filePath);
-        pwVisibility.setIcon(new ImageIcon(icon));
-    }
-
-    /**
-     * ActionListener for pwVisibility label clicked -- displays or hides user input password
-     */
-    private void pwVisibilityListener() {
-        pwVisibility.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                if (pwIsVisible) {
-                    String filePath = PathManager.getIconDirectory().concat("\\eye.png");
-                    pwVisibility.setIcon(new ImageIcon(filePath));
-                    passwordField.setEchoChar('*');
-                    pwIsVisible = false;
-                } else {
-                    String filePath = PathManager.getIconDirectory().concat("\\eye-close.png");
-                    pwVisibility.setIcon(new ImageIcon(filePath));
-                    passwordField.setEchoChar((char) 0);
-                    pwIsVisible = true;
-                }
-            }
-        });
     }
 
     // TODO: Delete During Deployment
