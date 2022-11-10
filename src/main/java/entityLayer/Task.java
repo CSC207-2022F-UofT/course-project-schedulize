@@ -38,6 +38,13 @@ public interface Task {
     int getId();
 
     /**
+     * Get the total amount of tasks there are.
+     *
+     * @return the static taskCount attribute
+     */
+    int getTaskCount();
+
+    /**
      * Sets this Task's completion attribute to the passed number.
      * If the attempted value is out of bounds (i.e. less than 0, greater than 100) return false. True otherwise.
      *

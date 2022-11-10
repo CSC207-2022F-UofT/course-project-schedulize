@@ -14,6 +14,8 @@ public class CommonTask implements Task {
     \* ********** */
     // Static
     private static int taskCount = 0;
+    private static final int COMPLETION_LOWER_BOUND = 0;
+    private static final int COMPLETION_UPPER_BOUND = 100;
 
     // Instance
     private final int id;
@@ -36,6 +38,8 @@ public class CommonTask implements Task {
 
     /**
      * Constructs a CommonTask object with the provided name, description, and completion.
+     * If the passed completion is out of bounds, the completion is set to the nearest in-bounds value (i.e. an
+     * argument of -3 will set the completion to 0, and an argument of 132 will set the completion to 100)
      *
      * @param name this CommonTask's name
      * @param description this CommonTask's description
@@ -44,7 +48,15 @@ public class CommonTask implements Task {
     public CommonTask(String name, String description, int completion) {
         this.name = name;
         this.description = description;
-        this.completion = completion;
+        if (completionWithinBounds(completion)) {
+            this.completion = completion;
+        } else {
+            if (completion > COMPLETION_UPPER_BOUND) {
+                this.completion = COMPLETION_UPPER_BOUND;
+            } else if (completion < COMPLETION_LOWER_BOUND) {
+                this.completion = COMPLETION_UPPER_BOUND;
+            }
+        }
         this.id = taskCount++;
     }
 
@@ -58,7 +70,17 @@ public class CommonTask implements Task {
      */
     @Override
     public boolean isComplete() {
-        return this.completion == 100;
+        return this.completion == COMPLETION_UPPER_BOUND;
+    }
+
+    /**
+     * Returns true if the provided completion is within the valid bounds of a task's completion
+     *
+     * @param completion the completion to be judged
+     * @return true if the completion value is valid, false otherwise
+     */
+    private static boolean completionWithinBounds(int completion) {
+        return (completion >= COMPLETION_LOWER_BOUND && completion <= COMPLETION_UPPER_BOUND);
     }
 
     /* **************** *\
@@ -106,6 +128,16 @@ public class CommonTask implements Task {
         return this.id;
     }
 
+    /**
+     * Get the total amount of tasks there are.
+     *
+     * @return the static taskCount attribute
+     */
+    @Override
+    public int getTaskCount() {
+        return taskCount;
+    }
+
     // Setters
     /**
      * Sets this CommonTask's completion attribute to the passed number.
@@ -116,7 +148,7 @@ public class CommonTask implements Task {
      */
     @Override
     public boolean setCompletion(int completion) {
-        if (completion < 0 || completion > 100) {
+        if (!completionWithinBounds(completion)) {
             return false;
         }
         this.completion = completion;
