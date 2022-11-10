@@ -9,6 +9,32 @@ package entityLayer;
  */
 public class CommonTask implements Task {
 
+    /* ********** *\
+    *  Attributes  *
+    \* ********** */
+    // Static
+    private static int taskCount = 0;
+
+    // Instance
+    private final int id;
+    private String name;
+    private String description;
+    private int completion;
+
+    /* ************ *\
+    *  Constructors  *
+    \* ************ */
+    public CommonTask(String name, String description) {
+        this(name, description, 0);
+    }
+
+    public CommonTask(String name, String description, int completion) {
+        this.name = name;
+        this.description = description;
+        this.completion = completion;
+        this.id = taskCount++;
+    }
+
     /**
      * Get this CommonTask's completion level.
      *
