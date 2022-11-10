@@ -105,7 +105,7 @@ public class PasswordField extends JPanel {
     }
 
     /**
-     * Set this password to be visible or invisible
+     * Set this password to be invisible if isVisible is true or invisible if isVisible is false
      * @param isVisible boolean which represents whether password is visible (True) or invisible (False)
      */
     public void setPwVisibility(boolean isVisible) {
@@ -154,17 +154,5 @@ public class PasswordField extends JPanel {
      */
     public void reconfigureFieldSize(int width, int height) {
         this.passwordField.setPreferredSize(new Dimension(width, height));
-    }
-
-    // TODO: REMOVE DURING DEPLOYMENT
-    public static void main(String[] args) {
-        JFrame frame = new JFrame("Testing");
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setLayout(new BorderLayout());
-        frame.add(new PasswordField(), BorderLayout.CENTER);
-        frame.pack();
-        frame.setSize(500, 300);
-        frame.setLocationRelativeTo(null);
-        frame.setVisible(true);
     }
 }

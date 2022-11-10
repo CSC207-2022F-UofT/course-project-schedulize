@@ -47,8 +47,6 @@ public class LoginUI extends CentralWindow {
         this.setSize(350, 300);
         // disable resizability
         this.setResizable(false);
-        // set close operation
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         // set content, configured in form file
         this.setContentPane(mainPanel);
     }
@@ -87,6 +85,20 @@ public class LoginUI extends CentralWindow {
                 createAccountWindow.setVisible(true);
             }
         });
+    }
+
+    @Override
+    public void setVisible(boolean visible) {
+        super.setVisible(visible);
+
+        // reset fields when opening or closing this window
+        this.userInputField.setText("");
+        this.passwordField.setText("");
+        this.passwordField.setPwVisibility(true);
+        this.errorLabel.setText("");
+
+        // recenter the window
+        this.centreWindow();
     }
 
     // TODO: Delete for Deployment

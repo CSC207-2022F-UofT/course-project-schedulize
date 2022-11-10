@@ -15,7 +15,12 @@ import java.awt.*;
 public abstract class CentralWindow extends JFrame {
 
     public CentralWindow() {
+        // set window Icon
         this.setFrameIcon();
+        // set title
+        this.setTitle("Schedulize");
+        // set close operation
+        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
 
     /**

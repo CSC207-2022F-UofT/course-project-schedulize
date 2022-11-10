@@ -60,8 +60,6 @@ public class CreateAccountUI extends CentralWindow {
         this.setSize(400, 300);
         // disable resizability
         this.setResizable(false);
-        // set close operation
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         // set content, configured in form file
         this.setContentPane(mainPanel);
     }
@@ -122,5 +120,21 @@ public class CreateAccountUI extends CentralWindow {
                 System.out.println("reached!");
             }
         });
+    }
+
+    @Override
+    public void setVisible(boolean visible) {
+        super.setVisible(visible);
+
+        // reset fields when opening or closing this window
+        this.usernameField.setText("");
+        this.confirmPasswordField.setText("");
+        this.emailField.setText("");
+        this.passwordField.setText("");
+        this.passwordField.setPwVisibility(true);
+        this.errorLabel.setText("");
+
+        // recenter the window
+        this.centreWindow();
     }
 }
