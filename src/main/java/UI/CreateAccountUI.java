@@ -19,6 +19,7 @@ public class CreateAccountUI extends CentralWindow {
     private JLabel repeatPasswordLabel;
     private JPanel mainPanel;
     private JLabel suggestPwLabel;
+    private JButton createAccountButton;
 
     /**
      * Default constructor for the create account window
