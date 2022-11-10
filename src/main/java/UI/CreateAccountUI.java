@@ -1,6 +1,8 @@
 package UI;
 
 import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
@@ -23,6 +25,7 @@ public class CreateAccountUI extends CentralWindow {
     private JLabel suggestPwLabel;
     private JButton createAccountButton;
     private JLabel login;
+    private JLabel errorLabel;
     private JFrame loginWindow;
 
     /**
@@ -68,6 +71,8 @@ public class CreateAccountUI extends CentralWindow {
      */
     private void setListeners() {
         this.loginListener();
+        this.createAccountListener();
+        this.passwordSuggestionListener();
     }
 
     /**
@@ -83,11 +88,38 @@ public class CreateAccountUI extends CentralWindow {
      */
     private void loginListener() {
         JFrame createAccountWindow = this;
-        login.addMouseListener(new MouseAdapter() {
+        this.login.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
                 createAccountWindow.setVisible(false);
                 loginWindow.setVisible(true);
+            }
+        });
+    }
+
+    /**
+     * Action Listener for clicking the suggest password label
+     */
+    private void passwordSuggestionListener() {
+        this.suggestPwLabel.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                // TODO: Implement password suggester
+                System.out.println("reached!");
+            }
+        });
+    }
+
+    /**
+     * Action Listener for loginButton clicked
+     */
+    private void createAccountListener() {
+        this.createAccountButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // TODO: Connect to createAccount Use Case
+                errorLabel.setText("Devs didn't connect this LOL");
+                System.out.println("reached!");
             }
         });
     }

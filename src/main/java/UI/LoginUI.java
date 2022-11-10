@@ -18,7 +18,7 @@ public class LoginUI extends CentralWindow {
     private JLabel createAccount;
     private JLabel errorLabel;
     private PasswordField passwordField;
-    private JFrame createAccountWindow;
+    private final JFrame createAccountWindow;
 
     /**
      * Default constructor for Login UI
