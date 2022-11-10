@@ -13,7 +13,7 @@ import java.awt.event.*;
  *
  * @author David Adler
  */
-public class LoginUI extends JFrame {
+public class LoginUI extends CentralWindow {
     private JPanel mainPanel;
     private JTextField userInputField;
     private JPasswordField passwordField;
@@ -72,16 +72,6 @@ public class LoginUI extends JFrame {
         filePath = PathManager.getIconDirectory().concat("\\eye.png");
         icon = Toolkit.getDefaultToolkit().getImage(filePath);
         pwVisibility.setIcon(new ImageIcon(icon));
-    }
-
-    /**
-     * Centers the JFrame window on the screen
-     */
-    private void centreWindow() {
-        Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
-        int x = (int) ((dimension.getWidth() - this.getWidth()) / 2);
-        int y = (int) ((dimension.getHeight() - this.getHeight()) / 2);
-        this.setLocation(x, y);
     }
 
     /**
