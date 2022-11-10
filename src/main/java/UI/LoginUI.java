@@ -1,9 +1,6 @@
 package UI;
 
-import Config.PathManager;
-
 import javax.swing.*;
-import java.awt.*;
 import java.awt.event.*;
 
 /**
@@ -16,14 +13,11 @@ import java.awt.event.*;
 public class LoginUI extends CentralWindow {
     private JPanel mainPanel;
     private JTextField userInputField;
-    private JPasswordField passwordField;
     private JLabel usernameLabel;
-    private JLabel passwordLabel;
     private JButton loginButton;
     private JLabel createAccount;
-    private JLabel pwVisibility;
     private JLabel errorLabel;
-    private boolean pwIsVisible;
+    private PasswordField passwordField;
 
     /**
      * Default constructor for Login UI
@@ -38,7 +32,6 @@ public class LoginUI extends CentralWindow {
         this.setListeners();
         // show the window
         this.setVisible(true);
-        this.pwIsVisible = false;
     }
 
     /**
@@ -49,8 +42,6 @@ public class LoginUI extends CentralWindow {
         this.setTitle("Schedulize Login");
         // set Frame window size
         this.setSize(350, 300);
-        // set Icons
-        this.setDefaultIcons();
         // disable resizability
         this.setResizable(false);
         // set close operation
@@ -60,22 +51,11 @@ public class LoginUI extends CentralWindow {
     }
 
     /**
-     * Sets the default icons for all UI components in this Frame
-     */
-    private void setDefaultIcons() {
-        // set password visibility icon
-        String filePath = PathManager.getIconDirectory().concat("\\eye.png");
-        Image icon = Toolkit.getDefaultToolkit().getImage(filePath);
-        pwVisibility.setIcon(new ImageIcon(icon));
-    }
-
-    /**
      * Connects all action listeners for this window
      */
     private void setListeners() {
         this.loginListener();
         this.createAccountListener();
-        this.pwVisibilityListener();
     }
 
     /**
@@ -101,28 +81,6 @@ public class LoginUI extends CentralWindow {
             public void mouseClicked(MouseEvent e) {
                 // TODO: Connect to CreateAccount UI
                 System.out.println("reached!");
-            }
-        });
-    }
-
-    /**
-     * ActionListener for pwVisibility label clicked -- displays or hides user input password
-     */
-    private void pwVisibilityListener() {
-        pwVisibility.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                if (pwIsVisible) {
-                    String filePath = PathManager.getIconDirectory().concat("\\eye.png");
-                    pwVisibility.setIcon(new ImageIcon(filePath));
-                    passwordField.setEchoChar('*');
-                    pwIsVisible = false;
-                } else {
-                    String filePath = PathManager.getIconDirectory().concat("\\eye-close.png");
-                    pwVisibility.setIcon(new ImageIcon(filePath));
-                    passwordField.setEchoChar((char) 0);
-                    pwIsVisible = true;
-                }
             }
         });
     }
