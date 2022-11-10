@@ -2,7 +2,13 @@ package UI;
 
 import javax.swing.*;
 
-
+/**
+ * A class that contains the GUI for creating a new account
+ * Created: 11/10/2022
+ * Last updated: 11/10/2022
+ *
+ * @author David Adler
+ */
 public class CreateAccountUI extends CentralWindow {
     private JTextField emailField;
     private JLabel emailLabel;
@@ -39,6 +45,9 @@ public class CreateAccountUI extends CentralWindow {
         this.setContentPane(mainPanel);
     }
 
+    /**
+     * Connects all action listeners for this window
+     */
     private void setListeners() {
     }
 

@@ -9,7 +9,7 @@ import java.awt.event.*;
 /**
  * A LoginUI class, implements the JFrame interface which makes it a moveable window.
  * Created: 11/08/2022
- * Last updated: 11/08/2022
+ * Last updated: 11/10/2022
  *
  * @author David Adler
  */
@@ -73,9 +73,9 @@ public class LoginUI extends CentralWindow {
      * Connects all action listeners for this window
      */
     private void setListeners() {
-        loginListener();
-        createAccountListener();
-        pwVisibilityListener();
+        this.loginListener();
+        this.createAccountListener();
+        this.pwVisibilityListener();
     }
 
     /**
