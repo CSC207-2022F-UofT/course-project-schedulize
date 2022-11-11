@@ -54,7 +54,7 @@ public class CommonTask implements Task {
             if (completion > COMPLETION_UPPER_BOUND) {
                 this.completion = COMPLETION_UPPER_BOUND;
             } else if (completion < COMPLETION_LOWER_BOUND) {
-                this.completion = COMPLETION_UPPER_BOUND;
+                this.completion = COMPLETION_LOWER_BOUND;
             }
         }
         this.id = taskCount++;
