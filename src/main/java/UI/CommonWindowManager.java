@@ -1,6 +1,8 @@
 package UI;
 
+import javax.management.openmbean.InvalidKeyException;
 import javax.swing.*;
+import java.security.KeyException;
 import java.util.Collection;
 import java.util.HashMap;
 
@@ -47,5 +49,27 @@ public class CommonWindowManager implements WindowManager {
      */
     public Collection<JFrame> getExistingWindows() {
         return this.existingWindows.values();
+    }
+
+    public void openWindow(String key) {
+        this.existingWindows.get(key).setVisible(true);
+    }
+
+    /**
+     * Closes the given window
+     * @param key String reference to the requested window
+     */
+    public void closeWindow(String key) {
+        this.existingWindows.get(key).setVisible(false);
+    }
+
+    /**
+     * Opens the given window
+     * @param key String reference to the requested window
+     */
+    public void removeWindow(String key) {
+        JFrame frame = this.existingWindows.get(key);
+        this.existingWindows.remove(key);
+        frame = null;
     }
 }

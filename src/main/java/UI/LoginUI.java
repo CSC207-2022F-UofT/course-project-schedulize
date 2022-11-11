@@ -19,7 +19,6 @@ public class LoginUI extends CentralWindow {
     private JLabel errorLabel;
     private PasswordField passwordField;
     private final WindowManager programWindows;
-    public static final String WINDOW_REFERENCE_KEY = "login";
 
     /**
      * Default constructor for Login UI
@@ -28,7 +27,7 @@ public class LoginUI extends CentralWindow {
         super();
         // store reference to existing windows in program
         this.programWindows = existingWindows;
-        this.programWindows.addWindow(WINDOW_REFERENCE_KEY, this);
+        this.programWindows.addWindow(WindowManager.LOGIN_REFERENCE_KEY, this);
         // configure default frame attributes
         this.configureFrame();
         this.centreWindow();
@@ -73,15 +72,14 @@ public class LoginUI extends CentralWindow {
     }
 
     /**
-     * Action Listener for createAccount label clicked
+     * Action Listener for createAccount label clicked that opens the login window and closes this window
      */
     private void createAccountListener() {
-        JFrame loginWindow = this;
         createAccount.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                loginWindow.setVisible(false);
-                programWindows.getWindow(CreateAccountUI.WINDOW_REFERENCE_KEY).setVisible(true);
+                programWindows.closeWindow(WindowManager.LOGIN_REFERENCE_KEY);
+                programWindows.openWindow(WindowManager.REGISTRATION_REFERENCE_KEY);
             }
         });
     }

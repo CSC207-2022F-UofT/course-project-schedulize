@@ -10,6 +10,15 @@ import javax.swing.*;
  * @author David Adler
  */
 public interface WindowManager {
-    public JFrame getWindow(String key);
-    public void addWindow(String key, JFrame window);
+    JFrame getWindow(String key);
+    void addWindow(String key, JFrame window);
+    void openWindow(String key);
+    void closeWindow(String key);
+    void removeWindow(String key);
+
+    // reference constants for types of windows
+    String REGISTRATION_REFERENCE_KEY = "userRegistration";
+    String LOGIN_REFERENCE_KEY = "login";
+
+
 }

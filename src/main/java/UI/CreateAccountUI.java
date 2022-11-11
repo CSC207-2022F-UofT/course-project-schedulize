@@ -27,7 +27,6 @@ public class CreateAccountUI extends CentralWindow {
     private JLabel login;
     private JLabel errorLabel;
     private final WindowManager programWindows;
-    public static final String WINDOW_REFERENCE_KEY = "userRegistration";
 
     /**
      * Default constructor for the create account window
@@ -36,7 +35,7 @@ public class CreateAccountUI extends CentralWindow {
         super();
         // store reference to existing windows in program
         this.programWindows = existingWindows;
-        this.programWindows.addWindow(WINDOW_REFERENCE_KEY, this);
+        this.programWindows.addWindow(WindowManager.REGISTRATION_REFERENCE_KEY, this);
         // configure default frame attributes
         this.setPasswordFieldSize();
         this.configureFrame();
@@ -77,15 +76,14 @@ public class CreateAccountUI extends CentralWindow {
     }
 
     /**
-     * Action Listener for login label clicked
+     * Action Listener for login label clicked that opens the registration window and closes this window
      */
     private void loginListener() {
-        JFrame createAccountWindow = this;
         this.login.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                createAccountWindow.setVisible(false);
-                programWindows.getWindow(LoginUI.WINDOW_REFERENCE_KEY).setVisible(true);
+                programWindows.closeWindow(WindowManager.REGISTRATION_REFERENCE_KEY);
+                programWindows.openWindow(WindowManager.LOGIN_REFERENCE_KEY);
             }
         });
     }
