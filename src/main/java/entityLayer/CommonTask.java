@@ -22,22 +22,35 @@ public class CommonTask implements Task {
     private String name;
     private String description;
     private int completion;
+    private int duration;
 
     /* ************ *\
     *  Constructors  *
     \* ************ */
+
     /**
-     * Constructs a CommonTask object with the provided name and description, setting its completion to 0
+     * Constructs a CommonTask object with the provided name and description, setting duration and completion to 0
      *
      * @param name this CommonTask's name
      * @param description this CommonTask's description
      */
     public CommonTask(String name, String description) {
-        this(name, description, 0);
+        this(name, description, 0, 0);
     }
 
     /**
-     * Constructs a CommonTask object with the provided name, description, and completion.
+     * Constructs a CommonTask object with the provided name, description, and duration, setting its completion to 0
+     *
+     * @param name this CommonTask's name
+     * @param description this CommonTask's description
+     * @param duration this CommonTask's duration
+     */
+    public CommonTask(String name, String description, int duration) {
+        this(name, description, duration, 0);
+    }
+
+    /**
+     * Constructs a CommonTask object with the provided name, description, duration, setting completion to 0.
      * If the passed completion is out of bounds, the completion is set to the nearest in-bounds value (i.e. an
      * argument of -3 will set the completion to 0, and an argument of 132 will set the completion to 100)
      *
@@ -45,18 +58,11 @@ public class CommonTask implements Task {
      * @param description this CommonTask's description
      * @param completion this CommonTask's completion
      */
-    public CommonTask(String name, String description, int completion) {
+    public CommonTask(String name, String description, int duration, int completion) {
         this.name = name;
         this.description = description;
-        if (completionWithinBounds(completion)) {
-            this.completion = completion;
-        } else {
-            if (completion > COMPLETION_UPPER_BOUND) {
-                this.completion = COMPLETION_UPPER_BOUND;
-            } else if (completion < COMPLETION_LOWER_BOUND) {
-                this.completion = COMPLETION_LOWER_BOUND;
-            }
-        }
+        this.completion = completion;
+        this.duration = duration;
         this.id = taskCount++;
     }
 
@@ -138,6 +144,15 @@ public class CommonTask implements Task {
         return taskCount;
     }
 
+    /**
+     * Return this CommonTask's duration.
+     *
+     * @return this CommonTask's duration.
+     */
+    public int getDuration() {
+        return this.duration;
+    }
+
     // Setters
     /**
      * Sets this CommonTask's completion attribute to the passed number.
@@ -173,5 +188,16 @@ public class CommonTask implements Task {
     @Override
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    /**
+     * Set this CommonTask's duration
+     *
+     * @param duration this CommonTask's intended duration
+     */
+    @Override
+    public void setDuration(int duration) {
+        // TODO: make it so duration can never be less than 0
+        this.duration = duration;
     }
 }

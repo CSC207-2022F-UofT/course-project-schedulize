@@ -17,6 +17,20 @@ public interface Task {
     int getCompletion();
 
     /**
+     * Get this Task's duration in minutes.
+     *
+     * @return this Task's duration
+     */
+    int getDuration();
+
+    /**
+     * Set this Task's duration in minutes.
+     *
+     * @param duration this Task's intended duration
+     */
+    void setDuration(int duration);
+
+    /**
      * Get this Task's name.
      *
      * @return this Task's name.

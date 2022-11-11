@@ -17,14 +17,6 @@ public class CommonTaskTests {
     }
 
     @Test
-    public void testCompletionOutOfBoundsConstructor() {
-        Task t1 = new CommonTask("n", "d", 132);
-        Task t2 = new CommonTask("n", "d", -12);
-        assertEquals(100, t1.getCompletion());
-        assertEquals(0, t2.getCompletion());
-    }
-
-    @Test
     public void testIsComplete() {
         Task t1 = new CommonTask("n", "d");
         t1.setCompletion(100);
