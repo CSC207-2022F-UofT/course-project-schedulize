@@ -43,14 +43,6 @@ public class CommonWindowManager implements WindowManager {
         this.existingWindows.put(key, window);
     }
 
-    /**
-     * Gets the existing windows in the program
-     * @return collection of existing windows
-     */
-    public Collection<JFrame> getExistingWindows() {
-        return this.existingWindows.values();
-    }
-
     public void openWindow(String key) {
         this.existingWindows.get(key).setVisible(true);
     }
