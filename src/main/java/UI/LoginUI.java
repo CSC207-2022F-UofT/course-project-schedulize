@@ -18,22 +18,21 @@ public class LoginUI extends CentralWindow {
     private JLabel createAccount;
     private JLabel errorLabel;
     private PasswordField passwordField;
-    private final JFrame createAccountWindow;
+    private final WindowManager programWindows;
+    public static final String WINDOW_REFERENCE_KEY = "login";
 
     /**
      * Default constructor for Login UI
      */
-    public LoginUI(JFrame createAccountWindow) {
+    public LoginUI(WindowManager existingWindows) {
         super();
-        // connect the create account window
-        this.createAccountWindow = createAccountWindow;
+        // store reference to existing windows in program
+        this.programWindows = existingWindows;
+        this.programWindows.addWindow(WINDOW_REFERENCE_KEY, this);
         // configure default frame attributes
         this.configureFrame();
-        // center frame on screen
         this.centreWindow();
-        // set event listeners
         this.setListeners();
-        // show the window
         this.setVisible(true);
     }
 
@@ -82,7 +81,7 @@ public class LoginUI extends CentralWindow {
             @Override
             public void mouseClicked(MouseEvent e) {
                 loginWindow.setVisible(false);
-                createAccountWindow.setVisible(true);
+                programWindows.getWindow(CreateAccountUI.WINDOW_REFERENCE_KEY).setVisible(true);
             }
         });
     }
@@ -103,9 +102,8 @@ public class LoginUI extends CentralWindow {
 
     // TODO: Delete for Deployment
     public static void main(String[] args) {
-        CreateAccountUI createAccountWindow = new CreateAccountUI();
-        JFrame mainWindow = new LoginUI(createAccountWindow);
-
-        createAccountWindow.setLoginWindow(mainWindow);
+        WindowManager windows = new CommonWindowManager();
+        CreateAccountUI createAccountWindow = new CreateAccountUI(windows);
+        JFrame mainWindow = new LoginUI(windows);
     }
 }

@@ -26,13 +26,18 @@ public class CreateAccountUI extends CentralWindow {
     private JButton createAccountButton;
     private JLabel login;
     private JLabel errorLabel;
-    private JFrame loginWindow;
+    private final WindowManager programWindows;
+    public static final String WINDOW_REFERENCE_KEY = "userRegistration";
 
     /**
      * Default constructor for the create account window
      */
-    public CreateAccountUI() {
+    public CreateAccountUI(WindowManager existingWindows) {
         super();
+        // store reference to existing windows in program
+        this.programWindows = existingWindows;
+        this.programWindows.addWindow(WINDOW_REFERENCE_KEY, this);
+        // configure default frame attributes
         this.setPasswordFieldSize();
         this.configureFrame();
         this.setVisible(false);
@@ -56,9 +61,7 @@ public class CreateAccountUI extends CentralWindow {
     private void configureFrame() {
         // set Frame title
         this.setTitle("Schedulize New User Registration");
-        // set Frame window size
         this.setSize(400, 300);
-        // disable resizability
         this.setResizable(false);
         // set content, configured in form file
         this.setContentPane(mainPanel);
@@ -74,14 +77,6 @@ public class CreateAccountUI extends CentralWindow {
     }
 
     /**
-     * Set the login window used when toggling between this screen and the login screen
-     * @param window a JFrame representing a login window
-     */
-    public void setLoginWindow(JFrame window) {
-        this.loginWindow = window;
-    }
-
-    /**
      * Action Listener for login label clicked
      */
     private void loginListener() {
@@ -90,7 +85,7 @@ public class CreateAccountUI extends CentralWindow {
             @Override
             public void mouseClicked(MouseEvent e) {
                 createAccountWindow.setVisible(false);
-                loginWindow.setVisible(true);
+                programWindows.getWindow(LoginUI.WINDOW_REFERENCE_KEY).setVisible(true);
             }
         });
     }
