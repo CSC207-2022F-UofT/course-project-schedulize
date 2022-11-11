@@ -24,4 +24,13 @@ public class CommonTaskTests {
         assertEquals(0, t2.getCompletion());
     }
 
+    @Test
+    public void testIsComplete() {
+        Task t1 = new CommonTask("n", "d");
+        t1.setCompletion(100);
+        assertTrue(t1.isComplete());
+        t1.setCompletion(30);
+        assertFalse(t1.isComplete());
+    }
+
 }
