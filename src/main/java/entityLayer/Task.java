@@ -1,5 +1,7 @@
 package entityLayer;
 
+import java.io.Serializable;
+
 /**
  * A Task interface, implemented by the CommonTask class. Meant as a layer of abstraction.
  * Created: 10/31/22
@@ -7,7 +9,7 @@ package entityLayer;
  *
  * @author MMachadoUofT
  */
-public interface Task {
+public interface Task extends Serializable {
 
     /**
      * Get this Task's completion level.
