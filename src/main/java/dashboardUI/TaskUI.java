@@ -13,10 +13,9 @@ import javax.swing.*;
 public class TaskUI extends CentralWindow {
     private JPanel mainPanel;
     private JProgressBar progressBar1;
-    private JLabel durationLabel;
     private JCheckBox completeCheck;
-    private JTextArea descriptionArea;
     private JButton deleteTaskButton;
+    private JLabel descriptionLabel;
 
     public TaskUI(){
         super();
