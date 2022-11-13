@@ -23,7 +23,19 @@ public class UserRegistrationRequest {
         return this.password1;
     }
 
-    public boolean validPasswordRepeat() {
+    public boolean isValidPasswordRepeat() {
         return this.password1.equals(this.password2);
+    }
+
+    public boolean isValidEmail() {
+        int atSignIndex = this.email.indexOf("@");
+
+        if (atSignIndex == -1) {
+            return false;
+        }
+
+        int extensionIndex = this.email.indexOf(".", atSignIndex);
+
+        return extensionIndex != -1;
     }
 }
