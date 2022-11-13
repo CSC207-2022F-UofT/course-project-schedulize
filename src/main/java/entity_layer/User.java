@@ -45,6 +45,11 @@ public interface User {
     void setPassword(String password);
 
     /**
+     * get this user's password as a String
+     */
+    String getPassword();
+
+    /**
      * Get this User's username.
      * @return this User's username attribute
      */
