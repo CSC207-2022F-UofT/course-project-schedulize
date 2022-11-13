@@ -3,7 +3,7 @@ package config;
 /**
  * A PathManager class, following a Singleton design pattern for flexibility in refactoring
  * Created: 11/08/2022
- * Last updated: 11/08/2022
+ * Last updated: 11/13/2022
  *
  * @author David Adler
  */
@@ -12,6 +12,7 @@ public class PathManager {
     private static PathManager instance = null;
     private final String baseDir;
     private final String iconDir;
+    private final String userDir;
 
     /**
      * Private constructor for setting directories for the program
@@ -19,6 +20,7 @@ public class PathManager {
     private PathManager() {
         this.baseDir = System.getProperty("user.dir");
         this.iconDir = baseDir.concat("\\Icons");
+        this.userDir = baseDir.concat("\\src\\main\\stored_users");
     }
 
     /**
@@ -46,5 +48,13 @@ public class PathManager {
      */
     public static String getIconDirectory() {
         return getInstance().iconDir;
+    }
+
+    /**
+     * gets the project's User Storage directory
+     * @return String representing the user storage directory path
+     */
+    public static String getUserDirectory() {
+        return getInstance().userDir;
     }
 }

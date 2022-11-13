@@ -30,7 +30,7 @@ public class UserRegistrationInteractor implements UserRegistrationInputBoundary
 
         User newUser = userFactory.create(newUserRequest.getUsername(), newUserRequest.getEmail(),
                                           newUserRequest.getPassword());
-        existingUsers.saveNewUser(newUser);
+        existingUsers.saveUser(newUser);
 
         return resultPresenter.prepareSuccessView(newUserRequest.getUsername());
     }

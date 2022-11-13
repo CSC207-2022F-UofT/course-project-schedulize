@@ -4,5 +4,5 @@ import entity_layer.User;
 
 public interface UserDataStoreGateway {
     boolean usernameExists(String username);
-    void saveNewUser(User newUser);
+    void saveUser(User newUser);
 }
