@@ -1,5 +1,5 @@
 package complete_task;
-import entityLayer.Curriculum;
+import entity_layer.Curriculum;
 
 /**
  * Controller for the completeTask use case; receives user input in

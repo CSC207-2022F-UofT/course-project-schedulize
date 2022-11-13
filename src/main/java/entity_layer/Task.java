@@ -1,4 +1,4 @@
-package entityLayer;
+package entity_layer;
 
 /**
  * A Task interface, implemented by the CommonTask class. Meant as a layer of abstraction.

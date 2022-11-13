@@ -1,5 +1,5 @@
 package complete_task;
-import entityLayer.Curriculum;
+import entity_layer.Curriculum;
 
 /**
  * An output boundary interface that is implemented by the completeTaskPresenter class.

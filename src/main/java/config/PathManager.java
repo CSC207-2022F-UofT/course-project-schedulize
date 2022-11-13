@@ -1,4 +1,4 @@
-package Config;
+package config;
 
 /**
  * A PathManager class, following a Singleton design pattern for flexibility in refactoring
