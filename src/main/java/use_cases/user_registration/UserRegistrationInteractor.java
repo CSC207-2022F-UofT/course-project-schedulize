@@ -1,5 +1,8 @@
 package use_cases.user_registration;
 
+import entity_layer.User;
+import entity_layer.UserFactory;
+
 public class UserRegistrationInteractor implements UserRegistrationInputBoundary {
     private final UserFactory userFactory;
     private final UserDataStoreGateway existingUsers;
@@ -21,6 +24,14 @@ public class UserRegistrationInteractor implements UserRegistrationInputBoundary
                     " characters long.");
         } else if (!newUserRequest.isValidEmail()) {
             throw new UserRegistrationError("Invalid email address.");
+        } else if (existingUsers.usernameExists(newUserRequest.getUsername())) {
+            throw new UserRegistrationError("Username already exists.");
         }
+
+        User newUser = userFactory.create(newUserRequest.getUsername(), newUserRequest.getEmail(),
+                                          newUserRequest.getPassword());
+        existingUsers.saveNewUser(newUser);
+
+        return resultPresenter.prepareSuccessView(newUserRequest.getUsername());
     }
 }
