@@ -1,10 +1,10 @@
 package useCases.userRegistration;
 
 public class UserRegistrationRequest {
-    private String email;
-    private String username;
-    private String password1;
-    private String password2;
+    private final String email;
+    private final String username;
+    private final String password1;
+    private final String password2;
 
     public UserRegistrationRequest(String email, String username, String password1, String password2) {
         this.email = email;
