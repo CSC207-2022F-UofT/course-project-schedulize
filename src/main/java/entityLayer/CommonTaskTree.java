@@ -43,6 +43,8 @@ public class CommonTaskTree implements TaskTree {
     @Override
     public void addSubTaskTree(TaskTree taskTree) {
         this.subTaskTrees.add(taskTree);
+
+        // Remove the given TaskTree from its previous superTaskTree's subTaskTrees
         if (taskTree.getSuperTaskTree() != null)
             taskTree.getSuperTaskTree().removeSubTaskTree(taskTree);
 
@@ -58,7 +60,12 @@ public class CommonTaskTree implements TaskTree {
      */
     @Override
     public boolean removeSubTaskTree(TaskTree taskTree) {
-        return false;
+        if (this.subTaskTrees.contains(taskTree)) {
+            this.subTaskTrees.remove(taskTree);
+            return true;
+        } else {
+            return false;
+        }
     }
 
     /**
@@ -70,7 +77,17 @@ public class CommonTaskTree implements TaskTree {
      */
     @Override
     public boolean removeChildTaskTree(TaskTree taskTree) {
-        return false;
+        // Check if it's a direct subtree
+        if (this.removeSubTaskTree(taskTree))
+            return true;
+        // Recurse on all subtrees
+        else {
+            for (TaskTree subTaskTree : this.subTaskTrees) {
+                if (this.removeChildTaskTree(taskTree)) return true;
+            }
+            // If we never returned, then we never had a true removal of the taskTree, so it was not removed.
+            return false;
+        }
     }
 
     /**
