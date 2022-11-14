@@ -38,6 +38,6 @@ public class UserRegistrationInteractor implements UserRegistrationInputBoundary
             throw new UserRegistrationError("Data Saving Error");
         }
 
-        return resultPresenter.prepareSuccessView(newUserRequest.getUsername());
+        return resultPresenter.prepareSuccessView(newUserRequest.getUsername(), newUserRequest.getPassword());
     }
 }

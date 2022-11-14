@@ -6,7 +6,7 @@ import use_cases.user_registration.UserRegistrationResponse;
 public class UserRegistrationResponseFormatter implements UserRegistrationPresenter {
 
     @Override
-    public UserRegistrationResponse prepareSuccessView(String username) {
-        return new UserRegistrationResponse(username);
+    public UserRegistrationResponse prepareSuccessView(String username, String password) {
+        return new UserRegistrationResponse(username, password);
     }
 }
