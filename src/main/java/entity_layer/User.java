@@ -1,4 +1,4 @@
-package entityLayer;
+package entity_layer;
 
 /**
  * An interface for Users, used as a layer of abstraction. Implemented by the CommonUser class.

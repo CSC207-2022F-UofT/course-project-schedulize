@@ -1,4 +1,4 @@
-package entityLayer;
+package entity_layer;
 
 /**
  * A CommonTask class, implements the Task interface.

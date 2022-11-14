@@ -1,4 +1,4 @@
-package entityLayer;
+package entity_layer;
 
 /**
  * A CommonUser class, implements the User interface.
