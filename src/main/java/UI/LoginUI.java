@@ -2,9 +2,7 @@ package UI;
 
 import entity_layer.CommonUserFactory;
 import entity_layer.UserStorage;
-import use_cases.user_registration.UserRegistrationController;
 import use_cases.user_registration.UserRegistrationInteractor;
-import use_cases.user_registration.UserRegistrationResponseFormatter;
 
 import javax.swing.*;
 import java.awt.event.*;

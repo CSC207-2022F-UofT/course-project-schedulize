@@ -1,4 +1,8 @@
-package use_cases.user_registration;
+package UI;
+
+import use_cases.user_registration.UserRegistrationInputBoundary;
+import use_cases.user_registration.UserRegistrationRequest;
+import use_cases.user_registration.UserRegistrationResponse;
 
 public class UserRegistrationController {
     private final UserRegistrationInputBoundary userInput;

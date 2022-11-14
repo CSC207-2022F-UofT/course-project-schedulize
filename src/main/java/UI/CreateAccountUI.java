@@ -1,6 +1,5 @@
 package UI;
 
-import use_cases.user_registration.UserRegistrationController;
 import use_cases.user_registration.UserRegistrationError;
 
 import javax.swing.*;

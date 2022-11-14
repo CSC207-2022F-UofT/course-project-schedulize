@@ -1,3 +1,5 @@
+import UI.UserRegistrationController;
+import UI.UserRegistrationResponseFormatter;
 import entity_layer.CommonUserFactory;
 import entity_layer.UserFactory;
 import entity_layer.UserStorage;
