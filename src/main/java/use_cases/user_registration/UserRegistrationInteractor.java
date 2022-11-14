@@ -3,6 +3,8 @@ package use_cases.user_registration;
 import entity_layer.User;
 import entity_layer.UserFactory;
 
+import java.io.IOException;
+
 public class UserRegistrationInteractor implements UserRegistrationInputBoundary {
     private final UserFactory userFactory;
     private final UserDataStoreGateway existingUsers;
@@ -30,7 +32,11 @@ public class UserRegistrationInteractor implements UserRegistrationInputBoundary
 
         User newUser = userFactory.create(newUserRequest.getUsername(), newUserRequest.getEmail(),
                                           newUserRequest.getPassword());
-        existingUsers.saveUser(newUser);
+        try {
+            existingUsers.saveUser(newUser);
+        } catch (IOException except) {
+            throw new UserRegistrationError("Data Saving Error");
+        }
 
         return resultPresenter.prepareSuccessView(newUserRequest.getUsername());
     }

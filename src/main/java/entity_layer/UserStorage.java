@@ -4,13 +4,16 @@ import config.PathManager;
 import use_cases.user_registration.UserDataStoreGateway;
 
 import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
 import java.util.HashSet;
 
 
 public class UserStorage implements UserDataStoreGateway {
     private final HashSet<String> existingUsernames;
 
-    UserStorage() {
+    public UserStorage() {
         existingUsernames = new HashSet<String>();
         File userDir = new File(PathManager.getUserDirectory());
         File[] directoryListing = userDir.listFiles();
@@ -32,8 +35,13 @@ public class UserStorage implements UserDataStoreGateway {
     }
 
     @Override
-    public void saveUser(User newUser) {
-        return;
+    public void saveUser(User newUser) throws IOException {
+        String filepath = PathManager.getUserDirectory().concat("\\" + newUser.getUsername() + ".ser");
+        File saveFile = new File(filepath);
+        ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(saveFile));
+        out.writeObject(newUser);
+        out.close();
+        existingUsernames.add(newUser.getUsername());
     }
 
     private String removeFileExtension(String filename) {
@@ -41,6 +49,7 @@ public class UserStorage implements UserDataStoreGateway {
         if (pos > 0) {
             return filename.substring(0, pos);
         } else {
+            // TODO: INVALID FILES IN DIRECTORY
             return filename;
         }
     }
