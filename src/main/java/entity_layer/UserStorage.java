@@ -44,6 +44,22 @@ public class UserStorage implements UserDataStoreGateway {
         existingUsernames.add(newUser.getUsername());
     }
 
+    public void removeUser(String username) {
+        if (this.usernameExists(username)) {
+            String filepath = PathManager.getUserDirectory().concat("\\" + username + ".ser");
+            File saveFile = new File(filepath);
+            saveFile.delete();
+        }
+    }
+
+    public void removeUser(User existingUser) {
+        if (this.usernameExists(existingUser.getUsername())) {
+            String filepath = PathManager.getUserDirectory().concat("\\" + existingUser.getUsername() + ".ser");
+            File saveFile = new File(filepath);
+            saveFile.delete();
+        }
+    }
+
     private String removeFileExtension(String filename) {
         int pos = filename.lastIndexOf(".");
         if (pos > 0) {

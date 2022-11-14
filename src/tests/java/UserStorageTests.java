@@ -1,6 +1,7 @@
 import entity_layer.CommonUser;
 import entity_layer.User;
 import entity_layer.UserStorage;
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -26,7 +27,7 @@ public class UserStorageTests {
     HashSet<String> usernames;
 
     @Before
-    public void setUp() throws Exception {
+    public void setUp() throws IOException {
         storage = new UserStorage();
         user1 = new CommonUser(username1, "shale@lalal.com", password1);
         user2 = new CommonUser(username2, "copy@maker.com", password2);
@@ -36,6 +37,7 @@ public class UserStorageTests {
         usernames = new HashSet<>();
         String[] arr = {username1, username2, username3, username4};
         usernames.addAll(List.of(arr));
+        testAddingUsers();
     }
 
     @Test(timeout = 100)
@@ -64,7 +66,15 @@ public class UserStorageTests {
     public void testInitialization() {
         UserStorage ds = new UserStorage();
         for (String username: usernames) {
-            assert storage.usernameExists(username);
+            assert ds.usernameExists(username);
         }
+    }
+
+    @After
+    public void tearDown() {
+        storage.removeUser(username1);
+        storage.removeUser(username2);
+        storage.removeUser(username3);
+        storage.removeUser(username4);
     }
 }
