@@ -1,5 +1,6 @@
 package entityLayer;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -9,7 +10,8 @@ import java.util.List;
  *
  * @author MMachadoUofT
  */
-public interface TaskTree {
+
+public interface TaskTree extends Serializable {
 
     /**
      * Adds the given TaskTree to this TaskTree's list of subTaskTrees

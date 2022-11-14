@@ -1,16 +1,40 @@
 package entityLayer;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
  * A CommonTaskTree class, implements the TaskTree interface
  * Created: 10/31/2022
- * Last updated: 11/5/2022
+ * Last updated: 11/14/2022
  *
  * @author MMachadoUofT
  */
 public class CommonTaskTree implements TaskTree {
 
+    /* ********** *\
+    *  Attributes  *
+    \* ********** */
+    private Task task;
+    private TaskTree superTaskTree;
+    private List<TaskTree> subTaskTrees;
+
+    /* ************ *\
+    *  Constructors  *
+    \* ************ */
+    /**
+     * Creates an empty CommonTaskTree with no superTaskTree, no subTaskTrees, and no Task.
+     * For this TaskTree to hold a task and to belong to a hierarchy, it must be assigned the relevant attributes.
+     */
+    public CommonTaskTree() {
+        this.task = null;
+        this.superTaskTree = null;
+        this.subTaskTrees = new ArrayList<>();
+    }
+
+    /* ************* *\
+    *  Functionality  *
+    \* ************* */
     /**
      * Adds the given TaskTree to this CommonTaskTree's list of subTaskTrees
      *
