@@ -20,10 +20,10 @@ public class UserRegistrationInteractor implements UserRegistrationInputBoundary
     @Override
     public UserRegistrationResponse create(UserRegistrationRequest newUserRequest) throws UserRegistrationError {
         if (!newUserRequest.isValidPasswordRepeat()) {
-            throw new UserRegistrationError("Password and Password Confirmation must match.");
+            throw new UserRegistrationError("Password and Confirmation must match.");
         } else if (newUserRequest.getPassword().length() < MINIMUM_PASSWORD_LENGTH) {
             throw new UserRegistrationError("Password must be at least " + MINIMUM_PASSWORD_LENGTH +
-                    " characters long.");
+                    " characters.");
         } else if (!newUserRequest.isValidEmail()) {
             throw new UserRegistrationError("Invalid email address.");
         } else if (existingUsers.usernameExists(newUserRequest.getUsername())) {
