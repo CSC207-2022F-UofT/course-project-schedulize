@@ -42,7 +42,11 @@ public class CommonTaskTree implements TaskTree {
      */
     @Override
     public void addSubTaskTree(TaskTree taskTree) {
-        
+        this.subTaskTrees.add(taskTree);
+        if (taskTree.getSuperTaskTree() != null)
+            taskTree.getSuperTaskTree().removeSubTaskTree(taskTree);
+
+        taskTree.setSuperTaskTree(this);
     }
 
     /**
