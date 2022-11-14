@@ -43,8 +43,59 @@ public class UserRegistrationTests {
         controller.create("email@sample.com", "i'm a user", "password", "password");
     }
 
+    @Test(timeout = 50)
+    public void testControllerExisitngUser() {
+        controller.create("email@sample.com", "user person", "password", "password");
+        try {
+            controller.create("email@sample.com", "user person", "password", "password");
+        } catch (UserRegistrationError error){
+            return;
+        }
+
+        throw new RuntimeException();
+    }
+
+    @Test(timeout = 50)
+    public void testControllerPasswordNotLongEnough() {
+        try {
+            controller.create("email@sample.com", "user person", "p", "p");
+        } catch (UserRegistrationError error){
+            return;
+        }
+
+        throw new RuntimeException();
+    }
+
+    @Test(timeout = 50)
+    public void testControllerInvalidEmails() {
+        try {
+            controller.create("email@samplecom", "user person", "password", "password");
+        } catch (UserRegistrationError ignored){}
+
+        try {
+            controller.create("emailsample.com", "user person", "password", "password");
+        } catch (UserRegistrationError error){
+            return;
+        }
+
+        throw new RuntimeException();
+    }
+
+    @Test(timeout = 50)
+    public void testControllerPasswordsDontMatch() {
+        try {
+            controller.create("email@samplecom", "user person", "passwora;aad",
+                    "passwo;lasrd");
+        } catch (UserRegistrationError ignored){
+            return;
+        }
+
+        throw new RuntimeException();
+    }
+
     @After
     public void tearDown() {
         ((UserStorage) storage).removeUser("i'm a user");
+        ((UserStorage) storage).removeUser("user person");
     }
 }
