@@ -4,6 +4,13 @@ import use_cases.user_registration.UserRegistrationInputBoundary;
 import use_cases.user_registration.UserRegistrationRequest;
 import use_cases.user_registration.UserRegistrationResponse;
 
+/**
+ * A controller for registering a new user
+ * Created: 11/13/2022
+ * Last updated: 11/14/2022
+ *
+ * @author David Adler
+ */
 public class UserRegistrationController {
     private final UserRegistrationInputBoundary userInput;
 

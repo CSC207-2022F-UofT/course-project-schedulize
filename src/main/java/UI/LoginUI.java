@@ -1,7 +1,7 @@
 package UI;
 
 import entity_layer.CommonUserFactory;
-import entity_layer.UserStorage;
+import config.UserStorage;
 import use_cases.user_registration.UserRegistrationInteractor;
 
 import javax.swing.*;

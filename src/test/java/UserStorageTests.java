@@ -1,6 +1,6 @@
 import entity_layer.CommonUser;
 import entity_layer.User;
-import entity_layer.UserStorage;
+import config.UserStorage;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;

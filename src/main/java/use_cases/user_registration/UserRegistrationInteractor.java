@@ -5,6 +5,13 @@ import entity_layer.UserFactory;
 
 import java.io.IOException;
 
+/**
+ * The interactor that determines whether the new User information is valid and whether or not to save the user
+ * Created: 11/13/2022
+ * Last updated: 11/14/2022
+ *
+ * @author David Adler
+ */
 public class UserRegistrationInteractor implements UserRegistrationInputBoundary {
     private final UserFactory userFactory;
     private final UserDataStoreGateway existingUsers;

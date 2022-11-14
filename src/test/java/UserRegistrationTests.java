@@ -2,7 +2,7 @@ import UI.UserRegistrationController;
 import UI.UserRegistrationResponseFormatter;
 import entity_layer.CommonUserFactory;
 import entity_layer.UserFactory;
-import entity_layer.UserStorage;
+import config.UserStorage;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -72,6 +72,7 @@ public class UserRegistrationTests {
     public void testControllerInvalidEmails() {
         try {
             controller.create("email@samplecom", "user person", "password", "password");
+            throw new RuntimeException("invalid email did not fail");
         } catch (UserRegistrationError ignored){}
 
         try {
