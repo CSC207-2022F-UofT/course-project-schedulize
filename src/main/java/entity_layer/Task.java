@@ -1,13 +1,15 @@
 package entity_layer;
 
+import java.io.Serializable;
+
 /**
  * A Task interface, implemented by the CommonTask class. Meant as a layer of abstraction.
  * Created: 10/31/22
- * Last updated: 11/4/2022
+ * Last updated: 11/10/2022
  *
  * @author MMachadoUofT
  */
-public interface Task {
+public interface Task extends Serializable {
 
     /**
      * Get this Task's completion level.
@@ -15,6 +17,20 @@ public interface Task {
      * @return this Task's completion.
      */
     int getCompletion();
+
+    /**
+     * Get this Task's duration in minutes.
+     *
+     * @return this Task's duration
+     */
+    int getDuration();
+
+    /**
+     * Set this Task's duration in minutes.
+     *
+     * @param duration this Task's intended duration
+     */
+    void setDuration(int duration);
 
     /**
      * Get this Task's name.
@@ -36,6 +52,13 @@ public interface Task {
      * @return this Task's unique ID.
      */
     int getId();
+
+    /**
+     * Get the total amount of tasks there are.
+     *
+     * @return the static taskCount attribute
+     */
+    int getTaskCount();
 
     /**
      * Sets this Task's completion attribute to the passed number.
