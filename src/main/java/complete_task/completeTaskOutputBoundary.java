@@ -1,5 +1,5 @@
 package complete_task;
-import entityLayer.Curriculum;
+import entityLayer.User;
 
 /**
  * An output boundary interface that is implemented by the completeTaskPresenter class.
@@ -9,5 +9,7 @@ import entityLayer.Curriculum;
 public interface completeTaskOutputBoundary {
 
     int taskId = completeTaskController.taskId;
-    boolean taskCompleted(int taskId, Curriculum taskCurriculum);
+    int taskCurriculumId = completeTaskController.taskCurriculumId;
+    User activeUser = completeTaskController.activeUser;
+    boolean taskCompleted(int taskId, int taskCurriculumId, User activeUser);
 }

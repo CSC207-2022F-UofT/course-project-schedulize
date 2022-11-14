@@ -1,7 +1,9 @@
 package complete_task;
+import entityLayer.Schedule;
 import entityLayer.Curriculum;
 import entityLayer.Task;
 import entityLayer.TaskTree;
+import entityLayer.User;
 
 /**
  * Use Case for completing a task.
@@ -14,9 +16,14 @@ public class completeTaskUseCase implements completeTaskInputBoundary {
     /**
      * Complete the task by setting the Task's completion to 100.
      * @param taskId the unique id of the task to be completed.
+     * @param taskCurriculumId the unique id of the curriculum
+     *                         that the task belongs to.
+     * @param activeUser the active user using the program right now.
      */
     @Override
-    public void completeTask(int taskId, Curriculum taskCurriculum){
+    public void completeTask(int taskId, int taskCurriculumId, User activeUser){
+        Schedule schedule = activeUser.getSchedule();
+        Curriculum taskCurriculum = schedule.getCurriculum(taskCurriculumId);
         TaskTree taskTree = taskCurriculum.getTaskTreeByID(taskId);
         Task task = taskTree.getTask();
         task.setCompletion(100);
