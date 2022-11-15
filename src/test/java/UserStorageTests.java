@@ -7,13 +7,12 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import javax.crypto.NoSuchPaddingException;
 import java.io.IOException;
 import java.io.StreamCorruptedException;
-import java.security.InvalidKeyException;
-import java.security.NoSuchAlgorithmException;
 import java.util.HashSet;
 import java.util.List;
+
+import static org.junit.Assert.assertEquals;
 
 public class UserStorageTests {
     UserStorage storage;
@@ -80,7 +79,10 @@ public class UserStorageTests {
 
     @Test(timeout = 100)
     public void testUserLoad() throws IOException {
-        storage.loadUser(username1, password1);
+        User experimentUser = storage.loadUser(username1, password1);
+        assertEquals(experimentUser.getUsername(), user1.getUsername());
+        assertEquals(experimentUser.getEmail(), user1.getEmail());
+        assertEquals(experimentUser.getPassword(), user1.getPassword());
     }
 
     @Test(timeout = 100)
