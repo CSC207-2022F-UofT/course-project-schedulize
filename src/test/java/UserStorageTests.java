@@ -1,3 +1,5 @@
+import config.CommonCryptograph;
+import config.Cryptograph;
 import entity_layer.CommonUser;
 import entity_layer.User;
 import config.UserStorage;
@@ -32,7 +34,8 @@ public class UserStorageTests {
 
     @Before
     public void setUp() throws IOException {
-        storage = new UserStorage();
+        Cryptograph cipher = new CommonCryptograph();
+        storage = new UserStorage(cipher);
         user1 = new CommonUser(username1, "shale@lalal.com", password1);
         user2 = new CommonUser(username2, "copy@maker.com", password2);
         user3 = new CommonUser(username3, "lace@grape.com", password3);
@@ -68,19 +71,20 @@ public class UserStorageTests {
 
     @Test(timeout = 100)
     public void testInitialization() {
-        UserStorage ds = new UserStorage();
+        Cryptograph cipher = new CommonCryptograph();
+        UserStorage ds = new UserStorage(cipher);
         for (String username: usernames) {
             assert ds.usernameExists(username);
         }
     }
 
     @Test(timeout = 100)
-    public void testUserLoad() throws NoSuchPaddingException, IOException, NoSuchAlgorithmException, InvalidKeyException, ClassNotFoundException {
+    public void testUserLoad() throws IOException {
         storage.loadUser(username1, password1);
     }
 
     @Test(timeout = 100)
-    public void testInvalidUserLoad() throws NoSuchPaddingException, IOException, NoSuchAlgorithmException, InvalidKeyException, ClassNotFoundException {
+    public void testInvalidUserLoad() throws IOException {
         try {
             storage.loadUser(username1, password2);
         } catch (StreamCorruptedException error) {

@@ -9,12 +9,19 @@ import java.io.*;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
 
-public class Encryption {
-    private static final int KEY_LENGTH = 16;
-    private static final char TRAILING_CHAR = '#';
-    private static final String ENCRYPTION_TYPE = "AES";
+public class CommonCryptograph implements Cryptograph {
+    private final int KEY_LENGTH;
+    private final char TRAILING_CHAR;
+    private final String ENCRYPTION_TYPE;
 
-    public static void encryptSave(Serializable object, OutputStream oStream, String password)
+    public CommonCryptograph() {
+        KEY_LENGTH = 16;
+        TRAILING_CHAR = '#';
+        ENCRYPTION_TYPE = "AES";
+    }
+
+    @Override
+    public void encryptSave(Serializable object, OutputStream oStream, String password)
             throws DataStorageMalfunction {
         // Length is 16 byte
         SecretKeySpec sks = new SecretKeySpec(createKeyFromPassword(password), ENCRYPTION_TYPE);
@@ -30,25 +37,18 @@ public class Encryption {
         writeEncryptedObject(sealedObj, cipher, oStream);
     }
 
-    public static Object decrypt(InputStream istream, String password) throws IOException, NoSuchAlgorithmException,
-            NoSuchPaddingException, InvalidKeyException {
+    @Override
+    public Object decrypt(InputStream iStream, String password) throws IOException {
         SecretKeySpec sks = new SecretKeySpec(createKeyFromPassword(password), ENCRYPTION_TYPE);
-        Cipher cipher = Cipher.getInstance(ENCRYPTION_TYPE);
-        cipher.init(Cipher.DECRYPT_MODE, sks);
-
-        CipherInputStream cipherInputStream = new CipherInputStream(istream, cipher);
-        ObjectInputStream inputStream = new ObjectInputStream(cipherInputStream);
-        SealedObject sealedObject;
+        Cipher cipher = initializeCipher();
         try {
-            sealedObject = (SealedObject) inputStream.readObject();
-            return sealedObject.getObject(cipher);
-        } catch (ClassNotFoundException | IllegalBlockSizeException | BadPaddingException e) {
-            e.printStackTrace();
-            return null;
-        }
+            cipher.init(Cipher.DECRYPT_MODE, sks);
+        } catch (InvalidKeyException error) { throw new DataStorageMalfunction("Key Decryption failed"); }
+
+        return loadDecryptedObject(iStream, cipher);
     }
 
-    private static byte[] createKeyFromPassword(String password) {
+    private byte[] createKeyFromPassword(String password) {
         while (password.length() < KEY_LENGTH) {
             password = password.concat(String.valueOf(TRAILING_CHAR));
         }
@@ -58,7 +58,7 @@ public class Encryption {
         return password.getBytes();
     }
 
-    private static Cipher initializeCipher() {
+    private Cipher initializeCipher() {
         try {
             return Cipher.getInstance(ENCRYPTION_TYPE);
         } catch (NoSuchAlgorithmException | NoSuchPaddingException error) {
@@ -66,7 +66,7 @@ public class Encryption {
         }
     }
 
-    private static SealedObject sealObject(Serializable o, Cipher cipher) {
+    private SealedObject sealObject(Serializable o, Cipher cipher) {
         try {
             return new SealedObject(o, cipher);
         } catch (IllegalBlockSizeException | IOException error) {
@@ -74,7 +74,7 @@ public class Encryption {
         }
     }
 
-    private static void writeEncryptedObject(SealedObject sealedObj, Cipher cipher, OutputStream oStream) {
+    private void writeEncryptedObject(SealedObject sealedObj, Cipher cipher, OutputStream oStream) {
         try {
             CipherOutputStream cos = new CipherOutputStream(oStream, cipher);
             ObjectOutputStream outputStream = new ObjectOutputStream(cos);
@@ -83,8 +83,21 @@ public class Encryption {
         } catch (IOException error) { throw new DataStorageMalfunction("Driver Malfunction"); }
     }
 
-    public static void main(String[] args) throws IOException, ClassNotFoundException, NoSuchPaddingException, NoSuchAlgorithmException, InvalidKeyException {
-        UserStorage storage = new UserStorage();
+    private Object loadDecryptedObject(InputStream iStream, Cipher cipher) throws IOException {
+        CipherInputStream cipherInputStream = new CipherInputStream(iStream, cipher);
+        try {
+            ObjectInputStream inputStream = new ObjectInputStream(cipherInputStream);
+            SealedObject sealedObject;
+            sealedObject = (SealedObject) inputStream.readObject();
+            return sealedObject.getObject(cipher);
+        } catch (ClassNotFoundException | IllegalBlockSizeException | BadPaddingException error) {
+            throw new DataStorageMalfunction("Decryption failed");
+        }
+    }
+
+    public static void main(String[] args) throws IOException {
+        Cryptograph cipher = new CommonCryptograph();
+        UserStorage storage = new UserStorage(cipher);
         User user = new CommonUser("userPerson","email@sample.com",  "password");
         storage.saveUser(user);
         User loadeduser = storage.loadUser("userPerson", "password");

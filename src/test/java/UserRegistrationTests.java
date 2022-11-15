@@ -1,5 +1,7 @@
 import UI.UserRegistrationController;
 import UI.UserRegistrationResponseFormatter;
+import config.CommonCryptograph;
+import config.Cryptograph;
 import entity_layer.CommonUserFactory;
 import entity_layer.UserFactory;
 import config.UserStorage;
@@ -30,7 +32,8 @@ public class UserRegistrationTests {
     @Test(timeout = 50)
     public void testInteractorInitialization() {
         UserFactory factory = new CommonUserFactory();
-        storage = new UserStorage();
+        Cryptograph cipher = new CommonCryptograph();
+        storage = new UserStorage(cipher);
 
         interactor = new UserRegistrationInteractor(factory, storage, presenter);
     }

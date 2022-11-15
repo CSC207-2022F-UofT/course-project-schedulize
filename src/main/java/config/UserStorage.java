@@ -3,10 +3,7 @@ package config;
 import entity_layer.User;
 import use_cases.user_registration.UserDataStoreGateway;
 
-import javax.crypto.NoSuchPaddingException;
 import java.io.*;
-import java.security.InvalidKeyException;
-import java.security.NoSuchAlgorithmException;
 import java.util.HashSet;
 
 
@@ -19,12 +16,14 @@ import java.util.HashSet;
  */
 public class UserStorage implements UserDataStoreGateway {
     private final HashSet<String> existingUsernames;
+    private final Cryptograph cipher;
 
     /**
      * Default constructor that gets all existing usernames
      */
-    public UserStorage() {
-        existingUsernames = new HashSet<String>();
+    public UserStorage(Cryptograph cipher) {
+        existingUsernames = new HashSet<>();
+        this.cipher = cipher;
         File userDir = new File(PathManager.getUserDirectory());
         File[] directoryListing = userDir.listFiles();
 
@@ -52,10 +51,10 @@ public class UserStorage implements UserDataStoreGateway {
     /**
      * Saves a user to .ser file
      * @param newUser User object to save
-     * @throws DataStorageMalfunction for when Saving at any lower level malfunctions
+     * @throws DataStorageMalfunction for when saving at any lower level malfunctions
      */
     @Override
-    public void saveUser(User newUser) {
+    public void saveUser(User newUser) throws DataStorageMalfunction {
         String filepath = PathManager.getUserDirectory().concat("\\" + newUser.getUsername() + ".ser");
         File saveFile = new File(filepath);
         ObjectOutputStream oStream;
@@ -66,16 +65,31 @@ public class UserStorage implements UserDataStoreGateway {
         } catch (IOException error) {
             throw new DataStorageMalfunction("Driver Malfunction");
         }
-        Encryption.encryptSave(newUser, oStream, newUser.getPassword());
+        cipher.encryptSave(newUser, oStream, newUser.getPassword());
         existingUsernames.add(newUser.getUsername());
     }
 
-    public User loadUser(String username, String password) throws IOException, ClassNotFoundException, NoSuchPaddingException, NoSuchAlgorithmException, InvalidKeyException {
+    /**
+     * Loads a user from the saved user files
+     * @param username username of requested user to load
+     * @param password password of requested user to load
+     * @return decrypted User object
+     * @throws DataStorageMalfunction thrown when loading a User fails
+     * @throws IOException thrown when loading a User fails
+     * @throws StreamCorruptedException thrown when password is not correct for decryption of user data
+     */
+    public User loadUser(String username, String password) throws DataStorageMalfunction, StreamCorruptedException,
+            IOException {
         String filepath = PathManager.getUserDirectory().concat("\\" + username + ".ser");
         File loadFile = new File(filepath);
-        ObjectInputStream in = new ObjectInputStream(new FileInputStream(loadFile));
-        Object object = Encryption.decrypt(in, password);
-        return (User) object;
+        Object user;
+        try {
+            ObjectInputStream in = new ObjectInputStream(new FileInputStream(loadFile));
+            user = cipher.decrypt(in, password);
+        } catch (FileNotFoundException error) {
+            throw new DataStorageMalfunction("Username does not exist.");
+        }
+        return (User) user;
     }
 
     /**
