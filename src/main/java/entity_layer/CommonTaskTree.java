@@ -45,8 +45,20 @@ public class CommonTaskTree implements TaskTree {
         // Create variables for updated taskTrees later
         TaskTree oldParent = taskTree.getSuperTaskTree();
 
-        // Add taskTree to this TaskTree's subTaskTrees
+        // Add <taskTree> to this TaskTree's subTaskTrees
         this.subTaskTrees.add(taskTree);
+
+        // remove <taskTree> from <oldParent>
+        if (oldParent != null)
+            oldParent.removeSubTaskTree(taskTree);
+
+        // Add <taskTree>'s parent to <this>
+        taskTree.setSuperTaskTree(this);
+
+        // Update necessary taskTrees
+        this.updateTask();
+        if (oldParent != null)
+            oldParent.updateTask();
 
         // TODO: Because this involves updating trees, there might be an error at some point if a tree doesn't
         //  have a task. I might make an exception class for when a tree doesn't have a task, and it was supposed to.
