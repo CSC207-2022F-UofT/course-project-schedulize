@@ -3,6 +3,7 @@ import config.Cryptograph;
 import entity_layer.CommonUser;
 import entity_layer.User;
 import config.UserStorage;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.AfterAll;
@@ -73,16 +74,16 @@ public class UserStorageTests {
         Cryptograph cipher = new CommonCryptograph();
         UserStorage ds = new UserStorage(cipher);
         for (String username: usernames) {
-            assert ds.usernameExists(username);
+            Assertions.assertTrue(ds.usernameExists(username));
         }
     }
 
     @Test
     public void testUserLoad() throws IOException {
         User experimentUser = storage.loadUser(username1, password1);
-        assertEquals(experimentUser.getUsername(), user1.getUsername());
-        assertEquals(experimentUser.getEmail(), user1.getEmail());
-        assertEquals(experimentUser.getPassword(), user1.getPassword());
+        Assertions.assertEquals(experimentUser.getUsername(), user1.getUsername());
+        Assertions.assertEquals(experimentUser.getEmail(), user1.getEmail());
+        Assertions.assertEquals(experimentUser.getPassword(), user1.getPassword());
     }
 
     @Test
