@@ -234,7 +234,7 @@ public class CommonTaskTree implements TaskTree {
      */
     @Override
     public TaskTree getSuperTaskTree() {
-        return null;
+        return this.superTaskTree;
     }
 
     /**
@@ -244,7 +244,7 @@ public class CommonTaskTree implements TaskTree {
      */
     @Override
     public void setSuperTaskTree(TaskTree superTaskTree) {
-
+        this.superTaskTree = superTaskTree;
     }
 
     /**
@@ -254,7 +254,7 @@ public class CommonTaskTree implements TaskTree {
      */
     @Override
     public List<TaskTree> getSubTaskTrees() {
-        return null;
+        return new ArrayList<>(this.subTaskTrees);
     }
 
     /**
@@ -264,7 +264,7 @@ public class CommonTaskTree implements TaskTree {
      */
     @Override
     public Task getTask() {
-        return null;
+        return this.task;
     }
 
     /**
@@ -274,6 +274,6 @@ public class CommonTaskTree implements TaskTree {
      */
     @Override
     public void setTask(Task task) {
-
+        this.task = task;
     }
 }
