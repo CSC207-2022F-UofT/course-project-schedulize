@@ -1,7 +1,7 @@
 import UI.UserRegistrationController;
 import UI.UserRegistrationResponseFormatter;
-import entity_layer.CommonUserFactory;
-import entity_layer.UserFactory;
+import entity_factories.CommonUserFactory;
+import entity_factories.UserFactory;
 import config.UserStorage;
 import org.junit.After;
 import org.junit.Before;

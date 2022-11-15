@@ -1,7 +1,7 @@
 package use_cases.user_registration;
 
 import entity_layer.User;
-import entity_layer.UserFactory;
+import entity_factories.UserFactory;
 
 import java.io.IOException;
 

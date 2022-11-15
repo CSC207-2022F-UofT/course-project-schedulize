@@ -1,6 +1,6 @@
 package UI;
 
-import entity_layer.CommonUserFactory;
+import entity_factories.CommonUserFactory;
 import config.UserStorage;
 import use_cases.user_registration.UserRegistrationInteractor;
 
