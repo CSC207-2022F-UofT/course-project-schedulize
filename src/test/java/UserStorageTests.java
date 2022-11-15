@@ -5,7 +5,10 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import javax.crypto.NoSuchPaddingException;
 import java.io.IOException;
+import java.security.InvalidKeyException;
+import java.security.NoSuchAlgorithmException;
 import java.util.HashSet;
 import java.util.List;
 
@@ -68,6 +71,11 @@ public class UserStorageTests {
         for (String username: usernames) {
             assert ds.usernameExists(username);
         }
+    }
+
+    @Test(timeout = 100)
+    public void testUserLoad() throws NoSuchPaddingException, IOException, NoSuchAlgorithmException, InvalidKeyException, ClassNotFoundException {
+        storage.loadUser(username1, password2);
     }
 
     @After

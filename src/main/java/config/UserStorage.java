@@ -3,10 +3,10 @@ package config;
 import entity_layer.User;
 import use_cases.user_registration.UserDataStoreGateway;
 
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.ObjectOutputStream;
+import javax.crypto.NoSuchPaddingException;
+import java.io.*;
+import java.security.InvalidKeyException;
+import java.security.NoSuchAlgorithmException;
 import java.util.HashSet;
 
 
@@ -59,9 +59,20 @@ public class UserStorage implements UserDataStoreGateway {
         String filepath = PathManager.getUserDirectory().concat("\\" + newUser.getUsername() + ".ser");
         File saveFile = new File(filepath);
         ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(saveFile));
-        out.writeObject(newUser);
-        out.close();
+        try {
+            Encryption.encrypt(newUser, out, newUser.getPassword());
+        } catch (Exception ignore) {}
+//        out.writeObject(newUser);
+//        out.close();
         existingUsernames.add(newUser.getUsername());
+    }
+
+    public User loadUser(String username, String password) throws IOException, ClassNotFoundException, NoSuchPaddingException, NoSuchAlgorithmException, InvalidKeyException {
+        String filepath = PathManager.getUserDirectory().concat("\\" + username + ".ser");
+        File loadFile = new File(filepath);
+        ObjectInputStream in = new ObjectInputStream(new FileInputStream(loadFile));
+        Object object = Encryption.decrypt(in, password);
+        return (User) object;
     }
 
     /**
