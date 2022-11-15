@@ -99,7 +99,19 @@ public class CommonTaskTree implements TaskTree {
      */
     @Override
     public TaskTree getChildTaskTreeByTask(Task task) {
-        return null;
+        // Check if this is the matching tree
+        if (this.task == task)
+            return this;
+        // Next, check if any of the subtrees might have it
+        else {
+            for (TaskTree taskTree : this.subTaskTrees) {
+                // Store this given subTree's candidate to be compared
+                TaskTree candidate = taskTree.getChildTaskTreeByTask(task);
+                if (candidate != null)
+                    return candidate;
+            }
+            return null;
+        }
     }
 
     /**
@@ -111,7 +123,16 @@ public class CommonTaskTree implements TaskTree {
      */
     @Override
     public TaskTree getChildTaskTreeByID(int taskID) {
-        return null;
+        if (this.task.getId() == taskID)
+            return this;
+        else {
+            for (TaskTree taskTree : this.subTaskTrees) {
+                TaskTree candidate = taskTree.getChildTaskTreeByID(taskID);
+                if (candidate != null)
+                    return candidate;
+            }
+            return null;
+        }
     }
 
     /**
