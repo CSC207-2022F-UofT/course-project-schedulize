@@ -50,20 +50,23 @@ public class UserStorage implements UserDataStoreGateway {
     }
 
     /**
-     * Saves users to .ser files
+     * Saves a user to .ser file
      * @param newUser User object to save
-     * @throws IOException for when drivers do not connect correctly
+     * @throws DataStorageMalfunction for when Saving at any lower level malfunctions
      */
     @Override
-    public void saveUser(User newUser) throws IOException {
+    public void saveUser(User newUser) {
         String filepath = PathManager.getUserDirectory().concat("\\" + newUser.getUsername() + ".ser");
         File saveFile = new File(filepath);
-        ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(saveFile));
+        ObjectOutputStream oStream;
         try {
-            Encryption.encrypt(newUser, out, newUser.getPassword());
-        } catch (Exception ignore) {}
-//        out.writeObject(newUser);
-//        out.close();
+            oStream = new ObjectOutputStream(new FileOutputStream(saveFile));
+        } catch (FileNotFoundException error) {
+            throw new DataStorageMalfunction("User Data corrupted");
+        } catch (IOException error) {
+            throw new DataStorageMalfunction("Driver Malfunction");
+        }
+        Encryption.encryptSave(newUser, oStream, newUser.getPassword());
         existingUsernames.add(newUser.getUsername());
     }
 

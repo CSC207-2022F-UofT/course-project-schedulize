@@ -7,6 +7,7 @@ import org.junit.Test;
 
 import javax.crypto.NoSuchPaddingException;
 import java.io.IOException;
+import java.io.StreamCorruptedException;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
 import java.util.HashSet;
@@ -75,7 +76,17 @@ public class UserStorageTests {
 
     @Test(timeout = 100)
     public void testUserLoad() throws NoSuchPaddingException, IOException, NoSuchAlgorithmException, InvalidKeyException, ClassNotFoundException {
-        storage.loadUser(username1, password2);
+        storage.loadUser(username1, password1);
+    }
+
+    @Test(timeout = 100)
+    public void testInvalidUserLoad() throws NoSuchPaddingException, IOException, NoSuchAlgorithmException, InvalidKeyException, ClassNotFoundException {
+        try {
+            storage.loadUser(username1, password2);
+        } catch (StreamCorruptedException error) {
+            return;
+        }
+        throw new RuntimeException();
     }
 
     @After
