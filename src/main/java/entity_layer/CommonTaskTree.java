@@ -142,7 +142,7 @@ public class CommonTaskTree implements TaskTree {
      */
     @Override
     public boolean hasSubTaskTrees() {
-        return false;
+        return this.subTaskTrees.size() > 0;
     }
 
     /**
@@ -152,7 +152,7 @@ public class CommonTaskTree implements TaskTree {
      */
     @Override
     public boolean hasSuperTaskTree() {
-        return false;
+        return this.superTaskTree != null;
     }
 
     /**
@@ -162,7 +162,13 @@ public class CommonTaskTree implements TaskTree {
      */
     @Override
     public List<TaskTree> toList() {
-        return null;
+        List<TaskTree> taskTreeList = new ArrayList<>();
+        taskTreeList.add(this);
+
+        for (TaskTree taskTree : this.subTaskTrees) {
+            taskTreeList.addAll(taskTree.toList());
+        }
+        return taskTreeList;
     }
 
     /**
@@ -172,7 +178,14 @@ public class CommonTaskTree implements TaskTree {
      */
     @Override
     public List<Task> toListOfTasks() {
-        return null;
+        List<TaskTree> taskTreeList = this.toList();
+        List<Task> taskList = new ArrayList<>();
+
+        for (TaskTree taskTree : taskTreeList) {
+            taskList.add(taskTree.getTask());
+        }
+
+        return taskList;
     }
 
     /**
