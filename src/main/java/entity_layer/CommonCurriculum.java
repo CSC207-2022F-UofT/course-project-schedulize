@@ -1,4 +1,4 @@
-package entityLayer;
+package entity_layer;
 
 /**
  * A CommonCurriculum class, implements the Curriculum interface.
