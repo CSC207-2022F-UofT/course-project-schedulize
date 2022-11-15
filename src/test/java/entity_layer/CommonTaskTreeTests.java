@@ -49,6 +49,12 @@ public class CommonTaskTreeTests {
         return new CommonTask("n", "d");
     }
 
+    private void populateTree(TaskTree root) {
+        for (TaskTree tree : root.toList()) {
+            tree.setTask(createTestTask());
+        }
+    }
+
     @Test
     public void testAddSubtree() {
         TaskTree tree1 = new CommonTaskTree();
@@ -141,7 +147,77 @@ public class CommonTaskTreeTests {
      */
     @Test
     public void testCompleteTaskMiddleLayer() {
+        // Create upper-level trees
+        TaskTree root = new CommonTaskTree();
+        TaskTree sub1 = new CommonTaskTree();
+        TaskTree sub2 = new CommonTaskTree();
+        TaskTree sub3 = new CommonTaskTree();
 
+        root.addSubTaskTree(sub1);
+        root.addSubTaskTree(sub2);
+        root.addSubTaskTree(sub3);
+
+        // Give each subtree 3 subTaskTrees
+        for (TaskTree subTree : root.getSubTaskTrees()) {
+            for (int i = 1; i <= 3; i++) {
+                subTree.addSubTaskTree(new CommonTaskTree());
+            }
+        }
+
+        // Populate all trees
+        for (TaskTree tree : root.toList()) {
+            tree.setTask(createTestTask());
+        }
+
+        // Complete a mid-level task
+        sub2.completeTask();
+
+        // Assert that neither sibling tree was affected
+        assertEquals(0, sub1.getTask().getCompletion());
+        assertEquals(0, sub3.getTask().getCompletion());
+
+        // Assert children trees were completed
+        for (TaskTree sub2Tree : sub2.getSubTaskTrees()) {
+            assertEquals(100, sub2Tree.getTask().getCompletion());
+        }
+
+        // Assert that root was updated
+        assertEquals(33, root.getTask().getCompletion());
+    }
+
+    /**
+     * Test that higher-level superTaskTrees are updated
+     */
+    @Test
+    public void testParentOfParentUpdated() {
+        // Create TaskTrees
+        TaskTree root = new CommonTaskTree();
+        TaskTree sub1 = new CommonTaskTree();
+        TaskTree sub2 = new CommonTaskTree();
+        TaskTree sub11 = new CommonTaskTree();
+        TaskTree sub12 = new CommonTaskTree();
+        TaskTree sub21 = new CommonTaskTree();
+        TaskTree sub22 = new CommonTaskTree();
+
+        // Connect TaskTrees
+        root.addSubTaskTree(sub1);
+        root.addSubTaskTree(sub2);
+        sub1.addSubTaskTree(sub11);
+        sub1.addSubTaskTree(sub12);
+        sub2.addSubTaskTree(sub21);
+        sub2.addSubTaskTree(sub22);
+
+        // Populate
+        populateTree(root);
+
+        // Update a low-level Task
+        sub22.completeTask();
+
+        // Assertions
+        assertEquals(0, sub1.getTask().getCompletion());
+        assertEquals(0, sub21.getTask().getCompletion());
+        assertEquals(50, sub2.getTask().getCompletion());
+        assertEquals(25, root.getTask().getCompletion());
     }
 
 }

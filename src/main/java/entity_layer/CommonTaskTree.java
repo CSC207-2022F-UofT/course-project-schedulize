@@ -96,7 +96,7 @@ public class CommonTaskTree implements TaskTree {
         // Recurse on all subtrees
         else {
             for (TaskTree subTaskTree : this.subTaskTrees) {
-                if (this.removeChildTaskTree(taskTree)) return true;
+                if (subTaskTree.removeChildTaskTree(taskTree)) return true;
             }
             // If we never returned, then we never had a true removal of the taskTree, so it was not removed.
             return false;
@@ -227,6 +227,11 @@ public class CommonTaskTree implements TaskTree {
      */
     @Override
     public void updateTask() {
+        // TODO: This is a TEMPORARY FIX. If there is no task here, it just returns none. This is just so that the tests
+        //  that test other aspects of the code will run, regardless of whether this is implemented yet.
+        if (this.task == null)
+            return;
+
         // Get the total amount of subtasks
         double subTaskCount = this.subTaskTrees.size();
         double taskCompletionSum = 0.0;
@@ -238,6 +243,11 @@ public class CommonTaskTree implements TaskTree {
 
         // Set this task's completion to the average completion of all of its subtasks
         this.task.setCompletion((int) (taskCompletionSum / subTaskCount));
+
+        // Recurse upwards
+        if (this.superTaskTree != null) {
+            this.superTaskTree.updateTask();
+        }
     }
 
     /**
