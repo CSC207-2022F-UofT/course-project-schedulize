@@ -32,9 +32,6 @@ public class UserStorage implements UserDataStoreGateway {
                 String extendedUsername = user.getName();
                 existingUsernames.add(removeFileExtension(extendedUsername));
             }
-        } else {
-            // TODO: invalid file structure and directory does not exist
-            // throw new RuntimeException();
         }
     }
 
@@ -121,13 +118,12 @@ public class UserStorage implements UserDataStoreGateway {
      * @param filename a String representing the requested filename
      * @return a String, filename without extension
      */
-    private String removeFileExtension(String filename) {
+    private String removeFileExtension(String filename) throws DataStorageMalfunction {
         int pos = filename.lastIndexOf(".");
         if (pos > 0) {
             return filename.substring(0, pos);
         } else {
-            // TODO: INVALID FILES IN DIRECTORY
-            return filename;
+            throw new DataStorageMalfunction("Save Directory contains corrupted or invalid files");
         }
     }
 }
