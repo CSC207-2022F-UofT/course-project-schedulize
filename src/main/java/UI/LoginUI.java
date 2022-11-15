@@ -1,5 +1,9 @@
 package UI;
 
+import entity_layer.CommonUserFactory;
+import config.UserStorage;
+import use_cases.user_registration.UserRegistrationInteractor;
+
 import javax.swing.*;
 import java.awt.event.*;
 
@@ -101,7 +105,10 @@ public class LoginUI extends CentralWindow {
     // TODO: Delete for Deployment
     public static void main(String[] args) {
         WindowManager windows = new CommonWindowManager();
-        CreateAccountUI createAccountWindow = new CreateAccountUI(windows);
+        UserRegistrationInteractor interactor = new UserRegistrationInteractor(new CommonUserFactory(),
+                new UserStorage(), new UserRegistrationResponseFormatter());
+        UserRegistrationController controller = new UserRegistrationController(interactor);
+        CreateAccountUI createAccountWindow = new CreateAccountUI(windows, controller);
         JFrame mainWindow = new LoginUI(windows);
     }
 }

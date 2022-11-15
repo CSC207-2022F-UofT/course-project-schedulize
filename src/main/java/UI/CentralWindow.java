@@ -1,6 +1,6 @@
 package UI;
 
-import Config.PathManager;
+import config.PathManager;
 
 import javax.swing.*;
 import java.awt.*;
