@@ -16,14 +16,12 @@ public class LoginInteractor implements LoginInputBoundary {
     }
 
     public void login(LoginRequest request) throws LoginException {
-        if (storage.usernameExists(request.getUsername())) {
-            try {
-                storage.loadUser(request.getUsername(), request.getPassword());
-            } catch (IOException error) {
-                throw new LoginException("Invalid username or password.");
-            } catch (DataStorageMalfunction error) {
-                throw new LoginException("Fatal Error: " + error.getMessage());
-            }
+        try {
+            storage.loadUser(request.getUsername(), request.getPassword());
+        } catch (IOException error) {
+            throw new LoginException("Invalid username or password.");
+        } catch (DataStorageMalfunction error) {
+            throw new LoginException("Fatal Error: " + error.getMessage());
         }
     }
 }
