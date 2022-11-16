@@ -2,7 +2,7 @@ import use_cases.user_registration.UserRegistrationController;
 import config.CommonCryptograph;
 import config.Cryptograph;
 import config.UserDataStoreGateway;
-import entity_layer.CommonUserFactory;
+import entity_factories.CommonUserFactory;
 import entity_layer.UserFactory;
 import config.UserStorage;
 import org.junit.jupiter.api.Test;

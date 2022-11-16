@@ -3,7 +3,7 @@ import config.CommonCryptograph;
 import config.Cryptograph;
 import config.UserDataStoreGateway;
 import config.UserStorage;
-import entity_layer.CommonUserFactory;
+import entity_factories.CommonUserFactory;
 import entity_layer.UserFactory;
 import use_cases.login.LoginController;
 import use_cases.login.LoginInputBoundary;
