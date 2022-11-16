@@ -42,23 +42,18 @@ public class CommonTaskTree implements TaskTree {
      */
     @Override
     public void addSubTaskTree(TaskTree taskTree) {
-        // Create variables for updated taskTrees later
         TaskTree oldParent = taskTree.getSuperTaskTree();
 
-        // Add <taskTree> to this TaskTree's subTaskTrees
         this.subTaskTrees.add(taskTree);
 
-        // remove <taskTree> from <oldParent>
-        if (oldParent != null)
+        if (oldParent != null) {
             oldParent.removeSubTaskTree(taskTree);
+            oldParent.updateTask();
+        }
 
-        // Add <taskTree>'s parent to <this>
         taskTree.setSuperTaskTree(this);
 
-        // Update necessary taskTrees
         this.updateTask();
-        if (oldParent != null)
-            oldParent.updateTask();
 
         // TODO: Because this involves updating trees, there might be an error at some point if a tree doesn't
         //  have a task. I might make an exception class for when a tree doesn't have a task, and it was supposed to.
@@ -207,15 +202,12 @@ public class CommonTaskTree implements TaskTree {
      */
     @Override
     public void completeTask() {
-        // Root task completion
         this.getTask().setCompletion(100);
 
-        // SubTask completion
         for (TaskTree taskTree : this.subTaskTrees) {
             taskTree.completeTask();
         }
 
-        // SuperTask update
         this.superTaskTree.updateTask();
 
         // Now that I'm writing this, I'm realizing that the recursive call to this TaskTree's subTaskTrees will cause
@@ -232,19 +224,15 @@ public class CommonTaskTree implements TaskTree {
         if (this.task == null)
             return;
 
-        // Get the total amount of subtasks
         double subTaskCount = this.subTaskTrees.size();
         double taskCompletionSum = 0.0;
 
-        // Get a total of all subtask's completions
         for (TaskTree taskTree : this.subTaskTrees) {
             taskCompletionSum += taskTree.getTask().getCompletion();
         }
 
-        // Set this task's completion to the average completion of all of its subtasks
         this.task.setCompletion((int) (taskCompletionSum / subTaskCount));
 
-        // Recurse upwards
         if (this.superTaskTree != null) {
             this.superTaskTree.updateTask();
         }
