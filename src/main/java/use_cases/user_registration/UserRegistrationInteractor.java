@@ -1,6 +1,7 @@
 package use_cases.user_registration;
 
 import config.UserDataStoreGateway;
+import entity_layer.InMemoryUser;
 import entity_layer.User;
 import entity_layer.UserFactory;
 
@@ -42,5 +43,7 @@ public class UserRegistrationInteractor implements UserRegistrationInputBoundary
         } catch (IOException except) {
             throw new UserRegistrationError("Data Saving Error");
         }
+
+        InMemoryUser.setActiveUser(newUser);
     }
 }
