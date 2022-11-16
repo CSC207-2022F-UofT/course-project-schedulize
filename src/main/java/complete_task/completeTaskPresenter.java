@@ -1,7 +1,7 @@
 package complete_task;
-import entityLayer.Curriculum;
-import entityLayer.Task;
-import entityLayer.TaskTree;
+import entity_layer.Curriculum;
+import entity_layer.Task;
+import entity_layer.TaskTree;
 
 /**
  * Presenter for the completeTask use case that receives if the task

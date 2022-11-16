@@ -1,4 +1,4 @@
-package entityLayer;
+package entity_layer;
 
 import java.io.Serializable;
 

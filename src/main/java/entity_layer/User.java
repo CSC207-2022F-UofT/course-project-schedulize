@@ -1,4 +1,6 @@
-package entityLayer;
+package entity_layer;
+
+import java.io.Serializable;
 
 /**
  * An interface for Users, used as a layer of abstraction. Implemented by the CommonUser class.
@@ -7,7 +9,7 @@ package entityLayer;
  *
  * @author MMachadoUofT
  */
-public interface User {
+public interface User extends Serializable {
 
     /**
      * Get this User's email.
@@ -43,6 +45,11 @@ public interface User {
      * @param password this User's new password
      */
     void setPassword(String password);
+
+    /**
+     * get this user's password as a String
+     */
+    String getPassword();
 
     /**
      * Get this User's username.
