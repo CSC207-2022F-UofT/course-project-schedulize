@@ -23,14 +23,13 @@ public class LoginTests {
 
     @BeforeAll
     public static void setUp() throws IOException {
-        UserFactory factory = new CommonUserFactory();
         Cryptograph cipher = new CommonCryptograph();
 
         storage = new UserStorage(cipher);
         user = new CommonUser("Shelly", "shale@lalal.com", "password1");
         storage.saveUser(user);
 
-        interactor = new LoginInteractor(factory, storage);
+        interactor = new LoginInteractor(storage);
         controller = new LoginController(interactor);
     }
 

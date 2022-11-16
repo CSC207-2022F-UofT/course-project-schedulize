@@ -24,7 +24,7 @@ public class Main {
         UserRegistrationInteractor interactor = new UserRegistrationInteractor(factory, storage);
         UserRegistrationController registryController = new UserRegistrationController(interactor);
 
-        LoginInputBoundary loginInteractor = new LoginInteractor(factory, storage);
+        LoginInputBoundary loginInteractor = new LoginInteractor(storage);
         LoginController loginController = new LoginController(loginInteractor);
 
         CreateAccountUI createAccountWindow = new CreateAccountUI(windows, registryController);

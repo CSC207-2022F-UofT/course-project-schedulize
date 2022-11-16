@@ -8,10 +8,8 @@ import java.io.IOException;
 import java.io.StreamCorruptedException;
 
 public class LoginInteractor implements LoginInputBoundary {
-    private final UserFactory userFactory;
     private final UserDataStoreGateway storage;
-    public LoginInteractor(UserFactory userFactory, UserDataStoreGateway dataStorage) {
-        this.userFactory = userFactory;
+    public LoginInteractor(UserDataStoreGateway dataStorage) {
         this.storage = dataStorage;
     }
 
