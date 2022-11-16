@@ -80,7 +80,7 @@ public class UserStorage implements UserDataStoreGateway {
         File loadFile = new File(filepath);
         Object user;
         ObjectInputStream in = new ObjectInputStream(new FileInputStream(loadFile));
-        user = cipher.decrypt(in, password);
+        user = cipher.decryptLoad(in, password);
         return (User) user;
     }
 
