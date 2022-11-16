@@ -1,3 +1,5 @@
+import entity_layer.InMemoryUser;
+import entity_layer.User;
 import use_cases.user_registration.UserRegistrationController;
 import config.CommonCryptograph;
 import config.Cryptograph;
@@ -9,6 +11,8 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.AfterAll;
 import use_cases.user_registration.*;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 
 public class UserRegistrationTests {
@@ -28,7 +32,16 @@ public class UserRegistrationTests {
 
     @Test
     public void testControllerUserCreation() {
+        UserFactory factory = new CommonUserFactory();
+        User expectedUser = factory.create("i'm a user","email@sample.com",  "password");
+
         controller.create("email@sample.com", "i'm a user", "password", "password");
+        User actualUser = InMemoryUser.getActiveUser();
+
+        // check that expected and actual fields are the same
+        assertEquals(expectedUser.getUsername(), actualUser.getUsername());
+        assertEquals(expectedUser.getPassword(), actualUser.getPassword());
+        assertEquals(expectedUser.getEmail(), actualUser.getEmail());
     }
 
     @Test
