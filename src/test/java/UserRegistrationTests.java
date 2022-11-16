@@ -1,4 +1,4 @@
-import UI.UserRegistrationController;
+import use_cases.user_registration.UserRegistrationController;
 import config.CommonCryptograph;
 import config.Cryptograph;
 import config.UserDataStoreGateway;

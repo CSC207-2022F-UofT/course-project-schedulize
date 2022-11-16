@@ -1,4 +1,4 @@
-package UI;
+package use_cases.user_registration;
 
 import use_cases.user_registration.UserRegistrationInputBoundary;
 import use_cases.user_registration.UserRegistrationRequest;

@@ -8,6 +8,7 @@ import entity_layer.UserFactory;
 import use_cases.login.LoginController;
 import use_cases.login.LoginInputBoundary;
 import use_cases.login.LoginInteractor;
+import use_cases.user_registration.UserRegistrationController;
 import use_cases.user_registration.UserRegistrationInteractor;
 
 import javax.swing.*;
