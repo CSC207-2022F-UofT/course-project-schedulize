@@ -103,15 +103,4 @@ public class LoginUI extends CentralWindow {
         // recenter the window
         this.centreWindow();
     }
-
-    // TODO: Delete for Deployment
-    public static void main(String[] args) {
-        WindowManager windows = new CommonWindowManager();
-        Cryptograph cipher = new CommonCryptograph();
-        UserRegistrationInteractor interactor = new UserRegistrationInteractor(new CommonUserFactory(),
-                new UserStorage(cipher), new UserRegistrationResponseFormatter());
-        UserRegistrationController controller = new UserRegistrationController(interactor);
-        CreateAccountUI createAccountWindow = new CreateAccountUI(windows, controller);
-        JFrame mainWindow = new LoginUI(windows);
-    }
 }
