@@ -1,5 +1,4 @@
 import UI.UserRegistrationController;
-import UI.UserRegistrationResponseFormatter;
 import config.CommonCryptograph;
 import config.Cryptograph;
 import config.UserDataStoreGateway;
@@ -15,17 +14,15 @@ import use_cases.user_registration.*;
 public class UserRegistrationTests {
     static UserRegistrationController controller;
     static UserRegistrationInputBoundary interactor;
-    static UserRegistrationPresenter presenter;
     static UserDataStoreGateway storage;
 
     @BeforeAll
     public static void setUp() {
-        presenter = new UserRegistrationResponseFormatter();
         UserFactory factory = new CommonUserFactory();
         Cryptograph cipher = new CommonCryptograph();
         storage = new UserStorage(cipher);
 
-        interactor = new UserRegistrationInteractor(factory, storage, presenter);
+        interactor = new UserRegistrationInteractor(factory, storage);
         controller = new UserRegistrationController(interactor);
     }
 

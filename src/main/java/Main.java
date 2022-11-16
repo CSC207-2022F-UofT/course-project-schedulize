@@ -20,8 +20,7 @@ public class Main {
         UserFactory factory = new CommonUserFactory();
         UserDataStoreGateway storage = new UserStorage(cipher);
 
-        UserRegistrationInteractor interactor = new UserRegistrationInteractor(factory,
-                storage, new UserRegistrationResponseFormatter());
+        UserRegistrationInteractor interactor = new UserRegistrationInteractor(factory, storage);
         UserRegistrationController registryController = new UserRegistrationController(interactor);
 
         LoginInputBoundary loginInteractor = new LoginInteractor(factory, storage);

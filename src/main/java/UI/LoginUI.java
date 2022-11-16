@@ -74,7 +74,6 @@ public class LoginUI extends CentralWindow {
         loginButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                // TODO: Connect to Login Use Case
                 try {
                     controller.login(userInputField.getText(), passwordField.getText());
                 } catch (LoginException error){
@@ -82,6 +81,7 @@ public class LoginUI extends CentralWindow {
                     return;
                 }
                 errorLabel.setText("");
+                // TODO: Connect to Dashboard
                 programWindows.closeWindow(WindowManager.LOGIN_REFERENCE_KEY);
             }
         });
