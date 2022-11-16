@@ -1,5 +1,6 @@
 package use_cases.user_registration;
 
+import config.UserDataStoreGateway;
 import entity_layer.User;
 import entity_layer.UserFactory;
 

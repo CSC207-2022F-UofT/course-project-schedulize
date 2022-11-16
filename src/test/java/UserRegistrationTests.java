@@ -2,6 +2,7 @@ import UI.UserRegistrationController;
 import UI.UserRegistrationResponseFormatter;
 import config.CommonCryptograph;
 import config.Cryptograph;
+import config.UserDataStoreGateway;
 import entity_layer.CommonUserFactory;
 import entity_layer.UserFactory;
 import config.UserStorage;

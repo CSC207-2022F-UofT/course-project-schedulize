@@ -1,7 +1,6 @@
 package config;
 
 import entity_layer.User;
-import use_cases.user_registration.UserDataStoreGateway;
 
 import java.io.*;
 import java.util.HashSet;
@@ -75,17 +74,13 @@ public class UserStorage implements UserDataStoreGateway {
      * @throws IOException thrown when loading a User fails
      * @throws StreamCorruptedException thrown when password is not correct for decryption of user data
      */
-    public User loadUser(String username, String password) throws DataStorageMalfunction, StreamCorruptedException,
-            IOException {
+    @Override
+    public User loadUser(String username, String password) throws DataStorageMalfunction, IOException {
         String filepath = PathManager.getUserDirectory().concat("\\" + username + ".ser");
         File loadFile = new File(filepath);
         Object user;
-        try {
-            ObjectInputStream in = new ObjectInputStream(new FileInputStream(loadFile));
-            user = cipher.decrypt(in, password);
-        } catch (FileNotFoundException error) {
-            throw new DataStorageMalfunction("Username does not exist.");
-        }
+        ObjectInputStream in = new ObjectInputStream(new FileInputStream(loadFile));
+        user = cipher.decrypt(in, password);
         return (User) user;
     }
 
