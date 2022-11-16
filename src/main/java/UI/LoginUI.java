@@ -1,5 +1,7 @@
 package UI;
 
+import config.CommonCryptograph;
+import config.Cryptograph;
 import entity_layer.CommonUserFactory;
 import config.UserStorage;
 import use_cases.user_registration.UserRegistrationInteractor;
@@ -100,15 +102,5 @@ public class LoginUI extends CentralWindow {
 
         // recenter the window
         this.centreWindow();
-    }
-
-    // TODO: Delete for Deployment
-    public static void main(String[] args) {
-        WindowManager windows = new CommonWindowManager();
-        UserRegistrationInteractor interactor = new UserRegistrationInteractor(new CommonUserFactory(),
-                new UserStorage(), new UserRegistrationResponseFormatter());
-        UserRegistrationController controller = new UserRegistrationController(interactor);
-        CreateAccountUI createAccountWindow = new CreateAccountUI(windows, controller);
-        JFrame mainWindow = new LoginUI(windows);
     }
 }
