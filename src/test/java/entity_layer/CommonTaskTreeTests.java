@@ -16,35 +16,6 @@ import static org.junit.jupiter.api.Assertions.*;
  */
 public class CommonTaskTreeTests {
 
-    /*
-    private TaskTree setupTree() {
-        TaskTree tree1 = new CommonTaskTree();
-        TaskTree tree2 = new CommonTaskTree();
-        TaskTree tree3 = new CommonTaskTree();
-        TaskTree tree4 = new CommonTaskTree();
-        TaskTree tree5 = new CommonTaskTree();
-        TaskTree tree6 = new CommonTaskTree();
-        TaskTree tree7 = new CommonTaskTree();
-
-        Task task1 = new CommonTask("n", "d");
-        Task task2 = new CommonTask("n", "d");
-        Task task3 = new CommonTask("n", "d");
-        Task task4 = new CommonTask("n", "d");
-        Task task5 = new CommonTask("n", "d");
-        Task task6 = new CommonTask("n", "d");
-        Task task7 = new CommonTask("n", "d");
-
-        tree1.setTask(task1);
-        tree2.setTask(task2);
-        tree3.setTask(task3);
-        tree4.setTask(task4);
-        tree5.setTask(task5);
-        tree6.setTask(task6);
-        tree7.setTask(task7);
-
-
-    }*/
-
     private Task createTestTask() {
         return new CommonTask("n", "d");
     }
@@ -64,6 +35,32 @@ public class CommonTaskTreeTests {
 
         assertEquals(tree2, tree1.getSubTaskTrees().get(0));
         assertEquals(tree1, tree2.getSuperTaskTree());
+    }
+
+    @Test
+    public void testHasSuperTaskTree() {
+        TaskTree tree1 = new CommonTaskTree();
+        TaskTree tree2 = new CommonTaskTree();
+
+        assertFalse(tree1.hasSuperTaskTree());
+        assertFalse(tree2.hasSuperTaskTree());
+
+        tree1.addSubTaskTree(tree2);
+
+        assertTrue(tree2.hasSuperTaskTree());
+    }
+
+    @Test
+    public void testHasSubtrees() {
+        TaskTree tree1 = new CommonTaskTree();
+        TaskTree tree2 = new CommonTaskTree();
+
+        assertFalse(tree1.hasSubTaskTrees());
+        assertFalse(tree2.hasSubTaskTrees());
+
+        tree1.addSubTaskTree(tree2);
+
+        assertTrue(tree1.hasSubTaskTrees());
     }
 
     @Test
@@ -107,12 +104,57 @@ public class CommonTaskTreeTests {
 
     @Test
     public void testGetTaskTreeByIDNestedTree() {
-        // TODO: Write this test
+        // Create TaskTrees
+        TaskTree root = new CommonTaskTree();
+        TaskTree sub1 = new CommonTaskTree();
+        TaskTree sub2 = new CommonTaskTree();
+        TaskTree sub11 = new CommonTaskTree();
+        TaskTree sub12 = new CommonTaskTree();
+        TaskTree sub21 = new CommonTaskTree();
+        TaskTree sub22 = new CommonTaskTree();
+
+        // Connect TaskTrees
+        root.addSubTaskTree(sub1);
+        root.addSubTaskTree(sub2);
+        sub1.addSubTaskTree(sub11);
+        sub1.addSubTaskTree(sub12);
+        sub2.addSubTaskTree(sub21);
+        sub2.addSubTaskTree(sub22);
+
+        // Populate
+        populateTree(root);
+
+        // Get expected id
+        int expectedID = sub21.getTask().getId();
+
+        // Assertion
+        assertEquals(sub21, root.getChildTaskTreeByID(expectedID));
     }
 
     @Test
     public void testGetTaskTreeByIDNotFound() {
-        // TODO: Write this test
+        // Create TaskTrees
+        TaskTree root = new CommonTaskTree();
+        TaskTree sub1 = new CommonTaskTree();
+        TaskTree sub2 = new CommonTaskTree();
+        TaskTree sub11 = new CommonTaskTree();
+        TaskTree sub12 = new CommonTaskTree();
+        TaskTree sub21 = new CommonTaskTree();
+        TaskTree sub22 = new CommonTaskTree();
+
+        // Connect TaskTrees
+        root.addSubTaskTree(sub1);
+        root.addSubTaskTree(sub2);
+        sub1.addSubTaskTree(sub11);
+        sub1.addSubTaskTree(sub12);
+        sub2.addSubTaskTree(sub21);
+        sub2.addSubTaskTree(sub22);
+
+        // Populate
+        populateTree(root);
+
+        // Assert null for an unfound Tree
+        assertNull(root.getChildTaskTreeByID(-1));
     }
 
     /**
@@ -218,6 +260,100 @@ public class CommonTaskTreeTests {
         assertEquals(0, sub21.getTask().getCompletion());
         assertEquals(50, sub2.getTask().getCompletion());
         assertEquals(25, root.getTask().getCompletion());
+    }
+
+    /**
+     * Tests that we can succesfully remove a child TaskTree that is *not* a direct subTaskTree
+     */
+    @Test
+    public void testRemoveChildTaskTree() {
+        // Create TaskTrees
+        TaskTree root = new CommonTaskTree();
+        TaskTree sub1 = new CommonTaskTree();
+        TaskTree sub2 = new CommonTaskTree();
+        TaskTree sub11 = new CommonTaskTree();
+        TaskTree sub12 = new CommonTaskTree();
+        TaskTree sub21 = new CommonTaskTree();
+        TaskTree sub22 = new CommonTaskTree();
+
+        // Connect TaskTrees
+        root.addSubTaskTree(sub1);
+        root.addSubTaskTree(sub2);
+        sub1.addSubTaskTree(sub11);
+        sub1.addSubTaskTree(sub12);
+        sub2.addSubTaskTree(sub21);
+        sub2.addSubTaskTree(sub22);
+
+        // Populate
+        populateTree(root);
+
+        // Assert that sub12 can be deleted
+        assertTrue(root.removeChildTaskTree(sub12));
+        assertEquals(1, sub1.getSubTaskTrees().size());
+    }
+
+    @Test
+    public void testGetChildTreeByTask() {
+        // Create TaskTrees
+        TaskTree root = new CommonTaskTree();
+        TaskTree sub1 = new CommonTaskTree();
+        TaskTree sub2 = new CommonTaskTree();
+        TaskTree sub11 = new CommonTaskTree();
+        TaskTree sub12 = new CommonTaskTree();
+        TaskTree sub21 = new CommonTaskTree();
+        TaskTree sub22 = new CommonTaskTree();
+
+        // Connect TaskTrees
+        root.addSubTaskTree(sub1);
+        root.addSubTaskTree(sub2);
+        sub1.addSubTaskTree(sub11);
+        sub1.addSubTaskTree(sub12);
+        sub2.addSubTaskTree(sub21);
+        sub2.addSubTaskTree(sub22);
+
+        // Populate
+        populateTree(root);
+
+        Task expectedTask = sub12.getTask();
+
+        // Assertion
+        assertEquals(sub12, root.getChildTaskTreeByTask(expectedTask));
+    }
+
+    @Test
+    public void testToListOfTasks() {
+        // Create TaskTrees
+        TaskTree root = new CommonTaskTree();
+        TaskTree sub1 = new CommonTaskTree();
+        TaskTree sub2 = new CommonTaskTree();
+        TaskTree sub11 = new CommonTaskTree();
+        TaskTree sub12 = new CommonTaskTree();
+        TaskTree sub21 = new CommonTaskTree();
+        TaskTree sub22 = new CommonTaskTree();
+
+        // Connect TaskTrees
+        root.addSubTaskTree(sub1);
+        root.addSubTaskTree(sub2);
+        sub1.addSubTaskTree(sub11);
+        sub1.addSubTaskTree(sub12);
+        sub2.addSubTaskTree(sub21);
+        sub2.addSubTaskTree(sub22);
+
+        // Populate
+        populateTree(root);
+
+        // Set up expected list
+        List<Task> expectedList = new ArrayList<>();
+        expectedList.add(root.getTask());
+        expectedList.add(sub1.getTask());
+        expectedList.add(sub11.getTask());
+        expectedList.add(sub12.getTask());
+        expectedList.add(sub2.getTask());
+        expectedList.add(sub21.getTask());
+        expectedList.add(sub22.getTask());
+
+        // Assertion
+        assertEquals(expectedList, root.toListOfTasks());
     }
 
 }
