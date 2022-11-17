@@ -11,6 +11,6 @@ public interface completeTaskOutputBoundary {
 
     int taskId = completeTaskController.taskId;
     int taskCurriculumId = completeTaskController.taskCurriculumId;
-    User activeUser = InMemoryUser.loadedUser;
+    User activeUser = InMemoryUser.getActiveUser();
     boolean taskCompleted(int taskId, int taskCurriculumId, User activeUser);
 }

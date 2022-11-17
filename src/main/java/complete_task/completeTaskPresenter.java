@@ -4,7 +4,6 @@ import entity_layer.Curriculum;
 import entity_layer.Task;
 import entity_layer.TaskTree;
 import entity_layer.User;
-import entity_layer.InMemoryUser;
 
 /**
  * Presenter for the completeTask use case that receives if the task

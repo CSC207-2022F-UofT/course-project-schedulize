@@ -1,5 +1,4 @@
 package complete_task;
-import entity_layer.User;
 
 /**
  * Controller for the completeTask use case; receives user input in
