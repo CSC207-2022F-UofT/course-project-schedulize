@@ -1,6 +1,6 @@
 import config.CommonCryptograph;
 import config.Cryptograph;
-import entity_layer.CommonUser;
+import entity_factories.CommonUser;
 import entity_layer.User;
 import config.UserStorage;
 import org.junit.jupiter.api.Assertions;

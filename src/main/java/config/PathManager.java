@@ -27,7 +27,7 @@ public class PathManager {
      * gets an existing instance of the PathManager, or creates one if it has not been instantiated yet
      * @return instance of the PathManager
      */
-    public static PathManager getInstance() {
+    private static PathManager getInstance() {
         if (instance == null) {
             instance = new PathManager();
         }

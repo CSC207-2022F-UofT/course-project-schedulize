@@ -1,4 +1,7 @@
-package entity_layer;
+package entity_factories;
+
+import entity_layer.Schedule;
+import entity_layer.User;
 
 /**
  * A CommonUser class, implements the User interface.

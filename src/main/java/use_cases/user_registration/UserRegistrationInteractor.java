@@ -1,5 +1,7 @@
 package use_cases.user_registration;
 
+import config.UserDataStoreGateway;
+import entity_layer.InMemoryUser;
 import entity_layer.User;
 import entity_layer.UserFactory;
 
@@ -15,17 +17,14 @@ import java.io.IOException;
 public class UserRegistrationInteractor implements UserRegistrationInputBoundary {
     private final UserFactory userFactory;
     private final UserDataStoreGateway existingUsers;
-    private final UserRegistrationPresenter resultPresenter;
 
-    public UserRegistrationInteractor(UserFactory userFactory, UserDataStoreGateway existingUsers,
-                                      UserRegistrationPresenter resultPresenter) {
+    public UserRegistrationInteractor(UserFactory userFactory, UserDataStoreGateway existingUsers) {
         this.userFactory = userFactory;
         this.existingUsers = existingUsers;
-        this.resultPresenter = resultPresenter;
     }
 
     @Override
-    public UserRegistrationResponse create(UserRegistrationRequest newUserRequest) throws UserRegistrationError {
+    public void create(UserRegistrationRequest newUserRequest) throws UserRegistrationError {
         if (!newUserRequest.isValidPasswordRepeat()) {
             throw new UserRegistrationError("Password and Confirmation must match.");
         } else if (newUserRequest.getPassword().length() < MINIMUM_PASSWORD_LENGTH) {
@@ -45,6 +44,6 @@ public class UserRegistrationInteractor implements UserRegistrationInputBoundary
             throw new UserRegistrationError("Data Saving Error");
         }
 
-        return resultPresenter.prepareSuccessView(newUserRequest.getUsername(), newUserRequest.getPassword());
+        InMemoryUser.setActiveUser(newUser);
     }
 }
