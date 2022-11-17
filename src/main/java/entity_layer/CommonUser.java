@@ -1,4 +1,4 @@
-package entityLayer;
+package entity_layer;
 
 /**
  * A CommonUser class, implements the User interface.
@@ -8,6 +8,18 @@ package entityLayer;
  * @author MMachadoUofT
  */
 public class CommonUser implements User {
+    private String username;
+    private String email;
+    private String password;
+
+    /**
+     * Constructor for new empty user
+     */
+    public CommonUser(String username, String email, String password) {
+        this.username = username;
+        this.email = email;
+        this.password = password;
+    }
 
     /**
      * Get this CommonUser's email.
@@ -16,7 +28,7 @@ public class CommonUser implements User {
      */
     @Override
     public String getEmail() {
-        return null;
+        return this.email;
     }
 
     /**
@@ -36,7 +48,7 @@ public class CommonUser implements User {
      */
     @Override
     public void setEmail(String email) {
-
+        this.email = email;
     }
 
     /**
@@ -56,7 +68,7 @@ public class CommonUser implements User {
      */
     @Override
     public void setPassword(String password) {
-
+        this.password = password;
     }
 
     /**
@@ -66,7 +78,17 @@ public class CommonUser implements User {
      */
     @Override
     public String getUsername() {
-        return null;
+        return this.username;
+    }
+
+    /**
+     * Get this CommonUser's password.
+     *
+     * @return this CommonUser's password attribute
+     */
+    @Override
+    public String getPassword() {
+        return this.password;
     }
 
     /**
@@ -76,6 +98,6 @@ public class CommonUser implements User {
      */
     @Override
     public void setUsername(String username) {
-
+        this.username = username;
     }
 }

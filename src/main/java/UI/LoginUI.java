@@ -1,5 +1,11 @@
 package UI;
 
+import config.CommonCryptograph;
+import config.Cryptograph;
+import entity_layer.CommonUserFactory;
+import config.UserStorage;
+import use_cases.user_registration.UserRegistrationInteractor;
+
 import javax.swing.*;
 import java.awt.event.*;
 
@@ -96,12 +102,5 @@ public class LoginUI extends CentralWindow {
 
         // recenter the window
         this.centreWindow();
-    }
-
-    // TODO: Delete for Deployment
-    public static void main(String[] args) {
-        WindowManager windows = new CommonWindowManager();
-        CreateAccountUI createAccountWindow = new CreateAccountUI(windows);
-        JFrame mainWindow = new LoginUI(windows);
     }
 }
