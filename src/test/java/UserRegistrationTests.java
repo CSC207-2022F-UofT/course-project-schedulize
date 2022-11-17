@@ -5,7 +5,7 @@ import config.CommonCryptograph;
 import config.Cryptograph;
 import config.UserDataStoreGateway;
 import entity_factories.CommonUserFactory;
-import entity_layer.UserFactory;
+import entity_factories.UserFactory;
 import config.UserStorage;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.BeforeAll;

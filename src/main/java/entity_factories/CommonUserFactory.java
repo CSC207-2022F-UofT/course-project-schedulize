@@ -1,8 +1,7 @@
 package entity_factories;
 
-import entity_factories.CommonUser;
+import entity_layer.CommonUser;
 import entity_layer.User;
-import entity_layer.UserFactory;
 
 public class CommonUserFactory implements UserFactory {
 

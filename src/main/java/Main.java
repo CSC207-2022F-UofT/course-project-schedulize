@@ -4,7 +4,7 @@ import config.Cryptograph;
 import config.UserDataStoreGateway;
 import config.UserStorage;
 import entity_factories.CommonUserFactory;
-import entity_layer.UserFactory;
+import entity_factories.UserFactory;
 import use_cases.login.LoginController;
 import use_cases.login.LoginInputBoundary;
 import use_cases.login.LoginInteractor;

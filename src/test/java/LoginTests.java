@@ -2,7 +2,7 @@ import config.CommonCryptograph;
 import config.Cryptograph;
 import config.UserDataStoreGateway;
 import config.UserStorage;
-import entity_factories.CommonUser;
+import entity_layer.CommonUser;
 import entity_layer.InMemoryUser;
 import entity_layer.User;
 import org.junit.jupiter.api.Test;
