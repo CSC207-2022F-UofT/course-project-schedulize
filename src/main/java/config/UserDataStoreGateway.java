@@ -1,8 +1,10 @@
-package use_cases.user_registration;
+package config;
 
 import entity_layer.User;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.StreamCorruptedException;
 
 /**
  * An interface for interacting with the data storage
@@ -14,4 +16,5 @@ import java.io.IOException;
 public interface UserDataStoreGateway {
     boolean usernameExists(String username);
     void saveUser(User newUser) throws IOException;
+    User loadUser(String username, String password) throws DataStorageMalfunction, IOException;
 }
