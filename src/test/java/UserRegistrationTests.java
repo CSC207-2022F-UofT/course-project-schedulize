@@ -1,51 +1,39 @@
 import UI.UserRegistrationController;
 import UI.UserRegistrationResponseFormatter;
+import config.CommonCryptograph;
+import config.Cryptograph;
 import entity_layer.CommonUserFactory;
 import entity_layer.UserFactory;
 import config.UserStorage;
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.AfterAll;
 import use_cases.user_registration.*;
 
 
 public class UserRegistrationTests {
-    UserRegistrationController controller;
-    UserRegistrationInputBoundary interactor;
-    UserRegistrationPresenter presenter;
-    UserDataStoreGateway storage;
+    static UserRegistrationController controller;
+    static UserRegistrationInputBoundary interactor;
+    static UserRegistrationPresenter presenter;
+    static UserDataStoreGateway storage;
 
-    @Before
-    public void setUp() {
-        testPresenterInitialization();
-        testInteractorInitialization();
-        testControllerInitialization();
-    }
-
-    @Test(timeout = 50)
-    public void testPresenterInitialization() {
+    @BeforeAll
+    public static void setUp() {
         presenter = new UserRegistrationResponseFormatter();
-    }
-
-    @Test(timeout = 50)
-    public void testInteractorInitialization() {
         UserFactory factory = new CommonUserFactory();
-        storage = new UserStorage();
+        Cryptograph cipher = new CommonCryptograph();
+        storage = new UserStorage(cipher);
 
         interactor = new UserRegistrationInteractor(factory, storage, presenter);
-    }
-
-    @Test(timeout = 50)
-    public void testControllerInitialization() {
         controller = new UserRegistrationController(interactor);
     }
 
-    @Test(timeout = 50)
+    @Test
     public void testControllerUserCreation() {
         controller.create("email@sample.com", "i'm a user", "password", "password");
     }
 
-    @Test(timeout = 50)
+    @Test
     public void testControllerExisitngUser() {
         controller.create("email@sample.com", "user person", "password", "password");
         try {
@@ -57,7 +45,7 @@ public class UserRegistrationTests {
         throw new RuntimeException();
     }
 
-    @Test(timeout = 50)
+    @Test
     public void testControllerPasswordNotLongEnough() {
         try {
             controller.create("email@sample.com", "user person", "p", "p");
@@ -68,7 +56,7 @@ public class UserRegistrationTests {
         throw new RuntimeException();
     }
 
-    @Test(timeout = 50)
+    @Test
     public void testControllerInvalidEmails() {
         try {
             controller.create("email@samplecom", "user person", "password", "password");
@@ -84,7 +72,7 @@ public class UserRegistrationTests {
         throw new RuntimeException();
     }
 
-    @Test(timeout = 50)
+    @Test
     public void testControllerPasswordsDontMatch() {
         try {
             controller.create("email@samplecom", "user person", "passwora;aad",
@@ -96,8 +84,8 @@ public class UserRegistrationTests {
         throw new RuntimeException();
     }
 
-    @After
-    public void tearDown() {
+    @AfterAll
+    public static void tearDown() {
         ((UserStorage) storage).removeUser("i'm a user");
         ((UserStorage) storage).removeUser("user person");
     }

@@ -3,10 +3,7 @@ package config;
 import entity_layer.User;
 import use_cases.user_registration.UserDataStoreGateway;
 
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.ObjectOutputStream;
+import java.io.*;
 import java.util.HashSet;
 
 
@@ -19,12 +16,14 @@ import java.util.HashSet;
  */
 public class UserStorage implements UserDataStoreGateway {
     private final HashSet<String> existingUsernames;
+    private final Cryptograph cipher;
 
     /**
      * Default constructor that gets all existing usernames
      */
-    public UserStorage() {
-        existingUsernames = new HashSet<String>();
+    public UserStorage(Cryptograph cipher) {
+        existingUsernames = new HashSet<>();
+        this.cipher = cipher;
         File userDir = new File(PathManager.getUserDirectory());
         File[] directoryListing = userDir.listFiles();
 
@@ -33,9 +32,6 @@ public class UserStorage implements UserDataStoreGateway {
                 String extendedUsername = user.getName();
                 existingUsernames.add(removeFileExtension(extendedUsername));
             }
-        } else {
-            // TODO: invalid file structure and directory does not exist
-            // throw new RuntimeException();
         }
     }
 
@@ -50,18 +46,47 @@ public class UserStorage implements UserDataStoreGateway {
     }
 
     /**
-     * Saves users to .ser files
+     * Saves a user to .ser file
      * @param newUser User object to save
-     * @throws IOException for when drivers do not connect correctly
+     * @throws DataStorageMalfunction for when saving at any lower level malfunctions
      */
     @Override
-    public void saveUser(User newUser) throws IOException {
+    public void saveUser(User newUser) throws DataStorageMalfunction {
         String filepath = PathManager.getUserDirectory().concat("\\" + newUser.getUsername() + ".ser");
         File saveFile = new File(filepath);
-        ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(saveFile));
-        out.writeObject(newUser);
-        out.close();
+        ObjectOutputStream oStream;
+        try {
+            oStream = new ObjectOutputStream(new FileOutputStream(saveFile));
+        } catch (FileNotFoundException error) {
+            throw new DataStorageMalfunction("User Data corrupted");
+        } catch (IOException error) {
+            throw new DataStorageMalfunction("Driver Malfunction");
+        }
+        cipher.encryptSave(newUser, oStream, newUser.getPassword());
         existingUsernames.add(newUser.getUsername());
+    }
+
+    /**
+     * Loads a user from the saved user files
+     * @param username username of requested user to load
+     * @param password password of requested user to load
+     * @return decrypted User object
+     * @throws DataStorageMalfunction thrown when loading a User fails
+     * @throws IOException thrown when loading a User fails
+     * @throws StreamCorruptedException thrown when password is not correct for decryption of user data
+     */
+    public User loadUser(String username, String password) throws DataStorageMalfunction, StreamCorruptedException,
+            IOException {
+        String filepath = PathManager.getUserDirectory().concat("\\" + username + ".ser");
+        File loadFile = new File(filepath);
+        Object user;
+        try {
+            ObjectInputStream in = new ObjectInputStream(new FileInputStream(loadFile));
+            user = cipher.decrypt(in, password);
+        } catch (FileNotFoundException error) {
+            throw new DataStorageMalfunction("Username does not exist.");
+        }
+        return (User) user;
     }
 
     /**
@@ -93,13 +118,12 @@ public class UserStorage implements UserDataStoreGateway {
      * @param filename a String representing the requested filename
      * @return a String, filename without extension
      */
-    private String removeFileExtension(String filename) {
+    private String removeFileExtension(String filename) throws DataStorageMalfunction {
         int pos = filename.lastIndexOf(".");
         if (pos > 0) {
             return filename.substring(0, pos);
         } else {
-            // TODO: INVALID FILES IN DIRECTORY
-            return filename;
+            throw new DataStorageMalfunction("Save Directory contains corrupted or invalid files");
         }
     }
 }
