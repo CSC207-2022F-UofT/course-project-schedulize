@@ -1,5 +1,5 @@
 package complete_task;
-import entityLayer.User;
+import entity_layer.User;
 
 /**
  * Controller for the completeTask use case; receives user input in
@@ -11,11 +11,9 @@ import entityLayer.User;
 public class completeTaskController {
     public static int taskId;
     public static int taskCurriculumId;
-    public static User activeUser;
 
-    public completeTaskController(int taskId, int taskCurriculumId, User activeUser){
+    public completeTaskController(int taskId, int taskCurriculumId){
         this.taskId = taskId;
         this.taskCurriculumId = taskCurriculumId;
-        this.activeUser = activeUser;
     }
 }

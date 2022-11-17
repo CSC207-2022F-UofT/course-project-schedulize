@@ -1,5 +1,5 @@
 package complete_task;
-import entityLayer.User;
+import entity_layer.InMemoryUser;
 
 /**
  * An input boundary interface that is implemented by the completeTaskUseCase class.
@@ -10,7 +10,7 @@ public interface completeTaskInputBoundary {
 
     int taskId = completeTaskController.taskId;
     int taskCurriculumId = completeTaskController.taskCurriculumId;
-    User activeUser = completeTaskController.activeUser;
+    User activeUser = InMemoryUser.loadedUser;
     void completeTask(int TaskId, int taskCurriculumId, User activeUser);
 
 }

@@ -1,9 +1,10 @@
 package complete_task;
-import entityLayer.Schedule;
-import entityLayer.Curriculum;
-import entityLayer.Task;
-import entityLayer.TaskTree;
-import entityLayer.User;
+import entity_layer.Schedule;
+import entity_layer.Curriculum;
+import entity_layer.Task;
+import entity_layer.TaskTree;
+import entity_layer.User;
+import entity_layer.InMemoryUser;
 
 /**
  * Use Case for completing a task.
