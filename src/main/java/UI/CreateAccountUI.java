@@ -1,5 +1,6 @@
 package UI;
 
+import use_cases.user_registration.UserRegistrationController;
 import use_cases.user_registration.UserRegistrationError;
 
 import javax.swing.*;
@@ -11,7 +12,7 @@ import java.awt.event.MouseEvent;
 /**
  * A class that contains the GUI for creating a new account
  * Created: 11/10/2022
- * Last updated: 11/10/2022
+ * Last updated: 11/15/2022
  *
  * @author David Adler
  */
@@ -121,6 +122,7 @@ public class CreateAccountUI extends CentralWindow {
                     return;
                 }
                 errorLabel.setText("");
+                programWindows.closeWindow(WindowManager.REGISTRATION_REFERENCE_KEY);
                 // TODO: Connect to Dashboard if successful
             }
         });

@@ -14,5 +14,5 @@ import java.io.Serializable;
  */
 public interface Cryptograph {
     void encryptSave(Serializable object, OutputStream oStream, String password);
-    Object decrypt(InputStream iStream, String password) throws IOException;
+    Object decryptLoad(InputStream iStream, String password) throws IOException;
 }
