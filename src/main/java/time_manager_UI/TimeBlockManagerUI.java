@@ -1,4 +1,8 @@
 package time_manager_UI;
+import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 
 
 /**
@@ -8,6 +12,32 @@ package time_manager_UI;
  *
  * @author Amir Bare
  */
-public class TimeBlockManagerUI {
+public class TimeBlockManagerUI extends JFrame {
 
+
+    private JPanel panelMain;
+    private JLabel worktimeLabel;
+    private JLabel starttimeLabel;
+    private JLabel endtimeLabel;
+    private JLabel dateLabel;
+    private JButton DONEButton;
+
+
+    TimeBlockManagerUI(){
+        super("TimeBlock");
+        this.setContentPane(this.panelMain);
+        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.pack();
+        DONEButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+            }
+        });
+
+
+
+
+
+
+    }
 }
