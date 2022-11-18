@@ -1,17 +1,14 @@
 package complete_task;
-import entity_layer.User;
-import entity_layer.InMemoryUser;
+
 
 /**
  * An input boundary interface that is implemented by the completeTaskUseCase class.
  *
+ * Created: 11/11/2022
+ * Last updated: 11/18/2022
+ *
  * @author Bmguiler
  */
 public interface completeTaskInputBoundary {
-
-    int taskId = completeTaskController.taskId;
-    int taskCurriculumId = completeTaskController.taskCurriculumId;
-    User activeUser = InMemoryUser.getActiveUser();
-    void completeTask(int TaskId, int taskCurriculumId, User activeUser);
-
+    void completeTask(int curriculumId, int taskId);
 }

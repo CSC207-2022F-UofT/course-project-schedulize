@@ -1,16 +1,13 @@
 package complete_task;
-import entity_layer.User;
-import entity_layer.InMemoryUser;
 
 /**
  * An output boundary interface that is implemented by the completeTaskPresenter class.
  *
+ * Created: 11/11/2022
+ * Last updated: 11/18/2022
+ *
  * @author Bmguiler
  */
 public interface completeTaskOutputBoundary {
-
-    int taskId = completeTaskController.taskId;
-    int taskCurriculumId = completeTaskController.taskCurriculumId;
-    User activeUser = InMemoryUser.getActiveUser();
-    boolean taskCompleted(int taskId, int taskCurriculumId, User activeUser);
+    String taskCompleted(CompletedTaskModel completedTask);
 }
