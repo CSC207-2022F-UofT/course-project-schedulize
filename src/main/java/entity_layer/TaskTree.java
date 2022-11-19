@@ -6,7 +6,7 @@ import java.util.List;
 /**
  * A TaskTree interface, implemented by the CommonTaskTree class, used as a level of abstraction.
  * Created: 10/31/2022
- * Last updated: 11/5/2022
+ * Last updated: 11/19/2022
  *
  * @author MMachadoUofT
  */

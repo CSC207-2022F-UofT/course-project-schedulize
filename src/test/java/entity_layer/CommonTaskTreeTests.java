@@ -356,4 +356,46 @@ public class CommonTaskTreeTests {
         assertEquals(expectedList, root.toListOfTasks());
     }
 
+    @Test
+    public void testCompletionAfterRemoval() {
+        // Create TaskTrees
+        TaskTree root = new CommonTaskTree();
+        TaskTree sub1 = new CommonTaskTree();
+        TaskTree sub2 = new CommonTaskTree();
+        TaskTree sub11 = new CommonTaskTree();
+        TaskTree sub12 = new CommonTaskTree();
+        TaskTree sub21 = new CommonTaskTree();
+        TaskTree sub22 = new CommonTaskTree();
+
+        // Connect TaskTrees
+        root.addSubTaskTree(sub1);
+        root.addSubTaskTree(sub2);
+        sub1.addSubTaskTree(sub11);
+        sub1.addSubTaskTree(sub12);
+        sub2.addSubTaskTree(sub21);
+        sub2.addSubTaskTree(sub22);
+
+        // Populate
+        populateTree(root);
+
+        // Complete a lowest-level tree
+        sub11.completeTask();
+        assertEquals(50, sub1.getTask().getCompletion());
+
+        // Delete the sibling tree
+        root.removeChildTaskTree(sub12);
+
+        // Assert that the upper tree is properly updated
+        assertTrue(sub1.getTask().isComplete());
+
+        // Repeat
+        root.removeChildTaskTree(sub11);
+        assertTrue(sub1.getTask().isComplete());
+
+        // Repeat once more
+        root.removeChildTaskTree(sub21);
+        root.removeChildTaskTree(sub22);
+        assertEquals(0, sub2.getTask().getCompletion());
+    }
+
 }

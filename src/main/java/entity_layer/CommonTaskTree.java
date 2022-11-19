@@ -6,7 +6,7 @@ import java.util.List;
 /**
  * A CommonTaskTree class, implements the TaskTree interface
  * Created: 10/31/2022
- * Last updated: 11/14/2022
+ * Last updated: 11/19/2022
  *
  * @author MMachadoUofT
  */
@@ -35,6 +35,7 @@ public class CommonTaskTree implements TaskTree {
     /* ************* *\
     *  Functionality  *
     \* ************* */
+    // Public
     /**
      * Adds the given TaskTree to this CommonTaskTree's list of subTaskTrees
      *
@@ -48,7 +49,6 @@ public class CommonTaskTree implements TaskTree {
 
         if (oldParent != null) {
             oldParent.removeChildTaskTree(taskTree);
-            oldParent.updateTask();
         }
 
         taskTree.setSuperTaskTree(this);
@@ -57,22 +57,6 @@ public class CommonTaskTree implements TaskTree {
 
         // TODO: Because this involves updating trees, there might be an error at some point if a tree doesn't
         //  have a task. I might make an exception class for when a tree doesn't have a task, and it was supposed to.
-    }
-
-    /**
-     * Removes the passed TaskTree object from this CommonTaskTree's list of subTaskTrees. Returns false if no such
-     * TaskTree was found.
-     *
-     * @param taskTree the TaskTree to be deleted
-     * @return true if the deletion was successful, false otherwise
-     */
-    private boolean removeSubTaskTree(TaskTree taskTree) {
-        if (this.subTaskTrees.contains(taskTree)) {
-            this.subTaskTrees.remove(taskTree);
-            return true;
-        } else {
-            return false;
-        }
     }
 
     /**
@@ -226,6 +210,9 @@ public class CommonTaskTree implements TaskTree {
         double subTaskCount = this.subTaskTrees.size();
         double taskCompletionSum = 0.0;
 
+        if (subTaskCount == 0)
+            return;
+
         for (TaskTree taskTree : this.subTaskTrees) {
             taskCompletionSum += taskTree.getTask().getCompletion();
         }
@@ -237,6 +224,27 @@ public class CommonTaskTree implements TaskTree {
         }
     }
 
+    // Private
+    /**
+     * Removes the passed TaskTree object from this CommonTaskTree's list of subTaskTrees. Returns false if no such
+     * TaskTree was found.
+     *
+     * @param taskTree the TaskTree to be deleted
+     * @return true if the deletion was successful, false otherwise
+     */
+    private boolean removeSubTaskTree(TaskTree taskTree) {
+        if (this.subTaskTrees.contains(taskTree)) {
+            this.subTaskTrees.remove(taskTree);
+            this.updateTask();
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    /* **************** *\
+    *  Attribute Access  *
+    \* **************** */
     /**
      * Return this CommonTaskTree's superTaskTree object.
      *
