@@ -198,6 +198,23 @@ public class CommonTaskTree implements TaskTree {
     }
 
     /**
+     * Resets this CommonTaskTree's Task's completion to zero, then updates parent and child trees appropriately
+     */
+    public void resetTask() {
+        if (this.getTask().getCompletion() == 0)
+            return;
+
+        if (this.subTaskTrees.size() > 0) {
+            for (TaskTree taskTree : this.subTaskTrees) {
+                taskTree.resetTask();
+            }
+        } else {
+            this.task.setCompletion(0);
+        }
+        this.updateTask();
+    }
+
+    /**
      * Re-calculates this CommonTaskTree's Task's completion according to the completion of its subTaskTrees' Tasks.
      */
     @Override

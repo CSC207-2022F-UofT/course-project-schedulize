@@ -21,6 +21,11 @@ public interface TaskTree extends Serializable {
     void addSubTaskTree(TaskTree taskTree);
 
     /**
+     * Resets this TaskTree's Task's completion to zero, then updates parent and child trees appropriately
+     */
+    void resetTask();
+
+    /**
      * Removes the passed TaskTree object from this TaskTree's descendant TaskTrees. Returns false if no such TaskTree
      * was found.
      *
