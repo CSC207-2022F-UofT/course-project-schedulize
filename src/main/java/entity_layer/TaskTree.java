@@ -21,15 +21,6 @@ public interface TaskTree extends Serializable {
     void addSubTaskTree(TaskTree taskTree);
 
     /**
-     * Removes the passed TaskTree object from this TaskTree's list of subTaskTrees. Returns false if no such
-     * TaskTree was found.
-     *
-     * @param taskTree the TaskTree to be deleted
-     * @return true if the deletion was successful, false otherwise
-     */
-    boolean removeSubTaskTree(TaskTree taskTree);
-
-    /**
      * Removes the passed TaskTree object from this TaskTree's descendant TaskTrees. Returns false if no such TaskTree
      * was found.
      *

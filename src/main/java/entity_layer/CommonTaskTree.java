@@ -47,7 +47,7 @@ public class CommonTaskTree implements TaskTree {
         this.subTaskTrees.add(taskTree);
 
         if (oldParent != null) {
-            oldParent.removeSubTaskTree(taskTree);
+            oldParent.removeChildTaskTree(taskTree);
             oldParent.updateTask();
         }
 
@@ -66,8 +66,7 @@ public class CommonTaskTree implements TaskTree {
      * @param taskTree the TaskTree to be deleted
      * @return true if the deletion was successful, false otherwise
      */
-    @Override
-    public boolean removeSubTaskTree(TaskTree taskTree) {
+    private boolean removeSubTaskTree(TaskTree taskTree) {
         if (this.subTaskTrees.contains(taskTree)) {
             this.subTaskTrees.remove(taskTree);
             return true;
