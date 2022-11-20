@@ -8,7 +8,12 @@ package entity_layer;
  * @author MMachadoUofT
  */
 public class CommonCurriculum implements Curriculum {
-    
+
+    @Override
+    public String getName() {
+        return null;
+    }
+
     /**
      * Get the highest-level TaskTree item within this CommonCurriculum. Note that this returns a TaskTree item, *not*
      * a Task item.
