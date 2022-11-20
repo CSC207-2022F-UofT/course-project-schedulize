@@ -1,5 +1,5 @@
 package complete_task;
-import entity_factories.CommonUser;
+import entity_layer.CommonUser;
 import entity_layer.Schedule;
 import entity_layer.User;
 import entity_layer.InMemoryUser;
