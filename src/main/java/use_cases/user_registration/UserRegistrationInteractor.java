@@ -3,7 +3,7 @@ package use_cases.user_registration;
 import config.UserDataStoreGateway;
 import entity_layer.InMemoryUser;
 import entity_layer.User;
-import entity_layer.UserFactory;
+import entity_factories.UserFactory;
 
 import java.io.IOException;
 
