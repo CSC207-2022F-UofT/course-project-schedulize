@@ -33,7 +33,25 @@ public class CommonTimeBlock implements TimeBlock {
      */
     @Override
     public boolean equals(TimeBlock other) {
-        return false;
+        if (other == this)
+            return true;
+        if ((other == null) || (other.getClass() != this.getClass()))
+            return false;
+        return (this.startTime == other.getStartTime() && this.endTime == other.getEndTime());
+    }
+
+    /**
+     * Returns this TimeBlock's hashcode. This is primarily being implemented to allow the equals() method to adhere
+     * to the hashCode requirements
+     *
+     * @return this TimeBlocks hashcode.
+     */
+    @Override
+    public int hashCode() {
+        int startTimeInt = this.startTime.getDayOfMonth() + this.startTime.getDayOfYear() + this.startTime.getHour();
+        int endTimeInt = this.endTime.getDayOfMonth() + this.endTime.getDayOfYear() + this.endTime.getHour();
+
+        return startTimeInt + endTimeInt;
     }
 
     /**
