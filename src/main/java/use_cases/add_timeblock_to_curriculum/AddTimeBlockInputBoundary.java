@@ -1,4 +1,4 @@
-package add_timeblock_to_curriculum;
+package use_cases.add_timeblock_to_curriculum;
 
 /**
  * An interface for interacting with the addTimeBlock Interactor
