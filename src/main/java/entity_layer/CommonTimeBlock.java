@@ -11,6 +11,20 @@ import java.time.LocalDateTime;
  */
 public class CommonTimeBlock implements TimeBlock {
 
+    /* ********** *\
+    *  Attributes  *
+    \* ********** */
+    private LocalDateTime startTime;
+    private LocalDateTime endTime;
+
+    /* ************ *\
+    *  Constructors  *
+    \* ************ */
+    public CommonTimeBlock(LocalDateTime startTime, LocalDateTime endTime) {
+        this.startTime = startTime;
+        this.endTime = endTime;
+    }
+
     /**
      * Returns true if this CommonTimeBlock's start and end times are the same as other's start and end times
      *
