@@ -24,7 +24,6 @@ public class TimeBlockManagerUI extends CentralWindow {
     private JLabel dateLabel;
     private JButton DONEButton;
 
-
     TimeBlockManagerUI(){
         super();
         this.setTitle("TimeBlock");
@@ -37,15 +36,11 @@ public class TimeBlockManagerUI extends CentralWindow {
             public void actionPerformed(ActionEvent e) {
             }
         });
-
     }
 
-
+    //TODO Delete for Deployment
     public static void main(String[] args) {
         JFrame ui = new TimeBlockManagerUI();
         ui.setVisible(true);
-
-
-
     }
 }
