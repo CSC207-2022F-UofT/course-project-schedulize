@@ -3,14 +3,15 @@ package setavailability;
 /**
  * Interface for the controller to interact with the SetAvailabilityTaskInteractor class
  *
- * @author: od-obas1187
+ * @author od-obas1187
  */
 public interface SetAvailabilityInputBoundary {
 
     /**
      * Creates a TimeManager, one that contains one TimeBlock for each availability/LocalTime
      *
-     * @param availabilityInputs
-     */    SetAvailabilityPresenter create(String[] availabilityInputs);
+     * @param availabilityInputs a String list of availabilities
+     */
+    SetAvailabilityPresenter create(String[] availabilityInputs);
 
 }

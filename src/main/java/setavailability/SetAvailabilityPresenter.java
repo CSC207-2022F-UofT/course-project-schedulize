@@ -3,7 +3,7 @@ package setavailability;
 /**
  * ...
  *
- * @author: od-obas1187
+ * @author od-obas1187
  */
 public class SetAvailabilityPresenter implements SetAvailabilityOutputBoundary{
 
