@@ -12,6 +12,6 @@ public interface SetAvailabilityInputBoundary {
      *
      * @param availabilityInputs a String list of availabilities
      */
-    SetAvailabilityPresenter create(String[] availabilityInputs);
+    void create(String[] availabilityInputs, int curriculumId);
 
 }

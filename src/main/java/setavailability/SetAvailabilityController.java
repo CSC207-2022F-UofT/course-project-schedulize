@@ -10,11 +10,11 @@ public class SetAvailabilityController {
     SetAvailabilityUseCase userAvailabilityInteractor;
 
     /**
-     * 1. Receives set of String values (user’s availabilities);
-     * 2. Sets the availabilities inputted by the user, sends it to the
-     * SetAvailabilityInputBoundary
+     * 1. Receives interactor
+     * 2. Sets controller's interactor to the interactor given from parameter
      *
-     * @param interactor an interactor
+     * @param interactor Interactor given to controller to create TimeBlockFactory, which creates TimeBlockManager
+     *                   & corresponding TimeBlocks
      */
     public SetAvailabilityController(SetAvailabilityUseCase interactor) {
 
@@ -23,9 +23,12 @@ public class SetAvailabilityController {
     }
 
     /**
-     * Using controller's
+     * 1. Receives set of String values (user’s availabilities);
+     * 2. Sends them to the SetAvailabilityInteractor
      */
-    public void create(String[] availabilities) {
-       userAvailabilityInteractor.create(availabilities);
+    public void create(String[] availabilities, int curriculumId) {
+
+        userAvailabilityInteractor.create(availabilities, curriculumId);
+
     }
 }
