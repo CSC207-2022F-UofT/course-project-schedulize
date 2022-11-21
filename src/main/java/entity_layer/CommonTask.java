@@ -18,7 +18,7 @@ public class CommonTask implements Task {
     private static final int COMPLETION_UPPER_BOUND = 100;
 
     // Instance
-    private final int id;
+    private final transient int id = getNextID();
     private String name;
     private String description;
     private int completion;
@@ -63,7 +63,6 @@ public class CommonTask implements Task {
         this.description = description;
         this.completion = completion;
         this.duration = duration;
-        this.id = taskCount++;
     }
 
     /* ************* *\
@@ -87,6 +86,14 @@ public class CommonTask implements Task {
      */
     private static boolean completionWithinBounds(int completion) {
         return (completion >= COMPLETION_LOWER_BOUND && completion <= COMPLETION_UPPER_BOUND);
+    }
+
+    //Private
+    /**
+     * Gets the ID for the next task in memory
+     */
+    private static int getNextID() {
+        return taskCount++;
     }
 
     /* **************** *\
