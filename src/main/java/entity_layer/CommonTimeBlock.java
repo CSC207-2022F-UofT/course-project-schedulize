@@ -25,6 +25,9 @@ public class CommonTimeBlock implements TimeBlock {
         this.endTime = endTime;
     }
 
+    /* ************* *\
+    *  Functionality  *
+    \* ************* */
     /**
      * Returns true if this CommonTimeBlock's start and end times are the same as other's start and end times
      *
@@ -62,7 +65,7 @@ public class CommonTimeBlock implements TimeBlock {
      */
     @Override
     public boolean overlapsWith(TimeBlock other) {
-        return false;
+        return (this.startTime.isAfter(other.getEndTime()) || this.endTime.isBefore(other.getStartTime()));
     }
 
     /**
@@ -73,7 +76,7 @@ public class CommonTimeBlock implements TimeBlock {
      */
     @Override
     public boolean isContainedWithin(TimeBlock other) {
-        return false;
+        return (this.startTime.isAfter(other.getStartTime()) && this.endTime.isBefore(other.getEndTime()));
     }
 
     /**
@@ -84,7 +87,7 @@ public class CommonTimeBlock implements TimeBlock {
      */
     @Override
     public boolean contains(TimeBlock other) {
-        return false;
+        return other.isContainedWithin(this);
     }
 
     /**
@@ -95,7 +98,7 @@ public class CommonTimeBlock implements TimeBlock {
      */
     @Override
     public boolean isAdjacentTo(TimeBlock other) {
-        return false;
+        return (this.startTime == other.getEndTime() || this.endTime == other.getStartTime());
     }
 
     /**
