@@ -10,6 +10,13 @@ package entity_layer;
 public interface Curriculum {
 
     /**
+     * Get this curriculum's name.
+     *
+     * @return this Curriculum's name.
+     */
+    String getName();
+
+    /**
      * Get the highest-level TaskTree item within this Curriculum. Note that this returns a TaskTree item, *not*
      * a Task item.
      *

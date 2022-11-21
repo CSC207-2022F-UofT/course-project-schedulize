@@ -1,16 +1,41 @@
 package entity_layer;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
  * A CommonTaskTree class, implements the TaskTree interface
  * Created: 10/31/2022
- * Last updated: 11/5/2022
+ * Last updated: 11/19/2022
  *
  * @author MMachadoUofT
  */
 public class CommonTaskTree implements TaskTree {
 
+    /* ********** *\
+    *  Attributes  *
+    \* ********** */
+    private Task task;
+    private TaskTree superTaskTree;
+    private List<TaskTree> subTaskTrees;
+
+    /* ************ *\
+    *  Constructors  *
+    \* ************ */
+    /**
+     * Creates an empty CommonTaskTree with no superTaskTree, no subTaskTrees, and no Task.
+     * For this TaskTree to hold a task and to belong to a hierarchy, it must be assigned the relevant attributes.
+     */
+    public CommonTaskTree() {
+        this.task = null;
+        this.superTaskTree = null;
+        this.subTaskTrees = new ArrayList<>();
+    }
+
+    /* ************* *\
+    *  Functionality  *
+    \* ************* */
+    // Public
     /**
      * Adds the given TaskTree to this CommonTaskTree's list of subTaskTrees
      *
@@ -18,19 +43,20 @@ public class CommonTaskTree implements TaskTree {
      */
     @Override
     public void addSubTaskTree(TaskTree taskTree) {
-        
-    }
+        TaskTree oldParent = taskTree.getSuperTaskTree();
 
-    /**
-     * Removes the passed TaskTree object from this CommonTaskTree's list of subTaskTrees. Returns false if no such
-     * TaskTree was found.
-     *
-     * @param taskTree the TaskTree to be deleted
-     * @return true if the deletion was successful, false otherwise
-     */
-    @Override
-    public boolean removeSubTaskTree(TaskTree taskTree) {
-        return false;
+        this.subTaskTrees.add(taskTree);
+
+        if (oldParent != null) {
+            oldParent.removeChildTaskTree(taskTree);
+        }
+
+        taskTree.setSuperTaskTree(this);
+
+        this.updateTask();
+
+        // TODO: Because this involves updating trees, there might be an error at some point if a tree doesn't
+        //  have a task. I might make an exception class for when a tree doesn't have a task, and it was supposed to.
     }
 
     /**
@@ -42,7 +68,17 @@ public class CommonTaskTree implements TaskTree {
      */
     @Override
     public boolean removeChildTaskTree(TaskTree taskTree) {
-        return false;
+        // Check if it's a direct subtree
+        if (this.removeSubTaskTree(taskTree))
+            return true;
+        // Recurse on all subtrees
+        else {
+            for (TaskTree subTaskTree : this.subTaskTrees) {
+                if (subTaskTree.removeChildTaskTree(taskTree)) return true;
+            }
+            // If we never returned, then we never had a true removal of the taskTree, so it was not removed.
+            return false;
+        }
     }
 
     /**
@@ -54,7 +90,19 @@ public class CommonTaskTree implements TaskTree {
      */
     @Override
     public TaskTree getChildTaskTreeByTask(Task task) {
-        return null;
+        // Check if this is the matching tree
+        if (this.task == task)
+            return this;
+        // Next, check if any of the subtrees might have it
+        else {
+            for (TaskTree taskTree : this.subTaskTrees) {
+                // Store this given subTree's candidate to be compared
+                TaskTree candidate = taskTree.getChildTaskTreeByTask(task);
+                if (candidate != null)
+                    return candidate;
+            }
+            return null;
+        }
     }
 
     /**
@@ -66,7 +114,16 @@ public class CommonTaskTree implements TaskTree {
      */
     @Override
     public TaskTree getChildTaskTreeByID(int taskID) {
-        return null;
+        if (this.task.getId() == taskID)
+            return this;
+        else {
+            for (TaskTree taskTree : this.subTaskTrees) {
+                TaskTree candidate = taskTree.getChildTaskTreeByID(taskID);
+                if (candidate != null)
+                    return candidate;
+            }
+            return null;
+        }
     }
 
     /**
@@ -76,7 +133,7 @@ public class CommonTaskTree implements TaskTree {
      */
     @Override
     public boolean hasSubTaskTrees() {
-        return false;
+        return this.subTaskTrees.size() > 0;
     }
 
     /**
@@ -86,7 +143,7 @@ public class CommonTaskTree implements TaskTree {
      */
     @Override
     public boolean hasSuperTaskTree() {
-        return false;
+        return this.superTaskTree != null;
     }
 
     /**
@@ -96,7 +153,13 @@ public class CommonTaskTree implements TaskTree {
      */
     @Override
     public List<TaskTree> toList() {
-        return null;
+        List<TaskTree> taskTreeList = new ArrayList<>();
+        taskTreeList.add(this);
+
+        for (TaskTree taskTree : this.subTaskTrees) {
+            taskTreeList.addAll(taskTree.toList());
+        }
+        return taskTreeList;
     }
 
     /**
@@ -106,7 +169,14 @@ public class CommonTaskTree implements TaskTree {
      */
     @Override
     public List<Task> toListOfTasks() {
-        return null;
+        List<TaskTree> taskTreeList = this.toList();
+        List<Task> taskList = new ArrayList<>();
+
+        for (TaskTree taskTree : taskTreeList) {
+            taskList.add(taskTree.getTask());
+        }
+
+        return taskList;
     }
 
     /**
@@ -115,7 +185,33 @@ public class CommonTaskTree implements TaskTree {
      */
     @Override
     public void completeTask() {
+        this.getTask().setCompletion(100);
 
+        for (TaskTree taskTree : this.subTaskTrees) {
+            taskTree.completeTask();
+        }
+
+        this.superTaskTree.updateTask();
+
+        // Now that I'm writing this, I'm realizing that the recursive call to this TaskTree's subTaskTrees will cause
+        //  updateTask() to be called over and over again. I'll have to think of a way to optimize this.
+    }
+
+    /**
+     * Resets this CommonTaskTree's Task's completion to zero, then updates parent and child trees appropriately
+     */
+    public void resetTask() {
+        if (this.getTask().getCompletion() == 0)
+            return;
+
+        if (this.subTaskTrees.size() > 0) {
+            for (TaskTree taskTree : this.subTaskTrees) {
+                taskTree.resetTask();
+            }
+        } else {
+            this.task.setCompletion(0);
+        }
+        this.updateTask();
     }
 
     /**
@@ -123,9 +219,49 @@ public class CommonTaskTree implements TaskTree {
      */
     @Override
     public void updateTask() {
+        // TODO: This is a TEMPORARY FIX. If there is no task here, it just returns none. This is just so that the tests
+        //  that test other aspects of the code will run, regardless of whether this is implemented yet.
+        if (this.task == null)
+            return;
 
+        double subTaskCount = this.subTaskTrees.size();
+        double taskCompletionSum = 0.0;
+
+        if (subTaskCount == 0)
+            return;
+
+        for (TaskTree taskTree : this.subTaskTrees) {
+            taskCompletionSum += taskTree.getTask().getCompletion();
+        }
+
+        this.task.setCompletion((int) (taskCompletionSum / subTaskCount));
+
+        if (this.superTaskTree != null) {
+            this.superTaskTree.updateTask();
+        }
     }
 
+    // Private
+    /**
+     * Removes the passed TaskTree object from this CommonTaskTree's list of subTaskTrees. Returns false if no such
+     * TaskTree was found.
+     *
+     * @param taskTree the TaskTree to be deleted
+     * @return true if the deletion was successful, false otherwise
+     */
+    private boolean removeSubTaskTree(TaskTree taskTree) {
+        if (this.subTaskTrees.contains(taskTree)) {
+            this.subTaskTrees.remove(taskTree);
+            this.updateTask();
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    /* **************** *\
+    *  Attribute Access  *
+    \* **************** */
     /**
      * Return this CommonTaskTree's superTaskTree object.
      *
@@ -133,7 +269,7 @@ public class CommonTaskTree implements TaskTree {
      */
     @Override
     public TaskTree getSuperTaskTree() {
-        return null;
+        return this.superTaskTree;
     }
 
     /**
@@ -143,7 +279,7 @@ public class CommonTaskTree implements TaskTree {
      */
     @Override
     public void setSuperTaskTree(TaskTree superTaskTree) {
-
+        this.superTaskTree = superTaskTree;
     }
 
     /**
@@ -153,7 +289,7 @@ public class CommonTaskTree implements TaskTree {
      */
     @Override
     public List<TaskTree> getSubTaskTrees() {
-        return null;
+        return new ArrayList<>(this.subTaskTrees);
     }
 
     /**
@@ -163,7 +299,7 @@ public class CommonTaskTree implements TaskTree {
      */
     @Override
     public Task getTask() {
-        return null;
+        return this.task;
     }
 
     /**
@@ -173,6 +309,6 @@ public class CommonTaskTree implements TaskTree {
      */
     @Override
     public void setTask(Task task) {
-
+        this.task = task;
     }
 }

@@ -60,7 +60,7 @@ public class CommonCryptograph implements Cryptograph {
      * @throws DataStorageMalfunction Decryption or Cipher failure
      */
     @Override
-    public Object decrypt(InputStream iStream, String password) throws IOException, DataStorageMalfunction {
+    public Object decryptLoad(InputStream iStream, String password) throws IOException, DataStorageMalfunction {
         SecretKeySpec sks = new SecretKeySpec(createKeyFromPassword(password), ENCRYPTION_TYPE);
         Cipher cipher = initializeCipher();
         try {

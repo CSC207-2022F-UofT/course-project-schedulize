@@ -1,15 +1,17 @@
 package entity_layer;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
  * A TaskTree interface, implemented by the CommonTaskTree class, used as a level of abstraction.
  * Created: 10/31/2022
- * Last updated: 11/5/2022
+ * Last updated: 11/19/2022
  *
  * @author MMachadoUofT
  */
-public interface TaskTree {
+
+public interface TaskTree extends Serializable {
 
     /**
      * Adds the given TaskTree to this TaskTree's list of subTaskTrees
@@ -19,13 +21,9 @@ public interface TaskTree {
     void addSubTaskTree(TaskTree taskTree);
 
     /**
-     * Removes the passed TaskTree object from this TaskTree's list of subTaskTrees. Returns false if no such
-     * TaskTree was found.
-     *
-     * @param taskTree the TaskTree to be deleted
-     * @return true if the deletion was successful, false otherwise
+     * Resets this TaskTree's Task's completion to zero, then updates parent and child trees appropriately
      */
-    boolean removeSubTaskTree(TaskTree taskTree);
+    void resetTask();
 
     /**
      * Removes the passed TaskTree object from this TaskTree's descendant TaskTrees. Returns false if no such TaskTree

@@ -1,36 +1,47 @@
-import UI.UserRegistrationController;
-import UI.UserRegistrationResponseFormatter;
+import entity_layer.InMemoryUser;
+import entity_layer.User;
+import use_cases.user_registration.UserRegistrationController;
 import config.CommonCryptograph;
 import config.Cryptograph;
-import entity_layer.CommonUserFactory;
-import entity_layer.UserFactory;
+import config.UserDataStoreGateway;
+import entity_factories.CommonUserFactory;
+import entity_factories.UserFactory;
 import config.UserStorage;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.AfterAll;
 import use_cases.user_registration.*;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 
 public class UserRegistrationTests {
     static UserRegistrationController controller;
     static UserRegistrationInputBoundary interactor;
-    static UserRegistrationPresenter presenter;
     static UserDataStoreGateway storage;
 
     @BeforeAll
     public static void setUp() {
-        presenter = new UserRegistrationResponseFormatter();
         UserFactory factory = new CommonUserFactory();
         Cryptograph cipher = new CommonCryptograph();
         storage = new UserStorage(cipher);
 
-        interactor = new UserRegistrationInteractor(factory, storage, presenter);
+        interactor = new UserRegistrationInteractor(factory, storage);
         controller = new UserRegistrationController(interactor);
     }
 
     @Test
     public void testControllerUserCreation() {
+        UserFactory factory = new CommonUserFactory();
+        User expectedUser = factory.create("i'm a user","email@sample.com",  "password");
+
         controller.create("email@sample.com", "i'm a user", "password", "password");
+        User actualUser = InMemoryUser.getActiveUser();
+
+        // check that expected and actual fields are the same
+        assertEquals(expectedUser.getUsername(), actualUser.getUsername());
+        assertEquals(expectedUser.getPassword(), actualUser.getPassword());
+        assertEquals(expectedUser.getEmail(), actualUser.getEmail());
     }
 
     @Test
