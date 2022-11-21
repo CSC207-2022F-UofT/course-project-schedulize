@@ -1,5 +1,6 @@
 package entity_layer;
 
+import java.time.Duration;
 import java.time.LocalDateTime;
 
 /**
@@ -101,6 +102,9 @@ public class CommonTimeBlock implements TimeBlock {
         return (this.startTime == other.getEndTime() || this.endTime == other.getStartTime());
     }
 
+    /* **************** *\
+    *  Attribute Access  *
+    \* **************** */
     /**
      * Return this CommonTimeBlocks start time and date.
      *
@@ -108,7 +112,7 @@ public class CommonTimeBlock implements TimeBlock {
      */
     @Override
     public LocalDateTime getStartTime() {
-        return null;
+        return this.startTime;
     }
 
     /**
@@ -118,7 +122,7 @@ public class CommonTimeBlock implements TimeBlock {
      */
     @Override
     public LocalDateTime getEndTime() {
-        return null;
+        return this.endTime;
     }
 
     /**
@@ -128,7 +132,7 @@ public class CommonTimeBlock implements TimeBlock {
      */
     @Override
     public void setStartTime(LocalDateTime startTime) {
-
+        this.startTime = startTime;
     }
 
     /**
@@ -138,7 +142,7 @@ public class CommonTimeBlock implements TimeBlock {
      */
     @Override
     public void setEndTime(LocalDateTime endTime) {
-
+        this.endTime = endTime;
     }
 
     /**
@@ -148,6 +152,6 @@ public class CommonTimeBlock implements TimeBlock {
      */
     @Override
     public int getDuration() {
-        return 0;
+        return Duration.between(this.startTime, this.endTime).toMinutesPart();
     }
 }
