@@ -1,29 +1,25 @@
 package complete_task;
-import entityLayer.Curriculum;
-import entityLayer.Task;
-import entityLayer.TaskTree;
 
 /**
- * Presenter for the completeTask use case that receives if the task
- * was successfully completed in order for the dashboard view to update.
+ * Presenter for the UI that confirms that the task was completed.
+ *
+ * Created: 11/11/2022
+ * Last updated: 11/18/2022
  *
  * @author Bmguiler
  */
 public class completeTaskPresenter implements completeTaskOutputBoundary{
 
     /**
-     * Check if the task was successfully completed.
+     * Confirm that the task was completed.
      *
-     * @param taskId the unique id of the task to be completed.
-     * @param taskCurriculum the curriculum that the task belongs to.
-     * @return true if the task's completion is 100, return false otherwise.
+     * @param taskCompleted model containing completed task information.
+     * @return a message confirming the task was completed.
      */
     @Override
-    public boolean taskCompleted(int taskId, Curriculum taskCurriculum) {
-        TaskTree taskTree = taskCurriculum.getTaskTreeByID(taskId);
-        Task task = taskTree.getTask();
-        return task.isComplete();
+    public String taskCompleted(CompletedTaskModel taskCompleted) {
+        return "The task " + taskCompleted.getTaskName() + " from " +
+                taskCompleted.getCurriculumName() + " was successfully completed.";
     }
 
-    // if taskCompleted returns true, then UI changes
 }

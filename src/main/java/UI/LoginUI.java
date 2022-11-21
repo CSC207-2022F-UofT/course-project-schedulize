@@ -1,5 +1,8 @@
 package UI;
 
+import use_cases.login.LoginController;
+import use_cases.login.LoginException;
+
 import javax.swing.*;
 import java.awt.event.*;
 
@@ -19,12 +22,14 @@ public class LoginUI extends CentralWindow {
     private JLabel errorLabel;
     private PasswordField passwordField;
     private final WindowManager programWindows;
+    private final LoginController controller;
 
     /**
      * Default constructor for Login UI
      */
-    public LoginUI(WindowManager existingWindows) {
+    public LoginUI(WindowManager existingWindows, LoginController controller) {
         super();
+        this.controller = controller;
         // store reference to existing windows in program
         this.programWindows = existingWindows;
         this.programWindows.addWindow(WindowManager.LOGIN_REFERENCE_KEY, this);
@@ -64,9 +69,15 @@ public class LoginUI extends CentralWindow {
         loginButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                // TODO: Connect to Login Use Case
-                errorLabel.setText("Devs didn't connect this LOL");
-                System.out.println("reached!");
+                try {
+                    controller.login(userInputField.getText(), passwordField.getText());
+                } catch (LoginException error){
+                    errorLabel.setText(error.getMessage());
+                    return;
+                }
+                errorLabel.setText("");
+                // TODO: Connect to Dashboard
+                programWindows.closeWindow(WindowManager.LOGIN_REFERENCE_KEY);
             }
         });
     }
@@ -96,12 +107,5 @@ public class LoginUI extends CentralWindow {
 
         // recenter the window
         this.centreWindow();
-    }
-
-    // TODO: Delete for Deployment
-    public static void main(String[] args) {
-        WindowManager windows = new CommonWindowManager();
-        CreateAccountUI createAccountWindow = new CreateAccountUI(windows);
-        JFrame mainWindow = new LoginUI(windows);
     }
 }

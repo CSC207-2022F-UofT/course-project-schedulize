@@ -1,5 +1,8 @@
 package UI;
 
+import use_cases.user_registration.UserRegistrationController;
+import use_cases.user_registration.UserRegistrationError;
+
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -9,7 +12,7 @@ import java.awt.event.MouseEvent;
 /**
  * A class that contains the GUI for creating a new account
  * Created: 11/10/2022
- * Last updated: 11/10/2022
+ * Last updated: 11/15/2022
  *
  * @author David Adler
  */
@@ -27,15 +30,18 @@ public class CreateAccountUI extends CentralWindow {
     private JLabel login;
     private JLabel errorLabel;
     private final WindowManager programWindows;
+    private final UserRegistrationController registrationController;
 
     /**
      * Default constructor for the create account window
      */
-    public CreateAccountUI(WindowManager existingWindows) {
+    public CreateAccountUI(WindowManager existingWindows, UserRegistrationController registrationController) {
         super();
         // store reference to existing windows in program
         this.programWindows = existingWindows;
         this.programWindows.addWindow(WindowManager.REGISTRATION_REFERENCE_KEY, this);
+
+        this.registrationController = registrationController;
         // configure default frame attributes
         this.setPasswordFieldSize();
         this.configureFrame();
@@ -108,9 +114,16 @@ public class CreateAccountUI extends CentralWindow {
         this.createAccountButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                // TODO: Connect to createAccount Use Case
-                errorLabel.setText("Devs didn't connect this LOL");
-                System.out.println("reached!");
+                try {
+                    registrationController.create(emailField.getText(), usernameField.getText(),
+                            passwordField.getText(), new String(confirmPasswordField.getPassword()));
+                } catch (UserRegistrationError error) {
+                    errorLabel.setText(error.getMessage());
+                    return;
+                }
+                errorLabel.setText("");
+                programWindows.closeWindow(WindowManager.REGISTRATION_REFERENCE_KEY);
+                // TODO: Connect to Dashboard if successful
             }
         });
     }

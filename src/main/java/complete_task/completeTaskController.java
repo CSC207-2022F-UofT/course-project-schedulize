@@ -1,20 +1,22 @@
 package complete_task;
-import entityLayer.Curriculum;
 
 /**
- * Controller for the completeTask use case; receives user input in
- * the form of the id of the task to be completed and the curriculum
- * that the task belongs to.
+ * Controller for the completeTask use case; receives user input
+ * from the UI.
+ *
+ * Created: 11/11/2022
+ * Last updated: 11/18/2022
  *
  * @author Bmguiler
  */
 public class completeTaskController {
-    public static int taskId;
-    public static Curriculum taskCurriculum;
+    private completeTaskInputBoundary userInput;
 
-    public completeTaskController(int taskId, Curriculum taskCurriculum){
-        this.taskId = taskId;
-        this.taskCurriculum = taskCurriculum;
+    public completeTaskController(completeTaskInputBoundary userInput){
+        this.userInput = userInput;
+    }
 
+    public void completeTask(int curriculumId, int taskId){
+        this.userInput.completeTask(curriculumId, taskId);
     }
 }

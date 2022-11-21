@@ -1,7 +1,7 @@
 package entity_factories;
 
-import entityLayer.Task;
-import entityLayer.CommonTask;
+import entity_layer.Task;
+import entity_layer.CommonTask;
 
 /**
  * A CommonTaskFactory for creating CommonTask objects, implements the TaskFactory interface

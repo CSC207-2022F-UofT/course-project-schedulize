@@ -4,8 +4,8 @@ import javax.swing.*;
 
 /**
  * An interface for managing the existing UI windows in the program
- * Created: 11/11/2022
- * Last updated: 11/10/2022
+ * Created: 11/10/2022
+ * Last updated: 11/11/2022
  *
  * @author David Adler
  */
