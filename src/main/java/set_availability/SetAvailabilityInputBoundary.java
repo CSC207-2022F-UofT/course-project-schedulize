@@ -1,4 +1,4 @@
-package setavailability;
+package set_availability;
 
 /**
  * Interface for the controller to interact with the SetAvailabilityTaskInteractor class

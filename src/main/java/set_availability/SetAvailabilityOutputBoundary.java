@@ -1,4 +1,4 @@
-package setavailability;
+package set_availability;
 
 /**
  * An output boundary interface that is implemented by the setAvailabilityPresenter class.

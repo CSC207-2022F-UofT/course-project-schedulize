@@ -1,4 +1,4 @@
-package setavailability;
+package set_availability;
 
 /**
  * Class responsible for initializing the first-time setting of availability;
@@ -10,8 +10,7 @@ public class SetAvailabilityController {
     SetAvailabilityUseCase userAvailabilityInteractor;
 
     /**
-     * 1. Receives interactor
-     * 2. Sets controller's interactor to the interactor given from parameter
+     * Receives interactor & Sets controller's interactor to the interactor given by parameter
      *
      * @param interactor Interactor given to controller to create TimeBlockFactory, which creates TimeBlockManager
      *                   & corresponding TimeBlocks

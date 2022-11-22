@@ -1,4 +1,4 @@
-package setavailability;
+package set_availability;
 
 /**
  * ...

@@ -1,4 +1,4 @@
-package setavailability;
+package set_availability;
 
 /**
  * A model class for packaging the required info needed by the setAvailabilityPresenter.

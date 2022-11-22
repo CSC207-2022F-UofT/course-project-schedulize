@@ -1,4 +1,4 @@
-package setavailability;
+package set_availability;
 import entity_layer.*;
 
 import java.util.function.Consumer;
@@ -12,9 +12,6 @@ import java.util.function.Consumer;
 public class SetAvailabilityUseCase implements SetAvailabilityInputBoundary {
 
     SetAvailabilityOutputBoundary availabilityPresenter;
-
-    //ALL INTERACTORS WILL USE inMemoryUser in constructor (inMemoryUser.getActiveUser())
-    // - Not touched by controllers or presenters; only used by interactors to do fancy stuff
 
     public SetAvailabilityUseCase(SetAvailabilityOutputBoundary availabilityPresenter) {
         this.availabilityPresenter = availabilityPresenter;
@@ -31,6 +28,7 @@ public class SetAvailabilityUseCase implements SetAvailabilityInputBoundary {
     @Override
     public void create(String[] availabilityInputs, int curriculumId) {
 
+        //Create TimeBlockManager
         Schedule schedule = InMemoryUser.getActiveUser().getSchedule();
         TimeBlockManager timeBlockManager = schedule.getAvailability();
         timeBlockManager.getTimeBlocks().forEach(
@@ -43,6 +41,7 @@ public class SetAvailabilityUseCase implements SetAvailabilityInputBoundary {
 
         );
 
+        //Send info as Presenter model through Presenter
         Curriculum curriculum = schedule.getCurriculum(curriculumId);
         SetAvailabilityModel availabilityModel = new SetAvailabilityModel(curriculum.getName());
         availabilityPresenter.availabilitiesSet(availabilityModel);
