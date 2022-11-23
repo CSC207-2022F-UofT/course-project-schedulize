@@ -76,4 +76,36 @@ public class CommonTimeBlockTests {
     public void testContainedThisEndTimeEquals() {
 
     }
+
+    // TimeBlock.contains()
+    @Test
+    public void testContainsTrue() {
+
+    }
+
+    @Test
+    public void testContainsThatContainsThis() {
+
+    }
+
+    // TimeBlock.isAdjacentTo()
+    @Test
+    public void testAdjacentThisBefore() {
+
+    }
+
+    @Test
+    public void testAdjacentThisAfter() {
+
+    }
+
+    @Test
+    public void testAdjacentApart() {
+
+    }
+
+    @Test
+    public void testAdjacentOverlapping() {
+
+    }
 }
