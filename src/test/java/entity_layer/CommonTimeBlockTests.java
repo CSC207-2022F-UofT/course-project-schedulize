@@ -8,6 +8,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class CommonTimeBlockTests {
 
+    // TimeBlock.equals()
     @Test
     public void testEqualsNullComparison() {
         LocalDateTime start = LocalDateTime.of(2022, Month.JULY, 14, 11, 30);
@@ -31,6 +32,27 @@ public class CommonTimeBlockTests {
 
     @Test
     public void testEqualsSeparateObjectsFalse() {
+
+    }
+
+    // TimeBlock.overlapsWith()
+    @Test
+    public void testOverlapsWithApart() {
+
+    }
+
+    @Test
+    public void testOverlapsWithAdjacent() {
+
+    }
+
+    @Test
+    public void testOverlapsWithThisStartsBefore() {
+
+    }
+
+    @Test
+    public void testOverlapsWithThisEndsAfter() {
 
     }
 }
