@@ -24,6 +24,8 @@ public class CommonTimeBlock implements TimeBlock {
     public CommonTimeBlock(LocalDateTime startTime, LocalDateTime endTime) {
         this.startTime = startTime;
         this.endTime = endTime;
+        // I'll have to include a check somewhere that doesn't allow start time to be before
+        //  end time.
     }
 
     /* ************* *\

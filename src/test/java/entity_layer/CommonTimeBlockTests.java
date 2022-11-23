@@ -108,4 +108,10 @@ public class CommonTimeBlockTests {
     public void testAdjacentOverlapping() {
 
     }
+
+    // TimeBlock.getDuration()
+    @Test
+    public void testDuration() {
+
+    }
 }
