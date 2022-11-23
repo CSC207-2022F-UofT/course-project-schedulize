@@ -22,17 +22,50 @@ public class CommonTimeBlockTests {
 
     @Test
     public void testEqualsReflexive() {
+        LocalDateTime start = LocalDateTime.of(2022, Month.JULY, 14, 11, 30);
+        LocalDateTime end = LocalDateTime.of(2022, Month.JULY, 14, 14, 30);
 
+        TimeBlock t1 = new CommonTimeBlock(start, end);
+        TimeBlock t2 = t1;
+
+        assertTrue(t1.equals(t2));
     }
 
     @Test
     public void testEqualsSeparateObjectsTrue() {
+        LocalDateTime start = LocalDateTime.of(2022, Month.JULY, 14, 11, 30);
+        LocalDateTime end = LocalDateTime.of(2022, Month.JULY, 14, 14, 30);
 
+        TimeBlock t1 = new CommonTimeBlock(start, end);
+        TimeBlock t2 = new CommonTimeBlock(start, end);
+
+        assertTrue(t1.equals(t2));
     }
 
     @Test
     public void testEqualsSeparateObjectsFalse() {
+        LocalDateTime start1 = LocalDateTime.of(2022, Month.JULY, 14, 11, 30);
+        LocalDateTime end1 = LocalDateTime.of(2022, Month.JULY, 14, 14, 30);
+        LocalDateTime start2 = LocalDateTime.of(2022, Month.JULY, 15, 11, 30);
+        LocalDateTime end2 = LocalDateTime.of(2022, Month.JULY, 15, 11, 30);
 
+        TimeBlock t1 = new CommonTimeBlock(start1, end1);
+        TimeBlock t2 = new CommonTimeBlock(start2, end2);
+
+        assertFalse(t1.equals(t2));
+    }
+
+    @Test
+    public void testEqualsWhenAdjacentIsFalse() {
+        LocalDateTime start1 = LocalDateTime.of(2022, Month.JULY, 14, 11, 30);
+        LocalDateTime end1 = LocalDateTime.of(2022, Month.JULY, 14, 14, 30);
+        LocalDateTime start2 = LocalDateTime.of(2022, Month.JULY, 14, 14, 30);
+        LocalDateTime end2 = LocalDateTime.of(2022, Month.JULY, 14, 15, 30);
+
+        TimeBlock t1 = new CommonTimeBlock(start1, end1);
+        TimeBlock t2 = new CommonTimeBlock(start2, end2);
+
+        assertFalse(t1.equals(t2));
     }
 
     // TimeBlock.overlapsWith()
