@@ -75,14 +75,16 @@ public class CommonTimeBlock implements TimeBlock {
     }
 
     /**
-     * Returns true if the entirety of this CommonTimeBlock is contained between the start and end times of the other.
+     * Returns true if the entirety of this CommonTimeBlock is contained between the start and end times of the other,
+     * inclusive.
      *
      * @param other the TimeBlock that this is being compared to
      * @return true if this CommonTimeBlock lies within other, false otherwise
      */
     @Override
     public boolean isContainedWithin(TimeBlock other) {
-        return (this.startTime.isAfter(other.getStartTime()) && this.endTime.isBefore(other.getEndTime()));
+        return isAfterOrEqual(this.startTime, other.getStartTime())
+                && isBeforeOrEqual(this.endTime, other.getEndTime());
     }
 
     /**
@@ -108,7 +110,6 @@ public class CommonTimeBlock implements TimeBlock {
     }
 
     // Private
-
     /**
      * Returns true if the first provided LocalDateTime lies between the latter two provided LocalDateTimes, false
      * if otherwise.
@@ -121,6 +122,28 @@ public class CommonTimeBlock implements TimeBlock {
     private static boolean dateTimeIsBetween(LocalDateTime candidate,
                                              LocalDateTime lowerBound, LocalDateTime upperBound) {
         return candidate.isAfter(lowerBound) && candidate.isBefore(upperBound);
+    }
+
+    /**
+     * Returns true if t1 is after or at the same time as t2
+     *
+     * @param t1 the first LocalDateTime
+     * @param t2 the second LocalDateTime
+     * @return true if t1 is after or equal to t2
+     */
+    private static boolean isAfterOrEqual(LocalDateTime t1, LocalDateTime t2) {
+        return t1.isAfter(t2) || t1.isEqual(t2);
+    }
+
+    /**
+     * Returns true if t1 is before or at the same time as t2
+     *
+     * @param t1 the first LocalDateTime
+     * @param t2 the second LocalDateTime
+     * @return true if t1 is before or equal to t2
+     */
+    private static boolean isBeforeOrEqual(LocalDateTime t1, LocalDateTime t2) {
+        return t1.isBefore(t2) || t1.isEqual(t2);
     }
 
     /* **************** *\
