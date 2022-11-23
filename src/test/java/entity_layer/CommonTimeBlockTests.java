@@ -177,12 +177,28 @@ public class CommonTimeBlockTests {
     // TimeBlock.contains()
     @Test
     public void testContainsTrue() {
+        LocalDateTime start1 = LocalDateTime.of(2022, Month.JULY, 14, 15, 0);
+        LocalDateTime end1 = LocalDateTime.of(2022, Month.JULY, 14, 16, 0);
+        LocalDateTime start2 = LocalDateTime.of(2022, Month.JULY, 14, 12, 0);
+        LocalDateTime end2 = LocalDateTime.of(2022, Month.JULY, 14, 18, 0);
 
+        TimeBlock t2 = new CommonTimeBlock(start1, end1);
+        TimeBlock t1 = new CommonTimeBlock(start2, end2);
+
+        assertTrue(t1.contains(t2));
     }
 
     @Test
     public void testContainsThatContainsThis() {
+        LocalDateTime start1 = LocalDateTime.of(2022, Month.JULY, 14, 15, 0);
+        LocalDateTime end1 = LocalDateTime.of(2022, Month.JULY, 14, 16, 0);
+        LocalDateTime start2 = LocalDateTime.of(2022, Month.JULY, 14, 12, 0);
+        LocalDateTime end2 = LocalDateTime.of(2022, Month.JULY, 14, 18, 0);
 
+        TimeBlock t1 = new CommonTimeBlock(start1, end1);
+        TimeBlock t2 = new CommonTimeBlock(start2, end2);
+
+        assertFalse(t1.contains(t2));
     }
 
     // TimeBlock.isAdjacentTo()
