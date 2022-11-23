@@ -204,22 +204,54 @@ public class CommonTimeBlockTests {
     // TimeBlock.isAdjacentTo()
     @Test
     public void testAdjacentThisBefore() {
+        LocalDateTime start1 = LocalDateTime.of(2022, Month.JULY, 14, 15, 0);
+        LocalDateTime end1 = LocalDateTime.of(2022, Month.JULY, 14, 16, 0);
+        LocalDateTime start2 = LocalDateTime.of(2022, Month.JULY, 14, 16, 0);
+        LocalDateTime end2 = LocalDateTime.of(2022, Month.JULY, 14, 18, 0);
 
+        TimeBlock t1 = new CommonTimeBlock(start1, end1);
+        TimeBlock t2 = new CommonTimeBlock(start2, end2);
+
+        assertTrue(t1.isAdjacentTo(t2));
     }
 
     @Test
     public void testAdjacentThisAfter() {
+        LocalDateTime start1 = LocalDateTime.of(2022, Month.JULY, 14, 15, 0);
+        LocalDateTime end1 = LocalDateTime.of(2022, Month.JULY, 14, 16, 0);
+        LocalDateTime start2 = LocalDateTime.of(2022, Month.JULY, 14, 16, 0);
+        LocalDateTime end2 = LocalDateTime.of(2022, Month.JULY, 14, 18, 0);
 
+        TimeBlock t1 = new CommonTimeBlock(start1, end1);
+        TimeBlock t2 = new CommonTimeBlock(start2, end2);
+
+        assertTrue(t2.isAdjacentTo(t1));
     }
 
     @Test
     public void testAdjacentApart() {
+        LocalDateTime start1 = LocalDateTime.of(2022, Month.JULY, 14, 15, 0);
+        LocalDateTime end1 = LocalDateTime.of(2022, Month.JULY, 14, 16, 0);
+        LocalDateTime start2 = LocalDateTime.of(2022, Month.JULY, 14, 17, 0);
+        LocalDateTime end2 = LocalDateTime.of(2022, Month.JULY, 14, 18, 0);
 
+        TimeBlock t1 = new CommonTimeBlock(start1, end1);
+        TimeBlock t2 = new CommonTimeBlock(start2, end2);
+
+        assertFalse(t1.isAdjacentTo(t2));
     }
 
     @Test
     public void testAdjacentOverlapping() {
+        LocalDateTime start1 = LocalDateTime.of(2022, Month.JULY, 14, 11, 30);
+        LocalDateTime end1 = LocalDateTime.of(2022, Month.JULY, 14, 14, 30);
+        LocalDateTime start2 = LocalDateTime.of(2022, Month.JULY, 14, 12, 30);
+        LocalDateTime end2 = LocalDateTime.of(2022, Month.JULY, 14, 15, 30);
 
+        TimeBlock t1 = new CommonTimeBlock(start1, end1);
+        TimeBlock t2 = new CommonTimeBlock(start2, end2);
+
+        assertFalse(t1.isAdjacentTo(t2));
     }
 
     // TimeBlock.getDuration()

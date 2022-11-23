@@ -106,7 +106,7 @@ public class CommonTimeBlock implements TimeBlock {
      */
     @Override
     public boolean isAdjacentTo(TimeBlock other) {
-        return (this.startTime == other.getEndTime() || this.endTime == other.getStartTime());
+        return (this.startTime.equals(other.getEndTime()) || this.endTime.equals(other.getStartTime()));
     }
 
     // Private
