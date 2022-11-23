@@ -256,7 +256,42 @@ public class CommonTimeBlockTests {
 
     // TimeBlock.getDuration()
     @Test
-    public void testDuration() {
+    public void testDuration30Min() {
+        LocalDateTime start1 = LocalDateTime.of(2022, Month.JULY, 14, 11, 30);
+        LocalDateTime end1 = LocalDateTime.of(2022, Month.JULY, 14, 12, 0);
 
+        TimeBlock t = new CommonTimeBlock(start1, end1);
+
+        assertEquals(30, t.getDuration());
+    }
+
+    @Test
+    public void testDurationOneHour() {
+        LocalDateTime start1 = LocalDateTime.of(2022, Month.JULY, 14, 11, 30);
+        LocalDateTime end1 = LocalDateTime.of(2022, Month.JULY, 14, 12, 30);
+
+        TimeBlock t = new CommonTimeBlock(start1, end1);
+
+        assertEquals(60, t.getDuration());
+    }
+
+    @Test
+    public void testDurationThreeHours() {
+        LocalDateTime start1 = LocalDateTime.of(2022, Month.JULY, 14, 11, 0);
+        LocalDateTime end1 = LocalDateTime.of(2022, Month.JULY, 14, 14, 0);
+
+        TimeBlock t = new CommonTimeBlock(start1, end1);
+
+        assertEquals(180, t.getDuration());
+    }
+
+    @Test
+    public void testDurationFullDay() {
+        LocalDateTime start1 = LocalDateTime.of(2022, Month.JULY, 14, 11, 0);
+        LocalDateTime end1 = LocalDateTime.of(2022, Month.JULY, 15, 11, 0);
+
+        TimeBlock t = new CommonTimeBlock(start1, end1);
+
+        assertEquals(1440, t.getDuration());
     }
 }

@@ -196,6 +196,6 @@ public class CommonTimeBlock implements TimeBlock {
      */
     @Override
     public int getDuration() {
-        return Duration.between(this.startTime, this.endTime).toMinutesPart();
+        return Math.toIntExact(Duration.between(this.startTime, this.endTime).toMinutes());
     }
 }
