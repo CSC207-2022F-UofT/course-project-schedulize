@@ -31,6 +31,7 @@ public class CommonTimeBlock implements TimeBlock {
     /* ************* *\
     *  Functionality  *
     \* ************* */
+    // Public
     /**
      * Returns true if this CommonTimeBlock's start and end times are the same as other's start and end times
      *
@@ -61,14 +62,16 @@ public class CommonTimeBlock implements TimeBlock {
     }
 
     /**
-     * Returns true if these TimeBlocks share common times, partially, or entirely
+     * Returns true if these CommonTimeBlocks share common times, partially, or entirely.
+     * That is, if the two provided CommonTimeBlocks are equal, or one contains the other, this will return true.
      *
      * @param other the TimeBlock that this is being compared to
      * @return true if there is a time overlap, false otherwise
      */
     @Override
     public boolean overlapsWith(TimeBlock other) {
-        return (this.startTime.isAfter(other.getEndTime()) || this.endTime.isBefore(other.getStartTime()));
+        return dateTimeIsBetween(this.startTime, other.getStartTime(), other.getEndTime())
+               || dateTimeIsBetween(this.endTime, other.getStartTime(), other.getEndTime());
     }
 
     /**
@@ -102,6 +105,22 @@ public class CommonTimeBlock implements TimeBlock {
     @Override
     public boolean isAdjacentTo(TimeBlock other) {
         return (this.startTime == other.getEndTime() || this.endTime == other.getStartTime());
+    }
+
+    // Private
+
+    /**
+     * Returns true if the first provided LocalDateTime lies between the latter two provided LocalDateTimes, false
+     * if otherwise.
+     *
+     * @param candidate the LocalDateTime to be tested
+     * @param lowerBound the LocalDateTime candidate is meant to fall after
+     * @param upperBound the LocalDateTime candidate is meant to fall before
+     * @return true if the stipulations of lowerBound and upperBound are met
+     */
+    private static boolean dateTimeIsBetween(LocalDateTime candidate,
+                                             LocalDateTime lowerBound, LocalDateTime upperBound) {
+        return candidate.isAfter(lowerBound) && candidate.isBefore(upperBound);
     }
 
     /* **************** *\

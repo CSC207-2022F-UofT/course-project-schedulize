@@ -70,23 +70,55 @@ public class CommonTimeBlockTests {
 
     // TimeBlock.overlapsWith()
     @Test
-    public void testOverlapsWithApart() {
+    public void testOverlapsWithApartFalse() {
+        LocalDateTime start1 = LocalDateTime.of(2022, Month.JULY, 14, 11, 30);
+        LocalDateTime end1 = LocalDateTime.of(2022, Month.JULY, 14, 14, 30);
+        LocalDateTime start2 = LocalDateTime.of(2022, Month.JULY, 15, 11, 30);
+        LocalDateTime end2 = LocalDateTime.of(2022, Month.JULY, 15, 11, 30);
 
+        TimeBlock t1 = new CommonTimeBlock(start1, end1);
+        TimeBlock t2 = new CommonTimeBlock(start2, end2);
+
+        assertFalse(t1.overlapsWith(t2));
     }
 
     @Test
     public void testOverlapsWithAdjacent() {
+        LocalDateTime start1 = LocalDateTime.of(2022, Month.JULY, 14, 11, 30);
+        LocalDateTime end1 = LocalDateTime.of(2022, Month.JULY, 14, 14, 30);
+        LocalDateTime start2 = LocalDateTime.of(2022, Month.JULY, 14, 14, 30);
+        LocalDateTime end2 = LocalDateTime.of(2022, Month.JULY, 14, 15, 30);
 
+        TimeBlock t1 = new CommonTimeBlock(start1, end1);
+        TimeBlock t2 = new CommonTimeBlock(start2, end2);
+
+        assertFalse(t1.overlapsWith(t2));
     }
 
     @Test
     public void testOverlapsWithThisStartsBefore() {
+        LocalDateTime start1 = LocalDateTime.of(2022, Month.JULY, 14, 11, 30);
+        LocalDateTime end1 = LocalDateTime.of(2022, Month.JULY, 14, 14, 30);
+        LocalDateTime start2 = LocalDateTime.of(2022, Month.JULY, 14, 12, 30);
+        LocalDateTime end2 = LocalDateTime.of(2022, Month.JULY, 14, 15, 30);
 
+        TimeBlock t1 = new CommonTimeBlock(start1, end1);
+        TimeBlock t2 = new CommonTimeBlock(start2, end2);
+
+        assertTrue(t1.overlapsWith(t2));
     }
 
     @Test
     public void testOverlapsWithThisEndsAfter() {
+        LocalDateTime start1 = LocalDateTime.of(2022, Month.JULY, 14, 11, 30);
+        LocalDateTime end1 = LocalDateTime.of(2022, Month.JULY, 14, 14, 30);
+        LocalDateTime start2 = LocalDateTime.of(2022, Month.JULY, 14, 12, 30);
+        LocalDateTime end2 = LocalDateTime.of(2022, Month.JULY, 14, 15, 30);
 
+        TimeBlock t2 = new CommonTimeBlock(start1, end1);
+        TimeBlock t1 = new CommonTimeBlock(start2, end2);
+
+        assertTrue(t1.overlapsWith(t2));
     }
 
     // TimeBlock.isContainedWithin()

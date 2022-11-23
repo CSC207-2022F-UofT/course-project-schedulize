@@ -27,7 +27,8 @@ public interface TimeBlock {
     int hashCode();
 
     /**
-     * Returns true if these TimeBlocks share common times, partially, or entirely
+     * Returns true if these TimeBlocks share common times, partially, or entirely.
+     * That is, if the two provided TimeBlocks are equal, or one contains the other, this will return true.
      *
      * @param other the TimeBlock that this is being compared to
      * @return true if there is a time overlap, false otherwise
