@@ -55,4 +55,25 @@ public class CommonTimeBlockTests {
     public void testOverlapsWithThisEndsAfter() {
 
     }
+
+    // TimeBlock.isContainedWithin()
+    @Test
+    public void testContainedTrue() {
+
+    }
+
+    @Test
+    public void testContainedThisContainsThat() {
+
+    }
+
+    @Test
+    public void testContainedThisStartTimeEquals() {
+
+    }
+
+    @Test
+    public void testContainedThisEndTimeEquals() {
+
+    }
 }
