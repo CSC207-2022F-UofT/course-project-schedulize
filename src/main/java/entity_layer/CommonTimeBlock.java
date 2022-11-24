@@ -68,8 +68,33 @@ public class CommonTimeBlock implements TimeBlock {
      */
     @Override
     public boolean overlapsWith(TimeBlock other) {
-        return dateTimeIsBetween(this.startTime, other.getStartTime(), other.getEndTime())
-               || dateTimeIsBetween(this.endTime, other.getStartTime(), other.getEndTime());
+        return this.overlapsBefore(other) || this.overlapsAfter(other);
+    }
+
+    /**
+     * Returns true if these TimeBlocks share common times, partially, or entirely.
+     * That is, if the two provided TimeBlocks are equal, or one contains the other, this will return true.
+     * This applies to the case where this may end *before* other
+     *
+     * @param other the TimeBlock that this is being compared to
+     * @return true if there is a time overlap, false otherwise
+     */
+    @Override
+    public boolean overlapsBefore(TimeBlock other) {
+        return dateTimeIsBetween(this.endTime, other.getStartTime(), other.getEndTime());
+    }
+
+    /**
+     * Returns true if these TimeBlocks share common times, partially, or entirely.
+     * That is, if the two provided TimeBlocks are equal, or one contains the other, this will return true.
+     * This applies to the case where this may start *after* other
+     *
+     * @param other the TimeBlock that this is being compared to
+     * @return true if there is a time overlap, false otherwise
+     */
+    @Override
+    public boolean overlapsAfter(TimeBlock other) {
+        return dateTimeIsBetween(this.startTime, other.getStartTime(), other.getEndTime());
     }
 
     /**

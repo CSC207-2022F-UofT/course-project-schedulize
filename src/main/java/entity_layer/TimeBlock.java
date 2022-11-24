@@ -21,6 +21,26 @@ public interface TimeBlock {
     /**
      * Returns true if these TimeBlocks share common times, partially, or entirely.
      * That is, if the two provided TimeBlocks are equal, or one contains the other, this will return true.
+     * This applies to the case where this ends *before* other
+     *
+     * @param other the TimeBlock that this is being compared to
+     * @return true if there is a time overlap, false otherwise
+     */
+    boolean overlapsBefore(TimeBlock other);
+
+    /**
+     * Returns true if these TimeBlocks share common times, partially, or entirely.
+     * That is, if the two provided TimeBlocks are equal, or one contains the other, this will return true.
+     * This applies to the case where this ends *after* other
+     *
+     * @param other the TimeBlock that this is being compared to
+     * @return true if there is a time overlap, false otherwise
+     */
+    boolean overlapsAfter(TimeBlock other);
+
+    /**
+     * Returns true if these TimeBlocks share common times, partially, or entirely.
+     * That is, if the two provided TimeBlocks are equal, or one contains the other, this will return true.
      *
      * @param other the TimeBlock that this is being compared to
      * @return true if there is a time overlap, false otherwise
