@@ -19,14 +19,6 @@ public interface TimeBlock {
     boolean equals(TimeBlock other);
 
     /**
-     * Returns this TimeBlock's hashcode. This is primarily being implemented to allow the equals() method to adhere
-     * to the hashCode requirements
-     *
-     * @return this TimeBlocks hashcode.
-     */
-    int hashCode();
-
-    /**
      * Returns true if these TimeBlocks share common times, partially, or entirely.
      * That is, if the two provided TimeBlocks are equal, or one contains the other, this will return true.
      *

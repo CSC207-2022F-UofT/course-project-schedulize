@@ -24,8 +24,6 @@ public class CommonTimeBlock implements TimeBlock {
     public CommonTimeBlock(LocalDateTime startTime, LocalDateTime endTime) {
         this.startTime = startTime;
         this.endTime = endTime;
-        // I'll have to include a check somewhere that doesn't allow start time to be before
-        //  end time.
     }
 
     /* ************* *\
@@ -48,10 +46,10 @@ public class CommonTimeBlock implements TimeBlock {
     }
 
     /**
-     * Returns this TimeBlock's hashcode. This is primarily being implemented to allow the equals() method to adhere
-     * to the hashCode requirements
+     * Returns this CommonTimeBlock's hashcode. This is primarily being implemented to allow the equals() method to
+     * adhere to the hashCode requirements
      *
-     * @return this TimeBlocks hashcode.
+     * @return this CommonTimeBlock's hashcode.
      */
     @Override
     public int hashCode() {
