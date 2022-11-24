@@ -97,14 +97,36 @@ public class CommonTimeBlock implements TimeBlock {
     }
 
     /**
-     * Returns true if the other TimeBlock ends exactly when this one starts, or starts exactly when this one ends.
+     * Returns true if this CommonTimeBlock is adjacent before, or after, the other.
      *
-     * @param other the TimeBlock that this is being compared to
-     * @return true if the other TimeBlock is adjacent to this one, false otherwise
+     * @param other the CommonTimeBlock this is being compared to
+     * @return true if either isAdjacentBefore is true, or isAdjacentAfter is true.
      */
     @Override
     public boolean isAdjacentTo(TimeBlock other) {
-        return (this.startTime.equals(other.getEndTime()) || this.endTime.equals(other.getStartTime()));
+        return this.isAdjacentAfter(other) || this.isAdjacentBefore(other);
+    }
+
+    /**
+     * Returns true if this CommonTimeBlock ends just as the other begins.
+     *
+     * @param other the CommonTimeBlock that this is being compared to
+     * @return true if the other CommonTimeBlock is adjacent to this one, false otherwise
+     */
+    @Override
+    public boolean isAdjacentBefore(TimeBlock other) {
+        return this.endTime.equals(other.getStartTime());
+    }
+
+    /**
+     * Returns true if this CommonTimeBlock begins just as the other ends.
+     *
+     * @param other the CommonTimeBlock that this is being compared to
+     * @return true if the other CommonTimeBlock is adjacent to this one, false otherwise
+     */
+    @Override
+    public boolean isAdjacentAfter(TimeBlock other) {
+        return this.startTime.equals(other.getEndTime());
     }
 
     // Private

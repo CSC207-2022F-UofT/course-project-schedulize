@@ -44,12 +44,28 @@ public interface TimeBlock {
     boolean contains(TimeBlock other);
 
     /**
-     * Returns true if the other TimeBlock ends exactly when this one starts, or starts exactly when this one ends.
+     * Returns true if this TimeBlock is adjacent before, or after, the other.
+     *
+     * @param other the TimeBlock this is being compared to
+     * @return true if either isAdjacentBefore is true, or isAdjacentAfter is true.
+     */
+    boolean isAdjacentTo(TimeBlock other);
+
+    /**
+     * Returns true if this TimeBlock ends just as the other begins.
      *
      * @param other the TimeBlock that this is being compared to
      * @return true if the other TimeBlock is adjacent to this one, false otherwise
      */
-    boolean isAdjacentTo(TimeBlock other);
+    boolean isAdjacentBefore(TimeBlock other);
+
+    /**
+     * Returns true if this TimeBlock begins just as the other ends.
+     *
+     * @param other the TimeBlock that this is being compared to
+     * @return true if the other TimeBlock is adjacent to this one, false otherwise
+     */
+    boolean isAdjacentAfter(TimeBlock other);
 
     /**
      * Return this TimeBlocks start time and date.
