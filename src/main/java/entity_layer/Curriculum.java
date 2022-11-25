@@ -8,7 +8,7 @@ package entity_layer;
  * @author MMachadoUofT
  */
 public interface Curriculum {
-
+    // TODO: Implement
     /**
      * Get this curriculum's name.
      *
@@ -23,6 +23,13 @@ public interface Curriculum {
      * @return this Curriculums goal.
      */
     TaskTree getGoal();
+
+    /**
+     * Return this Curriculum's unique id number.
+     *
+     * @return this Curriculum's id.
+     */
+    int getID();
 
     /**
      * Get the TaskTree holding the Task with the corresponding ID, null if no such TaskTree was found.

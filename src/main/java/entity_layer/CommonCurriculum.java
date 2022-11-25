@@ -8,7 +8,7 @@ package entity_layer;
  * @author MMachadoUofT
  */
 public class CommonCurriculum implements Curriculum {
-
+    // TODO: implement
     /* ********** *\
     *  Attributes  *
     \* ********** */
@@ -17,9 +17,11 @@ public class CommonCurriculum implements Curriculum {
     private TimeBlockManager workTimes;
     private TimeBlockManager weekSchedule;
     private String name;
+    private final transient int id = getNextID();
 
     // Static
-    private static int HOURS_IN_WEEK = 168;
+    private static int curriculumCount = 0;
+    private static final int HOURS_IN_WEEK = 168;
 
     /* ************ *\
     *  Constructors  *
@@ -31,6 +33,10 @@ public class CommonCurriculum implements Curriculum {
         this.name = name;
     }
 
+    /* **************** *\
+    *  Attribute Access  *
+    \* **************** */
+    // Public
     @Override
     public String getName() {
         return null;
@@ -45,6 +51,16 @@ public class CommonCurriculum implements Curriculum {
     @Override
     public TaskTree getGoal() {
         return null;
+    }
+
+    /**
+     * Return this CommonCurriculum's unique id number.
+     *
+     * @return this CommonCurriculum's id.
+     */
+    @Override
+    public int getID() {
+        return this.id;
     }
 
     /**
@@ -76,5 +92,10 @@ public class CommonCurriculum implements Curriculum {
     @Override
     public TimeBlockManager getFullSchedule() {
         return null;
+    }
+
+    // Private
+    private static int getNextID() {
+        return curriculumCount++;
     }
 }
