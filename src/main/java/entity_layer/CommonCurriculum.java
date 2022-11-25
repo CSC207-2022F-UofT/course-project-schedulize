@@ -9,6 +9,28 @@ package entity_layer;
  */
 public class CommonCurriculum implements Curriculum {
 
+    /* ********** *\
+    *  Attributes  *
+    \* ********** */
+    // Instance
+    private TaskTree goal;
+    private TimeBlockManager workTimes;
+    private TimeBlockManager weekSchedule;
+    private String name;
+
+    // Static
+    private static int HOURS_IN_WEEK = 168;
+
+    /* ************ *\
+    *  Constructors  *
+    \* ************ */
+    public CommonCurriculum(TaskTree goal, TimeBlockManager workTimes, TimeBlockManager weekSchedule, String name) {
+        this.goal = goal;
+        this.workTimes = workTimes;
+        this.weekSchedule = weekSchedule;
+        this.name = name;
+    }
+
     @Override
     public String getName() {
         return null;
