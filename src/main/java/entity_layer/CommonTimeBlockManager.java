@@ -70,4 +70,12 @@ public class CommonTimeBlockManager implements TimeBlockManager {
     public void removeTimeBlock(TimeBlock timeBlock) {
 
     }
+
+    /**
+     * Clears all TimeBlocks from this TimeBlockManager.
+     */
+    @Override
+    public void clear() {
+        this.timeBlockList.clear();
+    }
 }

@@ -37,4 +37,9 @@ public interface TimeBlockManager {
      */
     void removeTimeBlock(TimeBlock timeBlock);
 
+    /**
+     * Clears all TimeBlocks from this TimeBlockManager.
+     */
+    void clear();
+
 }
