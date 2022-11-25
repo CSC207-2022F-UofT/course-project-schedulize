@@ -78,4 +78,31 @@ public class CommonTimeBlockManager implements TimeBlockManager {
     public void clear() {
         this.timeBlockList.clear();
     }
+
+    // Private
+    /**
+     * Extend the first TimeBlock by the second TimeBlock's start and end times.
+     *
+     * @param block1 the TimeBlock to be extended
+     * @param block2 the TimeBlock that block1 will be extended until
+     * @return true if there was no gap between block1 and block2, false otherwise
+     */
+    private static boolean extendTimeBlock(TimeBlock block1, TimeBlock block2) {
+        if (block1.contains(block2))
+            return true;
+        if (block1.isContainedWithin(block2)) {
+            block1.setStartTime(block2.getStartTime());
+            block1.setEndTime(block2.getEndTime());
+            return true;
+        }
+        if (block1.isAdjacentBefore(block2) || block1.overlapsBefore(block2)) {
+            block1.setEndTime(block2.getEndTime());
+            return true;
+        }
+        if (block1.isAdjacentAfter(block2) || block1.overlapsAfter(block2)) {
+            block1.setStartTime(block2.getStartTime());
+            return true;
+        }
+        return false;
+    }
 }
