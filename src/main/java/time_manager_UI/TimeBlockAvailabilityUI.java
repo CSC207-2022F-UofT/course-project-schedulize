@@ -1,0 +1,74 @@
+package time_manager_UI;
+import javax.swing.*;
+import javax.swing.table.DefaultTableCellRenderer;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumnModel;
+import UI.CentralWindow;
+
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+
+/**
+ * A TimeBlockManagerUi that uses JFrame to show a window that illustrates the Availability of a User.
+ * Created:2022-11-14
+ * Last updated:2022-11-16
+ *
+ * @author Amir Bare
+ */
+public class TimeBlockAvailabilityUI extends CentralWindow {
+    private JPanel mainPanel;
+    private JTable showTable;
+    private JButton backbutton;
+    private JButton changeAvailabilityButton;
+
+    public TimeBlockAvailabilityUI() {
+        super();
+        this.setTitle("User Availability");
+        this.setContentPane(this.mainPanel);
+        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.pack();
+        this.centreWindow();
+        showTable.setEnabled(false);
+        createTable();
+
+        backbutton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+            }
+        });
+
+        changeAvailabilityButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+            }
+        });
+    }
+
+    private void createTable(){
+        Object[][] contents = {
+                {"Monday"," From       to   "},
+                {"Tuesday"," From      to   "},
+                {"Wednesday"," From    to   "},
+                {"Thursday"," From     to   "},
+                {"Friday"," From       to   "},
+                {"Saturday"," From     to   "},
+                {"Sunday"," From       to   "},
+        };
+        showTable.setModel(new DefaultTableModel(contents, new String[]{"Day", "Available Times"}));
+        TableColumnModel columns = showTable.getColumnModel();
+        columns.getColumn(0).setMinWidth(200);
+        DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
+        centerRenderer.setHorizontalAlignment(JLabel.CENTER);
+        columns.getColumn(0).setCellRenderer(centerRenderer);
+        columns.getColumn(1).setCellRenderer(centerRenderer);
+    }
+
+
+
+// TODO Delete for Deployement
+    public static void main(String[] args) {
+        JFrame ui = new TimeBlockAvailabilityUI();
+        ui.setVisible(true);
+    }
+}
