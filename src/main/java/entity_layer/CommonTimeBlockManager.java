@@ -1,5 +1,8 @@
 package entity_layer;
 
+import entity_factories.TimeBlockFactory;
+
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -11,6 +14,26 @@ import java.util.List;
  */
 public class CommonTimeBlockManager implements TimeBlockManager {
 
+    /* ********** *\
+    *  Attributes  *
+    \* ********** */
+    private List<TimeBlock> timeBlockList = new ArrayList<>();
+    private TimeBlockFactory timeBlockFactory;
+
+    /* ************ *\
+    *  Constructors  *
+    \* ************ */
+    public CommonTimeBlockManager(List<TimeBlock> timeBlocks, TimeBlockFactory timeBlockFactory) {
+        this.timeBlockFactory = timeBlockFactory;
+        for (TimeBlock t : timeBlocks) {
+            this.addTimeBlock(t);
+        }
+    }
+
+    /* ************* *\
+    *  Functionality  *
+    \* ************* */
+    // Public
     /**
      * Returns a shallow copy of all the TimeBlocks held by this CommonTimeBlockManager.
      *
@@ -18,7 +41,7 @@ public class CommonTimeBlockManager implements TimeBlockManager {
      */
     @Override
     public List<TimeBlock> getTimeBlocks() {
-        return null;
+        return new ArrayList<>(this.timeBlockList);
     }
 
     /**
