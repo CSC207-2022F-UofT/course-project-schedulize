@@ -1,5 +1,6 @@
 package entity_layer;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 
 /**
@@ -9,7 +10,7 @@ import java.time.LocalDateTime;
  *
  * @author MMachadoUofT
  */
-public interface TimeBlock {
+public interface TimeBlock extends Serializable {
     /**
      * Returns true if this TimeBlock's start and end times are the same as other's start and end times
      *
