@@ -54,7 +54,11 @@ public class CommonTimeBlockManager implements TimeBlockManager {
      */
     @Override
     public void addTimeBlock(TimeBlock timeBlock) {
-
+        for (TimeBlock t : this.timeBlockList) {
+            if (extendTimeBlock(t, timeBlock))
+                return;
+        }
+        this.timeBlockList.add(timeBlock);
     }
 
     /**
