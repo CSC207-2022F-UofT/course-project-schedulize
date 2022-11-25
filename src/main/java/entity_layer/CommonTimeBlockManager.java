@@ -3,7 +3,9 @@ package entity_layer;
 import entity_factories.TimeBlockFactory;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
+import java.util.NoSuchElementException;
 
 /**
  * A CommonTimeBlockManager class, implements the TimeBlockManager interface.
@@ -104,5 +106,38 @@ public class CommonTimeBlockManager implements TimeBlockManager {
             return true;
         }
         return false;
+    }
+
+    /* ********* *\
+    *  Iteration  *
+    \* ********* */
+    /**
+     * Returns an iterator for this TimeBlockManager.
+     *
+     * @return an iterator for this TimeBlockManager
+     */
+    @Override
+    public Iterator<TimeBlock> iterator() {
+        return new TimeBlockManagerIterator();
+    }
+
+    private class TimeBlockManagerIterator implements Iterator<TimeBlock> {
+        private int currentTimeBlockIndex = 0;
+
+        public boolean hasNext() {
+            return currentTimeBlockIndex < timeBlockList.size();
+        }
+
+        public TimeBlock next() {
+            TimeBlock currentTimeBlock;
+
+            try {
+                currentTimeBlock = timeBlockList.get(currentTimeBlockIndex);
+            } catch (IndexOutOfBoundsException e) {
+                throw new NoSuchElementException();
+            }
+            currentTimeBlockIndex += 1;
+            return currentTimeBlock;
+        }
     }
 }

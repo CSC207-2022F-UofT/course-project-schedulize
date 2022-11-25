@@ -1,5 +1,6 @@
 package entity_layer;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -9,7 +10,7 @@ import java.util.List;
  *
  * @author MMachadoUofT
  */
-public interface TimeBlockManager {
+public interface TimeBlockManager extends Serializable, Iterable<TimeBlock> {
 
     /**
      * Returns a shallow copy of all the TimeBlocks held by this TimeBlockManager.
