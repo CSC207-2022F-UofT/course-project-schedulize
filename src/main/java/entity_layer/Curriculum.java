@@ -1,5 +1,7 @@
 package entity_layer;
 
+import java.io.Serializable;
+
 /**
  * A Curriculum interface, implemented by the CommonCurriculum class as a level of abstraction.
  * Created: 10/31/2022
@@ -7,8 +9,8 @@ package entity_layer;
  *
  * @author MMachadoUofT
  */
-public interface Curriculum {
-    // TODO: Implement
+public interface Curriculum extends Serializable {
+
     /**
      * Get this curriculum's name.
      *
