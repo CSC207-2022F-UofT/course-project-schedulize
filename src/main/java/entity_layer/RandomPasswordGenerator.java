@@ -37,24 +37,28 @@ public class RandomPasswordGenerator implements PasswordSuggester {
     }
 
     private char[] getCapitalCharacters() {
-        int numCapitals = this.getRandomInt(1, this.numCharsToAdd / this.IRREGULAR_CHAR_PROPORTION);
+        int numCapitals = this.getRandomInt(1, this.getUpperBound());
         this.numCharsToAdd -= numCapitals;
 
         return this.getRandomizedChars(numCapitals, 65, 91);
     }
 
     private char[] getSpecialCharacters() {
-        int numSpecial = this.getRandomInt(1, this.numCharsToAdd / this.IRREGULAR_CHAR_PROPORTION);
+        int numSpecial = this.getRandomInt(1, this.getUpperBound());
         this.numCharsToAdd -= numSpecial;
 
         return this.getRandomizedChars(numSpecial, 33, 48);
     }
 
     private char[] getNumberCharacters() {
-        int numberChars = this.getRandomInt(1, this.numCharsToAdd / this.IRREGULAR_CHAR_PROPORTION);
+        int numberChars = this.getRandomInt(1, this.getUpperBound());
         this.numCharsToAdd -= numberChars;
 
         return this.getRandomizedChars(numberChars, 48, 58);
+    }
+
+    private int getUpperBound() {
+        return Math.max(2, this.numCharsToAdd / this.IRREGULAR_CHAR_PROPORTION);
     }
 
     private char[] getNormalCharacters() {
