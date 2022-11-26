@@ -1,4 +1,4 @@
-package complete_task;
+package use_cases.complete_task;
 
 /**
  * A model class for packaging the required info needed by the completeTaskPresenter.
