@@ -1,4 +1,4 @@
-package complete_task;
+package use_cases.complete_task;
 import entity_layer.*;
 
 /**
@@ -10,10 +10,10 @@ import entity_layer.*;
  * @author Bmguiler
  */
 
-public class completeTaskUseCase implements completeTaskInputBoundary {
-    private completeTaskOutputBoundary presenter;
+public class CompleteTaskUseCase implements CompleteTaskInputBoundary {
+    private CompleteTaskOutputBoundary presenter;
 
-    public completeTaskUseCase(completeTaskOutputBoundary presenter){
+    public CompleteTaskUseCase(CompleteTaskOutputBoundary presenter){
         this.presenter = presenter;
     }
 

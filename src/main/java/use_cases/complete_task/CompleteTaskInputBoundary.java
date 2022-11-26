@@ -1,4 +1,4 @@
-package complete_task;
+package use_cases.complete_task;
 
 
 /**
@@ -9,6 +9,6 @@ package complete_task;
  *
  * @author Bmguiler
  */
-public interface completeTaskInputBoundary {
+public interface CompleteTaskInputBoundary {
     void completeTask(int curriculumId, int taskId);
 }
