@@ -13,6 +13,13 @@ import java.util.List;
 public interface TimeBlockManager extends Serializable, Iterable<TimeBlock> {
 
     /**
+     * Returns true if this TimeBlockManager isn't holding any TimeBlocks
+     *
+     * @return true if there are no TimeBlocks
+     */
+    boolean isEmpty();
+
+    /**
      * Returns a shallow copy of all the TimeBlocks held by this TimeBlockManager.
      *
      * @return a list of TimeBlocks

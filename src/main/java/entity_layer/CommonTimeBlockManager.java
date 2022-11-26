@@ -37,6 +37,16 @@ public class CommonTimeBlockManager implements TimeBlockManager {
     \* ************* */
     // Public
     /**
+     * Returns true if this CommonTimeBlockManager isn't holding any TimeBlocks
+     *
+     * @return true if there are no TimeBlocks
+     */
+    @Override
+    public boolean isEmpty() {
+        return this.timeBlockList.isEmpty();
+    }
+
+    /**
      * Returns a shallow copy of all the TimeBlocks held by this CommonTimeBlockManager.
      *
      * @return a list of TimeBlocks
@@ -96,6 +106,8 @@ public class CommonTimeBlockManager implements TimeBlockManager {
     public void clear() {
         this.timeBlockList.clear();
     }
+
+
 
     // Private
     /**
