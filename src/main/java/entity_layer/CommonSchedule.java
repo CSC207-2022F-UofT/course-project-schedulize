@@ -35,7 +35,7 @@ public class CommonSchedule implements Schedule {
      */
     @Override
     public void addAvailabilityBlock(TimeBlock availableBlock) {
-
+        this.availability.addTimeBlock(availableBlock);
     }
 
     /**
@@ -50,7 +50,7 @@ public class CommonSchedule implements Schedule {
      */
     @Override
     public void removeAvailabilityBlock(TimeBlock unavailableBlock) {
-
+        this.availability.removeTimeBlock(unavailableBlock);
     }
 
     /**
@@ -61,6 +61,10 @@ public class CommonSchedule implements Schedule {
      */
     @Override
     public Curriculum getCurriculum(int curriculumID) {
+        for (Curriculum curriculum : this.curriculums) {
+            if (curriculum.getID() == curriculumID)
+                return curriculum;
+        }
         return null;
     }
 
@@ -71,6 +75,6 @@ public class CommonSchedule implements Schedule {
      */
     @Override
     public TimeBlockManager getAvailability() {
-        return null;
+        return this.availability;
     }
 }
