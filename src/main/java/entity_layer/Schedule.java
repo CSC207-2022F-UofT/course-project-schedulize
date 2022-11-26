@@ -1,5 +1,7 @@
 package entity_layer;
 
+import java.io.Serializable;
+
 /**
  * An interface for dealing with the CommonSchedule class, used as way to abstract our source files.
  * Created: 10/31/2022
@@ -7,7 +9,7 @@ package entity_layer;
  *
  * @author MMachadoUofT
  */
-public interface Schedule {
+public interface Schedule extends Serializable {
 
     /**
      * Add the passed curriculum into this Schedule's list of curriculum.
