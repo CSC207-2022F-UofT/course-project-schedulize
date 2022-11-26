@@ -3,6 +3,7 @@ package entity_layer;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.BeforeAll;
 
+import static entity_layer.PasswordSuggester.MIN_PASSWORD_LEN;
 import static java.lang.Character.*;
 
 public class RandomPasswordGeneratorTests {
@@ -37,6 +38,6 @@ public class RandomPasswordGeneratorTests {
         assert numSpecial >= 1;
         assert numUpperCase >= 1;
         assert numNumbers >= 1;
-        assert passwordChars.length >= 8;
+        assert passwordChars.length >= MIN_PASSWORD_LEN;
     }
 }

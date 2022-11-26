@@ -31,7 +31,6 @@ public class RandomPasswordGenerator implements PasswordSuggester {
     }
 
     private void setSuggestionLength() {
-        int MIN_PASSWORD_LEN = 10;
         int MAX_PASSWORD_LEN = 13;
         this.numCharsToAdd = this.getRandomInt(MIN_PASSWORD_LEN, MAX_PASSWORD_LEN + 1);
     }

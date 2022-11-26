@@ -6,6 +6,8 @@ import use_cases.suggest_password.PasswordSuggestionController;
 import use_cases.suggest_password.PasswordSuggestionInputBoundary;
 import use_cases.suggest_password.PasswordSuggestionInteractor;
 
+import static entity_layer.PasswordSuggester.MIN_PASSWORD_LEN;
+
 public class SuggestPasswordUseCaseTests {
 
     public static PasswordSuggestionController suggestionController;
@@ -20,7 +22,7 @@ public class SuggestPasswordUseCaseTests {
     @Test
     public void testPasswordLength() {
         String randomPassword = suggestionController.suggestNewPassword();
-        assert randomPassword.length() >= 8;
+        assert randomPassword.length() >= MIN_PASSWORD_LEN;
     }
 
     @Test
