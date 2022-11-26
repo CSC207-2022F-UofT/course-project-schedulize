@@ -3,6 +3,7 @@ package entity_factories;
 import entity_layer.TimeBlock;
 import entity_layer.TimeBlockManager;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -12,7 +13,7 @@ import java.util.List;
  *
  * @author MMachadoUofT
  */
-public interface TimeBlockManagerFactory {
+public interface TimeBlockManagerFactory extends Serializable {
 
     /**
      * Returns a newly created object of type TimeBlockManager with no TimeBlocks
