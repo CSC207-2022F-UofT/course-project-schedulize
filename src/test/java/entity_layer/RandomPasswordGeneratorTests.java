@@ -16,6 +16,10 @@ public class RandomPasswordGeneratorTests {
     @Test
     public void testPasswordFormat() {
         String randomPassword = suggester.suggestPassword();
+        testPasswordCharacterMakeUp(randomPassword);
+    }
+
+    public static void testPasswordCharacterMakeUp(String randomPassword) {
         char[] passwordChars = randomPassword.toCharArray();
 
         int numSpecial = 0;

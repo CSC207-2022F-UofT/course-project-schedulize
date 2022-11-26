@@ -97,11 +97,4 @@ public class RandomPasswordGenerator implements PasswordSuggester {
 
         return new StringBuilder(String.valueOf(toShuffle));
     }
-
-    public static void main(String[] args) {
-        RandomPasswordGenerator suggester = new RandomPasswordGenerator();
-        for (int i = 0; i < 100; i ++) {
-            System.out.println(suggester.suggestPassword());
-        }
-    }
 }
