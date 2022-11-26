@@ -12,6 +12,13 @@ import java.io.Serializable;
 public interface Curriculum extends Serializable {
 
     /**
+     * Add the given TimeBlock to this Curriculum's worktimes
+     *
+     * @param workTime the TimeBlock to be added.
+     */
+    void addWorkTime(TimeBlock workTime);
+
+    /**
      * Get this curriculum's name.
      *
      * @return this Curriculum's name.

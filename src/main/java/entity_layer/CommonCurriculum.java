@@ -37,6 +37,15 @@ public class CommonCurriculum implements Curriculum {
     *  Functionality  *
     \* ************* */
     /**
+     * Add the given TimeBlock to this Curriculum's worktimes
+     *
+     * @param workTime the TimeBlock to be added.
+     */
+    public void addWorkTime(TimeBlock workTime) {
+        this.workTimes.addTimeBlock(workTime);
+    }
+
+    /**
      * Return a unique ID to be assigned to the next constructed CommonCurriculum
      *
      * @return the next ID to be assigned
