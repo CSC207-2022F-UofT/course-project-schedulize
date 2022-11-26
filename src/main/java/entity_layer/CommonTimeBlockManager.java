@@ -84,6 +84,7 @@ public class CommonTimeBlockManager implements TimeBlockManager {
                 if (reducedBlock != timeBlock) {
                     addTimeBlockAfter(t, reducedBlock);
                 }
+                return;
             }
         }
     }
