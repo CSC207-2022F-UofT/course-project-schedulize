@@ -10,6 +10,13 @@ package entity_layer;
 public interface Schedule {
 
     /**
+     * Add the passed curriculum into this Schedule's list of curriculum.
+     *
+     * @param curriculum the curriculum to be added
+     */
+    void addCurriculum(Curriculum curriculum);
+
+    /**
      * Adds the passed TimeBlock to the availability.
      * If the given TimeBlock is contained within an existing availability entirely, nothing occurs.
      * If the given TimeBlock is partially contained within - or is perfectly adjacent to - an existing

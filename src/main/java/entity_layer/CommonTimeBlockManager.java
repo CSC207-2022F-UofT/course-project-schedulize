@@ -69,6 +69,8 @@ public class CommonTimeBlockManager implements TimeBlockManager {
                 return;
         }
         this.timeBlockList.add(timeBlock);
+        // I have an idea for how to make this work even better, which I may do during our refactoring step.
+        //  Nutshell: Add any overlapping/adjacent TimeBlocks to a list, then replace those with a massive one
     }
 
     /**
@@ -97,6 +99,8 @@ public class CommonTimeBlockManager implements TimeBlockManager {
                 return;
             }
         }
+        // I have an idea for how to make this work even better, which I may do during our refactoring step.
+        //  Nutshell: Add any overlapping/adjacent TimeBlocks to a list, adjust the existing blocks as needed.
     }
 
     /**

@@ -25,6 +25,19 @@ public class CommonSchedule implements Schedule {
         this.availability = availability;
     }
 
+    /* ************* *\
+    *  Functionality  *
+    \* ************* */
+    /**
+     * Add the passed curriculum into this CommonSchedule's list of curriculum.
+     *
+     * @param curriculum the curriculum to be added
+     */
+    @Override
+    public void addCurriculum(Curriculum curriculum) {
+        this.curriculums.add(curriculum);
+    }
+
     /**
      * Adds the passed TimeBlock to the availability.
      * If the given TimeBlock is contained within an existing availability entirely, nothing occurs.
