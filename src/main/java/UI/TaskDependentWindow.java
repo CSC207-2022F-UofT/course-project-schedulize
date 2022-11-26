@@ -1,5 +1,5 @@
 package UI;
 
-public interface taskDependentWindow {
+public interface TaskDependentWindow {
     void setWindowID(int curriculumId);
 }

@@ -1,11 +1,11 @@
 package tasktree_UI;
 
 import UI.CentralWindow;
-import UI.taskDependentWindow;
+import UI.TaskDependentWindow;
 
 import javax.swing.*;
 
-public class TaskTreeUI extends CentralWindow implements taskDependentWindow {
+public class TaskTreeUI extends CentralWindow implements TaskDependentWindow {
  private JTree taskTree;
  private JPanel mainPanel;
  private int displayId;
