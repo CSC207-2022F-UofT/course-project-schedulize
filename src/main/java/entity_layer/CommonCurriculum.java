@@ -1,5 +1,8 @@
 package entity_layer;
 
+import java.time.Duration;
+import java.time.LocalDateTime;
+
 /**
  * A CommonCurriculum class, implements the Curriculum interface.
  * Created: 10/31/2022
@@ -71,7 +74,16 @@ public class CommonCurriculum implements Curriculum {
      * Reset this.weekSchedule to only include work times within one week of now.
      */
     private void reduceWorkTimesToWeek() {
+        LocalDateTime todayNow = LocalDateTime.now();
+        this.weekSchedule.clear();
 
+        for (TimeBlock t : this.workTimes) {
+            if (Math.toIntExact(Duration.between(todayNow, t.getStartTime()).toHours()) < HOURS_IN_WEEK) {
+                this.weekSchedule.addTimeBlock(t);
+            } else {
+                return;
+            }
+        }
     }
 
     /* **************** *\
