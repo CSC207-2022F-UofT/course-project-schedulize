@@ -8,14 +8,14 @@ package entity_layer;
  * @author MMachadoUofT
  */
 public class CommonCurriculum implements Curriculum {
-    // TODO: implement
+
     /* ********** *\
     *  Attributes  *
     \* ********** */
     // Instance
-    private TaskTree goal;
-    private TimeBlockManager workTimes;
-    private TimeBlockManager weekSchedule;
+    private final TaskTree goal;
+    private final TimeBlockManager workTimes;
+    private final TimeBlockManager weekSchedule;
     private String name;
     private final transient int id = getNextID();
 
@@ -33,13 +33,35 @@ public class CommonCurriculum implements Curriculum {
         this.name = name;
     }
 
+    /* ************* *\
+    *  Functionality  *
+    \* ************* */
+    /**
+     * Return a unique ID to be assigned to the next constructed CommonCurriculum
+     *
+     * @return the next ID to be assigned
+     */
+    private static int getNextID() {
+        return curriculumCount++;
+    }
+
+    /**
+     * Get a TimeBlockManager representing the times that the User will work on this CommonCurriculum for this week
+     *
+     * @return this week's TimeBlocks, held by a TimeBlockManager.
+     */
+    @Override
+    public TimeBlockManager getThisWeekSchedule() {
+        return null;
+    }
+
     /* **************** *\
     *  Attribute Access  *
     \* **************** */
-    // Public
+    // Getters
     @Override
     public String getName() {
-        return null;
+        return this.name;
     }
 
     /**
@@ -50,7 +72,7 @@ public class CommonCurriculum implements Curriculum {
      */
     @Override
     public TaskTree getGoal() {
-        return null;
+        return this.goal;
     }
 
     /**
@@ -71,17 +93,7 @@ public class CommonCurriculum implements Curriculum {
      */
     @Override
     public TaskTree getTaskTreeByID(int taskID) {
-        return null;
-    }
-
-    /**
-     * Get a TimeBlockManager representing the times that the User will work on this CommonCurriculum for this week
-     *
-     * @return this week's TimeBlocks, held by a TimeBlockManager.
-     */
-    @Override
-    public TimeBlockManager getThisWeekSchedule() {
-        return null;
+        return this.goal.getChildTaskTreeByID(taskID);
     }
 
     /**
@@ -91,11 +103,16 @@ public class CommonCurriculum implements Curriculum {
      */
     @Override
     public TimeBlockManager getFullSchedule() {
-        return null;
+        return this.workTimes;
     }
 
-    // Private
-    private static int getNextID() {
-        return curriculumCount++;
+    // Setters
+    /**
+     * Set this CommonCurriculum's name
+     *
+     * @param name this CommonCurriculum's new name
+     */
+    public void setName(String name) {
+        this.name = name;
     }
 }

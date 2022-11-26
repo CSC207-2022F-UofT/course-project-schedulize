@@ -19,6 +19,13 @@ public interface Curriculum extends Serializable {
     String getName();
 
     /**
+     * Set this curriculum's name.
+     *
+     * @param name this Curriculum's new name.
+     */
+    void setName(String name);
+
+    /**
      * Get the highest-level TaskTree item within this Curriculum. Note that this returns a TaskTree item, *not*
      * a Task item.
      *
