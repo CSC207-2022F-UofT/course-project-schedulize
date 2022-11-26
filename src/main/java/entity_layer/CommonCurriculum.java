@@ -36,6 +36,7 @@ public class CommonCurriculum implements Curriculum {
     /* ************* *\
     *  Functionality  *
     \* ************* */
+    // Public
     /**
      * Add the given TimeBlock to this Curriculum's worktimes
      *
@@ -61,7 +62,16 @@ public class CommonCurriculum implements Curriculum {
      */
     @Override
     public TimeBlockManager getThisWeekSchedule() {
-        return null;
+        this.reduceWorkTimesToWeek();
+        return this.weekSchedule;
+    }
+
+    // Private
+    /**
+     * Reset this.weekSchedule to only include work times within one week of now.
+     */
+    private void reduceWorkTimesToWeek() {
+
     }
 
     /* **************** *\
