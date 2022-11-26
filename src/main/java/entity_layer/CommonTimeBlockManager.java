@@ -19,8 +19,8 @@ public class CommonTimeBlockManager implements TimeBlockManager {
     /* ********** *\
     *  Attributes  *
     \* ********** */
-    private List<TimeBlock> timeBlockList = new ArrayList<>();
-    private TimeBlockFactory timeBlockFactory;
+    private final List<TimeBlock> timeBlockList = new ArrayList<>();
+    private final TimeBlockFactory timeBlockFactory;
 
     /* ************ *\
     *  Constructors  *
@@ -74,7 +74,18 @@ public class CommonTimeBlockManager implements TimeBlockManager {
      */
     @Override
     public void removeTimeBlock(TimeBlock timeBlock) {
-
+        for (TimeBlock t : this.timeBlockList) {
+            if (timeBlock.equals(t) || timeBlock.contains(t)) {
+                this.timeBlockList.remove(t);
+                return;
+            }
+            TimeBlock reducedBlock = reduceTimeBlock(t, timeBlock);
+            if (reducedBlock != null) {
+                if (reducedBlock != timeBlock) {
+                    addTimeBlockAfter(t, reducedBlock);
+                }
+            }
+        }
     }
 
     /**
@@ -110,6 +121,44 @@ public class CommonTimeBlockManager implements TimeBlockManager {
             return true;
         }
         return false;
+    }
+
+    /**
+     * Reduce the first TimeBlock by the second TimeBlock's start and end times.
+     *
+     * @param block1 the TimeBlock to be reduced
+     * @param block2 the TimeBlock that block1 will be reduced by
+     * @return Any necessary leftover timeBlock
+     */
+    private TimeBlock reduceTimeBlock(TimeBlock block1, TimeBlock block2) {
+        if (block1.contains(block2)) {
+            TimeBlock leftover = timeBlockFactory.create(block2.getEndTime(), block1.getEndTime());
+            block1.setEndTime(block2.getStartTime());
+            return leftover;
+        }
+        if (block1.overlapsAfter(block2)) {
+            block1.setStartTime(block2.getEndTime());
+            return block2;
+        }
+        if (block1.overlapsBefore(block2)) {
+            block1.setEndTime(block2.getStartTime());
+            return block2;
+        }
+        return null;
+    }
+
+    /**
+     * Add the given TimeBlock to this.timeBlockList AFTER the TimeBlock passed
+     * @param timeBlockBefore the TimeBlock that we want to place a block after
+     * @param timeBlockAfter the TimeBlock that we want to place after timeBlockBefore
+     */
+    private void addTimeBlockAfter(TimeBlock timeBlockBefore, TimeBlock timeBlockAfter) {
+        int indexToPlaceAt = this.timeBlockList.indexOf(timeBlockBefore) + 1;
+        if (indexToPlaceAt == this.timeBlockList.size()) {
+            this.timeBlockList.add(timeBlockAfter);
+        } else {
+            this.timeBlockList.add(indexToPlaceAt, timeBlockAfter);
+        }
     }
 
     /* ********* *\
