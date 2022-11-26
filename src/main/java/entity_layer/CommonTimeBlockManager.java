@@ -1,7 +1,6 @@
 package entity_layer;
 
 import entity_factories.TimeBlockFactory;
-import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -131,7 +130,6 @@ public class CommonTimeBlockManager implements TimeBlockManager {
      * @param block2 the TimeBlock that block1 will be reduced by
      * @return Any necessary leftover timeBlock
      */
-    @Nullable
     private TimeBlock reduceTimeBlock(TimeBlock block1, TimeBlock block2) {
         if (block1.contains(block2)) {
             TimeBlock leftover = timeBlockFactory.create(block2.getEndTime(), block1.getEndTime());

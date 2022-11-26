@@ -69,4 +69,18 @@ public class CommonTimeBlockManagerTests {
 
         assertTrue(testList.get(0).equals(timeBlockManager.getTimeBlocks().get(0)));
     }
+
+    @Test
+    public void testRemoveTimeBlockEmpty() {
+        TimeBlockManager timeBlockManager = createNew();
+        LocalDateTime start = LocalDateTime.of(2022, Month.JULY, 14, 11, 30);
+        LocalDateTime end = LocalDateTime.of(2022, Month.JULY, 14, 14, 30);
+        TimeBlock t1 = new CommonTimeBlock(start, end);
+
+        List<TimeBlock> expected = timeBlockManager.getTimeBlocks();
+
+        timeBlockManager.removeTimeBlock(t1);
+
+        assertEquals(expected, timeBlockManager.getTimeBlocks());
+    }
 }
