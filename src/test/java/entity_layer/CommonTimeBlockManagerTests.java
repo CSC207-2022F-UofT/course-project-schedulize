@@ -1,13 +1,13 @@
 package entity_layer;
 
 import entity_factories.CommonTimeBlockFactory;
-import org.junit.jupiter.api.*;
 
 import java.time.LocalDateTime;
 import java.time.Month;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.junit.jupiter.api.*;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class CommonTimeBlockManagerTests {
