@@ -50,15 +50,6 @@ public class CommonCurriculum implements Curriculum {
     }
 
     /**
-     * Return a unique ID to be assigned to the next constructed CommonCurriculum
-     *
-     * @return the next ID to be assigned
-     */
-    private static int getNextID() {
-        return curriculumCount++;
-    }
-
-    /**
      * Get a TimeBlockManager representing the times that the User will work on this CommonCurriculum for this week
      *
      * @return this week's TimeBlocks, held by a TimeBlockManager.
@@ -67,6 +58,26 @@ public class CommonCurriculum implements Curriculum {
     public TimeBlockManager getThisWeekSchedule() {
         this.reduceWorkTimesToWeek();
         return this.weekSchedule;
+    }
+
+    /**
+     * Get the TaskTree holding the Task with the corresponding ID, null if no such TaskTree was found.
+     *
+     * @param taskID the ID for the desired Task and subsequent TaskTree
+     * @return the TaskTree holding the desired Task
+     */
+    @Override
+    public TaskTree getTaskTreeByID(int taskID) {
+        return this.goal.getChildTaskTreeByID(taskID);
+    }
+
+    /**
+     * Return a unique ID to be assigned to the next constructed CommonCurriculum
+     *
+     * @return the next ID to be assigned
+     */
+    private static int getNextID() {
+        return curriculumCount++;
     }
 
     // Private
@@ -114,17 +125,6 @@ public class CommonCurriculum implements Curriculum {
     @Override
     public int getID() {
         return this.id;
-    }
-
-    /**
-     * Get the TaskTree holding the Task with the corresponding ID, null if no such TaskTree was found.
-     *
-     * @param taskID the ID for the desired Task and subsequent TaskTree
-     * @return the TaskTree holding the desired Task
-     */
-    @Override
-    public TaskTree getTaskTreeByID(int taskID) {
-        return this.goal.getChildTaskTreeByID(taskID);
     }
 
     /**
