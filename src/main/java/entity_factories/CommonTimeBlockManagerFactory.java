@@ -19,7 +19,7 @@ public class CommonTimeBlockManagerFactory implements TimeBlockManagerFactory {
     /**
      * Returns a newly created object of type CommonTimeBlockManager with no TimeBlocks
      *
-     * @return a TimeBlockManager
+     * @return a CommonTimeBlockManager
      */
     @Override
     public TimeBlockManager createEmpty() {
@@ -27,10 +27,10 @@ public class CommonTimeBlockManagerFactory implements TimeBlockManagerFactory {
     }
 
     /**
-     * Returns a newly created object of type TimeBlockManager with the given TimeBlocks
+     * Returns a newly created object of type CommonTimeBlockManager with the given TimeBlocks
      *
-     * @param timeBlocks this TimeBlockManager's initial timeblocks
-     * @return a TimeBlockManager
+     * @param timeBlocks this CommonTimeBlockManager's initial timeblocks
+     * @return a CommonTimeBlockManager
      */
     @Override
     public TimeBlockManager createWithTimeBlocks(List<TimeBlock> timeBlocks) {
