@@ -19,6 +19,13 @@ public interface Curriculum extends Serializable {
     void addWorkTime(TimeBlock workTime);
 
     /**
+     * Remove the given TimeBlock to this Curriculum's worktimes
+     *
+     * @param workTime the TimeBlock to be removed.
+     */
+    void removeWorkTime(TimeBlock workTime);
+
+    /**
      * Get this curriculum's name.
      *
      * @return this Curriculum's name.

@@ -45,8 +45,19 @@ public class CommonCurriculum implements Curriculum {
      *
      * @param workTime the TimeBlock to be added.
      */
+    @Override
     public void addWorkTime(TimeBlock workTime) {
         this.workTimes.addTimeBlock(workTime);
+    }
+
+    /**
+     * Remove the given TimeBlock to this CommonCurriculum's worktimes
+     *
+     * @param workTime the TimeBlock to be removed.
+     */
+    @Override
+    public void removeWorkTime(TimeBlock workTime) {
+        this.workTimes.removeTimeBlock(workTime);
     }
 
     /**
