@@ -4,7 +4,7 @@ import java.security.SecureRandom;
 import java.util.*;
 import java.util.stream.IntStream;
 
-public class RandomPasswordGenerator {
+public class RandomPasswordGenerator implements PasswordSuggester {
     private StringBuilder suggestion;
     private final SecureRandom randomizer;
     private int numCharsToAdd;
@@ -14,6 +14,7 @@ public class RandomPasswordGenerator {
         this.randomizer = new SecureRandom();
     }
 
+    @Override
     public String suggestPassword() {
         this.setSuggestion();
         return new String(this.suggestion);
@@ -82,15 +83,15 @@ public class RandomPasswordGenerator {
     }
 
     private static StringBuilder shuffleChars(StringBuilder original) {
-        char[] arr = original.toString().toCharArray();
+        char[] toShuffle = original.toString().toCharArray();
         List<Character> chars = new ArrayList<>();
-        for (char c : arr)
+        for (char c : toShuffle)
             chars.add(c);
         Collections.shuffle(chars);
-        for (int i = 0; i < arr.length; i++)
-            arr[i] = chars.get(i);
+        for (int i = 0; i < toShuffle.length; i++)
+            toShuffle[i] = chars.get(i);
 
-        return new StringBuilder(String.valueOf(arr));
+        return new StringBuilder(String.valueOf(toShuffle));
     }
 
     public static void main(String[] args) {
