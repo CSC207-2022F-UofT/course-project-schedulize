@@ -1,5 +1,6 @@
 package entity_layer;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -9,7 +10,14 @@ import java.util.List;
  *
  * @author MMachadoUofT
  */
-public interface TimeBlockManager {
+public interface TimeBlockManager extends Serializable, Iterable<TimeBlock> {
+
+    /**
+     * Returns true if this TimeBlockManager isn't holding any TimeBlocks
+     *
+     * @return true if there are no TimeBlocks
+     */
+    boolean isEmpty();
 
     /**
      * Returns a shallow copy of all the TimeBlocks held by this TimeBlockManager.
@@ -36,5 +44,10 @@ public interface TimeBlockManager {
      * @param timeBlock the TimeBlock to be removed
      */
     void removeTimeBlock(TimeBlock timeBlock);
+
+    /**
+     * Clears all TimeBlocks from this TimeBlockManager.
+     */
+    void clear();
 
 }

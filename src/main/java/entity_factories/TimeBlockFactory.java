@@ -2,6 +2,7 @@ package entity_factories;
 
 import entity_layer.TimeBlock;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 
 /**
@@ -11,7 +12,7 @@ import java.time.LocalDateTime;
  *
  * @author MMachadoUofT
  */
-public interface TimeBlockFactory {
+public interface TimeBlockFactory extends Serializable {
 
     /**
      * Creates a TimeBlock with the provided start and end times.

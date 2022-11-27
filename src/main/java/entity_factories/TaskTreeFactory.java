@@ -2,6 +2,8 @@ package entity_factories;
 
 import entity_layer.TaskTree;
 
+import java.io.Serializable;
+
 /**
  * A TaskTreeFactory interface for creating TaskTrees, implemented by the CommonTaskTreeFactory class
  * Created: 11/14/2022
@@ -9,7 +11,7 @@ import entity_layer.TaskTree;
  *
  * @author MMachadoUofT
  */
-public interface TaskTreeFactory {
+public interface TaskTreeFactory extends Serializable {
 
     /**
      * Creates an instance of a TaskTree object
