@@ -26,6 +26,13 @@ public interface User extends Serializable {
     Schedule getSchedule();
 
     /**
+     * Set this User's schedule.
+     *
+     * @param schedule this User's new schedule
+     */
+    void setSchedule(Schedule schedule);
+
+    /**
      * Set this User's email to the given String
      *
      * @param email this User's new email
