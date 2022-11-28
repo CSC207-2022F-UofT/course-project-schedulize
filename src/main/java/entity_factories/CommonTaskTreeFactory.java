@@ -13,6 +13,8 @@ import entity_layer.TaskTree;
  */
 public class CommonTaskTreeFactory implements TaskTreeFactory {
 
+    private final TaskFactory taskFactory = new CommonTaskFactory();
+
     /**
      * Creates an instance of a CommonTaskTree object
      *
@@ -21,5 +23,20 @@ public class CommonTaskTreeFactory implements TaskTreeFactory {
     @Override
     public TaskTree create() {
         return new CommonTaskTree();
+    }
+
+    /**
+     * Creates an instance of a TaskTree object with a preloaded Task.
+     * This is primarily for testing purposes and includes a hard coupling to create new Tasks
+     *
+     * @param name the new Task's name
+     * @param description the new Task's description
+     * @return a new TaskTree object
+     */
+    @Override
+    public TaskTree createWithTask(String name, String description) {
+        TaskTree newTree = new CommonTaskTree();
+        newTree.setTask(taskFactory.create(name, description));
+        return newTree;
     }
 }
