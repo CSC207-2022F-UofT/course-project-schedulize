@@ -1,4 +1,4 @@
-package set_availability;
+package use_cases.set_availability;
 
 /**
  * A model class for packaging the required info needed by the setAvailabilityPresenter.

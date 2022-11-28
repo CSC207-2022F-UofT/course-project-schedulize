@@ -1,4 +1,4 @@
-package set_availability;
+package use_cases.set_availability;
 
 /**
  * Class responsible for initializing the first-time setting of availability;

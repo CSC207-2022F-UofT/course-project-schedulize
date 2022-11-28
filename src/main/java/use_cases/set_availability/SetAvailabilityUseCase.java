@@ -1,6 +1,9 @@
-package set_availability;
+package use_cases.set_availability;
+import entity_factories.*;
 import entity_layer.*;
 
+import java.time.LocalDateTime;
+import java.util.Arrays;
 import java.util.function.Consumer;
 
 /**
@@ -28,18 +31,19 @@ public class SetAvailabilityUseCase implements SetAvailabilityInputBoundary {
     @Override
     public void create(String[] availabilityInputs, int curriculumId) {
 
-        //Create TimeBlockManager
+        //Update TimeBlockManager to have availabilityInputs as LocalDate times
         Schedule schedule = InMemoryUser.getActiveUser().getSchedule();
         TimeBlockManager timeBlockManager = schedule.getAvailability();
-        timeBlockManager.getTimeBlocks().forEach(
-                new Consumer<TimeBlock>() {
-                    @Override
-                    public void accept(TimeBlock timeBlock) {
-                        timeBlockManager.addTimeBlock(timeBlock);
-                    }
-                }
 
-        );
+        for (String s : availabilityInputs) {
+            int len = s.length();
+            LocalDateTime start = LocalDateTime.parse(s.substring(0, len/2));
+            LocalDateTime end = LocalDateTime.parse(s.substring(len/2, len));
+
+            TimeBlockFactory timeBlockFactory = new CommonTimeBlockFactory();
+            TimeBlock timeBlock = timeBlockFactory.create(start, end);
+            timeBlockManager.addTimeBlock(timeBlock);
+        }
 
         //Send info as Presenter model through Presenter
         Curriculum curriculum = schedule.getCurriculum(curriculumId);

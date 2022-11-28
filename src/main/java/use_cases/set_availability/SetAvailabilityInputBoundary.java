@@ -1,4 +1,4 @@
-package set_availability;
+package use_cases.set_availability;
 
 /**
  * Interface for the controller to interact with the SetAvailabilityTaskInteractor class
