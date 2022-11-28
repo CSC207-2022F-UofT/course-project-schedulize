@@ -1,9 +1,11 @@
 package entity_layer;
 
+import java.util.regex.Pattern;
+
 /**
  * A CommonUser class, implements the User interface.
  * Created: 10/31/2022
- * Last updated: 11/4/2022
+ * Last updated: 11/26/2022
  *
  * @author MMachadoUofT
  */
@@ -11,6 +13,9 @@ public class CommonUser implements User {
     private String username;
     private String email;
     private String password;
+    private Schedule schedule;
+
+    private static final Pattern emailPattern = Pattern.compile("^(.+)@(.+)$");
 
     /**
      * Constructor for new empty user
@@ -19,6 +24,7 @@ public class CommonUser implements User {
         this.username = username;
         this.email = email;
         this.password = password;
+        this.schedule = null;
     }
 
     /**
@@ -38,7 +44,7 @@ public class CommonUser implements User {
      */
     @Override
     public Schedule getSchedule() {
-        return null;
+        return this.schedule;
     }
 
     /**
@@ -58,7 +64,7 @@ public class CommonUser implements User {
      */
     @Override
     public boolean hasValidEmail() {
-        return false;
+        return emailPattern.matcher(this.email).matches();
     }
 
     /**
@@ -99,5 +105,15 @@ public class CommonUser implements User {
     @Override
     public void setUsername(String username) {
         this.username = username;
+    }
+
+    /**
+     * Set this CommonUser's schedule.
+     *
+     * @param schedule this CommonUser's new schedule
+     */
+    @Override
+    public void setSchedule(Schedule schedule) {
+        this.schedule = schedule;
     }
 }

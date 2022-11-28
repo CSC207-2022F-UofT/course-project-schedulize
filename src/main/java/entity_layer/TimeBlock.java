@@ -1,5 +1,6 @@
 package entity_layer;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 
 /**
@@ -9,7 +10,7 @@ import java.time.LocalDateTime;
  *
  * @author MMachadoUofT
  */
-public interface TimeBlock {
+public interface TimeBlock extends Serializable {
     /**
      * Returns true if this TimeBlock's start and end times are the same as other's start and end times
      *
@@ -19,15 +20,28 @@ public interface TimeBlock {
     boolean equals(TimeBlock other);
 
     /**
-     * Returns this TimeBlock's hashcode. This is primarily being implemented to allow the equals() method to adhere
-     * to the hashCode requirements
+     * Returns true if these TimeBlocks share common times, partially, or entirely.
+     * That is, if the two provided TimeBlocks are equal, or one contains the other, this will return true.
+     * This applies to the case where this ends *before* other
      *
-     * @return this TimeBlocks hashcode.
+     * @param other the TimeBlock that this is being compared to
+     * @return true if there is a time overlap, false otherwise
      */
-    int hashCode();
+    boolean overlapsBefore(TimeBlock other);
 
     /**
-     * Returns true if these TimeBlocks share common times, partially, or entirely
+     * Returns true if these TimeBlocks share common times, partially, or entirely.
+     * That is, if the two provided TimeBlocks are equal, or one contains the other, this will return true.
+     * This applies to the case where this ends *after* other
+     *
+     * @param other the TimeBlock that this is being compared to
+     * @return true if there is a time overlap, false otherwise
+     */
+    boolean overlapsAfter(TimeBlock other);
+
+    /**
+     * Returns true if these TimeBlocks share common times, partially, or entirely.
+     * That is, if the two provided TimeBlocks are equal, or one contains the other, this will return true.
      *
      * @param other the TimeBlock that this is being compared to
      * @return true if there is a time overlap, false otherwise
@@ -51,12 +65,28 @@ public interface TimeBlock {
     boolean contains(TimeBlock other);
 
     /**
-     * Returns true if the other TimeBlock ends exactly when this one starts, or starts exactly when this one ends.
+     * Returns true if this TimeBlock is adjacent before, or after, the other.
+     *
+     * @param other the TimeBlock this is being compared to
+     * @return true if either isAdjacentBefore is true, or isAdjacentAfter is true.
+     */
+    boolean isAdjacentTo(TimeBlock other);
+
+    /**
+     * Returns true if this TimeBlock ends just as the other begins.
      *
      * @param other the TimeBlock that this is being compared to
      * @return true if the other TimeBlock is adjacent to this one, false otherwise
      */
-    boolean isAdjacentTo(TimeBlock other);
+    boolean isAdjacentBefore(TimeBlock other);
+
+    /**
+     * Returns true if this TimeBlock begins just as the other ends.
+     *
+     * @param other the TimeBlock that this is being compared to
+     * @return true if the other TimeBlock is adjacent to this one, false otherwise
+     */
+    boolean isAdjacentAfter(TimeBlock other);
 
     /**
      * Return this TimeBlocks start time and date.
