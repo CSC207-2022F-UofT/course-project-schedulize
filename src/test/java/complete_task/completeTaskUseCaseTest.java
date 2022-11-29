@@ -11,8 +11,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class completeTaskUseCaseTest {
     static CompleteTaskController controller;
-    static CompleteTaskUseCase interactor;
-    static CompleteTaskPresenter presenter;
+    static CompleteTaskInputBoundary interactor;
+    static CompleteTaskOutputBoundary presenter;
     static User activeUser;
     static Schedule schedule;
     static Curriculum curriculum;
@@ -44,7 +44,7 @@ public class completeTaskUseCaseTest {
         curriculum.getGoal().addSubTaskTree(attendClassTT);
 
         // CompleteTaskInputBoundary userInput = ;
-        CompleteTaskInputBoundary interactor = new CompleteTaskUseCase(presenter);
+        interactor = new CompleteTaskUseCase(presenter);
         controller = new CompleteTaskController(interactor);
 
         presenter = new CompleteTaskPresenter();
