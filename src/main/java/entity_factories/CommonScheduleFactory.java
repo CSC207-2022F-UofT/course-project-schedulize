@@ -14,7 +14,7 @@ import java.util.ArrayList;
  */
 public class CommonScheduleFactory implements ScheduleFactory {
 
-    TimeBlockManagerFactory blockManagerFactory;
+    private final TimeBlockManagerFactory blockManagerFactory;
 
     public CommonScheduleFactory(TimeBlockManagerFactory blockManagerFactory) {
         this.blockManagerFactory = blockManagerFactory;
