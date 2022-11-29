@@ -12,13 +12,13 @@ public class CreateCurriculumController {
     /* ********** *\
     *  Attributes  *
     \* ********** */
-    private final CreateCurriculumInputBoundary interactor;
+    private final CreateCurriculumInputBoundary inputBoundary;
 
     /* ************ *\
     *  Constructors  *
     \* ************ */
-    public CreateCurriculumController(CreateCurriculumInputBoundary interactor) {
-        this.interactor = interactor;
+    public CreateCurriculumController(CreateCurriculumInputBoundary inputBoundary) {
+        this.inputBoundary = inputBoundary;
     }
 
     /**
@@ -27,7 +27,7 @@ public class CreateCurriculumController {
      * @param curriculumName the new Curriculum's name
      */
     public void createCurriculum(String curriculumName) {
-        interactor.createCurriculum(curriculumName);
+        inputBoundary.createCurriculum(curriculumName);
     }
 
 }
