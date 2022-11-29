@@ -1,32 +1,24 @@
 package use_cases.display_availability_timeblocks;
 import entity_layer.*;
 
-import java.time.LocalDate;
-import java.time.LocalDateTime;
+
+import java.time.LocalTime;
+import java.util.List;
 
 public class DisplayAvailabilityTimeBlockInteractor implements DisplayAvailabilityTimeBlockInputBoundary {
-    private DisplayAvailabilityTimeBlockOutputBoundary presenter;
+    private final DisplayAvailabilityTimeBlockOutputBoundary presenter;
 
     public DisplayAvailabilityTimeBlockInteractor(DisplayAvailabilityTimeBlockOutputBoundary presenter) {
         this.presenter = presenter;
     }
 
-
-
     @Override
-    public void displayAvailabilityTimeBlock() {
+    public DisplayAvailabilityTimeBlockModel displayAvailabilityTimeBlock() {
         Schedule schedule = InMemoryUser.getActiveUser().getSchedule();
-        schedule.getAvailability();
+        TimeBlockManager timeBlockManager = schedule.getAvailability();
+//        for (TimeBlock timeBlock: TimeBlockManager){
+        return null;
 
-
-
-
-
-//        Use In Memory user class to get active user's curriculum.
-
-
-
-
-
+        }
     }
-}
+

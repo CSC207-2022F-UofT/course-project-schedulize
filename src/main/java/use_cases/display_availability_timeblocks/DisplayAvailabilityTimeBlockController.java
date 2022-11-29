@@ -1,22 +1,15 @@
 package use_cases.display_availability_timeblocks;
 
-import java.time.LocalDate;
-import java.time.LocalDateTime;
+import java.time.LocalTime;
 
 public class DisplayAvailabilityTimeBlockController {
-    private DisplayAvailabilityTimeBlockInputBoundary timeBlockDisplay;
+    private final DisplayAvailabilityTimeBlockInteractor displayAvailabilityTimeBlockInteractor;
 
-    /**
-     * Default constructor
-     * @param timeBlockDisplay interactor for this controller
-     */
-
-    public DisplayAvailabilityTimeBlockController(DisplayAvailabilityTimeBlockInputBoundary timeBlockDisplay) {
-        this.timeBlockDisplay = timeBlockDisplay;
+    public DisplayAvailabilityTimeBlockController(DisplayAvailabilityTimeBlockInteractor interactor) {
+        this.displayAvailabilityTimeBlockInteractor = interactor;
     }
-
-    public void displayTimeBlock(){
-        timeBlockDisplay.displayAvailabilityTimeBlock();
+    public void displayAvailabilityTimeBlock(){
+        displayAvailabilityTimeBlockInteractor.displayAvailabilityTimeBlock();
     }
-
 }
+

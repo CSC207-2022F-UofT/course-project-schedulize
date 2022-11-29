@@ -2,6 +2,9 @@ package use_cases.display_availability_timeblocks;
 
 import entity_layer.TimeBlock;
 
+import java.time.LocalTime;
+import java.util.List;
+
 /**
  * An output boundary interface that is implemented by the DisplayTimeBlockPresenter class.
  *
@@ -12,5 +15,5 @@ import entity_layer.TimeBlock;
  */
 
 public interface DisplayAvailabilityTimeBlockOutputBoundary {
-    String availabilityTimeBlockDisplayed(DisplayAvailabilityTimeBlockModel displayedAvailabilityTimeBlock);
+    LocalTime[] availabilityTimeBlockDisplayed(DisplayAvailabilityTimeBlockModel displayedAvailabilityTimeBlock);
 }

@@ -1,14 +1,15 @@
 package use_cases.display_availability_timeblocks;
 
+import entity_layer.TimeBlock;
+
+
+import java.time.LocalTime;
+import java.util.List;
+
 public class DisplayAvailabilityTimeBlockPresenter implements DisplayAvailabilityTimeBlockOutputBoundary {
 
     @Override
-    public String availabilityTimeBlockDisplayed(DisplayAvailabilityTimeBlockModel displayedAvailabilityTimeBlock) {
-        return displayedAvailabilityTimeBlock.toString();
+    public LocalTime[] availabilityTimeBlockDisplayed(DisplayAvailabilityTimeBlockModel displayedAvailabilityTimeBlock) {
+        return null;
     }
-
-//    public String timeBlockDisplayed(DisplayAvailabilityTimeBlockModel displayedTimeBlock) {
-////        return "Start Time " + displayedTimeBlock.getStartTime() + '\n' + "End Time " + displayedTimeBlock.getEndTime();
-//
-//    }
 }
