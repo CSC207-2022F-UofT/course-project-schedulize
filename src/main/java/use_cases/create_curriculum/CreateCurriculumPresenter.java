@@ -8,4 +8,14 @@ package use_cases.create_curriculum;
  * @author MMachadoUofT
  */
 public class CreateCurriculumPresenter implements CreateCurriculumOutputBoundary {
+
+    /**
+     * Prepares the created curriculum for presentation
+     *
+     * @param curriculumModel the newly created Curriculum's model
+     */
+    @Override
+    public void displayCurriculum(CurriculumModel curriculumModel) {
+
+    }
 }
