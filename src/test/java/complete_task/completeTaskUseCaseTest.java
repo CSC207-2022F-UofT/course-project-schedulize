@@ -2,6 +2,7 @@ package complete_task;
 import entity_factories.*;
 import entity_layer.*;
 import org.junit.Before;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import use_cases.complete_task.*;
 
@@ -25,8 +26,8 @@ public class completeTaskUseCaseTest {
      *
      * @author Bmguiler
      */
-    @Before
-    public void setup(){
+    @BeforeAll
+    public static void setup(){
         curriculum = new PrebuiltCurriculumFactory().create("CSC207");
         schedule = new PrebuiltScheduleFactory().create();
         activeUser = new CommonUserFactory().create
@@ -42,8 +43,10 @@ public class completeTaskUseCaseTest {
         curriculum.getGoal().addSubTaskTree(readTextbookTT);
         curriculum.getGoal().addSubTaskTree(attendClassTT);
 
+        // CompleteTaskInputBoundary userInput = ;
+        CompleteTaskInputBoundary interactor = new CompleteTaskUseCase(presenter);
         controller = new CompleteTaskController(interactor);
-        interactor = new CompleteTaskUseCase(presenter);
+
         presenter = new CompleteTaskPresenter();
     }
 
