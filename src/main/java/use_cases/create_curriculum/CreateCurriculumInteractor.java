@@ -29,6 +29,9 @@ public class CreateCurriculumInteractor implements CreateCurriculumInputBoundary
         this.outputBoundary = outputBoundary;
     }
 
+    /* ************* *\
+    *  Functionality  *
+    \* ************* */
     /**
      * Executes the use case for creating a new Curriculum
      *

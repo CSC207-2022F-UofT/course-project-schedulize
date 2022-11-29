@@ -21,6 +21,9 @@ public class CreateCurriculumController {
         this.inputBoundary = inputBoundary;
     }
 
+    /* ************* *\
+    *  Functionality  *
+    \* ************* */
     /**
      * The controller method for creating a new curriculum belonging to the active user
      *
