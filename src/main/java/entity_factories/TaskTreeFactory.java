@@ -19,4 +19,12 @@ public interface TaskTreeFactory extends Serializable {
      * @return a new TaskTree object
      */
     TaskTree create();
+
+    /**
+     * Creates an instance of a TaskTree object with a pre-loaded Task.
+     * This is primarily for testing purposes and includes a hard coupling to create new Tasks
+     *
+     * @return a new TaskTree object
+     */
+    TaskTree createWithTask(String name, String description);
 }
