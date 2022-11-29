@@ -1,19 +1,22 @@
 package complete_task;
 import entity_factories.*;
 import entity_layer.*;
-import org.junit.Before;
 import use_cases.complete_task.*;
-
+import org.junit.Before;
 import org.junit.Test;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class completeTaskUseCaseTest {
     static CompleteTaskController controller;
     static CompleteTaskUseCase interactor;
-    static CompletedTaskModel model;
     static CompleteTaskPresenter presenter;
     static User activeUser;
     static Schedule schedule;
     static Curriculum curriculum;
+    static Task readTextbook;
+    static Task attendClass;
 
     @Before
     public void setup(){
@@ -22,8 +25,8 @@ public class completeTaskUseCaseTest {
 
         activeUser = new CommonUserFactory().create
                 ("username", "email@email.com", "password");
-        Task readTextbook = new CommonTaskFactory().create("Read Textbook", "Read chapter 1 of Clean Architecture");
-        Task attendClass = new CommonTaskFactory().create("Attend Lecture", "Tuesday 6-8pm at Bahen Centre");
+        readTextbook = new CommonTaskFactory().create("Read Textbook", "Read chapter 1 of Clean Architecture");
+        attendClass = new CommonTaskFactory().create("Attend Lecture", "Tuesday 6-8pm at Bahen Centre");
 
         activeUser.setSchedule(schedule);
         schedule.addCurriculum(curriculum);
@@ -36,13 +39,37 @@ public class completeTaskUseCaseTest {
 
         controller = new CompleteTaskController(interactor);
         interactor = new CompleteTaskUseCase(presenter);
-        model = new CompletedTaskModel(curriculum.getName(), readTextbook.getName());
         presenter = new CompleteTaskPresenter();
     }
 
     @Test
-    public void testCompleteTask(){
+    public void testCompleteTask1(){
         InMemoryUser.setActiveUser(activeUser);
+        CompletedTaskModel model = new CompletedTaskModel(curriculum.getName(), readTextbook.getName());
+        controller.completeTask(curriculum.getID(), readTextbook.getId());
 
+        String expectedPresenter = "The task Read Textbook from CSC207 was successfully completed.";
+        String actualPresenter = presenter.taskCompleted(model);
+
+        assertEquals(expectedPresenter, actualPresenter);
+        assertEquals(readTextbook.getCompletion(), 100);
+        assertTrue(readTextbook.isComplete());
+        assertEquals(curriculum.getGoal().getTask().getCompletion(), 50);
+        assertEquals(attendClass.getCompletion(), 0);
+    }
+
+    @Test
+    public void testCompleteTask2(){
+        InMemoryUser.setActiveUser(activeUser);
+        CompletedTaskModel model = new CompletedTaskModel(curriculum.getName(), attendClass.getName());
+        controller.completeTask(curriculum.getID(), attendClass.getId());
+
+        String expectedPresenter = "The task Attend Class from CSC207 was successfully completed.";
+        String actualPresenter = presenter.taskCompleted(model);
+
+        assertEquals(expectedPresenter, actualPresenter);
+        assertEquals(attendClass.getCompletion(), 100);
+        assertEquals(curriculum.getGoal().getTask().getCompletion(), 100);
+        assertTrue(attendClass.isComplete());
     }
 }
