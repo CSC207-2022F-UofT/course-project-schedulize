@@ -32,22 +32,23 @@ public class completeTaskUseCaseTest {
         schedule = new PrebuiltScheduleFactory().create();
         activeUser = new CommonUserFactory().create
                 ("username", "email@email.com", "password");
-        readTextbook = new CommonTaskFactory().create("Read Textbook", "Read chapter 1 of Clean Architecture");
-        attendClass = new CommonTaskFactory().create("Attend Lecture", "Tuesday 6-8pm at Bahen Centre");
+        //readTextbook = new CommonTaskFactory().create("Read Textbook", "Read chapter 1 of Clean Architecture");
+        //attendClass = new CommonTaskFactory().create("Attend Lecture", "Tuesday 6-8pm at Bahen Centre");
 
         activeUser.setSchedule(schedule);
         schedule.addCurriculum(curriculum);
 
-        TaskTree readTextbookTT = new CommonTaskTreeFactory().createWithTask(readTextbook.getName(), readTextbook.getDescription());
-        TaskTree attendClassTT = new CommonTaskTreeFactory().createWithTask(attendClass.getName(), attendClass.getDescription());
+        TaskTree readTextbookTT = new CommonTaskTreeFactory().createWithTask("Read Textbook", "Read chapter 1 of Clean Architecture");
+        readTextbook = readTextbookTT.getTask();
+        TaskTree attendClassTT = new CommonTaskTreeFactory().createWithTask("Attend Lecture", "Tuesday 6-8pm at Bahen Centre");
+        attendClass = attendClassTT.getTask();
         curriculum.getGoal().addSubTaskTree(readTextbookTT);
         curriculum.getGoal().addSubTaskTree(attendClassTT);
 
-        // CompleteTaskInputBoundary userInput = ;
+        presenter = new CompleteTaskPresenter();
         interactor = new CompleteTaskUseCase(presenter);
         controller = new CompleteTaskController(interactor);
 
-        presenter = new CompleteTaskPresenter();
     }
 
     /**
@@ -84,7 +85,7 @@ public class completeTaskUseCaseTest {
         CompletedTaskModel model = new CompletedTaskModel(curriculum.getName(), attendClass.getName());
         controller.completeTask(curriculum.getID(), attendClass.getId());
 
-        String expectedPresenter = "The task Attend Class from CSC207 was successfully completed.";
+        String expectedPresenter = "The task Attend Lecture from CSC207 was successfully completed.";
         String actualPresenter = presenter.taskCompleted(model);
 
         assertEquals(expectedPresenter, actualPresenter);
