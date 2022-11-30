@@ -1,5 +1,7 @@
 package use_cases.display_task_tree;
 
+import java.util.List;
+
 /**
  * A model for the DisplayTaskTree interactor to pass through to the Presenter
  * Created: 11/27/2022
@@ -8,5 +10,9 @@ package use_cases.display_task_tree;
  * @author Aayush Bhan
  */
 public class TaskTreeDisplayModel {
+
+    private final List<TaskTreeDisplayModel> subTrees;
+    private final TaskDisplayModel taskModel;
+
 
 }
