@@ -8,6 +8,13 @@ package use_cases.display_task_tree;
  * @author Aayush Bhan
  */
 public class DisplayTaskTreeInteractor implements DisplayTaskTreeInputBoundary {
+
+    private final DisplayTaskTreeOutputBoundary displayTaskTreeOutputBoundary;
+
+    public DisplayTaskTreeInteractor(DisplayTaskTreeOutputBoundary displayTaskTreeOutputBoundary) {
+            this.displayTaskTreeOutputBoundary = displayTaskTreeOutputBoundary;
+    }
+
     /**
      * Executes the use case for creating a new Curriculum
      *
@@ -15,7 +22,7 @@ public class DisplayTaskTreeInteractor implements DisplayTaskTreeInputBoundary {
      */
     @Override
     public void displayTree(int curriculumID) {
-
+        //this.displayTaskTreeOutputBoundary.displayTree(curriculumID);
     }
 
 
