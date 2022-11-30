@@ -13,5 +13,5 @@ import java.time.LocalDateTime;
  */
 
 public interface DisplayAvailabilityTimeBlockInputBoundary {
-    DisplayAvailabilityTimeBlockModel displayAvailabilityTimeBlock();
+    void displayAvailabilityTimeBlock();
 }

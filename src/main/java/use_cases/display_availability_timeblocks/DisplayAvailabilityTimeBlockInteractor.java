@@ -13,11 +13,13 @@ public class DisplayAvailabilityTimeBlockInteractor implements DisplayAvailabili
     }
 
     @Override
-    public DisplayAvailabilityTimeBlockModel displayAvailabilityTimeBlock() {
+    public void displayAvailabilityTimeBlock() {
         Schedule schedule = InMemoryUser.getActiveUser().getSchedule();
         TimeBlockManager timeBlockManager = schedule.getAvailability();
-//        for (TimeBlock timeBlock: TimeBlockManager){
-        return null;
+        for (TimeBlock timeBlock: timeBlockManager){
+
+
+        }
 
         }
     }
