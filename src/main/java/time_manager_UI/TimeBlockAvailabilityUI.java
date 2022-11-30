@@ -4,9 +4,12 @@ import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumnModel;
 import UI.CentralWindow;
+import UI.WindowManager;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.InputMethodEvent;
+import java.awt.event.InputMethodListener;
 
 
 /**
@@ -21,9 +24,14 @@ public class TimeBlockAvailabilityUI extends CentralWindow {
     private JTable showTable;
     private JButton backbutton;
     private JButton changeAvailabilityButton;
+    private final WindowManager appWindows;
 
-    public TimeBlockAvailabilityUI() {
+
+
+    public TimeBlockAvailabilityUI(WindowManager existingWindows) {
         super();
+        this.appWindows = existingWindows;
+        this.appWindows.addWindow(WindowManager.AVAILABILITY_REFERENCE_KEY, this);
         this.setTitle("User Availability");
         this.setContentPane(this.mainPanel);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -35,15 +43,30 @@ public class TimeBlockAvailabilityUI extends CentralWindow {
         backbutton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                appWindows.closeWindow(WindowManager.AVAILABILITY_REFERENCE_KEY);
+
             }
         });
 
         changeAvailabilityButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                appWindows.closeWindow(WindowManager.AVAILABILITY_REFERENCE_KEY);
+                appWindows.openWindow(WindowManager.AVAILABILITY_REFERENCE_KEY);
+            }
+        });
+        showTable.addInputMethodListener(new InputMethodListener() {
+            @Override
+            public void inputMethodTextChanged(InputMethodEvent event) {
+
+            }
+            @Override
+            public void caretPositionChanged(InputMethodEvent event){
+
             }
         });
     }
+
 
     private void createTable(){
         Object[][] contents = {
@@ -62,13 +85,6 @@ public class TimeBlockAvailabilityUI extends CentralWindow {
         centerRenderer.setHorizontalAlignment(JLabel.CENTER);
         columns.getColumn(0).setCellRenderer(centerRenderer);
         columns.getColumn(1).setCellRenderer(centerRenderer);
-    }
 
-
-
-// TODO Delete for Deployement
-    public static void main(String[] args) {
-        JFrame ui = new TimeBlockAvailabilityUI();
-        ui.setVisible(true);
     }
 }
