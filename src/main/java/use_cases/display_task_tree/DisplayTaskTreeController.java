@@ -8,13 +8,18 @@ package use_cases.display_task_tree;
  */
 public class DisplayTaskTreeController {
 
+        private final DisplayTaskTreeInputBoundary displayTaskTreeInputBoundary;
+
+        public DisplayTaskTreeController(DisplayTaskTreeInputBoundary displayTaskTreeInputBoundary) {
+                this.displayTaskTreeInputBoundary= displayTaskTreeInputBoundary;
+        }
 
         /**
          * The controller method for displaying a tasktree belonging to the active user
          *
          * @param curriculumID the id of the Curriculum
          */
-        public void displayTree(int curriculumID){
-
+        public void displayTree(int curriculumID) {
+                this.displayTaskTreeInputBoundary.displayTree(curriculumID);
         }
 }
