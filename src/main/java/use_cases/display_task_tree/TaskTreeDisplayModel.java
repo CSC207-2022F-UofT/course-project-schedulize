@@ -1,5 +1,7 @@
 package use_cases.display_task_tree;
 
+
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -11,8 +13,18 @@ import java.util.List;
  */
 public class TaskTreeDisplayModel {
 
-    private final List<TaskTreeDisplayModel> subTrees;
+    private final List<TaskTreeDisplayModel> subtrees = new ArrayList<>();
     private final TaskDisplayModel taskModel;
 
+    public TaskTreeDisplayModel(TaskDisplayModel taskModel, List<TaskTreeDisplayModel> subtrees){
+        this.taskModel = taskModel;
+        this.subtrees.addAll(subtrees);
+    }
+    public List<TaskTreeDisplayModel> getSubtrees() {
+        return this.subtrees;
+    }
 
+    public TaskDisplayModel getTaskModel() {
+        return this.taskModel;
+    }
 }
