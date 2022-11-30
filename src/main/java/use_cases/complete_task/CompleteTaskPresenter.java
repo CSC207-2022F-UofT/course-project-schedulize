@@ -1,4 +1,4 @@
-package complete_task;
+package use_cases.complete_task;
 
 /**
  * Presenter for the UI that confirms that the task was completed.
@@ -8,10 +8,10 @@ package complete_task;
  *
  * @author Bmguiler
  */
-public class completeTaskPresenter implements completeTaskOutputBoundary{
+public class CompleteTaskPresenter implements CompleteTaskOutputBoundary {
 
     /**
-     * Confirm that the task was completed.
+     * Display a message that the task was completed.
      *
      * @param taskCompleted model containing completed task information.
      * @return a message confirming the task was completed.

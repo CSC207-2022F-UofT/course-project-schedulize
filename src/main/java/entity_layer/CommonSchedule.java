@@ -1,13 +1,43 @@
 package entity_layer;
 
+import java.util.List;
+
 /**
  * A CommonSchedule class, implements the Schedule interface.
  * Created: 10/31/2022
- * Last updated: 11/4/2022
+ * Last updated: 11/26/2022
  *
  * @author MMachadoUofT
  */
 public class CommonSchedule implements Schedule {
+
+    /* ********** *\
+    *  Attributes  *
+    \* ********** */
+    List<Curriculum> curriculums;
+    TimeBlockManager availability;
+
+    /* ************ *\
+    *  Constructors  *
+    \* ************ */
+    public CommonSchedule(List<Curriculum> curriculums, TimeBlockManager availability) {
+        this.curriculums = curriculums;
+        this.availability = availability;
+    }
+
+    /* ************* *\
+    *  Functionality  *
+    \* ************* */
+    /**
+     * Add the passed curriculum into this CommonSchedule's list of curriculum.
+     *
+     * @param curriculum the curriculum to be added
+     */
+    @Override
+    public void addCurriculum(Curriculum curriculum) {
+        this.curriculums.add(curriculum);
+    }
+
     /**
      * Adds the passed TimeBlock to the availability.
      * If the given TimeBlock is contained within an existing availability entirely, nothing occurs.
@@ -18,7 +48,7 @@ public class CommonSchedule implements Schedule {
      */
     @Override
     public void addAvailabilityBlock(TimeBlock availableBlock) {
-
+        this.availability.addTimeBlock(availableBlock);
     }
 
     /**
@@ -33,7 +63,7 @@ public class CommonSchedule implements Schedule {
      */
     @Override
     public void removeAvailabilityBlock(TimeBlock unavailableBlock) {
-
+        this.availability.removeTimeBlock(unavailableBlock);
     }
 
     /**
@@ -44,6 +74,10 @@ public class CommonSchedule implements Schedule {
      */
     @Override
     public Curriculum getCurriculum(int curriculumID) {
+        for (Curriculum curriculum : this.curriculums) {
+            if (curriculum.getID() == curriculumID)
+                return curriculum;
+        }
         return null;
     }
 
@@ -54,6 +88,6 @@ public class CommonSchedule implements Schedule {
      */
     @Override
     public TimeBlockManager getAvailability() {
-        return null;
+        return this.availability;
     }
 }

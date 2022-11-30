@@ -2,6 +2,8 @@ package entity_factories;
 
 import entity_layer.Task;
 
+import java.io.Serializable;
+
 /**
  * An interface for creating Tasks, implemented by the CommonTaskFactory class
  * Created: 11/11/2022
@@ -9,7 +11,7 @@ import entity_layer.Task;
  *
  * @author MMachadoUofT
  */
-public interface TaskFactory {
+public interface TaskFactory extends Serializable {
 
     /**
      * Create a Task object with the given name and description

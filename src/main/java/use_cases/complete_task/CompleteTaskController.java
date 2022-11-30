@@ -1,4 +1,4 @@
-package complete_task;
+package use_cases.complete_task;
 
 /**
  * Controller for the completeTask use case; receives user input
@@ -9,10 +9,10 @@ package complete_task;
  *
  * @author Bmguiler
  */
-public class completeTaskController {
-    private completeTaskInputBoundary userInput;
+public class CompleteTaskController {
+    private CompleteTaskInputBoundary userInput;
 
-    public completeTaskController(completeTaskInputBoundary userInput){
+    public CompleteTaskController(CompleteTaskInputBoundary userInput){
         this.userInput = userInput;
     }
 
