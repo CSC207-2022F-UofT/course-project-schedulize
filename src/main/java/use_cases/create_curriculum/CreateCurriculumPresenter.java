@@ -1,5 +1,7 @@
 package use_cases.create_curriculum;
 
+import java.util.List;
+
 /**
  * A presenter for providing output data to the view via an interface.
  * Created: 11/27/2022
@@ -9,14 +11,11 @@ package use_cases.create_curriculum;
  */
 public class CreateCurriculumPresenter implements CreateCurriculumOutputBoundary {
 
-    // private final DashboardUiInterface dashboard;
+    private final List<DashboardUiInterface> dashboardObservers;
 
-    /*
-    public CreateCurriculumPresenter(DashboardUiInterface dashboard) {
-        this.dashboard = dashboard;
+    public CreateCurriculumPresenter(List<DashboardUiInterface> dashboardObservers) {
+        this.dashboardObservers = dashboardObservers;
     }
-    TODO: Connect this presenter to the dashboard
-     */
 
     /**
      * Prepares the created curriculum for presentation
@@ -27,7 +26,6 @@ public class CreateCurriculumPresenter implements CreateCurriculumOutputBoundary
     public void displayCurriculum(CurriculumModel curriculumModel) {
         String successfullyCreatedCurriculumMsg = String.format("The %s curriculum (i.d. %d) was successfully created",
                 curriculumModel.getCurriculumName(), curriculumModel.getCurriculumID());
-        // this.dashboard.displayCurriculum(successfullyCreatedCurriculumMsg);
-        // TODO: Connect this to the dashboard
+        this.dashboardObservers.get(0).createdCurriculum(successfullyCreatedCurriculumMsg);
     }
 }
