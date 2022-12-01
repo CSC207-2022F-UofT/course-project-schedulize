@@ -1,10 +1,9 @@
 package entity_layer;
 
-import org.junit.jupiter.api.*;
-
 import java.util.ArrayList;
 import java.util.List;
 
+import org.junit.jupiter.api.*;
 import static org.junit.jupiter.api.Assertions.*;
 
 /**
@@ -428,4 +427,35 @@ public class CommonTaskTreeTests {
         assertEquals(0, sub11.getTask().getCompletion());
     }
 
+    @Test
+    public void testGetSubTaskTrees() {
+        // Create TaskTrees
+        TaskTree root = new CommonTaskTree();
+        TaskTree sub1 = new CommonTaskTree();
+        TaskTree sub2 = new CommonTaskTree();
+        TaskTree sub11 = new CommonTaskTree();
+        TaskTree sub12 = new CommonTaskTree();
+        TaskTree sub21 = new CommonTaskTree();
+        TaskTree sub22 = new CommonTaskTree();
+
+        // Connect TaskTrees
+        root.addSubTaskTree(sub1);
+        root.addSubTaskTree(sub2);
+        sub1.addSubTaskTree(sub11);
+        sub1.addSubTaskTree(sub12);
+        sub2.addSubTaskTree(sub21);
+        sub2.addSubTaskTree(sub22);
+
+        // Populate
+        populateTree(root);
+
+        // Compare and contrast baby
+        List<TaskTree> expected = new ArrayList<>();
+        expected.add(sub1);
+        expected.add(sub2);
+        List<TaskTree> actual = root.getSubTaskTrees();
+
+        assertEquals(expected, actual);
+
+    }
 }

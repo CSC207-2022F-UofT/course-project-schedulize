@@ -1,4 +1,4 @@
-package complete_task;
+package use_cases.complete_task;
 
 /**
  * An output boundary interface that is implemented by the completeTaskPresenter class.
@@ -8,6 +8,6 @@ package complete_task;
  *
  * @author Bmguiler
  */
-public interface completeTaskOutputBoundary {
+public interface CompleteTaskOutputBoundary {
     String taskCompleted(CompletedTaskModel completedTask);
 }
