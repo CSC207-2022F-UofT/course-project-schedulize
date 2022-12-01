@@ -1,6 +1,6 @@
 package use_cases.display_task_tree;
 /**
- * A presenter for providing output data to the view through an interface.
+ * A presenter for providing output data to the view through the TaskTree UI interface.
  * Created: 11/27/2022
  * Last updated: 12/01/2022
  *
