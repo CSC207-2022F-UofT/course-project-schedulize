@@ -6,4 +6,8 @@ public class DisplayCurriculumsController {
     public DisplayCurriculumsController(DisplayCurriculumsInputBoundary interactor) {
         this.interactor = interactor;
     }
+
+    public void openDashboard() {
+        interactor.displayCurriculums();
+    }
 }
