@@ -1,8 +1,5 @@
 package use_cases.display_availability_timeblocks;
 
-import entity_layer.TimeBlock;
-
-import java.time.LocalTime;
 import java.util.List;
 
 /**
@@ -11,9 +8,9 @@ import java.util.List;
  * Created: 11/22/2022
  * Last updated: 11/22/2022
  *
- * @author Amir Bare
+ * @author amira
  */
 
 public interface DisplayAvailabilityTimeBlockOutputBoundary {
-    LocalTime[] availabilityTimeBlockDisplayed(DisplayAvailabilityTimeBlockModel displayedAvailabilityTimeBlock);
+    List<DisplayAvailabilityTimeBlockModel> availabilityTimeBlockDisplayed(List<DisplayAvailabilityTimeBlockModel> availabilityTimeBlockModels);
 }
