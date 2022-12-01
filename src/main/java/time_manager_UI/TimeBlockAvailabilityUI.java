@@ -5,6 +5,7 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumnModel;
 import UI.CentralWindow;
 import UI.WindowManager;
+import use_cases.display_availability_timeblocks.DisplayAvailabilityTimeBlockController;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -23,14 +24,19 @@ public class TimeBlockAvailabilityUI extends CentralWindow {
     private JPanel mainPanel;
     private JTable showTable;
     private JButton backbutton;
-    private JButton changeAvailabilityButton;
+    private JButton setAvailabilityButton;
     private final WindowManager appWindows;
+    private final DisplayAvailabilityTimeBlockController controller;
 
+    /**
+     * Default constructor for the view availability window
+     */
 
-
-    public TimeBlockAvailabilityUI(WindowManager existingWindows) {
+    public TimeBlockAvailabilityUI(WindowManager existingWindows, DisplayAvailabilityTimeBlockController controller) {
         super();
+        // store reference to existing windows in program
         this.appWindows = existingWindows;
+        this.controller = controller;
         this.appWindows.addWindow(WindowManager.AVAILABILITY_REFERENCE_KEY, this);
         this.setTitle("User Availability");
         this.setContentPane(this.mainPanel);
@@ -40,21 +46,24 @@ public class TimeBlockAvailabilityUI extends CentralWindow {
         showTable.setEnabled(false);
         createTable();
 
+        /**
+         * Action Listeners for back button and set availability button clicked
+         */
         backbutton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 appWindows.closeWindow(WindowManager.AVAILABILITY_REFERENCE_KEY);
-
             }
         });
 
-        changeAvailabilityButton.addActionListener(new ActionListener() {
+        setAvailabilityButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 appWindows.closeWindow(WindowManager.AVAILABILITY_REFERENCE_KEY);
                 appWindows.openWindow(WindowManager.AVAILABILITY_REFERENCE_KEY);
             }
         });
+
         showTable.addInputMethodListener(new InputMethodListener() {
             @Override
             public void inputMethodTextChanged(InputMethodEvent event) {
@@ -62,12 +71,13 @@ public class TimeBlockAvailabilityUI extends CentralWindow {
             }
             @Override
             public void caretPositionChanged(InputMethodEvent event){
-
             }
         });
     }
 
-
+    /**
+     * Table of two columns; day of the week and times.
+     */
     private void createTable(){
         Object[][] contents = {
                 {"Monday"," From       to   "},
@@ -85,6 +95,6 @@ public class TimeBlockAvailabilityUI extends CentralWindow {
         centerRenderer.setHorizontalAlignment(JLabel.CENTER);
         columns.getColumn(0).setCellRenderer(centerRenderer);
         columns.getColumn(1).setCellRenderer(centerRenderer);
-
     }
+
 }
