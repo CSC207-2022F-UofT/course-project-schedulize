@@ -77,7 +77,7 @@ public class AddTaskUseCaseTest {
         controller.addTask("Write Tests",
                 "Write tests for use cases", parentId, curriculumId);
 
-        String expectedPresenter = "New task with name: Write Tests  and description: " +
+        String expectedPresenter = "New task with name: Write Tests and description: " +
                 "Write tests for use cases was successfully added to the curriculum: CSC207" +
                 " as a subtask of: Finish Coding.";
         String actualPresenter = presenter.taskAdded(model);
