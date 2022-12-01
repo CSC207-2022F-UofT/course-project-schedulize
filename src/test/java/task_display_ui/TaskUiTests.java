@@ -48,7 +48,14 @@ public class TaskUiTests {
 
     @Test
     public void testInteractor(){
-        //interactor.displayTask(curriculum.getID(), attendClass.getId());
+        TaskUiOutputBoundary presenter = new TaskUiTestPresenter();
+        TaskUiInputBoundary interactor = new TaskUiInteractor(presenter);
+        interactor.displayTask(curriculum.getID(), attendClass.getId());
+        TaskUiModel taskUiModel = ((TaskUiTestPresenter) presenter).getTaskUiModel();
+        assertEquals(attendClass.getId(), taskUiModel.getTaskID());
+        assertEquals(curriculum.getID(), taskUiModel.getCurriculumID());
+        assertEquals(attendClass.getName(), taskUiModel.getName());
+        assertEquals(attendClass.getCompletion(), taskUiModel.getCompletion());
     }
 
     @Test
@@ -56,5 +63,6 @@ public class TaskUiTests {
         TaskUiInputBoundary interactor = new TaskUiTestInteractor();
         TaskUiController controller = new TaskUiController(interactor);
         controller.callInteractor(curriculum.getID(), attendClass.getId());
+        assertEquals(curriculum.getID(), ((TaskUiTestInteractor) interactor).getCurriculumID());
     }
 }
