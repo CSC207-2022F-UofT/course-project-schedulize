@@ -22,4 +22,10 @@ public class CompleteTaskPresenter implements CompleteTaskOutputBoundary {
                 taskCompleted.getCurriculumName() + " was successfully completed.";
     }
 
+    @Override
+    public String taskUncompleted(CompletedTaskModel taskUncompleted){
+        return "The task " + taskUncompleted.getTaskName() + " from " +
+                taskUncompleted.getCurriculumName() + " was successfully uncompleted.";
+    }
+
 }
