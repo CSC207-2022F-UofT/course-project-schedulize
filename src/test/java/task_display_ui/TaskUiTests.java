@@ -7,20 +7,15 @@ import entity_factories.PrebuiltScheduleFactory;
 import entity_layer.*;
 import org.junit.jupiter.api.*;
 import static org.junit.jupiter.api.Assertions.*;
-import use_cases.complete_task.*;
+
 
 public class TaskUiTests {
 
-    // static TaskUiController controller;
-    // static TaskUiInputBoundary interactor;
-    // static TaskUiOutputBoundary presenter;
     static User activeUser;
     static Schedule schedule;
     static Curriculum curriculum;
-    // static Task readTextbook;
     static Task attendClass;
 
-    // static TaskUiModel taskUiModel;
 
     @BeforeAll
     public static void setup(){
@@ -37,18 +32,16 @@ public class TaskUiTests {
         attendClass = attendClassTT.getTask();
         curriculum.getGoal().addSubTaskTree(attendClassTT);
 
-        // taskUiModel = new TaskUiModel(attendClass.getName(), attendClass.getDescription(), attendClass.getCompletion(),
-        //         curriculum.getID(), attendClass.getId());
         InMemoryUser.setActiveUser(activeUser);
     }
 
     @Test
     public void testPresenter(){
-        TaskUiViewInterface testView = new TaskUiTestView();
+        TaskUiTestView testView = new TaskUiTestView();
         TaskUiOutputBoundary presenter = new TaskUiModelPresenter(testView);
         TaskUiInputBoundary interactor = new TaskUiInteractor(presenter);
         interactor.displayTask(curriculum.getID(), attendClass.getId());
-        TaskUiModel taskUiModel = ((TaskUiTestView) testView).getTaskUiModel();
+        TaskUiModel taskUiModel = testView.getTaskUiModel();
         assertEquals(attendClass.getId(), taskUiModel.getTaskID());
         assertEquals(curriculum.getID(), taskUiModel.getCurriculumID());
         assertEquals(attendClass.getName(), taskUiModel.getName());
@@ -57,10 +50,10 @@ public class TaskUiTests {
 
     @Test
     public void testInteractor(){
-        TaskUiOutputBoundary presenter = new TaskUiTestPresenter();
+        TaskUiTestPresenter presenter = new TaskUiTestPresenter();
         TaskUiInputBoundary interactor = new TaskUiInteractor(presenter);
         interactor.displayTask(curriculum.getID(), attendClass.getId());
-        TaskUiModel taskUiModel = ((TaskUiTestPresenter) presenter).getTaskUiModel();
+        TaskUiModel taskUiModel = presenter.getTaskUiModel();
         assertEquals(attendClass.getId(), taskUiModel.getTaskID());
         assertEquals(curriculum.getID(), taskUiModel.getCurriculumID());
         assertEquals(attendClass.getName(), taskUiModel.getName());
@@ -69,9 +62,9 @@ public class TaskUiTests {
 
     @Test
     public void testController(){
-        TaskUiInputBoundary interactor = new TaskUiTestInteractor();
+        TaskUiTestInteractor interactor = new TaskUiTestInteractor();
         TaskUiController controller = new TaskUiController(interactor);
         controller.callInteractor(curriculum.getID(), attendClass.getId());
-        assertEquals(curriculum.getID(), ((TaskUiTestInteractor) interactor).getCurriculumID());
+        assertEquals(curriculum.getID(), interactor.getCurriculumID());
     }
 }
