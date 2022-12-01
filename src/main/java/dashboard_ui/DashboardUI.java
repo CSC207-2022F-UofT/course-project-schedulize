@@ -1,4 +1,4 @@
-package dashboardUI;
+package dashboard_ui;
 
 import entity_factories.CurriculumFactory;
 
