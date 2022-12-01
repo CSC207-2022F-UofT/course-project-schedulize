@@ -39,6 +39,7 @@ public class TaskUiTests {
 
         // taskUiModel = new TaskUiModel(attendClass.getName(), attendClass.getDescription(), attendClass.getCompletion(),
         //         curriculum.getID(), attendClass.getId());
+        InMemoryUser.setActiveUser(activeUser);
     }
 
     @Test
