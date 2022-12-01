@@ -53,6 +53,7 @@ public class DashboardUI extends CentralWindow implements DisplayCurriculumsInte
 
     private void setListeners() {
         this.newCurriculumListener();
+        this.loadCurriculumListener();
     }
 
     public void newCurriculumListener() {
