@@ -9,13 +9,28 @@ package use_cases.create_curriculum;
  */
 public class CreateCurriculumController {
 
+    /* ********** *\
+    *  Attributes  *
+    \* ********** */
+    private final CreateCurriculumInputBoundary inputBoundary;
+
+    /* ************ *\
+    *  Constructors  *
+    \* ************ */
+    public CreateCurriculumController(CreateCurriculumInputBoundary inputBoundary) {
+        this.inputBoundary = inputBoundary;
+    }
+
+    /* ************* *\
+    *  Functionality  *
+    \* ************* */
     /**
      * The controller method for creating a new curriculum belonging to the active user
      *
      * @param curriculumName the new Curriculum's name
      */
     public void createCurriculum(String curriculumName) {
-
+        inputBoundary.createCurriculum(curriculumName);
     }
 
 }
