@@ -7,7 +7,14 @@ import entity_layer.*;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-
+/**
+ * Class for testing the Add Task Use Case.
+ *
+ * date created: 12/1/2022
+ * last updated: 12/1/2022
+ *
+ * @author Bmguiler
+ */
 public class AddTaskUseCaseTest {
 
     static AddTaskController controller;
@@ -18,6 +25,11 @@ public class AddTaskUseCaseTest {
     static Curriculum curriculum;
 
 
+    /**
+     * Set up a new user with a schedule that has a curriculum named "CSC207" and
+     * create instances of the AddTask controller, interactor and presenter
+     * to use for the following tests.
+     */
     @BeforeAll
     public static void setup(){
         curriculum = new PrebuiltCurriculumFactory().create("CSC207");
@@ -34,6 +46,9 @@ public class AddTaskUseCaseTest {
         controller = new AddTaskController(interactor);
     }
 
+    /**
+     * Test adding a new task to an empty curriculum.
+     */
     @Test
     public void testAddTaskEmptyCurriculum(){
         InMemoryUser.setActiveUser(activeUser);
@@ -56,6 +71,10 @@ public class AddTaskUseCaseTest {
         assertSame("Read Textbook", curriculum.getGoal().getSubTaskTrees().get(0).getTask().getName());
     }
 
+    /**
+     * Test adding two tasks to the curriculum; the second task being a
+     * subtask of the first task.
+     */
     @Test
     public void testAddTwoTasks1(){
         InMemoryUser.setActiveUser(activeUser);
@@ -86,6 +105,10 @@ public class AddTaskUseCaseTest {
                 getChildTaskTreeByID(parentTask2Id).getSubTaskTrees().get(0).getTask().getName());
     }
 
+    /**
+     * Test adding two tasks to the curriculum; both the first and second
+     * task being subtasks of the goal.
+     */
     @Test
     public void testAddTwoTasks2(){
         InMemoryUser.setActiveUser(activeUser);
@@ -113,6 +136,9 @@ public class AddTaskUseCaseTest {
         assertSame("Attend Lecture", curriculum.getGoal().getSubTaskTrees().get(1).getTask().getName());
     }
 
+    /**
+     * Test adding a new task to a curriculum that already has two tasks.
+     */
     @Test
     public void testAddTaskNonEmptyCurriculum(){
         InMemoryUser.setActiveUser(activeUser);
