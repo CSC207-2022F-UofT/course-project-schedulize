@@ -81,9 +81,9 @@ public class TaskUI extends CentralWindow implements TaskUiViewInterface {
     }
 
     @Override
-    public void setVisible(boolean visibilty) {
-        super.setVisible(visibilty);
-
+    public void setVisible(boolean visible) {
+        super.setVisible(visible);
+        this.completeCheck.setSelected(false);
         // recenter the window
         this.centreWindow();
     }
