@@ -24,7 +24,7 @@ public class TaskUI extends CentralWindow implements TaskUiViewInterface {
     private final CompleteTaskController controller;
     private TaskUiModel taskUiModel;
 
-    public TaskUI(CompleteTaskController controller){
+    public TaskUI(CompleteTaskController controller) {
         super();
         // configure default frame attributes
         this.configureFrame();

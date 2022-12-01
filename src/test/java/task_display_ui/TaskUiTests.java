@@ -5,25 +5,22 @@ import entity_factories.CommonUserFactory;
 import entity_factories.PrebuiltCurriculumFactory;
 import entity_factories.PrebuiltScheduleFactory;
 import entity_layer.*;
-import org.junit.Test;
-import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.*;
+import static org.junit.jupiter.api.Assertions.*;
 import use_cases.complete_task.*;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class TaskUiTests {
 
-    static TaskUiController controller;
-    static TaskUiInputBoundary interactor;
-    static TaskUiOutputBoundary presenter;
+    // static TaskUiController controller;
+    // static TaskUiInputBoundary interactor;
+    // static TaskUiOutputBoundary presenter;
     static User activeUser;
     static Schedule schedule;
     static Curriculum curriculum;
-    static Task readTextbook;
+    // static Task readTextbook;
     static Task attendClass;
 
-    static TaskUiModel taskUiModel;
+    // static TaskUiModel taskUiModel;
 
     @BeforeAll
     public static void setup(){
@@ -40,24 +37,24 @@ public class TaskUiTests {
         attendClass = attendClassTT.getTask();
         curriculum.getGoal().addSubTaskTree(attendClassTT);
 
-        taskUiModel = new TaskUiModel(attendClass.getName(), attendClass.getDescription(), attendClass.getCompletion(),
-                curriculum.getID(), attendClass.getId());
+        // taskUiModel = new TaskUiModel(attendClass.getName(), attendClass.getDescription(), attendClass.getCompletion(),
+        //         curriculum.getID(), attendClass.getId());
     }
 
     @Test
     public void testPresenter(){
-        presenter.getTaskInfo(taskUiModel);
+        //presenter.getTaskInfo(taskUiModel);
     }
 
     @Test
     public void testInteractor(){
-        interactor.displayTask(curriculum.getID(), attendClass.getId());
+        //interactor.displayTask(curriculum.getID(), attendClass.getId());
     }
 
     @Test
     public void testController(){
+        TaskUiInputBoundary interactor = new TaskUiTestInteractor();
+        TaskUiController controller = new TaskUiController(interactor);
         controller.callInteractor(curriculum.getID(), attendClass.getId());
     }
-
-
 }
