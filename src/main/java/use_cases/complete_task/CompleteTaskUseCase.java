@@ -24,7 +24,7 @@ public class CompleteTaskUseCase implements CompleteTaskInputBoundary {
      *                         that the task belongs to.
      */
     @Override
-    public void completeTask(int taskId, int taskCurriculumId){
+    public void completeTask(int taskCurriculumId, int taskId){
         Schedule schedule = InMemoryUser.getActiveUser().getSchedule();
         Curriculum taskCurriculum = schedule.getCurriculum(taskCurriculumId);
         TaskTree taskTree = taskCurriculum.getTaskTreeByID(taskId);
