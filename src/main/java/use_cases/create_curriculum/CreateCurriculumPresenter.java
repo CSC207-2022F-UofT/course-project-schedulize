@@ -9,6 +9,15 @@ package use_cases.create_curriculum;
  */
 public class CreateCurriculumPresenter implements CreateCurriculumOutputBoundary {
 
+    // private final DashboardUiInterface dashboard;
+
+    /*
+    public CreateCurriculumPresenter(DashboardUiInterface dashboard) {
+        this.dashboard = dashboard;
+    }
+    TODO: Connect this presenter to the dashboard
+     */
+
     /**
      * Prepares the created curriculum for presentation
      *
@@ -16,6 +25,9 @@ public class CreateCurriculumPresenter implements CreateCurriculumOutputBoundary
      */
     @Override
     public void displayCurriculum(CurriculumModel curriculumModel) {
-
+        String successfullyCreatedCurriculumMsg = String.format("The %s curriculum (i.d. %d) was successfully created",
+                curriculumModel.getCurriculumName(), curriculumModel.getCurriculumID());
+        // this.dashboard.displayCurriculum(successfullyCreatedCurriculumMsg);
+        // TODO: Connect this to the dashboard
     }
 }
