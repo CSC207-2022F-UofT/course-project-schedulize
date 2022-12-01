@@ -11,8 +11,8 @@ public interface DisplayTaskTreeOutputBoundary {
     /**
      * Prepares the displayed TaskTree for presentation
      *
-     * @param tasktreedisplayModel the id of Curriculum's model
+     * @param curriculumDisplayModel the id of Curriculum's model
      */
-    void displayTree(TaskTreeDisplayModel tasktreedisplayModel);
+    void displayTree(CurriculumDisplayModel curriculumDisplayModel);
 
 }
