@@ -26,17 +26,15 @@ public class TimeBlockAvailabilityUI extends CentralWindow {
     private JButton backbutton;
     private JButton setAvailabilityButton;
     private final WindowManager appWindows;
-    private final DisplayAvailabilityTimeBlockController controller;
 
     /**
      * Default constructor for the view availability window
      */
 
-    public TimeBlockAvailabilityUI(WindowManager existingWindows, DisplayAvailabilityTimeBlockController controller) {
+    public TimeBlockAvailabilityUI(WindowManager existingWindows) {
         super();
         // store reference to existing windows in program
         this.appWindows = existingWindows;
-        this.controller = controller;
         this.appWindows.addWindow(WindowManager.AVAILABILITY_REFERENCE_KEY, this);
         this.setTitle("User Availability");
         this.setContentPane(this.mainPanel);
