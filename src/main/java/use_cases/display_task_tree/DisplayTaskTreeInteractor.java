@@ -1,5 +1,6 @@
 package use_cases.display_task_tree;
 
+import entity_layer.Curriculum;
 import entity_layer.InMemoryUser;
 import entity_layer.Task;
 import entity_layer.TaskTree;
@@ -10,7 +11,7 @@ import java.util.List;
 /**
  * A use case interactor for displaying TaskTree
  * Created: 11/27/2022
- * Last updated: 11/29/2022
+ * Last updated: 12/01/2022
  *
  * @author Aayush Bhan
  */
@@ -29,9 +30,10 @@ public class DisplayTaskTreeInteractor implements DisplayTaskTreeInputBoundary {
      */
     @Override
     public void displayTree(int curriculumID) {
-        TaskTree goal = InMemoryUser.getActiveUser().getSchedule().getCurriculum(curriculumID).getGoal();
-        TaskTreeDisplayModel goalModel = createTaskTreeModel(goal);
-        displayTaskTreeOutputBoundary.displayTree(goalModel);
+        Curriculum curriculum = InMemoryUser.getActiveUser().getSchedule().getCurriculum(curriculumID);
+        TaskTreeDisplayModel goalModel = createTaskTreeModel(curriculum.getGoal());
+        CurriculumDisplayModel curriculumDisplayModel = new CurriculumDisplayModel(curriculum.getID(), goalModel);
+        displayTaskTreeOutputBoundary.displayTree(curriculumDisplayModel);
     }
 
     /**
