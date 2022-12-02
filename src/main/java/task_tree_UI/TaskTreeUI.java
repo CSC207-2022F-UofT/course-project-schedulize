@@ -18,7 +18,7 @@ import java.awt.event.MouseEvent;
 /**
  * A TaskTree UI class, that implements the JFrame interface by making a list of tasks displayed by a tree.
  * Created: 11/15/2022
- * Last updated: 11/26/2022
+ * Last updated: 12/01/2022
  *
  * @author Aayush Bhan
  */
@@ -38,6 +38,7 @@ public class TaskTreeUI extends CentralWindow implements CurriculumDependentWind
      */
     public TaskTreeUI(WindowManager windowManager, DisplayTaskTreeController displayController) {
         this.programWindows = windowManager;
+        this.programWindows.addWindow(WindowManager.TASKTREE_REFERENCE_KEY, this);
         this.displayController = displayController;
         JPanel p = new JPanel(new BorderLayout());
         this.mainPanel = p;
