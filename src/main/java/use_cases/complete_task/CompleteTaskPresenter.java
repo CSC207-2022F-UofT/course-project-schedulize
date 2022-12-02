@@ -1,5 +1,7 @@
 package use_cases.complete_task;
 
+import java.util.List;
+
 /**
  * Presenter for the UI that confirms that the task was completed.
  *
@@ -10,6 +12,12 @@ package use_cases.complete_task;
  */
 public class CompleteTaskPresenter implements CompleteTaskOutputBoundary {
 
+    private final List<CompleteTaskUiInterface> taskUI;
+
+    public CompleteTaskPresenter(List<CompleteTaskUiInterface> taskUI){
+        this.taskUI = taskUI;
+    }
+
     /**
      * Display a message that the task was completed.
      *
@@ -18,8 +26,8 @@ public class CompleteTaskPresenter implements CompleteTaskOutputBoundary {
      */
     @Override
     public String taskCompleted(CompletedTaskModel taskCompleted) {
-        return "The task " + taskCompleted.getTaskName() + " from " +
-                taskCompleted.getCurriculumName() + " was successfully completed.";
+        this.taskUI.get(0).updateView("The task " + taskCompleted.getTaskName() + " from " +
+                taskCompleted.getCurriculumName() + " was successfully completed.");
     }
 
 }
