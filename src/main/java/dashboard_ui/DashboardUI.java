@@ -13,6 +13,13 @@ import java.util.List;
 import java.util.Map;
 import java.util.Vector;
 
+/**
+ * A class that contains the GUI for the dashboard menu
+ * Created: 11/28/2022
+ * Last updated: 12/01/2022
+ *
+ * @author Oswin Gan
+ */
 public class DashboardUI extends CentralWindow implements DisplayCurriculumsInterface {
     private JTextField curriculumName;
     private JList<String> curriculumList;
@@ -25,6 +32,12 @@ public class DashboardUI extends CentralWindow implements DisplayCurriculumsInte
     private final DisplayCurriculumsController displayerController;
     private final CreateCurriculumController createCurriculumController;
 
+    /**
+     * Default constructor for dashboard UI window
+     * @param existingWindows
+     * @param displayerController
+     * @param createCurriculumController
+     */
     public DashboardUI(WindowManager existingWindows, DisplayCurriculumsController displayerController,
                        CreateCurriculumController createCurriculumController) {
         this.displayerController = displayerController;
@@ -36,6 +49,9 @@ public class DashboardUI extends CentralWindow implements DisplayCurriculumsInte
         this.setListeners();
     }
 
+    /**
+     * Sets default aspects of the JFrame window, like size and title
+     */
     private void configureFrame() {
         // set Frame title
         this.setTitle("Dashboard");
@@ -51,11 +67,18 @@ public class DashboardUI extends CentralWindow implements DisplayCurriculumsInte
         this.centreWindow();
     }
 
+    /**
+     * Connects all action listeners for this window
+     */
     private void setListeners() {
         this.newCurriculumListener();
         this.loadCurriculumListener();
     }
 
+    /**
+     * Action Listener for button clicked that creates a new curriculum using the name entered into the curriculumName
+     * text field
+     */
     public void newCurriculumListener() {
         this.createButton.addActionListener(actionEvent -> {
             createCurriculumController.createCurriculum(curriculumName.getText());
@@ -63,6 +86,9 @@ public class DashboardUI extends CentralWindow implements DisplayCurriculumsInte
         });
     }
 
+    /**
+     * Loads an existing curriculum associated with the id entered into the curriculumIdField text field
+     */
     public void loadCurriculumListener() {
         this.loadCurriculumButton.addActionListener(actionEvent -> {
             // TODO: Tie this to Aayush's TaskTreeUI
