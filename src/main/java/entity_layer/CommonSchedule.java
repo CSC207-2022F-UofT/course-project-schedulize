@@ -28,6 +28,7 @@ public class CommonSchedule implements Schedule {
     /* ************* *\
     *  Functionality  *
     \* ************* */
+
     /**
      * Add the passed curriculum into this CommonSchedule's list of curriculum.
      *
@@ -36,6 +37,16 @@ public class CommonSchedule implements Schedule {
     @Override
     public void addCurriculum(Curriculum curriculum) {
         this.curriculums.add(curriculum);
+    }
+
+    /**
+     * Returns the curriculums this Schedule holds
+     *
+     * @return all curriculums
+     */
+    @Override
+    public List<Curriculum> getCurriculums() {
+        return this.curriculums;
     }
 
     /**

@@ -48,8 +48,9 @@ public class AddTaskUseCase implements AddTaskInputBoundary{
     public void addTask(String taskName, String taskDescription, int parentId,
                         int curriculumId) {
 
-        Task newTask = this.taskFactory.create(taskName, taskDescription);
-        TaskTree newTaskTree = this.taskTreeFactory.create();
+        TaskTree newTaskTree = this.taskTreeFactory.createWithTask(taskName, taskDescription);
+        Task newTask = newTaskTree.getTask();
+        //TaskTree newTaskTree = this.taskTreeFactory.create();
         // may need to implement a new line if we want to create a new task with a duration.
 
         Schedule schedule = InMemoryUser.getActiveUser().getSchedule();
