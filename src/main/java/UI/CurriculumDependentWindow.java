@@ -1,5 +1,5 @@
 package UI;
 
 public interface CurriculumDependentWindow {
-    void setWindowID(int curriculumId);
+    void setCurriculumID(int curriculumId);
 }
