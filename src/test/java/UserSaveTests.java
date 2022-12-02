@@ -1,4 +1,3 @@
-package complete_task;
 import config.CommonCryptograph;
 import config.Cryptograph;
 import config.UserDataStoreGateway;
@@ -13,11 +12,21 @@ import use_cases.save_user.SaveUserInteractor;
 
 import java.io.IOException;
 
+/**
+ * A testing suite for the save_user use case
+ * Created: 12/01/2022
+ * Last updated: 12/01/2022
+ *
+ * @author David Adler
+ */
 public class UserSaveTests {
 
     private static SaveUserController saveController;
     private static UserDataStoreGateway storage;
 
+    /**
+     * Creates necessary objects for tests
+     */
     @BeforeAll
     public static void setUp() {
         Cryptograph cipher = new CommonCryptograph();
@@ -26,11 +35,19 @@ public class UserSaveTests {
         saveController = new SaveUserController(interactor);
     }
 
+    /**
+     * Tests that trying to save the User loaded into memory, when one has not been loaded, does not produce an
+     * exception
+     */
     @Test
     public void testNonExistingUserSave() {
         saveController.saveInMemoryUser();
     }
 
+    /**
+     * Tests saving a User that has been loaded into memory and then retrieving that User
+     * @throws IOException thrown if drivers are not correctly connected
+     */
     @Test
     public void testExistingUserSave() throws IOException {
         InMemoryUser.setActiveUser(new CommonUser("abba", "abba@band.com", "password10"));
