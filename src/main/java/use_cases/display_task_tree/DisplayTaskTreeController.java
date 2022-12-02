@@ -7,19 +7,22 @@ package use_cases.display_task_tree;
  * @author Aayush Bhan
  */
 public class DisplayTaskTreeController {
+        private final DisplayTaskTreeInputBoundary interactor;
 
-        private final DisplayTaskTreeInputBoundary displayTaskTreeInputBoundary;
+        public DisplayTaskTreeController(DisplayTaskTreeInputBoundary interactor) {
+                this.interactor = interactor;
+        }
 
-        public DisplayTaskTreeController(DisplayTaskTreeInputBoundary displayTaskTreeInputBoundary) {
-                this.displayTaskTreeInputBoundary= displayTaskTreeInputBoundary;
+        public TaskTreeDisplayModel getRoot(int curriculumID) {
+                return interactor.getRoot(curriculumID);
         }
 
         /**
          * The controller method for displaying a tasktree belonging to the active user
          *
-         * @param curriculumID the id of the Curriculum
+         * @param taskID the id of the Curriculum
          */
-        public void displayTree(int curriculumID) {
-                this.displayTaskTreeInputBoundary.displayTree(curriculumID);
+        public TaskTreeDisplayModel[] getSubtrees(int curriculumID, int taskID){
+                return interactor.getSubtrees(curriculumID, taskID);
         }
 }

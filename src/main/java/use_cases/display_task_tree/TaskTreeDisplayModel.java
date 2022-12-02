@@ -1,9 +1,5 @@
 package use_cases.display_task_tree;
 
-
-import java.util.ArrayList;
-import java.util.List;
-
 /**
  * A model for the DisplayTaskTree interactor to pass through to the Presenter
  * Created: 11/27/2022
@@ -13,18 +9,19 @@ import java.util.List;
  */
 public class TaskTreeDisplayModel {
 
-    private final List<TaskTreeDisplayModel> subtrees = new ArrayList<>();
-    private final TaskDisplayModel taskModel;
+    private final String name;
+    private final int id;
 
-    public TaskTreeDisplayModel(TaskDisplayModel taskModel, List<TaskTreeDisplayModel> subtrees){
-        this.taskModel = taskModel;
-        this.subtrees.addAll(subtrees);
-    }
-    public List<TaskTreeDisplayModel> getSubtrees() {
-        return this.subtrees;
+    public TaskTreeDisplayModel(String name, int id) {
+        this.name =name;
+        this.id = id;
     }
 
-    public TaskDisplayModel getTaskModel() {
-        return this.taskModel;
+    public String getName() {
+        return name;
+    }
+
+    public int getId() {
+        return id;
     }
 }

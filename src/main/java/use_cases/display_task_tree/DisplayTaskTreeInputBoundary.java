@@ -9,5 +9,9 @@ package use_cases.display_task_tree;
  */
 
 public interface DisplayTaskTreeInputBoundary {
-    void displayTree(int curriculumID);
+
+    TaskTreeDisplayModel getRoot(int curriculumID);
+
+    TaskTreeDisplayModel[] getSubtrees(int curriculumID, int taskID);
 }
+

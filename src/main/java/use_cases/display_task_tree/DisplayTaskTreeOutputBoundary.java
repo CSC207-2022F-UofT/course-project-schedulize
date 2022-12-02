@@ -8,11 +8,6 @@ package use_cases.display_task_tree;
  */
 public interface DisplayTaskTreeOutputBoundary {
 
-    /**
-     * Prepares the displayed TaskTree for presentation
-     *
-     * @param curriculumDisplayModel the id of Curriculum's model
-     */
-    void displayTree(CurriculumDisplayModel curriculumDisplayModel);
-
+    TaskTreeDisplayModel prepareTreeView(String name, int id);
 }
+
