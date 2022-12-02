@@ -56,6 +56,9 @@ public class TaskTreeUI extends CentralWindow implements CurriculumDependentWind
         this.setListeners();
     }
 
+    /**
+     * Configure this JFrame
+     */
     private void configureFrame() {
         // set Frame title
         this.setTitle("Schedulize");
@@ -67,11 +70,19 @@ public class TaskTreeUI extends CentralWindow implements CurriculumDependentWind
         this.setContentPane(mainPanel);
     }
 
+    /**
+     * Set up buttons
+     */
     private void setListeners() {
         this.deleteTaskListener();
         this.addTaskListener();
     }
 
+    /**
+     * Set up the TaskTree for the desired curriculum to be displayed
+     *
+     * @param displayId the ID of the curriculum meant to be displayed
+     */
     private void treeSetUp(int displayId) {
         DefaultMutableTreeNode rootNode;
         TaskTreeDisplayModel root = displayController.getRoot(this.displayId);
@@ -86,6 +97,9 @@ public class TaskTreeUI extends CentralWindow implements CurriculumDependentWind
         this.treeClickListener();
     }
 
+    /**
+     * Clear the existing TaskTree from any previously viewed curriculums
+     */
     private void resetContent() {
         JPanel p = new JPanel(new BorderLayout());
         this.mainPanel = p;
@@ -99,6 +113,12 @@ public class TaskTreeUI extends CentralWindow implements CurriculumDependentWind
         this.repaint();
     }
 
+    /**
+     * Prepare curriculum subtrees to be displayed under their respective parent tree.
+     *
+     * @param root The root tree node on the UI
+     * @param rootId The ID for the root tree node
+     */
     private void setUpSubtrees(DefaultMutableTreeNode root, int rootId) {
         for (TaskTreeDisplayModel subtree : displayController.getSubtrees(this.displayId, rootId)) {
             DefaultMutableTreeNode node = new DefaultMutableTreeNode(subtree.getName()
@@ -108,10 +128,22 @@ public class TaskTreeUI extends CentralWindow implements CurriculumDependentWind
         }
     }
 
+    /**
+     * Converts the passed id into a formatted string
+     *
+     * @param id the id to be presented
+     * @return the formatted id
+     */
     private String displayIDString(int id) {
         return this.idDisplayText + id + ")";
     }
 
+    /**
+     * Extracts the integer Task ID from the tree node's given text
+     *
+     * @param text the intended tree node's text name
+     * @return the node's id
+     */
     private int parseNodeTextForID(String text) {
         int length = this.idDisplayText.length();
         int index = text.indexOf(this.idDisplayText) + length;
@@ -119,6 +151,9 @@ public class TaskTreeUI extends CentralWindow implements CurriculumDependentWind
         return Integer.parseInt(text.substring(index, last_index));
     }
 
+    /**
+     * A button to open the TaskUI from a tree node
+     */
     private void treeClickListener() {
         this.taskTree.addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent e) {
@@ -135,6 +170,9 @@ public class TaskTreeUI extends CentralWindow implements CurriculumDependentWind
         });
     }
 
+    /**
+     * A button to add tasks
+     */
     private void addTaskListener() {
         this.addTaskButton.addActionListener(new ActionListener() {
             @Override
@@ -145,6 +183,9 @@ public class TaskTreeUI extends CentralWindow implements CurriculumDependentWind
         });
     }
 
+    /**
+     * A button to delete tasks
+     */
     private void deleteTaskListener() {
         this.deleteTaskButton.addActionListener(new ActionListener() {
             @Override
@@ -169,6 +210,11 @@ public class TaskTreeUI extends CentralWindow implements CurriculumDependentWind
         this.treeSetUp(this.displayId);
     }
 
+    /**
+     * Set the id of the Tree window to the id of the displayed curiculum
+     *
+     * @param id the desired curriculum's id
+     */
     @Override
     public void setWindowID(int id) {
         this.displayId = id;
