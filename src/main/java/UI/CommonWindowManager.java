@@ -12,7 +12,7 @@ import java.util.HashMap;
 /**
  * A class for storing references to existing windows
  * Created: 11/11/2022
- * Last updated: 11/11/2022
+ * Last updated: 12/1/2022
  *
  * @author David Adler
  */
@@ -53,6 +53,10 @@ public class CommonWindowManager implements WindowManager {
         this.existingWindows.put(key, window);
     }
 
+    /**
+     * Opens the given window
+     * @param key String reference to the requested window
+     */
     @Override
     public void openWindow(String key) {
         this.existingWindows.get(key).setVisible(true);
@@ -71,7 +75,7 @@ public class CommonWindowManager implements WindowManager {
     }
 
     /**
-     * Opens the given window
+     * Removes the given window from the HashMap, and closes it with a window closing event
      * @param key String reference to the requested window
      */
     @Override
@@ -82,21 +86,30 @@ public class CommonWindowManager implements WindowManager {
         frame.dispatchEvent(new WindowEvent(frame, WindowEvent.WINDOW_CLOSING));
     }
 
+    /**
+     * Sets the input JFrames close operation to merely hide itself when closed and update the number of open windows
+     * in the program
+     * @param frame input JFrame
+     */
     private void setCloseListener(JFrame frame) {
         frame.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
         frame.addWindowListener(new java.awt.event.WindowAdapter() {
             @Override
             public void windowClosing(java.awt.event.WindowEvent windowEvent) {
+                saveController.saveInMemoryUser();
+                // run if window is just hiding (i.e. program is not ending)
                 if (frame.getDefaultCloseOperation() == JFrame.HIDE_ON_CLOSE) {
                     numOpenWindows -= 1;
+                    frame.setVisible(false);
+                    // if there are no open windows, close the program
                     if (numOpenWindows == 0) {
                         for (String reference : existingWindows.keySet()) {
                             removeWindow(reference);
                         }
                     }
                 }
+                // run if window is closing (i.e. entire program is ending)
                 else {
-                    saveController.saveInMemoryUser();
                     super.windowClosing(new WindowEvent(frame, WindowEvent.WINDOW_CLOSING));
                 }
             }
