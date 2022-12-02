@@ -46,7 +46,7 @@ public class Main {
         DisplayCurriculumsInputBoundary dashboardViewInteractor = new DisplayCurriculumsInteractor(dashboardViewPresenter);
         DisplayCurriculumsController dashboardViewController = new DisplayCurriculumsController(dashboardViewInteractor);
 
-        CreateCurriculumOutputBoundary createCurriculumPresenter = new CreateCurriculumPresenter();
+        CreateCurriculumOutputBoundary createCurriculumPresenter = new CreateCurriculumPresenter(new ArrayList<>());
         CurriculumFactory curriculumFactory = new PrebuiltCurriculumFactory();
         CreateCurriculumInputBoundary createCurriculumInteractor = new CreateCurriculumInteractor(curriculumFactory, createCurriculumPresenter);
         CreateCurriculumController createCurriculumController = new CreateCurriculumController(createCurriculumInteractor);
