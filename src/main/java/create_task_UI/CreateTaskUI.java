@@ -123,17 +123,4 @@ public class CreateTaskUI extends CentralWindow implements TaskDependentWindow, 
             }
         });
     }
-
-    // TODO: Delete for deployment
-    public static void main(String[] args) {
-        WindowManager manager = new CommonWindowManager();
-        TaskFactory taskFactory = new CommonTaskFactory();
-        TaskTreeFactory treeFactory = new CommonTaskTreeFactory();
-        AddTaskOutputBoundary presenter = new AddTaskPresenter();
-        AddTaskInputBoundary interactor = new AddTaskUseCase(presenter, taskFactory, treeFactory);
-        AddTaskController taskController = new AddTaskController(interactor);
-
-        JFrame ui = new CreateTaskUI(manager, taskController);
-        ui.setVisible(true);
-    }
 }
