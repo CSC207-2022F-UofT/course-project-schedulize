@@ -1,8 +1,10 @@
 package dashboard_ui;
 
 import UI.CentralWindow;
+import UI.CurriculumDependentWindow;
 import UI.WindowManager;
 import use_cases.create_curriculum.CreateCurriculumController;
+import use_cases.create_curriculum.DashboardUiInterface;
 import use_cases.display_curriculums.CurriculumsModel;
 import use_cases.display_curriculums.DisplayCurriculumsController;
 import use_cases.display_curriculums.DisplayCurriculumsInterface;
@@ -13,7 +15,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Vector;
 
-public class DashboardUI extends CentralWindow implements DisplayCurriculumsInterface {
+public class DashboardUI extends CentralWindow implements DisplayCurriculumsInterface, DashboardUiInterface {
     private JTextField curriculumName;
     private JList<String> curriculumList;
     private JButton createButton;
@@ -65,7 +67,10 @@ public class DashboardUI extends CentralWindow implements DisplayCurriculumsInte
 
     public void loadCurriculumListener() {
         this.loadCurriculumButton.addActionListener(actionEvent -> {
-            // TODO: Tie this to Aayush's TaskTreeUI
+            CurriculumDependentWindow taskTreeUI = (CurriculumDependentWindow) this.programWindows.getWindow(WindowManager.TASKTREE_REFERENCE_KEY);
+            taskTreeUI.setWindowID(Integer.parseInt(curriculumIdField.getText()));
+            this.programWindows.closeWindow(WindowManager.DASHBOARD_REFERENCE_KEY);
+            this.programWindows.openWindow(WindowManager.TASKTREE_REFERENCE_KEY);
         });
     }
 
@@ -89,5 +94,11 @@ public class DashboardUI extends CentralWindow implements DisplayCurriculumsInte
         }
         Vector<String> curriculumsVector = new Vector<>(curriculums);
         this.curriculumList.setListData(curriculumsVector);
+    }
+
+    @Override
+    public void createdCurriculum(String message) {
+        return;
+        // TODO: Implement a message of successful creation later
     }
 }

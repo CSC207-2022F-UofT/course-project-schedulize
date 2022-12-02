@@ -10,8 +10,10 @@ import entity_factories.PrebuiltCurriculumFactory;
 import entity_factories.UserFactory;
 import entity_layer.PasswordSuggester;
 import entity_layer.RandomPasswordGenerator;
+import task_tree_UI.TaskTreeUI;
 import use_cases.create_curriculum.*;
 import use_cases.display_curriculums.*;
+import use_cases.display_task_tree.*;
 import use_cases.login.LoginController;
 import use_cases.login.LoginInputBoundary;
 import use_cases.login.LoginInteractor;
@@ -51,9 +53,14 @@ public class Main {
         CreateCurriculumInputBoundary createCurriculumInteractor = new CreateCurriculumInteractor(curriculumFactory, createCurriculumPresenter);
         CreateCurriculumController createCurriculumController = new CreateCurriculumController(createCurriculumInteractor);
 
-
         DashboardUI dashboard = new DashboardUI(windows, dashboardViewController, createCurriculumController);
         dashboardViewPresenter.addViewObserver(dashboard);
+        createCurriculumPresenter.addViewObserver(dashboard);
+
+        DisplayTaskTreeOutputBoundary displayTaskTreePresenter = new DisplayTaskTreePresenter();
+        DisplayTaskTreeInputBoundary displayTaskTreeInteractor = new DisplayTaskTreeInteractor(displayTaskTreePresenter);
+        DisplayTaskTreeController displayTaskTreeController = new DisplayTaskTreeController(displayTaskTreeInteractor);
+        TaskTreeUI taskTreeUI = new TaskTreeUI(windows, displayTaskTreeController);
 
         CreateAccountUI createAccountWindow = new CreateAccountUI(windows, registryController, suggestionController);
         JFrame mainWindow = new LoginUI(windows, loginController);
