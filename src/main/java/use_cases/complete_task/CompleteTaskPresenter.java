@@ -26,8 +26,13 @@ public class CompleteTaskPresenter implements CompleteTaskOutputBoundary {
      */
     @Override
     public String taskCompleted(CompletedTaskModel taskCompleted) {
-        this.taskUI.get(0).updateView("The task " + taskCompleted.getTaskName() + " from " +
-                taskCompleted.getCurriculumName() + " was successfully completed.");
+        String viewMessage = "The task " + taskCompleted.getTaskName() + " from " +
+                taskCompleted.getCurriculumName() + " was successfully completed.";
+        for (CompleteTaskUiInterface taskUI : this.taskUI) {
+            taskUI.updateView("The task " + taskCompleted.getTaskName() + " from " +
+                    taskCompleted.getCurriculumName() + " was successfully completed.");
+        }
+        return viewMessage;
     }
 
 }
