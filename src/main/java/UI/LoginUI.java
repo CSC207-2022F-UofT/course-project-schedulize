@@ -76,8 +76,8 @@ public class LoginUI extends CentralWindow {
                     return;
                 }
                 errorLabel.setText("");
-                // TODO: Connect to Dashboard
                 programWindows.closeWindow(WindowManager.LOGIN_REFERENCE_KEY);
+                programWindows.openWindow(WindowManager.DASHBOARD_REFERENCE_KEY);
             }
         });
     }
