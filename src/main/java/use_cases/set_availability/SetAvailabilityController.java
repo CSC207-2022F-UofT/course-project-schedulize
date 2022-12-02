@@ -1,33 +1,37 @@
 package use_cases.set_availability;
 
 /**
- * Class responsible for initializing the first-time setting of availability;
- * takes input of set of LocalTime values & gives it to SetAvailability interactor.
+ * Controller class responsible for initializing the first-time setting of availability;
+ * through create function, takes input of set of availabilities (type String) & gives it
+ * to SetAvailability interactor.
  *
  * @author od-obas1187
  */
 public class SetAvailabilityController {
-    SetAvailabilityUseCase userAvailabilityInteractor;
+    private final SetAvailabilityInputBoundary userAvailabilityInteractor;
 
     /**
-     * Receives interactor & Sets controller's interactor to the interactor given by parameter
+     * Receives interactor (implemented by InputBoundary, interactor ar runtime) & Sets
+     * controller's interactor (same implementation) to the interactor given by parameter
      *
-     * @param interactor Interactor given to controller to create TimeBlockFactory, which creates TimeBlockManager
-     *                   & corresponding TimeBlocks
+     * @param interactor Interactor given to controller to create TimeBlockFactory, which creates
+     *                   TimeBlockManager & corresponding TimeBlocks
      */
-    public SetAvailabilityController(SetAvailabilityUseCase interactor) {
+    public SetAvailabilityController(SetAvailabilityInputBoundary interactor) {
 
         this.userAvailabilityInteractor = interactor;
 
     }
 
     /**
-     * 1. Receives set of String values (user’s availabilities);
+     * 1. Receives set of String values (user’s availabilities) & curriculumID;
      * 2. Sends them to the SetAvailabilityInteractor
+     *
+     * @param availabilities a String list of availabilities
      */
-    public void create(String[] availabilities, int curriculumId) {
+    public void create(String[] availabilities) {
 
-        userAvailabilityInteractor.create(availabilities, curriculumId);
+        userAvailabilityInteractor.create(availabilities);
 
     }
 }

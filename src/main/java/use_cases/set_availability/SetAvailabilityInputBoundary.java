@@ -8,10 +8,11 @@ package use_cases.set_availability;
 public interface SetAvailabilityInputBoundary {
 
     /**
-     * Creates a TimeManager, one that contains one TimeBlock for each availability/LocalTime
+     * Creates TimeBlocks based on User's inputted availabilities, updates the User's TimeBlockManager
+     * to contain all of them
      *
      * @param availabilityInputs a String list of availabilities
      */
-    void create(String[] availabilityInputs, int curriculumId);
+    void create(String[] availabilityInputs);
 
 }

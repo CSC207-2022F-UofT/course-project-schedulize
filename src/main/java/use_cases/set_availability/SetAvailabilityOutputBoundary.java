@@ -1,11 +1,14 @@
 package use_cases.set_availability;
 
 /**
- * An output boundary interface that is implemented by the setAvailabilityPresenter class.
+ * An OutputBoundary interface that is implemented by the presenter class,
+ * for the interactor (implemented by InputBoundary) to interact with the presenter class
  *
  * @author od-obas1187
  */
 public interface SetAvailabilityOutputBoundary {
 
-    String availabilitiesSet(SetAvailabilityModel availabilityPresenterModel);
+    void availabilitiesSet(String message);
+
+    void addViewObserver(SetAvailabilityViewInterface view);
 }
