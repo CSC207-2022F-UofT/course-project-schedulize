@@ -19,7 +19,7 @@ public class DashboardUI extends CentralWindow implements DisplayCurriculumsInte
     private JButton createButton;
     private JLabel curriculumLabel;
     private JPanel Dashboard;
-    private JTextField textField1;
+    private JTextField curriculumIdField;
     private JButton loadCurriculumButton;
     private final WindowManager programWindows;
     private final DisplayCurriculumsController displayerController;
@@ -77,6 +77,8 @@ public class DashboardUI extends CentralWindow implements DisplayCurriculumsInte
         // recenter the window
         this.centreWindow();
     }
+
+    // TODO: Open time block manager UI
 
     @Override
     public void displayCurriculums(CurriculumsModel curriculumsModel) {
