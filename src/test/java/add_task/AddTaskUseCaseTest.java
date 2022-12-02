@@ -21,8 +21,6 @@ public class AddTaskUseCaseTest {
     static AddTaskUseCase interactor;
     static AddTaskPresenter presenter;
     static User activeUser;
-    static Schedule schedule;
-    static Curriculum curriculum;
 
 
     /**
@@ -32,13 +30,6 @@ public class AddTaskUseCaseTest {
      */
     @BeforeAll
     public static void setup(){
-        curriculum = new PrebuiltCurriculumFactory().create("CSC207");
-        schedule = new PrebuiltScheduleFactory().create();
-        activeUser = new CommonUserFactory().create
-                ("username", "email@email.com", "password");
-        activeUser.setSchedule(schedule);
-        schedule.addCurriculum(curriculum);
-
         TaskFactory taskFactory = new CommonTaskFactory();
         TaskTreeFactory taskTreeFactory= new CommonTaskTreeFactory();
         presenter = new AddTaskPresenter();
@@ -51,6 +42,14 @@ public class AddTaskUseCaseTest {
      */
     @Test
     public void testAddTaskEmptyCurriculum(){
+        Curriculum curriculum = new PrebuiltCurriculumFactory().create("CSC207");
+        Schedule schedule = new PrebuiltScheduleFactory().create();
+        activeUser = new CommonUserFactory().create
+                ("username", "email@email.com", "password");
+        activeUser.setSchedule(schedule);
+        schedule.addCurriculum(curriculum);
+
+
         InMemoryUser.setActiveUser(activeUser);
         Task parentTask = curriculum.getGoal().getTask();
         int curriculumId = curriculum.getID();
@@ -77,6 +76,14 @@ public class AddTaskUseCaseTest {
      */
     @Test
     public void testAddTwoTasks1(){
+        Curriculum curriculum = new PrebuiltCurriculumFactory().create("CSC207");
+        Schedule schedule = new PrebuiltScheduleFactory().create();
+        activeUser = new CommonUserFactory().create
+                ("username", "email@email.com", "password");
+        activeUser.setSchedule(schedule);
+        schedule.addCurriculum(curriculum);
+
+
         InMemoryUser.setActiveUser(activeUser);
         Task parentTask1 = curriculum.getGoal().getTask();
         int curriculumId = curriculum.getID();
@@ -99,7 +106,7 @@ public class AddTaskUseCaseTest {
 
         assertEquals(expectedPresenter, actualPresenter);
         assertTrue(curriculum.getGoal().hasSubTaskTrees());
-        //assertSame(1, curriculum.getGoal().getSubTaskTrees().size());
+        assertSame(1, curriculum.getGoal().getSubTaskTrees().size());
         assertTrue(curriculum.getGoal().getChildTaskTreeByID(parentTask2Id).hasSubTaskTrees());
         assertSame("Do Textbook Questions", curriculum.getGoal().
                 getChildTaskTreeByID(parentTask2Id).getSubTaskTrees().get(0).getTask().getName());
@@ -111,6 +118,14 @@ public class AddTaskUseCaseTest {
      */
     @Test
     public void testAddTwoTasks2(){
+        Curriculum curriculum = new PrebuiltCurriculumFactory().create("CSC207");
+        Schedule schedule = new PrebuiltScheduleFactory().create();
+        activeUser = new CommonUserFactory().create
+                ("username", "email@email.com", "password");
+        activeUser.setSchedule(schedule);
+        schedule.addCurriculum(curriculum);
+
+
         InMemoryUser.setActiveUser(activeUser);
         Task parentTask = curriculum.getGoal().getTask();
         int curriculumId = curriculum.getID();
@@ -130,7 +145,7 @@ public class AddTaskUseCaseTest {
 
         assertEquals(expectedPresenter, actualPresenter);
         assertTrue(curriculum.getGoal().hasSubTaskTrees());
-        //assertSame(2, curriculum.getGoal().getSubTaskTrees().size());
+        assertSame(2, curriculum.getGoal().getSubTaskTrees().size());
         assertFalse(curriculum.getGoal().getSubTaskTrees().get(0).hasSubTaskTrees());
         assertSame("Read Textbook", curriculum.getGoal().getSubTaskTrees().get(0).getTask().getName());
         assertSame("Attend Lecture", curriculum.getGoal().getSubTaskTrees().get(1).getTask().getName());
@@ -141,6 +156,14 @@ public class AddTaskUseCaseTest {
      */
     @Test
     public void testAddTaskNonEmptyCurriculum(){
+        Curriculum curriculum = new PrebuiltCurriculumFactory().create("CSC207");
+        Schedule schedule = new PrebuiltScheduleFactory().create();
+        activeUser = new CommonUserFactory().create
+                ("username", "email@email.com", "password");
+        activeUser.setSchedule(schedule);
+        schedule.addCurriculum(curriculum);
+
+
         InMemoryUser.setActiveUser(activeUser);
 
         TaskTree finishCodingTT = new CommonTaskTreeFactory().createWithTask("Finish Coding", "Finish Use Cases for CSC207 Project");
@@ -165,7 +188,7 @@ public class AddTaskUseCaseTest {
 
         assertEquals(expectedPresenter, actualPresenter);
         assertTrue(curriculum.getGoal().hasSubTaskTrees());
-        //assertSame(2, curriculum.getGoal().getSubTaskTrees().size());
+        assertSame(2, curriculum.getGoal().getSubTaskTrees().size());
         assertTrue(curriculum.getGoal().getSubTaskTrees().get(0).hasSubTaskTrees());
         assertSame("Write Tests", curriculum.getGoal().getSubTaskTrees().get(0).
                 getSubTaskTrees().get(0).getTask().getName());
