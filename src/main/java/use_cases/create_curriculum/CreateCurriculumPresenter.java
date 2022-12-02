@@ -28,4 +28,9 @@ public class CreateCurriculumPresenter implements CreateCurriculumOutputBoundary
                 curriculumModel.getCurriculumName(), curriculumModel.getCurriculumID());
         this.dashboardObservers.get(0).createdCurriculum(successfullyCreatedCurriculumMsg);
     }
+
+    @Override
+    public void addViewObserver(DashboardUiInterface dashboard) {
+        this.dashboardObservers.add(dashboard);
+    }
 }
