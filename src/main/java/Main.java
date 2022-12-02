@@ -10,6 +10,9 @@ import entity_layer.RandomPasswordGenerator;
 import use_cases.login.LoginController;
 import use_cases.login.LoginInputBoundary;
 import use_cases.login.LoginInteractor;
+import use_cases.save_user.SaveUserController;
+import use_cases.save_user.SaveUserInputBoundary;
+import use_cases.save_user.SaveUserInteractor;
 import use_cases.suggest_password.PasswordSuggestionController;
 import use_cases.suggest_password.PasswordSuggestionInputBoundary;
 import use_cases.suggest_password.PasswordSuggestionInteractor;
@@ -20,12 +23,15 @@ import javax.swing.*;
 
 public class Main {
     public static void main(String[] args) {
-        WindowManager windows = new CommonWindowManager();
 
         Cryptograph cipher = new CommonCryptograph();
         UserFactory factory = new CommonUserFactory();
         UserDataStoreGateway storage = new UserStorage(cipher);
         PasswordSuggester suggester = new RandomPasswordGenerator();
+
+        SaveUserInputBoundary saveInteractor = new SaveUserInteractor(storage);
+        SaveUserController saveController = new SaveUserController(saveInteractor);
+        WindowManager windows = new CommonWindowManager(saveController);
 
         UserRegistrationInteractor interactor = new UserRegistrationInteractor(factory, storage);
         UserRegistrationController registryController = new UserRegistrationController(interactor);
