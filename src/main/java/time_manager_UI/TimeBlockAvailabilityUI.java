@@ -53,6 +53,7 @@ public class TimeBlockAvailabilityUI extends CentralWindow {
             @Override
             public void actionPerformed(ActionEvent e) {
                 programWindows.closeWindow(WindowManager.AVAILABILITY_REFERENCE_KEY);
+                programWindows.openWindow(WindowManager.SET_AVAILABILITY_REFERENCE_KEY);
             }
         });
 
