@@ -4,24 +4,11 @@ import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumnModel;
 import UI.CentralWindow;
-import UI.CommonWindowManager;
 import UI.WindowManager;
-import dashboard_ui.DashboardUI;
-import entity_factories.CommonUserFactory;
-import entity_layer.CommonTimeBlock;
-import entity_layer.CommonUser;
-import entity_layer.InMemoryUser;
-import entity_layer.User;
 import use_cases.display_availability_timeblocks.*;
-import use_cases.display_curriculums.DisplayCurriculumsController;
-import use_cases.display_curriculums.DisplayCurriculumsPresenter;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.InputMethodEvent;
-import java.awt.event.InputMethodListener;
-import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.List;
 
 
@@ -32,7 +19,7 @@ import java.util.List;
  *
  * @author Amir Bare
  */
-public class TimeBlockAvailabilityUI extends CentralWindow implements AvailabilityUiInterface {
+public class DisplayrAvailabilityTimeBlockUI extends CentralWindow implements AvailabilityUiInterface {
     private final DisplayAvailabilityTimeBlockController displayController;
     private JPanel mainPanel;
     private JTable showTable;
@@ -44,8 +31,8 @@ public class TimeBlockAvailabilityUI extends CentralWindow implements Availabili
      * Default constructor for the view availability window
      */
 
-    public TimeBlockAvailabilityUI(WindowManager existingWindows,
-                                   DisplayAvailabilityTimeBlockController displayController) {
+    public DisplayrAvailabilityTimeBlockUI(WindowManager existingWindows,
+                                           DisplayAvailabilityTimeBlockController displayController) {
         super();
 //         store reference to existing windows in program
         this.programWindows = existingWindows;
