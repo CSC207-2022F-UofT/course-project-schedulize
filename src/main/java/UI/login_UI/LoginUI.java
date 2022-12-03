@@ -1,5 +1,8 @@
-package UI;
+package UI.login_UI;
 
+import UI.CentralWindow;
+import UI.PasswordField;
+import UI.WindowManager;
 import use_cases.login.LoginController;
 import use_cases.login.LoginException;
 

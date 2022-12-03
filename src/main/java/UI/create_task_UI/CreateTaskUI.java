@@ -1,4 +1,4 @@
-package create_task_UI;
+package UI.create_task_UI;
 
 import UI.*;
 import entity_factories.CommonTaskFactory;

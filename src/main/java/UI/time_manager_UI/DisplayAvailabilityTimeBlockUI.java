@@ -1,4 +1,4 @@
-package time_manager_UI;
+package UI.time_manager_UI;
 import javax.swing.*;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;

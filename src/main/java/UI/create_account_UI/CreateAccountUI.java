@@ -1,5 +1,8 @@
-package UI;
+package UI.create_account_UI;
 
+import UI.CentralWindow;
+import UI.PasswordField;
+import UI.WindowManager;
 import use_cases.suggest_password.PasswordSuggestionController;
 import use_cases.user_registration.UserRegistrationController;
 import use_cases.user_registration.UserRegistrationError;

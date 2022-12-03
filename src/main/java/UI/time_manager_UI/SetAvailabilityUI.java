@@ -1,4 +1,4 @@
-package time_manager_UI;
+package UI.time_manager_UI;
 
 /**
  * A SetAvailabilityUI that uses JFrame to allow a User to input their available time during the days of the week.

@@ -1,9 +1,7 @@
-package task_tree_UI;
+package UI.task_tree_UI;
 
 import UI.*;
-import entity_factories.*;
-import entity_layer.*;
-import task_display_ui.TaskUI;
+import UI.task_display_UI.TaskUI;
 import use_cases.display_task_tree.*;
 
 import javax.swing.tree.DefaultMutableTreeNode;

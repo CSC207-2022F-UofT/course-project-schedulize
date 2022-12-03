@@ -1,6 +1,8 @@
 package task_display_ui;
 
-public class TaskUiTestInteractor implements TaskUiInputBoundary{
+import UI.task_display_UI.TaskUiInputBoundary;
+
+public class TaskUiTestInteractor implements TaskUiInputBoundary {
 
     private int curriculumID;
     private int taskID;

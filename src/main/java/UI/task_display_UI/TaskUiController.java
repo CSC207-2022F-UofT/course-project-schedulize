@@ -1,4 +1,4 @@
-package task_display_ui;
+package UI.task_display_UI;
 
 /**
  * Controller class for the display task use case; called by the tasktree UI

@@ -1,4 +1,4 @@
-package task_display_ui;
+package UI.task_display_UI;
 
 /**
  * An output boundary interface implemented by the TaskUiModelPresenter class.

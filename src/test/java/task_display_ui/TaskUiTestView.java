@@ -1,6 +1,9 @@
 package task_display_ui;
 
-public class TaskUiTestView implements TaskUiViewInterface{
+import UI.task_display_UI.TaskUiModel;
+import UI.task_display_UI.TaskUiViewInterface;
+
+public class TaskUiTestView implements TaskUiViewInterface {
     private TaskUiModel taskUiModel;
     @Override
     public void updateView(TaskUiModel taskUiModel) {

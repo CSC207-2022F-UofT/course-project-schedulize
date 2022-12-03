@@ -1,5 +1,6 @@
 package task_display_ui;
 
+import UI.task_display_UI.*;
 import entity_factories.CommonTaskTreeFactory;
 import entity_factories.CommonUserFactory;
 import entity_factories.PrebuiltCurriculumFactory;

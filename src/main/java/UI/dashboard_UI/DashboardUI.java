@@ -1,4 +1,4 @@
-package dashboard_ui;
+package UI.dashboard_UI;
 
 import UI.CentralWindow;
 import UI.CurriculumDependentWindow;
