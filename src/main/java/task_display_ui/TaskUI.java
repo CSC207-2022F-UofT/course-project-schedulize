@@ -6,6 +6,7 @@ import use_cases.complete_task.CompleteTaskPresenter;
 import use_cases.complete_task.CompleteTaskUseCase;
 
 import javax.swing.*;
+import java.util.ArrayList;
 
 /**
  * A TaskUI class, implements the JFrame interface which makes it a moveable window.
@@ -92,6 +93,6 @@ public class TaskUI extends CentralWindow implements TaskUiViewInterface {
 
     // TODO: Delete for Deployment
     public static void main(String[] args) {
-        JFrame window = new TaskUI(new CompleteTaskController(new CompleteTaskUseCase(new CompleteTaskPresenter())));
+        JFrame window = new TaskUI(new CompleteTaskController(new CompleteTaskUseCase(new CompleteTaskPresenter(new ArrayList<>()))));
     }
 }
