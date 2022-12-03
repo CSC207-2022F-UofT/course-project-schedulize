@@ -31,6 +31,7 @@ public class DashboardUI extends CentralWindow implements DisplayCurriculumsInte
     private JPanel Dashboard;
     private JTextField curriculumIdField;
     private JButton loadCurriculumButton;
+    private JButton availabilityButton;
     private final WindowManager programWindows;
     private final DisplayCurriculumsController displayerController;
     private final CreateCurriculumController createCurriculumController;
@@ -77,13 +78,14 @@ public class DashboardUI extends CentralWindow implements DisplayCurriculumsInte
     private void setListeners() {
         this.newCurriculumListener();
         this.loadCurriculumListener();
+        this.openAvailabilityListener();
     }
 
     /**
      * Action listener for button clicked that creates a new curriculum using the name entered into the
      * curriculumName text field
      */
-    public void newCurriculumListener() {
+    private void newCurriculumListener() {
         this.createButton.addActionListener(actionEvent -> {
             createCurriculumController.createCurriculum(curriculumName.getText());
             this.displayerController.openDashboard();
@@ -93,12 +95,19 @@ public class DashboardUI extends CentralWindow implements DisplayCurriculumsInte
     /**
      * Loads the existing curriculum associated with the id entered into the curriculumIdField text field
      */
-    public void loadCurriculumListener() {
+    private void loadCurriculumListener() {
         this.loadCurriculumButton.addActionListener(actionEvent -> {
             CurriculumDependentWindow taskTreeUI = (CurriculumDependentWindow) this.programWindows.getWindow(WindowManager.TASKTREE_REFERENCE_KEY);
             taskTreeUI.setCurriculumID(Integer.parseInt(curriculumIdField.getText()));
             this.programWindows.closeWindow(WindowManager.DASHBOARD_REFERENCE_KEY);
             this.programWindows.openWindow(WindowManager.TASKTREE_REFERENCE_KEY);
+        });
+    }
+
+    private void openAvailabilityListener() {
+        this.availabilityButton.addActionListener(actionEvent -> {
+            programWindows.openWindow(WindowManager.AVAILABILITY_REFERENCE_KEY);
+            programWindows.closeWindow(WindowManager.DASHBOARD_REFERENCE_KEY);
         });
     }
 

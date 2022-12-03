@@ -6,6 +6,8 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import use_cases.complete_task.*;
 
+import java.util.ArrayList;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -45,7 +47,7 @@ public class completeTaskUseCaseTest {
         curriculum.getGoal().addSubTaskTree(readTextbookTT);
         curriculum.getGoal().addSubTaskTree(attendClassTT);
 
-        presenter = new CompleteTaskPresenter();
+        presenter = new CompleteTaskPresenter(new ArrayList<>());
         interactor = new CompleteTaskUseCase(presenter);
         controller = new CompleteTaskController(interactor);
 
