@@ -19,9 +19,10 @@ public interface WindowManager {
     // reference constants for types of windows
     String REGISTRATION_REFERENCE_KEY = "userRegistration";
     String LOGIN_REFERENCE_KEY = "login";
+    String CREATE_TASK_REFERENCE_KEY = "createTask";
     String DASHBOARD_REFERENCE_KEY = "dashboard";
     String AVAILABILITY_REFERENCE_KEY = "availability";
     String SET_AVAILABILITY_REFERENCE_KEY = "setAvailability";
-
+    String TASKTREE_REFERENCE_KEY = "tasktree";
 
 }

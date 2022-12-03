@@ -1,8 +1,10 @@
 package dashboard_ui;
 
 import UI.CentralWindow;
+import UI.CurriculumDependentWindow;
 import UI.WindowManager;
 import use_cases.create_curriculum.CreateCurriculumController;
+import use_cases.create_curriculum.DashboardUiInterface;
 import use_cases.display_curriculums.CurriculumsModel;
 import use_cases.display_curriculums.DisplayCurriculumsController;
 import use_cases.display_curriculums.DisplayCurriculumsInterface;
@@ -20,7 +22,8 @@ import java.util.Vector;
  *
  * @author Oswin Gan
  */
-public class DashboardUI extends CentralWindow implements DisplayCurriculumsInterface {
+
+public class DashboardUI extends CentralWindow implements DisplayCurriculumsInterface, DashboardUiInterface {
     private JTextField curriculumName;
     private JList<String> curriculumList;
     private JButton createButton;
@@ -34,9 +37,10 @@ public class DashboardUI extends CentralWindow implements DisplayCurriculumsInte
 
     /**
      * Default constructor for dashboard UI window
-     * @param existingWindows
-     * @param displayerController
-     * @param createCurriculumController
+     *
+     * @param existingWindows The previously existing WindowManager
+     * @param displayerController The controller to set up Curriculum view
+     * @param createCurriculumController the controller to create new curriculums
      */
     public DashboardUI(WindowManager existingWindows, DisplayCurriculumsController displayerController,
                        CreateCurriculumController createCurriculumController) {
@@ -50,7 +54,7 @@ public class DashboardUI extends CentralWindow implements DisplayCurriculumsInte
     }
 
     /**
-     * Sets default aspects of the JFrame window, like size and title
+     * Sets default aspects of the Jframe window, like size and title
      */
     private void configureFrame() {
         // set Frame title
@@ -68,7 +72,7 @@ public class DashboardUI extends CentralWindow implements DisplayCurriculumsInte
     }
 
     /**
-     * Connects all action listeners for this window
+     * Sets action listeners for this window
      */
     private void setListeners() {
         this.newCurriculumListener();
@@ -76,8 +80,8 @@ public class DashboardUI extends CentralWindow implements DisplayCurriculumsInte
     }
 
     /**
-     * Action Listener for button clicked that creates a new curriculum using the name entered into the curriculumName
-     * text field
+     * Action listener for button clicked that creates a new curriculum using the name entered into the
+     * curriculumName text field
      */
     public void newCurriculumListener() {
         this.createButton.addActionListener(actionEvent -> {
@@ -87,11 +91,14 @@ public class DashboardUI extends CentralWindow implements DisplayCurriculumsInte
     }
 
     /**
-     * Loads an existing curriculum associated with the id entered into the curriculumIdField text field
+     * Loads the existing curriculum associated with the id entered into the curriculumIdField text field
      */
     public void loadCurriculumListener() {
         this.loadCurriculumButton.addActionListener(actionEvent -> {
-            // TODO: Tie this to Aayush's TaskTreeUI
+            CurriculumDependentWindow taskTreeUI = (CurriculumDependentWindow) this.programWindows.getWindow(WindowManager.TASKTREE_REFERENCE_KEY);
+            taskTreeUI.setCurriculumID(Integer.parseInt(curriculumIdField.getText()));
+            this.programWindows.closeWindow(WindowManager.DASHBOARD_REFERENCE_KEY);
+            this.programWindows.openWindow(WindowManager.TASKTREE_REFERENCE_KEY);
         });
     }
 
@@ -115,5 +122,11 @@ public class DashboardUI extends CentralWindow implements DisplayCurriculumsInte
         }
         Vector<String> curriculumsVector = new Vector<>(curriculums);
         this.curriculumList.setListData(curriculumsVector);
+    }
+
+    @Override
+    public void createdCurriculum(String message) {
+        return;
+        // TODO: Implement a message of successful creation later
     }
 }
