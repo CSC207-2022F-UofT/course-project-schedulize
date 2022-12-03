@@ -12,13 +12,13 @@ import java.util.List;
  */
 public class CompleteTaskPresenter implements CompleteTaskOutputBoundary {
 
-    private final List<CompleteTaskUiInterface> taskUI;
+    //private final List<CompleteTaskUiInterface> taskUI;
 
 
 
-    public CompleteTaskPresenter(List<CompleteTaskUiInterface> taskUI){
-        this.taskUI = taskUI;
-    }
+    //public CompleteTaskPresenter(List<CompleteTaskUiInterface> taskUI){
+        //this.taskUI = taskUI;
+   // }
 
     /**
      * Display a message that the task was completed.
@@ -30,10 +30,9 @@ public class CompleteTaskPresenter implements CompleteTaskOutputBoundary {
     public String taskCompleted(CompletedTaskModel taskCompleted) {
         String viewMessage = "The task " + taskCompleted.getTaskName() + " from " +
                 taskCompleted.getCurriculumName() + " was successfully completed.";
-        for (CompleteTaskUiInterface taskUI : this.taskUI) {
-            taskUI.updateView("The task " + taskCompleted.getTaskName() + " from " +
-                    taskCompleted.getCurriculumName() + " was successfully completed.");
-        }
+        //for (CompleteTaskUiInterface taskUI : this.taskUI) {
+            //taskUI.updateView("The task " + taskCompleted.getTaskName() + " from " +
+                    //taskCompleted.getCurriculumName() + " was successfully completed.");
         return viewMessage;
     }
 
