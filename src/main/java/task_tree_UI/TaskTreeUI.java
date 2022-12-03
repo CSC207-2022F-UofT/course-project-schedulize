@@ -3,6 +3,7 @@ package task_tree_UI;
 import UI.*;
 import entity_factories.*;
 import entity_layer.*;
+import task_display_ui.TaskUI;
 import use_cases.display_task_tree.*;
 
 import javax.swing.tree.DefaultMutableTreeNode;
@@ -162,9 +163,13 @@ public class TaskTreeUI extends CentralWindow implements CurriculumDependentWind
                             taskTree.getLastSelectedPathComponent();
                     if (node == null) return;
                     String nodeInfo = (String) node.getUserObject();
+                    TaskUI taskUI = (TaskUI) programWindows.getWindow(WindowManager.TASK_REFERENCE_KEY);
+                    taskUI.populateView(displayId, parseNodeTextForID(nodeInfo));
+                    programWindows.closeWindow(WindowManager.TASKTREE_REFERENCE_KEY);
+                    programWindows.openWindow(WindowManager.TASK_REFERENCE_KEY);
                     // TODO: Connect to TASK WINDOW
                     // eg. programWindows.openWindow(WindowManager.referenceKey);
-                    System.out.println(parseNodeTextForID(nodeInfo)); // THIS IS THE NEEDED TASK ID, Curriculum ID is on this window
+                    // System.out.println(parseNodeTextForID(nodeInfo)); // THIS IS THE NEEDED TASK ID, Curriculum ID is on this window
                 }
             }
         });

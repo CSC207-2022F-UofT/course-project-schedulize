@@ -8,6 +8,11 @@ public class TaskUiTestPresenter implements TaskUiOutputBoundary {
         this.taskUiModel = taskUiModel;
     }
 
+    @Override
+    public void addViewObserver(TaskUiViewInterface view) {
+        return;
+    }
+
     public TaskUiModel getTaskUiModel() {
         return taskUiModel;
     }

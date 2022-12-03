@@ -10,4 +10,5 @@ package task_display_ui;
  */
 public interface TaskUiOutputBoundary {
     void getTaskInfo(TaskUiModel taskUiModel);
+    void addViewObserver(TaskUiViewInterface view);
 }

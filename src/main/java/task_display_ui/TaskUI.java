@@ -1,6 +1,7 @@
 package task_display_ui;
 
 import UI.CentralWindow;
+import UI.WindowManager;
 import use_cases.complete_task.CompleteTaskController;
 import use_cases.complete_task.CompleteTaskPresenter;
 import use_cases.complete_task.CompleteTaskUseCase;
@@ -10,7 +11,7 @@ import javax.swing.*;
 /**
  * A TaskUI class, implements the JFrame interface which makes it a moveable window.
  * Created: 11/10/2022
- * Last updated: 11/10/2022
+ * Last updated: 12     /01/2022
  *
  * @author Oswin Gan
  */
@@ -23,13 +24,18 @@ public class TaskUI extends CentralWindow implements TaskUiViewInterface {
     private JLabel descriptionLabel;
     private final CompleteTaskController controller;
     private TaskUiModel taskUiModel;
+    private TaskUiController displayController;
+    private final WindowManager programWindows;
 
-    public TaskUI(CompleteTaskController controller) {
+    public TaskUI(WindowManager existingWindows, CompleteTaskController controller, TaskUiController displayController) {
         super();
+        this.programWindows = existingWindows;
+        this.programWindows.addWindow(WindowManager.TASK_REFERENCE_KEY, this);
         // configure default frame attributes
         this.configureFrame();
         this.setListeners();
         this.controller = controller;
+        this.displayController = displayController;
     }
 
     /**
@@ -62,6 +68,7 @@ public class TaskUI extends CentralWindow implements TaskUiViewInterface {
      *
      * @param taskUiModel
      */
+    @Override
     public void updateView(TaskUiModel taskUiModel) {
         this.taskUiModel = taskUiModel;
         this.setTitle(taskUiModel.getName());
@@ -80,6 +87,10 @@ public class TaskUI extends CentralWindow implements TaskUiViewInterface {
         });
     }
 
+    public void populateView(int curriculumID, int taskID) {
+        this.displayController.callInteractor(curriculumID, taskID);
+    }
+
     @Override
     public void setVisible(boolean visible) {
         super.setVisible(visible);
@@ -88,10 +99,8 @@ public class TaskUI extends CentralWindow implements TaskUiViewInterface {
         this.centreWindow();
     }
 
-    // TODO: Delete task use case
-
     // TODO: Delete for Deployment
-    public static void main(String[] args) {
+    /*public static void main(String[] args) {
         JFrame window = new TaskUI(new CompleteTaskController(new CompleteTaskUseCase(new CompleteTaskPresenter())));
-    }
+    }*/
 }

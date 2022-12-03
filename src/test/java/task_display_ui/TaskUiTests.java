@@ -6,6 +6,9 @@ import entity_factories.PrebuiltCurriculumFactory;
 import entity_factories.PrebuiltScheduleFactory;
 import entity_layer.*;
 import org.junit.jupiter.api.*;
+
+import java.util.ArrayList;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 
@@ -38,7 +41,8 @@ public class TaskUiTests {
     @Test
     public void testPresenter(){
         TaskUiTestView testView = new TaskUiTestView();
-        TaskUiOutputBoundary presenter = new TaskUiModelPresenter(testView);
+        TaskUiOutputBoundary presenter = new TaskUiModelPresenter(new ArrayList<>());
+        presenter.addViewObserver(testView);
         TaskUiInputBoundary interactor = new TaskUiInteractor(presenter);
         interactor.displayTask(curriculum.getID(), attendClass.getId());
         TaskUiModel taskUiModel = testView.getTaskUiModel();

@@ -1,5 +1,7 @@
 package task_display_ui;
 
+import java.util.List;
+
 /**
  * Presenter that updates the task UI with the requisite information from the TaskUiModel
  *
@@ -9,17 +11,24 @@ package task_display_ui;
  * @author Oswin Gan
  */
 public class TaskUiModelPresenter implements TaskUiOutputBoundary {
-    private final TaskUiViewInterface view;
+    private final List<TaskUiViewInterface> view;
 
     /** Gets task info to update the view with
      *
      * @param view the view
      */
-    public TaskUiModelPresenter(TaskUiViewInterface view) {
+    public TaskUiModelPresenter(List<TaskUiViewInterface> view) {
         this.view = view;
     }
     @Override
     public void getTaskInfo(TaskUiModel taskUiModel) {
-        this.view.updateView(taskUiModel);
+        this.view.get(0).updateView(taskUiModel);
     }
+
+    @Override
+    public void addViewObserver(TaskUiViewInterface view) {
+        this.view.add(view);
+    }
+
+
 }
