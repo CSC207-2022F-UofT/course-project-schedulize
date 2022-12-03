@@ -1,5 +1,6 @@
 package UI;
 
+import use_cases.suggest_password.PasswordSuggestionController;
 import use_cases.user_registration.UserRegistrationController;
 import use_cases.user_registration.UserRegistrationError;
 
@@ -31,17 +32,22 @@ public class CreateAccountUI extends CentralWindow {
     private JLabel errorLabel;
     private final WindowManager programWindows;
     private final UserRegistrationController registrationController;
+    private final PasswordSuggestionController pwSuggestionController;
+
 
     /**
      * Default constructor for the create account window
      */
-    public CreateAccountUI(WindowManager existingWindows, UserRegistrationController registrationController) {
+    public CreateAccountUI(WindowManager existingWindows, UserRegistrationController registrationController,
+                           PasswordSuggestionController pwSuggestionController) {
         super();
         // store reference to existing windows in program
         this.programWindows = existingWindows;
         this.programWindows.addWindow(WindowManager.REGISTRATION_REFERENCE_KEY, this);
 
+        this.pwSuggestionController = pwSuggestionController;
         this.registrationController = registrationController;
+
         // configure default frame attributes
         this.setPasswordFieldSize();
         this.configureFrame();
@@ -101,8 +107,8 @@ public class CreateAccountUI extends CentralWindow {
         this.suggestPwLabel.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                // TODO: Implement password suggester
-                System.out.println("reached!");
+                passwordField.setText(pwSuggestionController.suggestNewPassword());
+                passwordField.setPwVisibility(false);
             }
         });
     }

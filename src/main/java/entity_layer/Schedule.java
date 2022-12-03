@@ -1,6 +1,7 @@
 package entity_layer;
 
 import java.io.Serializable;
+import java.util.List;
 
 /**
  * An interface for dealing with the CommonSchedule class, used as way to abstract our source files.
@@ -17,6 +18,13 @@ public interface Schedule extends Serializable {
      * @param curriculum the curriculum to be added
      */
     void addCurriculum(Curriculum curriculum);
+
+    /**
+     * Returns the curriculums in this Schedule
+     *
+     * @return the Curriculums this Schedule holds
+     */
+    List<Curriculum> getCurriculums();
 
     /**
      * Adds the passed TimeBlock to the availability.
