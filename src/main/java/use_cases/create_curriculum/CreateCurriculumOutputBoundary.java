@@ -16,4 +16,11 @@ public interface CreateCurriculumOutputBoundary {
      */
     void displayCurriculum(CurriculumModel curriculumModel);
 
+    /**
+     * Adds the view interface to the list of this presenter's observers
+     *
+     * @param dashboard the observant dashboard
+     */
+    void addViewObserver(DashboardUiInterface dashboard);
+
 }

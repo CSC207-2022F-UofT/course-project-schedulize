@@ -26,7 +26,7 @@ public interface Task extends Serializable {
     int getDuration();
 
     /**
-     * Set this Task's duration in minutes.
+     * Set this Task's duration in minutes. If a value less than 0 is passed, duration is set to 0.
      *
      * @param duration this Task's intended duration
      */

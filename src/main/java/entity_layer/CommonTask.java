@@ -204,7 +204,10 @@ public class CommonTask implements Task {
      */
     @Override
     public void setDuration(int duration) {
-        // TODO: make it so duration can never be less than 0
+        if (duration < 0) {
+            this.duration = 0;
+            return;
+        }
         this.duration = duration;
     }
 }
