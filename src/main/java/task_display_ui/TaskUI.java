@@ -3,15 +3,13 @@ package task_display_ui;
 import UI.CentralWindow;
 import UI.WindowManager;
 import use_cases.complete_task.CompleteTaskController;
-import use_cases.complete_task.CompleteTaskPresenter;
-import use_cases.complete_task.CompleteTaskUseCase;
 
 import javax.swing.*;
 
 /**
- * A TaskUI class, implements the JFrame interface which makes it a moveable window.
+ * A TaskUI class, implements the JFrame interface which makes it a movable window.
  * Created: 11/10/2022
- * Last updated: 12     /01/2022
+ * Last updated: 12/01/2022
  *
  * @author Oswin Gan
  */
@@ -66,7 +64,7 @@ public class TaskUI extends CentralWindow implements TaskUiViewInterface {
     /**
      * Updates the view with the requisite information
      *
-     * @param taskUiModel
+     * @param taskUiModel Model containing task information
      */
     @Override
     public void updateView(TaskUiModel taskUiModel) {
@@ -87,6 +85,11 @@ public class TaskUI extends CentralWindow implements TaskUiViewInterface {
         });
     }
 
+    /**
+     * Populates the view with the current information
+     * @param curriculumID ID of the curriculum
+     * @param taskID ID of the task
+     */
     public void populateView(int curriculumID, int taskID) {
         this.displayController.callInteractor(curriculumID, taskID);
     }
@@ -98,9 +101,4 @@ public class TaskUI extends CentralWindow implements TaskUiViewInterface {
         // recenter the window
         this.centreWindow();
     }
-
-    // TODO: Delete for Deployment
-    /*public static void main(String[] args) {
-        JFrame window = new TaskUI(new CompleteTaskController(new CompleteTaskUseCase(new CompleteTaskPresenter())));
-    }*/
 }
