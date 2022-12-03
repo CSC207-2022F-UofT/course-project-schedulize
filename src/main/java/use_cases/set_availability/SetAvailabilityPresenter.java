@@ -11,26 +11,36 @@ import java.util.List;
 public class SetAvailabilityPresenter implements SetAvailabilityOutputBoundary {
 
     private final List<SetAvailabilityViewInterface> views;
-    private String returnMessage;
 
+    /**
+     * Sets this class's view interface list to the one provided in the constructor
+     *
+     * @param views The view interface list provided
+     */
     public SetAvailabilityPresenter(List<SetAvailabilityViewInterface> views) {
         this.views = views;
-        this.returnMessage = "";
     }
 
+    /**
+     * Adds the view interface provided in the parameter to this class's list of view interfaces.
+     *
+     * @param view A view interface
+     */
     @Override
     public void addViewObserver(SetAvailabilityViewInterface view) {
         this.views.add(view);
     }
 
     /**
-     * Confirm that the availabilities were set.
+     * Confirms that the availabilities were set with a confirmation message.
      *
      * @param returnMessage a message confirming the task was completed.
      */
     @Override
     public void availabilitiesSet(String returnMessage) {
-        this.returnMessage = returnMessage;
+        if (views.size() > 0) {
+            views.get(0).successfullySet(returnMessage);
+        }
     }
 
 }

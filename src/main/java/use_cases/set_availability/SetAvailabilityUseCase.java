@@ -5,12 +5,10 @@ import entity_layer.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
-import java.util.Arrays;
-import java.util.function.Consumer;
 
 /**
- * Class responsible for creating a TimeManager entity with multiple TimeBlock items, created with the
- * passed information
+ * Class responsible for updating the User's TimeBlockManager entity with multiple TimeBlock items,
+ * created based on the user's availability inputs
  *
  * @author ad-obas1187
  */
@@ -19,6 +17,12 @@ public class SetAvailabilityUseCase implements SetAvailabilityInputBoundary {
     SetAvailabilityOutputBoundary availabilityPresenter;
     TimeBlockFactory timeBlockFactory;
 
+    /**
+     * Sets this class's presenter to the one provided in the parameter,
+     * sets its TimeBlockFactory to a new CommonTimeBlockFactory
+     *
+     * @param availabilityPresenter The presenter sent by the controller
+     */
     public SetAvailabilityUseCase(SetAvailabilityOutputBoundary availabilityPresenter) {
         this.availabilityPresenter = availabilityPresenter;
         this.timeBlockFactory = new CommonTimeBlockFactory();
@@ -29,7 +33,8 @@ public class SetAvailabilityUseCase implements SetAvailabilityInputBoundary {
      * 2. Using that, update TimeBlockManager to have availabilityInputs as LocalDate times
      * 3. Create & return a SetAvailability Presenter
      *
-     * @param availabilityInputs an array...
+     * @param availabilityInputs Array of availability inputs, sent from controller through its
+     *                           create method
      */
     @Override
     public void create(String[] availabilityInputs) {
@@ -44,13 +49,13 @@ public class SetAvailabilityUseCase implements SetAvailabilityInputBoundary {
             LocalDate startDate = LocalDate.of(LocalDate.now().getYear(), LocalDate.now().getMonth(),
                     LocalDate.now().getDayOfWeek().getValue());
             LocalTime startTime = LocalTime.of(
-                    Integer.parseInt(s.substring(0, 1)) % 24,
+                    Integer.parseInt(s.substring(0, 2)) % 24,
                     0, 0);
 
             LocalDate endDate = LocalDate.of(LocalDate.now().getYear(), LocalDate.now().getMonth(),
                     LocalDate.now().getDayOfWeek().getValue());
             LocalTime endTime = LocalTime.of(
-                    Integer.parseInt(s.substring(2, 3)) % 24,
+                    Integer.parseInt(s.substring(2, 4)) % 24,
                     0, 0);
 
             LocalDateTime start = LocalDateTime.of(startDate, startTime);
