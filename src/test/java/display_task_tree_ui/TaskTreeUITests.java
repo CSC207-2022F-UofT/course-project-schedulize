@@ -1,5 +1,14 @@
 package display_task_tree_ui;
 
+/**
+ * Test for TaskTreeUI
+ *
+ * Created: 12/01/2022
+ * Last updated: 12/03/2022
+ *
+ * @author Aayush Bhan
+ */
+
 import entity_factories.CommonTaskTreeFactory;
 import entity_factories.CommonUserFactory;
 import entity_factories.PrebuiltCurriculumFactory;
@@ -7,66 +16,43 @@ import entity_factories.PrebuiltScheduleFactory;
 import entity_layer.*;
 import org.junit.jupiter.api.*;
 import task_display_ui.*;
+import task_tree_UI.TaskTreeUI;
+import use_cases.display_task_tree.*;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 public class TaskTreeUITests {
 
-    static User activeUser;
-    static Schedule schedule;
     static Curriculum curriculum;
     static Task attendClass;
 
 
-    @BeforeAll
-    public static void setup(){
-        curriculum = new PrebuiltCurriculumFactory().create("CSC207");
-        schedule = new PrebuiltScheduleFactory().create();
-        activeUser = new CommonUserFactory().create
-                ("username", "email@email.com", "password");
-
-        activeUser.setSchedule(schedule);
-        schedule.addCurriculum(curriculum);
-
-        TaskTree attendClassTT = new CommonTaskTreeFactory().createWithTask("Attend Lecture",
-                "Tuesday 6-8pm at Bahen Centre");
-        attendClass = attendClassTT.getTask();
-        curriculum.getGoal().addSubTaskTree(attendClassTT);
-
-        InMemoryUser.setActiveUser(activeUser);
-    }
-
     @Test
     public void testPresenter(){
-        TaskUiTestView testView = new TaskUiTestView();
-        TaskUiOutputBoundary presenter = new TaskUiModelPresenter(testView);
-        TaskUiInputBoundary interactor = new TaskUiInteractor(presenter);
-        interactor.displayTask(curriculum.getID(), attendClass.getId());
-        TaskUiModel taskUiModel = testView.getTaskUiModel();
-        assertEquals(attendClass.getId(), taskUiModel.getTaskID());
-        assertEquals(curriculum.getID(), taskUiModel.getCurriculumID());
-        assertEquals(attendClass.getName(), taskUiModel.getName());
-        assertEquals(attendClass.getCompletion(), taskUiModel.getCompletion());
+        DisplayTaskTreePresenter testView = new DisplayTaskTreePresenter();
+        //DisplayTaskTreeOutputBoundary presenter = new DisplayTaskTreePresenter(testView);
+       // DisplayTaskTreeInputBoundary interactor = new DisplayTaskTreeInteractor(presenter);
+       // interactor.getSubtrees(curriculum.getID(), attendClass.getId());
+        //TaskTreeDisplayModel tasktreeModel = treeView.TaskTreeDisplayModel();
+       // assertEquals(attendClass.getId(), tasktreeModel.getId());
+      //  assertEquals(attendClass.getName(), tasktreeModel.getName());
     }
 
     @Test
     public void testInteractor(){
-        TaskUiTestPresenter presenter = new TaskUiTestPresenter();
-        TaskUiInputBoundary interactor = new TaskUiInteractor(presenter);
-        interactor.displayTask(curriculum.getID(), attendClass.getId());
-        TaskUiModel taskUiModel = presenter.getTaskUiModel();
-        assertEquals(attendClass.getId(), taskUiModel.getTaskID());
-        assertEquals(curriculum.getID(), taskUiModel.getCurriculumID());
-        assertEquals(attendClass.getName(), taskUiModel.getName());
-        assertEquals(attendClass.getCompletion(), taskUiModel.getCompletion());
+        DisplayTaskTreePresenter presenter = new DisplayTaskTreePresenter();
+        DisplayTaskTreeInputBoundary interactor = new DisplayTaskTreeInteractor(presenter);
+        interactor.getSubtrees(curriculum.getID(), attendClass.getId());
+       // TaskTreeDisplayModel tasktreeModel = interactor.TaskTreeDisplayModel();
+        //assertEquals(attendClass.getName(), tasktreeModel.getName());
+
     }
 
     @Test
     public void testController(){
-        TaskUiTestInteractor interactor = new TaskUiTestInteractor();
-        TaskUiController controller = new TaskUiController(interactor);
-        controller.callInteractor(curriculum.getID(), attendClass.getId());
-        assertEquals(curriculum.getID(), interactor.getCurriculumID());
+        //DisplayTaskTreeInteractor interactor = new DisplayTaskTreeInteractor();
+        //DisplayTaskTreeController controller = new DisplayTaskTreeController(interactor);
+        //controller.getSubtrees(curriculum.getId(), attendClass.getId());
+        //assertEquals(curriculum.getID(), interactor.getClass());
     }
-
 }
