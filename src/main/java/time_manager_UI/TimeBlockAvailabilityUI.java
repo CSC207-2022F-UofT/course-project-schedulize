@@ -25,21 +25,23 @@ public class TimeBlockAvailabilityUI extends CentralWindow {
     private JTable showTable;
     private JButton backbutton;
     private JButton setAvailabilityButton;
-    private final WindowManager appWindows;
+    private final WindowManager programWindows;
 
     /**
      * Default constructor for the view availability window
      */
 
     public TimeBlockAvailabilityUI(WindowManager existingWindows) {
+//        WindowManager existingWindows
         super();
-        // store reference to existing windows in program
-        this.appWindows = existingWindows;
-        this.appWindows.addWindow(WindowManager.AVAILABILITY_REFERENCE_KEY, this);
+//         store reference to existing windows in program
+        this.programWindows = existingWindows;
+        this.programWindows.addWindow(WindowManager.AVAILABILITY_REFERENCE_KEY, this);
         this.setTitle("User Availability");
         this.setContentPane(this.mainPanel);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.pack();
+        this.setVisible(true);
         this.centreWindow();
         showTable.setEnabled(false);
         createTable();
@@ -50,15 +52,15 @@ public class TimeBlockAvailabilityUI extends CentralWindow {
         backbutton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                appWindows.closeWindow(WindowManager.AVAILABILITY_REFERENCE_KEY);
+                programWindows.closeWindow(WindowManager.AVAILABILITY_REFERENCE_KEY);
             }
         });
 
         setAvailabilityButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                appWindows.closeWindow(WindowManager.AVAILABILITY_REFERENCE_KEY);
-                appWindows.openWindow(WindowManager.AVAILABILITY_REFERENCE_KEY);
+                programWindows.closeWindow(WindowManager.AVAILABILITY_REFERENCE_KEY);
+                programWindows.openWindow(WindowManager.AVAILABILITY_REFERENCE_KEY);
             }
         });
 
@@ -94,5 +96,4 @@ public class TimeBlockAvailabilityUI extends CentralWindow {
         columns.getColumn(0).setCellRenderer(centerRenderer);
         columns.getColumn(1).setCellRenderer(centerRenderer);
     }
-
 }
