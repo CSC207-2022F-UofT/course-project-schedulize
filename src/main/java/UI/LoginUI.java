@@ -37,7 +37,7 @@ public class LoginUI extends CentralWindow {
         this.configureFrame();
         this.centreWindow();
         this.setListeners();
-        this.setVisible(true);
+        this.programWindows.openWindow(WindowManager.LOGIN_REFERENCE_KEY);
     }
 
     /**
