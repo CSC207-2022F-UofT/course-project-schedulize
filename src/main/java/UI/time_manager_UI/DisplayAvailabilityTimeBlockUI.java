@@ -89,8 +89,8 @@ public class DisplayAvailabilityTimeBlockUI extends CentralWindow implements Ava
         String[][] times = new String[7][2];
         for (int i = 0; i < 7; i++) {
             if (i < availabilities.size()) {
-                times[i][0] = availabilities.get(i).getStartTime();
-                times[i][1] = availabilities.get(i).getEndTime();
+                times[i][0] = availabilities.get(i).getStartTime() + "0";
+                times[i][1] = availabilities.get(i).getEndTime() + "0";
             } else {
                 times[i][0] = "";
                 times[i][1] = "";

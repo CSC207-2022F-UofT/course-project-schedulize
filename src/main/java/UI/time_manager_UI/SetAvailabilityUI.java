@@ -98,6 +98,7 @@ public class SetAvailabilityUI extends CentralWindow implements SetAvailabilityV
         backButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                errorLabel.setText("");
                 programWindows.openWindow(WindowManager.AVAILABILITY_REFERENCE_KEY);
                 programWindows.closeWindow(WindowManager.SET_AVAILABILITY_REFERENCE_KEY);
             }
@@ -109,6 +110,7 @@ public class SetAvailabilityUI extends CentralWindow implements SetAvailabilityV
      *
      * @param message message confirmation
      */
+    @Override
     public void successfullySet(String message) {
         JOptionPane.showMessageDialog(confirmButton, "Availability has been set");
     }
@@ -118,9 +120,9 @@ public class SetAvailabilityUI extends CentralWindow implements SetAvailabilityV
      */
     private void confirmListener() {
         confirmButton.addActionListener(new ActionListener() {
-            List<String> text = new ArrayList<>();
             @Override
             public void actionPerformed(ActionEvent e) {
+                List<String> text = new ArrayList<>();
                 text.add(mondayFrom.getText() + mondayTo.getText());
                 text.add(tuesdayFrom.getText() + tuesdayTo.getText());
                 text.add(wednesdayFrom.getText() + wednesdayTo.getText());
@@ -130,6 +132,13 @@ public class SetAvailabilityUI extends CentralWindow implements SetAvailabilityV
                 text.add(sundayFrom.getText() + sundayTo.getText());
                 String[] avaiabilityArray = new String[text.size()];
                 text.toArray(avaiabilityArray);
+                for (String availability: avaiabilityArray) {
+                    if (availability.length() != 4) {
+                        errorLabel.setText("Must give two digits for hours");
+                        return;
+                    }
+                }
+                errorLabel.setText("");
                 controller.create(avaiabilityArray);
                 programWindows.openWindow(WindowManager.SET_AVAILABILITY_REFERENCE_KEY);
             }

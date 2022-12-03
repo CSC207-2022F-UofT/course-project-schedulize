@@ -11,7 +11,6 @@ import UI.dashboard_UI.DashboardUI;
 import entity_factories.*;
 import entity_layer.PasswordSuggester;
 import entity_layer.RandomPasswordGenerator;
-import task_display_ui.*;
 import UI.task_tree_UI.TaskTreeUI;
 import use_cases.add_task.*;
 import use_cases.complete_task.*;
