@@ -106,6 +106,7 @@ public class CreateTaskUI extends CentralWindow implements TaskDependentWindow, 
                 String description = descriptionPane.getText();
                 if (!name.equals("")) {
                     taskController.addTask(name, description, parentTaskId, parentCurriculumId);
+                    programWindows.openWindow(WindowManager.TASKTREE_REFERENCE_KEY);
                     programWindows.closeWindow(WindowManager.CREATE_TASK_REFERENCE_KEY);
                 }
             }
@@ -119,6 +120,7 @@ public class CreateTaskUI extends CentralWindow implements TaskDependentWindow, 
         this.cancelButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                programWindows.openWindow(WindowManager.TASKTREE_REFERENCE_KEY);
                 programWindows.closeWindow(WindowManager.CREATE_TASK_REFERENCE_KEY);
             }
         });

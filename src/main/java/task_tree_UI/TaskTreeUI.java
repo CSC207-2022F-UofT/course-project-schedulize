@@ -81,10 +81,8 @@ public class TaskTreeUI extends CentralWindow implements CurriculumDependentWind
 
     /**
      * Set up the TaskTree for the desired curriculum to be displayed
-     *
-     * @param displayId the ID of the curriculum meant to be displayed
      */
-    private void treeSetUp(int displayId) {
+    private void treeSetUp() {
         DefaultMutableTreeNode rootNode;
         TaskTreeDisplayModel root = displayController.getRoot(this.displayId);
         rootNode = new DefaultMutableTreeNode(root.getName() +
@@ -179,7 +177,20 @@ public class TaskTreeUI extends CentralWindow implements CurriculumDependentWind
             @Override
             public void actionPerformed(ActionEvent e) {
                 // TODO: Connect to Add Task window
-                programWindows.closeWindow(WindowManager.LOGIN_REFERENCE_KEY);
+                JFrame createTaskWindow = programWindows.getWindow(WindowManager.CREATE_TASK_REFERENCE_KEY);
+                int requestedTaskID = 0;
+                DefaultMutableTreeNode node = (DefaultMutableTreeNode)
+                        taskTree.getLastSelectedPathComponent();
+                if (node == null) {
+                    ((TaskDependentWindow) createTaskWindow).setTaskID(displayId);
+                } else {
+                    String nodeInfo = (String) node.getUserObject();
+                    ((TaskDependentWindow) createTaskWindow).setTaskID(parseNodeTextForID(nodeInfo));
+                }
+                ((CurriculumDependentWindow) createTaskWindow).setCurriculumID(displayId);
+                programWindows.openWindow(WindowManager.CREATE_TASK_REFERENCE_KEY);
+                programWindows.closeWindow(WindowManager.TASKTREE_REFERENCE_KEY);
+                programWindows.closeWindow(WindowManager.TASK_REFERENCE_KEY);
             }
         });
     }
@@ -201,7 +212,7 @@ public class TaskTreeUI extends CentralWindow implements CurriculumDependentWind
     @Override
     public void setVisible(boolean b) {
         super.setVisible(b);
-        this.treeSetUp(this.displayId);
+        this.treeSetUp();
     }
 
     /**

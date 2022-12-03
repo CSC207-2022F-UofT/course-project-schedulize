@@ -18,7 +18,7 @@ public class CommonTask implements Task {
     private static final int COMPLETION_UPPER_BOUND = 100;
 
     // Instance
-    private final int id = getNextID();
+    private final int id = this.hashCode();
     private String name;
     private String description;
     private int completion;

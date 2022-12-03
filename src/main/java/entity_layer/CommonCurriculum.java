@@ -20,7 +20,7 @@ public class CommonCurriculum implements Curriculum {
     private final TimeBlockManager workTimes;
     private final TimeBlockManager weekSchedule;
     private String name;
-    private final int id = getNextID();
+    private final int id = this.hashCode();
 
     // Static
     private static int curriculumCount = 0;

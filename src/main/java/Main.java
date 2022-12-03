@@ -3,6 +3,7 @@ import config.CommonCryptograph;
 import config.Cryptograph;
 import config.UserDataStoreGateway;
 import config.UserStorage;
+import create_task_UI.CreateTaskUI;
 import dashboard_ui.DashboardUI;
 import entity_factories.*;
 import entity_layer.PasswordSuggester;
@@ -88,8 +89,6 @@ public class Main {
         SetAvailabilityUI setAvailabilitViewUI = new SetAvailabilityUI(windows, setAvailabilityController);
         setAvailabilityPresenter.addViewObserver(setAvailabilitViewUI);
 
-
-
         CompleteTaskOutputBoundary completeTaskPresenter = new CompleteTaskPresenter(new ArrayList<>());
         CompleteTaskInputBoundary completeTaskInteractor = new CompleteTaskUseCase(completeTaskPresenter);
         CompleteTaskController completeTaskController = new CompleteTaskController(completeTaskInteractor);
@@ -99,6 +98,14 @@ public class Main {
         TaskUiController taskViewController = new TaskUiController(taskViewInteractor);
         TaskUI taskView = new TaskUI(windows, completeTaskController, taskViewController);
         taskViewPresenter.addViewObserver(taskView);
+
+        TaskTreeFactory taskTreeFactory = new CommonTaskTreeFactory();
+        TaskFactory taskFactory = new CommonTaskFactory();
+        AddTaskOutputBoundary addTaskPresenter = new AddTaskPresenter();
+        AddTaskInputBoundary addTaskInteractor = new AddTaskUseCase(addTaskPresenter, taskFactory, taskTreeFactory);
+        AddTaskController addingTask = new AddTaskController(addTaskInteractor);
+        JFrame createTaskUI = new CreateTaskUI(windows, addingTask);
+
 
         CreateAccountUI createAccountWindow = new CreateAccountUI(windows, registryController, suggestionController);
         JFrame mainWindow = new LoginUI(windows, loginController);
