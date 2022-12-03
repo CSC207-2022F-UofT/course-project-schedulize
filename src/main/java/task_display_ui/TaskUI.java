@@ -22,7 +22,7 @@ public class TaskUI extends CentralWindow implements TaskUiViewInterface {
     private JLabel descriptionLabel;
     private final CompleteTaskController controller;
     private TaskUiModel taskUiModel;
-    private TaskUiController displayController;
+    private final TaskUiController displayController;
     private final WindowManager programWindows;
 
     public TaskUI(WindowManager existingWindows, CompleteTaskController controller, TaskUiController displayController) {
@@ -46,8 +46,6 @@ public class TaskUI extends CentralWindow implements TaskUiViewInterface {
         this.setSize(350, 250);
         // disable resizability
         this.setResizable(false);
-        // set close operation
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         // set content, configured in form file
         this.setContentPane(mainPanel);
         // centres window
@@ -59,6 +57,7 @@ public class TaskUI extends CentralWindow implements TaskUiViewInterface {
      */
     private void setListeners() {
         this.setCompletionListener();
+        this.setDeleteTaskListener();
     }
 
     /**
@@ -77,11 +76,21 @@ public class TaskUI extends CentralWindow implements TaskUiViewInterface {
     /**
      * Listener for setting the task as complete
      */
-    public void setCompletionListener(){
+    private void setCompletionListener(){
         this.completeCheck.addActionListener(actionEvent -> {
             if (completeCheck.isSelected()) {
                 controller.completeTask(taskUiModel.getCurriculumID(), taskUiModel.getTaskID());
             }
+        });
+    }
+
+    /**
+     * Listener for setting the task as complete
+     */
+    private void setDeleteTaskListener(){
+        this.deleteTaskButton.addActionListener(actionEvent -> {
+            programWindows.closeWindow(WindowManager.TASK_REFERENCE_KEY);
+            programWindows.openWindow(WindowManager.TASKTREE_REFERENCE_KEY);
         });
     }
 

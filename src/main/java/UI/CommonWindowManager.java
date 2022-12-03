@@ -59,8 +59,8 @@ public class CommonWindowManager implements WindowManager {
      */
     @Override
     public void openWindow(String key) {
+        if (!this.existingWindows.get(key).isVisible()) this.numOpenWindows += 1;
         this.existingWindows.get(key).setVisible(true);
-        this.numOpenWindows += 1;
     }
 
     /**
@@ -69,9 +69,9 @@ public class CommonWindowManager implements WindowManager {
      */
     @Override
     public void closeWindow(String key) {
+        if (this.existingWindows.get(key).isVisible()) this.numOpenWindows -= 1;
         this.existingWindows.get(key).setVisible(false);
         this.saveController.saveInMemoryUser();
-        this.numOpenWindows -= 1;
     }
 
     /**

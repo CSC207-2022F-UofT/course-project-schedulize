@@ -29,7 +29,7 @@ public class TaskTreeUI extends CentralWindow implements CurriculumDependentWind
     private final String idDisplayText = " (ID n.o.: ";
     private JPanel mainPanel;
     private final JButton addTaskButton;
-    private final JButton deleteTaskButton;
+    private final JButton backButton;
     private final DisplayTaskTreeController displayController;
     private final WindowManager programWindows;
 
@@ -51,8 +51,8 @@ public class TaskTreeUI extends CentralWindow implements CurriculumDependentWind
         this.addTaskButton = new JButton("Add Task");
         p.add(BorderLayout.NORTH, this.addTaskButton);
 
-        this.deleteTaskButton = new JButton("Delete Task");
-        p.add(BorderLayout.SOUTH, this.deleteTaskButton);
+        this.backButton = new JButton("Back");
+        p.add(BorderLayout.SOUTH, this.backButton);
         this.centreWindow();
         this.setListeners();
     }
@@ -75,7 +75,7 @@ public class TaskTreeUI extends CentralWindow implements CurriculumDependentWind
      * Set up buttons
      */
     private void setListeners() {
-        this.deleteTaskListener();
+        this.backButtonListener();
         this.addTaskListener();
     }
 
@@ -109,7 +109,7 @@ public class TaskTreeUI extends CentralWindow implements CurriculumDependentWind
                 JScrollPane(this.taskTree);
         p.add(BorderLayout.CENTER, s);
         p.add(BorderLayout.NORTH, this.addTaskButton);
-        p.add(BorderLayout.SOUTH, this.deleteTaskButton);
+        p.add(BorderLayout.SOUTH, this.backButton);
         this.revalidate();
         this.repaint();
     }
@@ -165,18 +165,14 @@ public class TaskTreeUI extends CentralWindow implements CurriculumDependentWind
                     String nodeInfo = (String) node.getUserObject();
                     TaskUI taskUI = (TaskUI) programWindows.getWindow(WindowManager.TASK_REFERENCE_KEY);
                     taskUI.populateView(displayId, parseNodeTextForID(nodeInfo));
-                    programWindows.closeWindow(WindowManager.TASKTREE_REFERENCE_KEY);
                     programWindows.openWindow(WindowManager.TASK_REFERENCE_KEY);
-                    // TODO: Connect to TASK WINDOW
-                    // eg. programWindows.openWindow(WindowManager.referenceKey);
-                    // System.out.println(parseNodeTextForID(nodeInfo)); // THIS IS THE NEEDED TASK ID, Curriculum ID is on this window
                 }
             }
         });
     }
 
     /**
-     * A button to add tasks
+     * A button listener to add tasks
      */
     private void addTaskListener() {
         this.addTaskButton.addActionListener(new ActionListener() {
@@ -189,22 +185,15 @@ public class TaskTreeUI extends CentralWindow implements CurriculumDependentWind
     }
 
     /**
-     * A button to delete tasks
+     * A button listener to go back to the dashboard
      */
-    private void deleteTaskListener() {
-        this.deleteTaskButton.addActionListener(new ActionListener() {
+    private void backButtonListener() {
+        this.backButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                // TODO: connect to delete task use case
-                DefaultMutableTreeNode node = (DefaultMutableTreeNode)
-                        taskTree.getLastSelectedPathComponent();
-                if (node == null) return;
-                String nodeInfo = (String) node.getUserObject();
-                System.out.println(parseNodeTextForID(nodeInfo)); // THIS IS THE NEEDED TASK ID, Curriculum ID is on this window
-                // e.g. controller.deleteTask(...)
-
-                // trigger redraw
-                treeSetUp(displayId);
+                programWindows.openWindow(WindowManager.DASHBOARD_REFERENCE_KEY);
+                programWindows.closeWindow(WindowManager.TASKTREE_REFERENCE_KEY);
+                programWindows.closeWindow(WindowManager.TASK_REFERENCE_KEY);
             }
         });
     }
@@ -224,49 +213,6 @@ public class TaskTreeUI extends CentralWindow implements CurriculumDependentWind
     public void setCurriculumID(int id) {
         this.displayId = id;
     }
-
-    //TODO Delete for Deployment
-
-    /*public static void main(String[] args) {
-        User example = new CommonUser("ssssss", "s@yshao.com", "bhan");
-
-        CurriculumFactory factory = new CommonCurriculumFactory(new CommonTaskTreeFactory(), new CommonTaskFactory(),
-                new CommonTimeBlockManagerFactory());
-        Curriculum curriculum = factory.create("Name");
-        TaskTreeFactory treeFactory = new CommonTaskTreeFactory();
-        TaskFactory taskFactory = new CommonTaskFactory();
-        TaskTree tree1 = treeFactory.create();
-        TaskTree tree2 = treeFactory.create();
-        TaskTree tree3 = treeFactory.create();
-        TaskTree tree4 = treeFactory.create();
-        TaskTree tree5 = treeFactory.create();
-        tree1.setTask(taskFactory.create("Name1", "description"));
-        tree2.setTask(taskFactory.create("Name2", "description"));
-        tree3.setTask(taskFactory.create("Name3", "description"));
-        tree4.setTask(taskFactory.create("Name4", "description"));
-        tree5.setTask(taskFactory.create("Name5", "description"));
-        example.setSchedule(new CommonScheduleFactory(new CommonTimeBlockManagerFactory()).create());
-        example.getSchedule().addCurriculum(curriculum);
-        TaskTree goal = curriculum.getGoal();
-        goal.addSubTaskTree(tree1);
-        goal.addSubTaskTree(tree2);
-        goal.addSubTaskTree(tree5);
-        tree2.addSubTaskTree(tree3);
-        tree2.addSubTaskTree(tree4);
-
-        InMemoryUser.setActiveUser(example);
-        // want curriculum id #0
-
-        DisplayTaskTreeOutputBoundary presenter = new DisplayTaskTreePresenter();
-        DisplayTaskTreeInputBoundary interactor = new DisplayTaskTreeInteractor(presenter);
-        DisplayTaskTreeController displayController = new DisplayTaskTreeController(interactor);
-        WindowManager manager = new CommonWindowManager();
-
-        TaskTreeUI ui = new TaskTreeUI(manager, displayController);
-        ui.setWindowID(0);
-        ui.setVisible(true);
-
-    }*/
 }
 
 

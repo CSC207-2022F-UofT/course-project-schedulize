@@ -129,7 +129,7 @@ public class CreateAccountUI extends CentralWindow {
                 }
                 errorLabel.setText("");
                 programWindows.closeWindow(WindowManager.REGISTRATION_REFERENCE_KEY);
-                // TODO: Connect to Dashboard if successful
+                programWindows.openWindow(WindowManager.DASHBOARD_REFERENCE_KEY);
             }
         });
     }
