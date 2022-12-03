@@ -96,7 +96,7 @@ public class DashboardUI extends CentralWindow implements DisplayCurriculumsInte
     public void loadCurriculumListener() {
         this.loadCurriculumButton.addActionListener(actionEvent -> {
             CurriculumDependentWindow taskTreeUI = (CurriculumDependentWindow) this.programWindows.getWindow(WindowManager.TASKTREE_REFERENCE_KEY);
-            taskTreeUI.setWindowID(Integer.parseInt(curriculumIdField.getText()));
+            taskTreeUI.setCurriculumID(Integer.parseInt(curriculumIdField.getText()));
             this.programWindows.closeWindow(WindowManager.DASHBOARD_REFERENCE_KEY);
             this.programWindows.openWindow(WindowManager.TASKTREE_REFERENCE_KEY);
         });
