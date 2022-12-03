@@ -1,17 +1,15 @@
 package task_display_ui;
 
 import UI.CentralWindow;
+import UI.WindowManager;
 import use_cases.complete_task.CompleteTaskController;
-import use_cases.complete_task.CompleteTaskPresenter;
-import use_cases.complete_task.CompleteTaskUseCase;
 
 import javax.swing.*;
-import java.util.ArrayList;
 
 /**
- * A TaskUI class, implements the JFrame interface which makes it a moveable window.
+ * A TaskUI class, implements the JFrame interface which makes it a movable window.
  * Created: 11/10/2022
- * Last updated: 11/10/2022
+ * Last updated: 12/01/2022
  *
  * @author Oswin Gan
  */
@@ -24,13 +22,18 @@ public class TaskUI extends CentralWindow implements TaskUiViewInterface {
     private JLabel descriptionLabel;
     private final CompleteTaskController controller;
     private TaskUiModel taskUiModel;
+    private TaskUiController displayController;
+    private final WindowManager programWindows;
 
-    public TaskUI(CompleteTaskController controller) {
+    public TaskUI(WindowManager existingWindows, CompleteTaskController controller, TaskUiController displayController) {
         super();
+        this.programWindows = existingWindows;
+        this.programWindows.addWindow(WindowManager.TASK_REFERENCE_KEY, this);
         // configure default frame attributes
         this.configureFrame();
         this.setListeners();
         this.controller = controller;
+        this.displayController = displayController;
     }
 
     /**
@@ -61,8 +64,9 @@ public class TaskUI extends CentralWindow implements TaskUiViewInterface {
     /**
      * Updates the view with the requisite information
      *
-     * @param taskUiModel
+     * @param taskUiModel Model containing task information
      */
+    @Override
     public void updateView(TaskUiModel taskUiModel) {
         this.taskUiModel = taskUiModel;
         this.setTitle(taskUiModel.getName());
@@ -81,18 +85,20 @@ public class TaskUI extends CentralWindow implements TaskUiViewInterface {
         });
     }
 
+    /**
+     * Populates the view with the current information
+     * @param curriculumID ID of the curriculum
+     * @param taskID ID of the task
+     */
+    public void populateView(int curriculumID, int taskID) {
+        this.displayController.callInteractor(curriculumID, taskID);
+    }
+
     @Override
     public void setVisible(boolean visible) {
         super.setVisible(visible);
         this.completeCheck.setSelected(false);
         // recenter the window
         this.centreWindow();
-    }
-
-    // TODO: Delete task use case
-
-    // TODO: Delete for Deployment
-    public static void main(String[] args) {
-        JFrame window = new TaskUI(new CompleteTaskController(new CompleteTaskUseCase(new CompleteTaskPresenter(new ArrayList<>()))));
     }
 }

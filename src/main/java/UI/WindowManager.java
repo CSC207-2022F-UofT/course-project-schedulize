@@ -24,5 +24,6 @@ public interface WindowManager {
     String AVAILABILITY_REFERENCE_KEY = "availability";
     String SET_AVAILABILITY_REFERENCE_KEY = "setAvailability";
     String TASKTREE_REFERENCE_KEY = "tasktree";
+    String TASK_REFERENCE_KEY = "task";
 
 }

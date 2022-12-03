@@ -6,6 +6,14 @@ import entity_layer.Schedule;
 
 import java.util.HashMap;
 
+/**
+ * Collects user schedule information to present to the Dashboard UI
+ *
+ * Created: 11/30/2022
+ * Last updated: 12/01/2022
+ *
+ * @author Oswin Gan
+ */
 public class DisplayCurriculumsInteractor implements DisplayCurriculumsInputBoundary {
 
     private final DisplayCurriculumsOutputBoundary presenter;
