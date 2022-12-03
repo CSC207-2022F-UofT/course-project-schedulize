@@ -11,6 +11,7 @@ import org.junit.jupiter.api.BeforeAll;
 import use_cases.display_availability_timeblocks.*;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -24,7 +25,7 @@ public class displayAvailabilityTestCase {
 
     @BeforeAll
     public static void setup(){
-        user = new CommonUserFactory().create("Haaris", "haarisal@gmail.com", "ozzyozbourne");
+        user = new CommonUserFactory().create("Alex Scott", "scottieAlex@gmail.com", "ozzyozbourne");
         schedule = new PrebuiltScheduleFactory().create();
 
         user.setSchedule(schedule);
@@ -36,7 +37,10 @@ public class displayAvailabilityTestCase {
     @Test
     public void testDisplayUserAvailability(){
         InMemoryUser.setActiveUser(user);
-        displayController.displayAvailabilityTimeBlock();
+        List<DisplayAvailabilityTimeBlockModel> list = new ArrayList<>();
+
+
+
     }
 
 }

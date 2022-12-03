@@ -12,7 +12,7 @@ import entity_layer.PasswordSuggester;
 import entity_layer.RandomPasswordGenerator;
 import task_tree_UI.TaskTreeUI;
 import time_manager_UI.SetAvailabilityUI;
-import time_manager_UI.TimeBlockAvailabilityUI;
+import time_manager_UI.DisplayAvailabilityTimeBlockUI;
 import use_cases.create_curriculum.*;
 import use_cases.display_availability_timeblocks.DisplayAvailabilityTimeBlockController;
 import use_cases.display_availability_timeblocks.DisplayAvailabilityTimeBlockInteractor;
@@ -80,7 +80,7 @@ public class Main {
         DisplayAvailabilityTimeBlockPresenter availabilityPresenter = new DisplayAvailabilityTimeBlockPresenter(new ArrayList<>());
         DisplayAvailabilityTimeBlockInteractor availabilityInteractor = new DisplayAvailabilityTimeBlockInteractor(availabilityPresenter);
         DisplayAvailabilityTimeBlockController controller = new DisplayAvailabilityTimeBlockController(availabilityInteractor);
-        TimeBlockAvailabilityUI view = new TimeBlockAvailabilityUI(windows, controller);
+        DisplayAvailabilityTimeBlockUI view = new DisplayAvailabilityTimeBlockUI(windows, controller);
         availabilityPresenter.addAvailabilityObserver(view);
 
         SetAvailabilityPresenter setAvailabilityPresenter = new SetAvailabilityPresenter(new ArrayList<>());

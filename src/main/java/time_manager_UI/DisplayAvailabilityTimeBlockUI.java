@@ -19,7 +19,7 @@ import java.util.List;
  *
  * @author Amir Bare
  */
-public class DisplayrAvailabilityTimeBlockUI extends CentralWindow implements AvailabilityUiInterface {
+public class DisplayAvailabilityTimeBlockUI extends CentralWindow implements AvailabilityUiInterface {
     private final DisplayAvailabilityTimeBlockController displayController;
     private JPanel mainPanel;
     private JTable showTable;
@@ -31,8 +31,8 @@ public class DisplayrAvailabilityTimeBlockUI extends CentralWindow implements Av
      * Default constructor for the view availability window
      */
 
-    public DisplayrAvailabilityTimeBlockUI(WindowManager existingWindows,
-                                           DisplayAvailabilityTimeBlockController displayController) {
+    public DisplayAvailabilityTimeBlockUI(WindowManager existingWindows,
+                                          DisplayAvailabilityTimeBlockController displayController) {
         super();
 //         store reference to existing windows in program
         this.programWindows = existingWindows;
