@@ -91,7 +91,7 @@ public class Main {
 
 
 
-        CompleteTaskOutputBoundary completeTaskPresenter = new CompleteTaskPresenter();
+        CompleteTaskOutputBoundary completeTaskPresenter = new CompleteTaskPresenter(new ArrayList<>());
         CompleteTaskInputBoundary completeTaskInteractor = new CompleteTaskUseCase(completeTaskPresenter);
         CompleteTaskController completeTaskController = new CompleteTaskController(completeTaskInteractor);
 
