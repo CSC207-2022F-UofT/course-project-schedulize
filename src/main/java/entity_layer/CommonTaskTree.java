@@ -17,7 +17,7 @@ public class CommonTaskTree implements TaskTree {
     \* ********** */
     private Task task;
     private TaskTree superTaskTree;
-    private List<TaskTree> subTaskTrees;
+    private final List<TaskTree> subTaskTrees;
 
     /* ************ *\
     *  Constructors  *
@@ -191,7 +191,8 @@ public class CommonTaskTree implements TaskTree {
             taskTree.completeTask();
         }
 
-        this.superTaskTree.updateTask();
+        if (this.superTaskTree != null)
+            this.superTaskTree.updateTask();
 
         // Now that I'm writing this, I'm realizing that the recursive call to this TaskTree's subTaskTrees will cause
         //  updateTask() to be called over and over again. I'll have to think of a way to optimize this.
@@ -227,14 +228,12 @@ public class CommonTaskTree implements TaskTree {
         double subTaskCount = this.subTaskTrees.size();
         double taskCompletionSum = 0.0;
 
-        if (subTaskCount == 0)
-            return;
-
         for (TaskTree taskTree : this.subTaskTrees) {
             taskCompletionSum += taskTree.getTask().getCompletion();
         }
 
-        this.task.setCompletion((int) (taskCompletionSum / subTaskCount));
+        if (subTaskCount != 0)
+            this.task.setCompletion((int) (taskCompletionSum / subTaskCount));
 
         if (this.superTaskTree != null) {
             this.superTaskTree.updateTask();
