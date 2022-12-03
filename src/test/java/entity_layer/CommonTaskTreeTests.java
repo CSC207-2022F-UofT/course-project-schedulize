@@ -458,4 +458,68 @@ public class CommonTaskTreeTests {
         assertEquals(expected, actual);
 
     }
+
+    @Test
+    public void testResetTask() {
+        // Create TaskTrees
+        TaskTree root = new CommonTaskTree();
+        TaskTree sub1 = new CommonTaskTree();
+        TaskTree sub2 = new CommonTaskTree();
+        TaskTree sub11 = new CommonTaskTree();
+        TaskTree sub12 = new CommonTaskTree();
+        TaskTree sub21 = new CommonTaskTree();
+        TaskTree sub22 = new CommonTaskTree();
+
+        // Connect TaskTrees
+        root.addSubTaskTree(sub1);
+        root.addSubTaskTree(sub2);
+        sub1.addSubTaskTree(sub11);
+        sub1.addSubTaskTree(sub12);
+        sub2.addSubTaskTree(sub21);
+        sub2.addSubTaskTree(sub22);
+
+        // Populate
+        populateTree(root);
+
+        // Complete all tasks
+        root.completeTask();
+        assertEquals(100, sub22.getTask().getCompletion());
+        assertEquals(100, sub1.getTask().getCompletion());
+
+        // Reset a middle task
+        sub1.resetTask();
+
+        // Assert correct completions
+        assertEquals(50, root.getTask().getCompletion());
+        assertEquals(0, sub11.getTask().getCompletion());
+        assertEquals(100, sub21.getTask().getCompletion());
+
+    }
+
+    @Test
+    public void testResetTaskSmallTree() {
+        // Create TaskTrees
+        TaskTree root = new CommonTaskTree();
+        TaskTree sub1 = new CommonTaskTree();
+        TaskTree sub2 = new CommonTaskTree();
+
+        // Connect TaskTrees
+        root.addSubTaskTree(sub1);
+        root.addSubTaskTree(sub2);
+
+        // Populate
+        populateTree(root);
+
+        // Complete all tasks
+        root.completeTask();
+
+        // Reset a bottom task
+        sub1.resetTask();
+
+        // Assertions
+        assertEquals(0, sub1.getTask().getCompletion());
+        assertEquals(100, sub2.getTask().getCompletion());
+        assertEquals(50, root.getTask().getCompletion());
+
+    }
 }
