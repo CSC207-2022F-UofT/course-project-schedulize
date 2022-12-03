@@ -11,7 +11,12 @@ import entity_factories.UserFactory;
 import entity_layer.PasswordSuggester;
 import entity_layer.RandomPasswordGenerator;
 import task_tree_UI.TaskTreeUI;
+import time_manager_UI.SetAvailabilityUI;
+import time_manager_UI.TimeBlockAvailabilityUI;
 import use_cases.create_curriculum.*;
+import use_cases.display_availability_timeblocks.DisplayAvailabilityTimeBlockController;
+import use_cases.display_availability_timeblocks.DisplayAvailabilityTimeBlockInteractor;
+import use_cases.display_availability_timeblocks.DisplayAvailabilityTimeBlockPresenter;
 import use_cases.display_curriculums.*;
 import use_cases.display_task_tree.*;
 import use_cases.login.LoginController;
@@ -20,6 +25,9 @@ import use_cases.login.LoginInteractor;
 import use_cases.save_user.SaveUserController;
 import use_cases.save_user.SaveUserInputBoundary;
 import use_cases.save_user.SaveUserInteractor;
+import use_cases.set_availability.SetAvailabilityController;
+import use_cases.set_availability.SetAvailabilityPresenter;
+import use_cases.set_availability.SetAvailabilityUseCase;
 import use_cases.suggest_password.PasswordSuggestionController;
 import use_cases.suggest_password.PasswordSuggestionInputBoundary;
 import use_cases.suggest_password.PasswordSuggestionInteractor;
@@ -67,6 +75,21 @@ public class Main {
         DisplayTaskTreeInputBoundary displayTaskTreeInteractor = new DisplayTaskTreeInteractor(displayTaskTreePresenter);
         DisplayTaskTreeController displayTaskTreeController = new DisplayTaskTreeController(displayTaskTreeInteractor);
         TaskTreeUI taskTreeUI = new TaskTreeUI(windows, displayTaskTreeController);
+        //createCurriculumPresenter.
+
+        DisplayAvailabilityTimeBlockPresenter availabilityPresenter = new DisplayAvailabilityTimeBlockPresenter(new ArrayList<>());
+        DisplayAvailabilityTimeBlockInteractor availabilityInteractor = new DisplayAvailabilityTimeBlockInteractor(availabilityPresenter);
+        DisplayAvailabilityTimeBlockController controller = new DisplayAvailabilityTimeBlockController(availabilityInteractor);
+        TimeBlockAvailabilityUI view = new TimeBlockAvailabilityUI(windows, controller);
+        availabilityPresenter.addAvailabilityObserver(view);
+
+        SetAvailabilityPresenter setAvailabilityPresenter = new SetAvailabilityPresenter(new ArrayList<>());
+        SetAvailabilityUseCase setAvailabilityUseCase = new SetAvailabilityUseCase(setAvailabilityPresenter);
+        SetAvailabilityController setAvailabilityController = new SetAvailabilityController(setAvailabilityUseCase);
+        SetAvailabilityUI setAvailabilitViewUI = new SetAvailabilityUI(windows, setAvailabilityController);
+        setAvailabilityPresenter.addViewObserver(setAvailabilitViewUI);
+
+
 
         CreateAccountUI createAccountWindow = new CreateAccountUI(windows, registryController, suggestionController);
         JFrame mainWindow = new LoginUI(windows, loginController);

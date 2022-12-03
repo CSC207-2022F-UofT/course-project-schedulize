@@ -11,6 +11,12 @@ import java.util.List;
 
 public class DisplayAvailabilityTimeBlockPresenter implements DisplayAvailabilityTimeBlockOutputBoundary {
 
+    private final List<AvailabilityUiInterface> availabilityViews;
+
+    public DisplayAvailabilityTimeBlockPresenter(List<AvailabilityUiInterface> availabilityViews) {
+        this.availabilityViews = availabilityViews;
+    }
+
     /**
      * Display a message that the task was completed.
      *
@@ -18,8 +24,16 @@ public class DisplayAvailabilityTimeBlockPresenter implements DisplayAvailabilit
      * @return a list of start times and end times of a user's availability.
      */
     @Override
-    public List<DisplayAvailabilityTimeBlockModel> availabilityTimeBlockDisplayed(List<DisplayAvailabilityTimeBlockModel> availabilityTimeBlockModels) {
-        return availabilityTimeBlockModels;
+    public void availabilityTimeBlockDisplayed(List<DisplayAvailabilityTimeBlockModel> availabilityTimeBlockModels) {
+        for (AvailabilityUiInterface view : availabilityViews) {
+            view.drawAvailabilities(availabilityTimeBlockModels);
+        }
     }
+
+    @Override
+    public void addAvailabilityObserver(AvailabilityUiInterface view) {
+        this.availabilityViews.add(view);
+    }
+
 }
 

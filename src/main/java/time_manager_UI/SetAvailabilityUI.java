@@ -10,16 +10,17 @@ package time_manager_UI;
 
 import UI.CentralWindow;
 import UI.WindowManager;
-import set_availability.SetAvailabilityController;
+import use_cases.set_availability.SetAvailabilityController;
+import use_cases.set_availability.SetAvailabilityViewInterface;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
-import java.util.Set;
 
-public class SetAvailabilityUI extends CentralWindow {
+public class SetAvailabilityUI extends CentralWindow implements SetAvailabilityViewInterface {
 
     private JTextField sundayFrom;
     private JTextField sundayTo;
@@ -29,34 +30,93 @@ public class SetAvailabilityUI extends CentralWindow {
     private JTextField fridayTo;
     private JTextField thursdayFrom;
     private JTextField thursdayTo;
-    private JTextField wednesdayTo;
+    private JTextField wednesdayFrom;
     private JTextField tuesdayFrom;
     private JTextField tuesdayTo;
     private JTextField mondayFrom;
     private JTextField mondayTo;
     private JButton confirmButton;
-    private JTextField wednesdayFrom;
+    private JTextField wednesdayTo;
     private JPanel panelMain;
+    private JButton backButton;
+    private JLabel errorLabel;
     private final SetAvailabilityController controller;
     private final WindowManager programWindows;
 
     /**
-     * Constructor for the UI
-     * @param existingWindows
-     * @param controller
+     * Default constructor for the UI
+     *
+     * @param existingWindows the reference to the window manager for opening and closing other windows
+     * @param controller controller that gets info that the UI can then show to the user
      */
-
     public SetAvailabilityUI(WindowManager existingWindows, SetAvailabilityController controller) {
-
         super();
         this.programWindows = existingWindows;
-        this.programWindows.addWindow("availability", this);
+        this.programWindows.addWindow(WindowManager.SET_AVAILABILITY_REFERENCE_KEY, this);
         this.controller = controller;
-        this.setTitle("User Availability");
-        this.setContentPane(panelMain);
+        this.uiSettings();
+        this.confirmListener();
+        this.setText();
+        this.setBackButtonListener();
+    }
+
+    /**
+     * Settings that allow the Frame of the set availability window to appear
+     */
+    private void uiSettings() {
+        this.setTitle("Set Availability");
+        this.setContentPane(this.panelMain);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.pack();
         this.centreWindow();
+    }
+
+    /**
+     * Method that updates the textboxes upon user confirmation
+     */
+    private void setText() {
+        mondayFrom.setText("");
+        mondayTo.setText("");
+        tuesdayFrom.setText("");
+        tuesdayTo.setText("");
+        wednesdayTo.setText("");
+        wednesdayFrom.setText("");
+        thursdayFrom.setText("");
+        thursdayTo.setText("");
+        fridayFrom.setText("");
+        fridayTo.setText("");
+        saturdayFrom.setText("");
+        saturdayTo.setText("");
+        sundayFrom.setText("");
+        sundayTo.setText("");
+    }
+
+    /**
+     * Action Listener for Back Button
+     */
+    private void setBackButtonListener() {
+        backButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                programWindows.openWindow(WindowManager.AVAILABILITY_REFERENCE_KEY);
+                programWindows.closeWindow(WindowManager.SET_AVAILABILITY_REFERENCE_KEY);
+            }
+        });
+    }
+
+    /**
+     * Method that creates a pop-up message to tell user of confirmation.
+     *
+     * @param message message confirmation
+     */
+    public void successfullySet(String message) {
+        JOptionPane.showMessageDialog(confirmButton, "Availability has been set");
+    }
+
+    /**
+     * Action Listener for Confirm Button
+     */
+    private void confirmListener() {
         confirmButton.addActionListener(new ActionListener() {
             List<String> text = new ArrayList<>();
             @Override
@@ -70,38 +130,9 @@ public class SetAvailabilityUI extends CentralWindow {
                 text.add(sundayFrom.getText() + sundayTo.getText());
                 String[] avaiabilityArray = new String[text.size()];
                 text.toArray(avaiabilityArray);
-                controller.create(avaiabilityArray, 0);
-                /**
-                 * Setting the textbox to empty after user confirms their availability
-                 *
-                 */
-                mondayFrom.setText("");
-                mondayTo.setText("");
-                tuesdayFrom.setText("");
-                tuesdayTo.setText("");
-                wednesdayFrom.setText("");
-                wednesdayTo.setText("");
-                thursdayFrom.setText("");
-                thursdayTo.setText("");
-                fridayFrom.setText("");
-                fridayTo.setText("");
-                saturdayFrom.setText("");
-                saturdayTo.setText("");
-                sundayFrom.setText("");
-                sundayTo.setText("");
+                controller.create(avaiabilityArray);
+                programWindows.openWindow(WindowManager.SET_AVAILABILITY_REFERENCE_KEY);
             }
         });
     }
-
-    /** Method that creates a pop-up message to tell user of confirmation.
-     *
-     * @param message message confirmation
-     */
-    public void successfullySet(String message) {
-        JOptionPane.showMessageDialog(confirmButton, "Availability has been set");
-    }
 }
-
-
-
-

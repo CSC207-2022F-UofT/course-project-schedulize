@@ -12,5 +12,6 @@ import java.util.List;
  */
 
 public interface DisplayAvailabilityTimeBlockOutputBoundary {
-    List<DisplayAvailabilityTimeBlockModel> availabilityTimeBlockDisplayed(List<DisplayAvailabilityTimeBlockModel> availabilityTimeBlockModels);
+    void availabilityTimeBlockDisplayed(List<DisplayAvailabilityTimeBlockModel> availabilityTimeBlockModels);
+    void addAvailabilityObserver(AvailabilityUiInterface view);
 }

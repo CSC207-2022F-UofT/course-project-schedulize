@@ -8,7 +8,7 @@ package use_cases.display_availability_timeblocks;
  * @author Amir Bare; amira
  */
 public class DisplayAvailabilityTimeBlockController {
-    private final DisplayAvailabilityTimeBlockInteractor displayAvailabilityTimeBlockInteractor;
+    private final DisplayAvailabilityTimeBlockInputBoundary displayAvailabilityTimeBlockInteractor;
 
     /**
      * Default constructor
