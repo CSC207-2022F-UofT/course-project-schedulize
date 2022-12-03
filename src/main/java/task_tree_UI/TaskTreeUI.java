@@ -216,7 +216,7 @@ public class TaskTreeUI extends CentralWindow implements CurriculumDependentWind
      * @param id the desired curriculum's id
      */
     @Override
-    public void setWindowID(int id) {
+    public void setCurriculumID(int id) {
         this.displayId = id;
     }
 
