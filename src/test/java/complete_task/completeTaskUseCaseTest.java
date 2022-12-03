@@ -136,6 +136,6 @@ public class completeTaskUseCaseTest {
         String actualPresenter2 = presenter.taskUncompleted(model2);
         assertEquals(expectedPresenter2, actualPresenter2);
         assertEquals(0, readTextbook.getCompletion());
-        assertEquals(100, curriculum.getGoal().getTask().getCompletion());
+        assertEquals(0, curriculum.getGoal().getTask().getCompletion());
     }
 }
