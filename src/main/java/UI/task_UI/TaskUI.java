@@ -1,7 +1,10 @@
-package UI.task_display_UI;
+package UI.task_UI;
 
 import UI.CentralWindow;
 import UI.WindowManager;
+import use_cases.task_display_UI.TaskUiController;
+import use_cases.task_display_UI.TaskUiModel;
+import use_cases.task_display_UI.TaskUiViewInterface;
 import use_cases.complete_task.CompleteTaskController;
 
 import javax.swing.*;
@@ -41,7 +44,7 @@ public class TaskUI extends CentralWindow implements TaskUiViewInterface {
      */
     private void configureFrame() {
         // set Frame title
-        this.setTitle("taskNameLabelTemp");
+        this.setTitle("Task");
         // set Frame window size
         this.setSize(350, 250);
         // disable resizability

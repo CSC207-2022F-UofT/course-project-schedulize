@@ -1,8 +1,8 @@
 package use_cases.task_display_ui;
 
-import UI.task_display_UI.TaskUiModel;
-import UI.task_display_UI.TaskUiOutputBoundary;
-import UI.task_display_UI.TaskUiViewInterface;
+import use_cases.task_display_UI.TaskUiModel;
+import use_cases.task_display_UI.TaskUiOutputBoundary;
+import use_cases.task_display_UI.TaskUiViewInterface;
 
 public class TaskUiTestPresenter implements TaskUiOutputBoundary {
 

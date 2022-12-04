@@ -1,6 +1,6 @@
 package use_cases.task_display_ui;
 
-import UI.task_display_UI.TaskUiInputBoundary;
+import use_cases.task_display_UI.TaskUiInputBoundary;
 
 public class TaskUiTestInteractor implements TaskUiInputBoundary {
 

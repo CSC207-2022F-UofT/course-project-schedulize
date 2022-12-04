@@ -1,4 +1,4 @@
-package UI.task_display_UI;
+package use_cases.task_display_UI;
 
 /**
  * Model class that packages the required information used by TaskUiModelPresenter

@@ -1,7 +1,7 @@
 import UI.*;
 import UI.create_account_UI.CreateAccountUI;
 import UI.login_UI.LoginUI;
-import UI.task_display_UI.*;
+import UI.task_UI.TaskUI;
 import config.CommonCryptograph;
 import config.Cryptograph;
 import config.UserDataStoreGateway;
@@ -34,6 +34,7 @@ import use_cases.set_availability.SetAvailabilityInteractor;
 import use_cases.suggest_password.PasswordSuggestionController;
 import use_cases.suggest_password.PasswordSuggestionInputBoundary;
 import use_cases.suggest_password.PasswordSuggestionInteractor;
+import use_cases.task_display_UI.*;
 import use_cases.user_registration.UserRegistrationController;
 import use_cases.user_registration.UserRegistrationInteractor;
 

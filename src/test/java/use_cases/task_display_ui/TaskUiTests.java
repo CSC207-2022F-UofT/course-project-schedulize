@@ -1,12 +1,12 @@
 package use_cases.task_display_ui;
 
-import UI.task_display_UI.*;
 import entity_factories.CommonTaskTreeFactory;
 import entity_factories.CommonUserFactory;
 import entity_factories.PrebuiltCurriculumFactory;
 import entity_factories.PrebuiltScheduleFactory;
 import entity_layer.*;
 import org.junit.jupiter.api.*;
+import use_cases.task_display_UI.*;
 
 import java.util.ArrayList;
 

@@ -1,4 +1,4 @@
-package UI.task_display_UI;
+package use_cases.task_display_UI;
 
 import java.util.List;
 
