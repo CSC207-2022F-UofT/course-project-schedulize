@@ -1,3 +1,5 @@
+package use_cases.save_user;
+
 import config.CommonCryptograph;
 import config.Cryptograph;
 import config.UserDataStoreGateway;

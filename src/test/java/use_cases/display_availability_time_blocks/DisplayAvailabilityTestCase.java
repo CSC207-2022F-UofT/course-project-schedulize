@@ -1,21 +1,19 @@
-package display_availability_time_blocks;
+package use_cases.display_availability_time_blocks;
 
 import entity_factories.CommonUserFactory;
 import entity_factories.PrebuiltScheduleFactory;
-import entity_layer.CommonUser;
 import entity_layer.InMemoryUser;
 import entity_layer.Schedule;
 import entity_layer.User;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.BeforeAll;
 import use_cases.display_availability_timeblocks.*;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class displayAvailabilityTestCase {
+public class DisplayAvailabilityTestCase {
     static DisplayAvailabilityTimeBlockController displayController;
     static DisplayAvailabilityTimeBlockInputBoundary displayInputBoundary;
     static DisplayAvailabilityTimeBlockOutputBoundary displayPresenter;
@@ -39,7 +37,7 @@ public class displayAvailabilityTestCase {
         InMemoryUser.setActiveUser(user);
         List<DisplayAvailabilityTimeBlockModel> list = new ArrayList<>();
 
-
+        // TODO: FINISH WRITING TESTS
 
     }
 

@@ -1,10 +1,9 @@
+package use_cases.suggest_password;
+
 import entity_layer.PasswordSuggester;
 import entity_layer.RandomPasswordGenerator;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
-import use_cases.suggest_password.PasswordSuggestionController;
-import use_cases.suggest_password.PasswordSuggestionInputBoundary;
-import use_cases.suggest_password.PasswordSuggestionInteractor;
 
 import static entity_layer.PasswordSuggester.MIN_PASSWORD_LEN;
 

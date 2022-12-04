@@ -1,3 +1,5 @@
+package use_cases.user_registration;
+
 import entity_layer.InMemoryUser;
 import entity_layer.User;
 import use_cases.user_registration.UserRegistrationController;

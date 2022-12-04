@@ -1,3 +1,5 @@
+package use_cases.login;
+
 import config.CommonCryptograph;
 import config.Cryptograph;
 import config.UserDataStoreGateway;

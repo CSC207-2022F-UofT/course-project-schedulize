@@ -1,4 +1,4 @@
-package task_display_ui;
+package use_cases.task_display_ui;
 
 import UI.task_display_UI.*;
 import entity_factories.CommonTaskTreeFactory;

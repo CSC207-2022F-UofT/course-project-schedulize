@@ -1,4 +1,4 @@
-package add_task;
+package use_cases.add_task;
 import entity_factories.*;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
