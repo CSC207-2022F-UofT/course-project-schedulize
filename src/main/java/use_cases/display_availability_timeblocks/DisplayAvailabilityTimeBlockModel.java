@@ -1,4 +1,5 @@
 package use_cases.display_availability_timeblocks;
+
 /**
  * A model class for packaging the required info needed by the DisplayAvailabilityTimeBlockModel.
  * Created: 11/28/2022
@@ -6,7 +7,6 @@ package use_cases.display_availability_timeblocks;
  *
  * @author Amir Bare; amira
  */
-
 public class DisplayAvailabilityTimeBlockModel {
 
     private final String startTime;

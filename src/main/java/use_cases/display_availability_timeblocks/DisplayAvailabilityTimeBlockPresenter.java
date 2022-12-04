@@ -13,6 +13,11 @@ public class DisplayAvailabilityTimeBlockPresenter implements DisplayAvailabilit
 
     private final List<AvailabilityUiInterface> availabilityViews;
 
+    /**
+     * Constructs a DisplayAvailabilityTimeBlockPresenter
+     *
+     * @param availabilityViews The list of Views observing this presenter
+     */
     public DisplayAvailabilityTimeBlockPresenter(List<AvailabilityUiInterface> availabilityViews) {
         this.availabilityViews = availabilityViews;
     }
@@ -29,6 +34,11 @@ public class DisplayAvailabilityTimeBlockPresenter implements DisplayAvailabilit
         }
     }
 
+    /**
+     * Adds a view to observe this presenter
+     *
+     * @param view The view to be added
+     */
     @Override
     public void addAvailabilityObserver(AvailabilityUiInterface view) {
         this.availabilityViews.add(view);

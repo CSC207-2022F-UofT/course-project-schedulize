@@ -7,5 +7,8 @@ package use_cases.display_availability_timeblocks;
  * @author amira
  */
 public interface DisplayAvailabilityTimeBlockInputBoundary {
+    /**
+     * Prepares the user's availability for View display
+     */
     void displayAvailabilityTimeBlock();
 }
