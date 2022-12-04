@@ -43,63 +43,75 @@ import java.util.ArrayList;
 
 public class Main {
     public static void main(String[] args) {
-
+        // New user architecture classes
         Cryptograph cipher = new CommonCryptograph();
         UserFactory factory = new CommonUserFactory();
         UserDataStoreGateway storage = new UserStorage(cipher);
         PasswordSuggester suggester = new RandomPasswordGenerator();
 
+        // Window management and program lifetime saving
         SaveUserInputBoundary saveInteractor = new SaveUserInteractor(storage);
         SaveUserController saveController = new SaveUserController(saveInteractor);
         WindowManager windows = new CommonWindowManager(saveController);
 
+        // Registration use case
         UserRegistrationInteractor interactor = new UserRegistrationInteractor(factory, storage);
         UserRegistrationController registryController = new UserRegistrationController(interactor);
 
         PasswordSuggestionInputBoundary suggestionInteractor = new PasswordSuggestionInteractor(suggester);
         PasswordSuggestionController suggestionController = new PasswordSuggestionController(suggestionInteractor);
 
+        // Login use case
         LoginInputBoundary loginInteractor = new LoginInteractor(storage);
         LoginController loginController = new LoginController(loginInteractor);
 
+        // Dashboard view use case
         DisplayCurriculumsOutputBoundary dashboardViewPresenter = new DisplayCurriculumsPresenter(new ArrayList<>());
         DisplayCurriculumsInputBoundary dashboardViewInteractor = new DisplayCurriculumsInteractor(dashboardViewPresenter);
         DisplayCurriculumsController dashboardViewController = new DisplayCurriculumsController(dashboardViewInteractor);
 
+        // CreateCurriculum use case
         CurriculumFactory curriculumFactory = new PrebuiltCurriculumFactory();
         CreateCurriculumInputBoundary createCurriculumInteractor = new CreateCurriculumInteractor(curriculumFactory);
         CreateCurriculumController createCurriculumController = new CreateCurriculumController(createCurriculumInteractor);
 
+        // Dashboard UI
         DashboardUI dashboard = new DashboardUI(windows, dashboardViewController, createCurriculumController);
         dashboardViewPresenter.addViewObserver(dashboard);
 
+        // TaskTree view use case
         DisplayTaskTreeOutputBoundary displayTaskTreePresenter = new DisplayTaskTreePresenter();
         DisplayTaskTreeInputBoundary displayTaskTreeInteractor = new DisplayTaskTreeInteractor(displayTaskTreePresenter);
         DisplayTaskTreeController displayTaskTreeController = new DisplayTaskTreeController(displayTaskTreeInteractor);
         TaskTreeUI taskTreeUI = new TaskTreeUI(windows, displayTaskTreeController);
 
+        // Availability view use case
         DisplayAvailabilityTimeBlockPresenter availabilityPresenter = new DisplayAvailabilityTimeBlockPresenter(new ArrayList<>());
         DisplayAvailabilityTimeBlockInteractor availabilityInteractor = new DisplayAvailabilityTimeBlockInteractor(availabilityPresenter);
         DisplayAvailabilityTimeBlockController controller = new DisplayAvailabilityTimeBlockController(availabilityInteractor);
         DisplayAvailabilityTimeBlockUI view = new DisplayAvailabilityTimeBlockUI(windows, controller);
         availabilityPresenter.addAvailabilityObserver(view);
 
+        // Set availability use case
         SetAvailabilityPresenter setAvailabilityPresenter = new SetAvailabilityPresenter(new ArrayList<>());
         SetAvailabilityInteractor setAvailabilityInteractor = new SetAvailabilityInteractor(setAvailabilityPresenter);
         SetAvailabilityController setAvailabilityController = new SetAvailabilityController(setAvailabilityInteractor);
         SetAvailabilityUI setAvailabilitViewUI = new SetAvailabilityUI(windows, setAvailabilityController);
         setAvailabilityPresenter.addViewObserver(setAvailabilitViewUI);
 
+        // Complete task use case
         CompleteTaskOutputBoundary completeTaskPresenter = new CompleteTaskPresenter(new ArrayList<>());
         CompleteTaskInputBoundary completeTaskInteractor = new CompleteTaskInteractor(completeTaskPresenter);
         CompleteTaskController completeTaskController = new CompleteTaskController(completeTaskInteractor);
 
+        // TaskUI view use case
         TaskUiOutputBoundary taskViewPresenter = new TaskUiModelPresenter(new ArrayList<>());
         TaskUiInputBoundary taskViewInteractor = new TaskUiInteractor(taskViewPresenter);
         TaskUiController taskViewController = new TaskUiController(taskViewInteractor);
         TaskUI taskView = new TaskUI(windows, completeTaskController, taskViewController);
         taskViewPresenter.addViewObserver(taskView);
 
+        // Add task use case
         TaskTreeFactory taskTreeFactory = new CommonTaskTreeFactory();
         TaskFactory taskFactory = new CommonTaskFactory();
         AddTaskOutputBoundary addTaskPresenter = new AddTaskPresenter();
@@ -107,7 +119,7 @@ public class Main {
         AddTaskController addingTask = new AddTaskController(addTaskInteractor);
         JFrame createTaskUI = new CreateTaskUI(windows, addingTask);
 
-
+        // Login and registration views, program start
         CreateAccountUI createAccountWindow = new CreateAccountUI(windows, registryController, suggestionController);
         JFrame mainWindow = new LoginUI(windows, loginController);
     }
