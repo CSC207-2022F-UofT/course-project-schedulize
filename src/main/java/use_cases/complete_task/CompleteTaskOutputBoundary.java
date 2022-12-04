@@ -10,4 +10,5 @@ package use_cases.complete_task;
  */
 public interface CompleteTaskOutputBoundary {
     String taskCompleted(CompletedTaskModel completedTask);
+    String taskUncompleted(CompletedTaskModel uncompletedTask);
 }

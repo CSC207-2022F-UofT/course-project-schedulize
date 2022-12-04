@@ -11,4 +11,5 @@ package use_cases.complete_task;
  */
 public interface CompleteTaskInputBoundary {
     void completeTask(int curriculumId, int taskId);
+    void uncompleteTask(int curriculumId, int taskId);
 }
