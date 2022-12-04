@@ -22,6 +22,11 @@ public class CreateCurriculumInteractor implements CreateCurriculumInputBoundary
     /* ************ *\
     *  Constructors  *
     \* ************ */
+    /**
+     * Constructs a CreateCurriculumInteractor
+     *
+     * @param curriculumFactory The CurriculumFactory this interactor will use to create new curriculums
+     */
     public CreateCurriculumInteractor(CurriculumFactory curriculumFactory) {
         this.curriculumFactory = curriculumFactory;
     }
