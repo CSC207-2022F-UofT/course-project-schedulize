@@ -12,7 +12,7 @@ import entity_layer.*;
  * @author Bmguiler
  */
 
-public class AddTaskUseCase implements AddTaskInputBoundary{
+public class AddTaskInteractor implements AddTaskInputBoundary{
 
     private final AddTaskOutputBoundary presenter;
     private final TaskFactory taskFactory;
@@ -26,8 +26,8 @@ public class AddTaskUseCase implements AddTaskInputBoundary{
      * @param taskFactory creates a new Task object.
      * @param taskTreeFactory creates a new Task Tree object.
      */
-    public AddTaskUseCase(AddTaskOutputBoundary presenter,
-                          TaskFactory taskFactory, TaskTreeFactory taskTreeFactory){
+    public AddTaskInteractor(AddTaskOutputBoundary presenter,
+                             TaskFactory taskFactory, TaskTreeFactory taskTreeFactory){
         this.presenter = presenter;
         this.taskFactory = taskFactory;
         this.taskTreeFactory = taskTreeFactory;

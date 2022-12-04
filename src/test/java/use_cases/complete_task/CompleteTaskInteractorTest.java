@@ -3,14 +3,13 @@ import entity_factories.*;
 import entity_layer.*;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
-import use_cases.complete_task.*;
 
 import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-public class CompleteTaskUseCaseTest {
+public class CompleteTaskInteractorTest {
     static CompleteTaskController controller;
     static CompleteTaskInputBoundary interactor;
     static CompleteTaskOutputBoundary presenter;
@@ -47,7 +46,7 @@ public class CompleteTaskUseCaseTest {
         curriculum.getGoal().addSubTaskTree(attendClassTT);
 
         presenter = new CompleteTaskPresenter(new ArrayList<>());
-        interactor = new CompleteTaskUseCase(presenter);
+        interactor = new CompleteTaskInteractor(presenter);
         controller = new CompleteTaskController(interactor);
 
     }

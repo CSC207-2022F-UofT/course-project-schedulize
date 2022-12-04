@@ -43,7 +43,7 @@ public class SetAvailabilityTests {
         List<SetAvailabilityViewInterface> testingViewInterfaceList = new ArrayList<>();
         testingViewInterfaceList.add(testingViewInterface);
         presenter = new SetAvailabilityPresenter(testingViewInterfaceList);
-        interactor = new SetAvailabilityUseCase(presenter);
+        interactor = new SetAvailabilityInteractor(presenter);
         controller = new SetAvailabilityController(interactor);
 
         timeBlockFactory = new CommonTimeBlockFactory();

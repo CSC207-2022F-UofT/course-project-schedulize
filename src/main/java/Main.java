@@ -30,7 +30,7 @@ import use_cases.save_user.SaveUserInputBoundary;
 import use_cases.save_user.SaveUserInteractor;
 import use_cases.set_availability.SetAvailabilityController;
 import use_cases.set_availability.SetAvailabilityPresenter;
-import use_cases.set_availability.SetAvailabilityUseCase;
+import use_cases.set_availability.SetAvailabilityInteractor;
 import use_cases.suggest_password.PasswordSuggestionController;
 import use_cases.suggest_password.PasswordSuggestionInputBoundary;
 import use_cases.suggest_password.PasswordSuggestionInteractor;
@@ -86,13 +86,13 @@ public class Main {
         availabilityPresenter.addAvailabilityObserver(view);
 
         SetAvailabilityPresenter setAvailabilityPresenter = new SetAvailabilityPresenter(new ArrayList<>());
-        SetAvailabilityUseCase setAvailabilityUseCase = new SetAvailabilityUseCase(setAvailabilityPresenter);
-        SetAvailabilityController setAvailabilityController = new SetAvailabilityController(setAvailabilityUseCase);
+        SetAvailabilityInteractor setAvailabilityInteractor = new SetAvailabilityInteractor(setAvailabilityPresenter);
+        SetAvailabilityController setAvailabilityController = new SetAvailabilityController(setAvailabilityInteractor);
         SetAvailabilityUI setAvailabilitViewUI = new SetAvailabilityUI(windows, setAvailabilityController);
         setAvailabilityPresenter.addViewObserver(setAvailabilitViewUI);
 
         CompleteTaskOutputBoundary completeTaskPresenter = new CompleteTaskPresenter(new ArrayList<>());
-        CompleteTaskInputBoundary completeTaskInteractor = new CompleteTaskUseCase(completeTaskPresenter);
+        CompleteTaskInputBoundary completeTaskInteractor = new CompleteTaskInteractor(completeTaskPresenter);
         CompleteTaskController completeTaskController = new CompleteTaskController(completeTaskInteractor);
 
         TaskUiOutputBoundary taskViewPresenter = new TaskUiModelPresenter(new ArrayList<>());
@@ -104,7 +104,7 @@ public class Main {
         TaskTreeFactory taskTreeFactory = new CommonTaskTreeFactory();
         TaskFactory taskFactory = new CommonTaskFactory();
         AddTaskOutputBoundary addTaskPresenter = new AddTaskPresenter();
-        AddTaskInputBoundary addTaskInteractor = new AddTaskUseCase(addTaskPresenter, taskFactory, taskTreeFactory);
+        AddTaskInputBoundary addTaskInteractor = new AddTaskInteractor(addTaskPresenter, taskFactory, taskTreeFactory);
         AddTaskController addingTask = new AddTaskController(addTaskInteractor);
         JFrame createTaskUI = new CreateTaskUI(windows, addingTask);
 

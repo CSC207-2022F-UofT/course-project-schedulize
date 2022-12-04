@@ -12,7 +12,7 @@ import java.time.LocalTime;
  *
  * @author ad-obas1187
  */
-public class SetAvailabilityUseCase implements SetAvailabilityInputBoundary {
+public class SetAvailabilityInteractor implements SetAvailabilityInputBoundary {
 
     SetAvailabilityOutputBoundary availabilityPresenter;
     TimeBlockFactory timeBlockFactory;
@@ -23,7 +23,7 @@ public class SetAvailabilityUseCase implements SetAvailabilityInputBoundary {
      *
      * @param availabilityPresenter The presenter sent by the controller
      */
-    public SetAvailabilityUseCase(SetAvailabilityOutputBoundary availabilityPresenter) {
+    public SetAvailabilityInteractor(SetAvailabilityOutputBoundary availabilityPresenter) {
         this.availabilityPresenter = availabilityPresenter;
         this.timeBlockFactory = new CommonTimeBlockFactory();
     }

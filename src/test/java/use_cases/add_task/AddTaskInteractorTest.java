@@ -2,7 +2,6 @@ package use_cases.add_task;
 import entity_factories.*;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
-import use_cases.add_task.*;
 import entity_layer.*;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -15,10 +14,10 @@ import static org.junit.jupiter.api.Assertions.*;
  *
  * @author Bmguiler
  */
-public class AddTaskUseCaseTest {
+public class AddTaskInteractorTest {
 
     static AddTaskController controller;
-    static AddTaskUseCase interactor;
+    static AddTaskInteractor interactor;
     static AddTaskPresenter presenter;
     static User activeUser;
 
@@ -33,7 +32,7 @@ public class AddTaskUseCaseTest {
         TaskFactory taskFactory = new CommonTaskFactory();
         TaskTreeFactory taskTreeFactory= new CommonTaskTreeFactory();
         presenter = new AddTaskPresenter();
-        interactor = new AddTaskUseCase(presenter, taskFactory, taskTreeFactory);
+        interactor = new AddTaskInteractor(presenter, taskFactory, taskTreeFactory);
         controller = new AddTaskController(interactor);
     }
 

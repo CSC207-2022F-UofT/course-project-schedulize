@@ -10,10 +10,10 @@ import entity_layer.*;
  * @author Bmguiler
  */
 
-public class CompleteTaskUseCase implements CompleteTaskInputBoundary {
+public class CompleteTaskInteractor implements CompleteTaskInputBoundary {
     private CompleteTaskOutputBoundary presenter;
 
-    public CompleteTaskUseCase(CompleteTaskOutputBoundary presenter){
+    public CompleteTaskInteractor(CompleteTaskOutputBoundary presenter){
         this.presenter = presenter;
     }
 
