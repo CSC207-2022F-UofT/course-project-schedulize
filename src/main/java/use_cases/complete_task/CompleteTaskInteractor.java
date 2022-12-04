@@ -3,7 +3,6 @@ import entity_layer.*;
 
 /**
  * Use Case for completing a task.
- *
  * Created: 11/11/2022
  * Last updated: 11/18/2022
  *
@@ -11,8 +10,13 @@ import entity_layer.*;
  */
 
 public class CompleteTaskInteractor implements CompleteTaskInputBoundary {
-    private CompleteTaskOutputBoundary presenter;
+    private final CompleteTaskOutputBoundary presenter;
 
+    /**
+     * Constructs a complete Task Interactor
+     *
+     * @param presenter The output boundary this interactor uses to pass information back to the view
+     */
     public CompleteTaskInteractor(CompleteTaskOutputBoundary presenter){
         this.presenter = presenter;
     }

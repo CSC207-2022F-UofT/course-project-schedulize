@@ -4,7 +4,6 @@ import java.util.List;
 
 /**
  * Presenter for the UI that confirms that the task was completed.
- *
  * Created: 11/11/2022
  * Last updated: 11/18/2022
  *
@@ -14,6 +13,11 @@ public class CompleteTaskPresenter implements CompleteTaskOutputBoundary {
 
     private final List<CompleteTaskUiInterface> taskUI;
 
+    /**
+     * Constructs a CompleteTaskPresenter
+     *
+     * @param taskUI A list of observer Views. This list will never exceed a size of one
+     */
     public CompleteTaskPresenter(List<CompleteTaskUiInterface> taskUI){
         this.taskUI = taskUI;
     }
