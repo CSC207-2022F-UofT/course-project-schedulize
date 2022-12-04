@@ -17,10 +17,10 @@ import javax.swing.*;
 public class TaskUI extends CentralWindow implements TaskUiViewInterface {
     private JPanel mainPanel;
     private JProgressBar progressBar1;
-    private JCheckBox completeCheck;
-    private JButton deleteTaskButton;
     private JLabel descriptionLabel;
-    private final CompleteTaskController controller;
+    private JButton completeButton;
+    private JButton undoButton;
+    private final CompleteTaskController completeTaskController;
     private TaskUiModel taskUiModel;
     private TaskUiController displayController;
     private final WindowManager programWindows;
@@ -32,7 +32,7 @@ public class TaskUI extends CentralWindow implements TaskUiViewInterface {
         // configure default frame attributes
         this.configureFrame();
         this.setListeners();
-        this.controller = controller;
+        this. completeTaskController= controller;
         this.displayController = displayController;
     }
 
@@ -78,10 +78,11 @@ public class TaskUI extends CentralWindow implements TaskUiViewInterface {
      * Listener for setting the task as complete
      */
     public void setCompletionListener(){
-        this.completeCheck.addActionListener(actionEvent -> {
-            if (completeCheck.isSelected()) {
-                controller.completeTask(taskUiModel.getCurriculumID(), taskUiModel.getTaskID());
-            }
+        this.completeButton.addActionListener(actionEvent -> {
+            completeTaskController.completeTask(taskUiModel.getCurriculumID(), taskUiModel.getTaskID());
+        });
+        this.undoButton.addActionListener(actionEvent -> {
+            completeTaskController.uncompleteTask(taskUiModel.getCurriculumID(), taskUiModel.getTaskID());
         });
     }
 
@@ -97,7 +98,6 @@ public class TaskUI extends CentralWindow implements TaskUiViewInterface {
     @Override
     public void setVisible(boolean visible) {
         super.setVisible(visible);
-        this.completeCheck.setSelected(false);
         // recenter the window
         this.centreWindow();
     }
