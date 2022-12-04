@@ -1,10 +1,9 @@
 package use_cases.display_curriculums;
 
-import java.util.HashMap;
+import java.util.Map;
 
 /**
  * A model class for packaging the required info needed by the DisplayCurriculumsPresenter
- *
  * Created: 11/30/2022
  * Last updated: 12/01/2022
  *
@@ -12,13 +11,13 @@ import java.util.HashMap;
  */
 
 public class CurriculumsModel {
-    private final HashMap<Integer, String> curriculums;
+    private final Map<Integer, String> curriculums;
 
     /**
      * Constructor
      * @param curriculums A HashMap containing existing curriculums
      */
-    public CurriculumsModel(HashMap<Integer, String> curriculums) {
+    public CurriculumsModel(Map<Integer, String> curriculums) {
         this.curriculums = curriculums;
     }
 
@@ -26,7 +25,7 @@ public class CurriculumsModel {
      * getter for the local variable curriculums
      * @return the curriculums HashMap
      */
-    public HashMap<Integer, String> getCurriculums() {
+    public Map<Integer, String> getCurriculums() {
         return curriculums;
     }
 }

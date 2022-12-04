@@ -8,5 +8,10 @@ package use_cases.suggest_password;
  * @author David Adler
  */
 public interface PasswordSuggestionInputBoundary {
+    /**
+     * Retrieves a new password suggestion
+     *
+     * @return a password suggestion
+     */
     String getNewSuggestion();
 }

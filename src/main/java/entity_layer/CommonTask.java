@@ -13,12 +13,11 @@ public class CommonTask implements Task {
     *  Attributes  *
     \* ********** */
     // Static
-    private static int taskCount = 0;
     private static final int COMPLETION_LOWER_BOUND = 0;
     private static final int COMPLETION_UPPER_BOUND = 100;
 
     // Instance
-    private final transient int id = getNextID();
+    private final int id = this.hashCode();
     private String name;
     private String description;
     private int completion;
@@ -27,7 +26,6 @@ public class CommonTask implements Task {
     /* ************ *\
     *  Constructors  *
     \* ************ */
-
     /**
      * Constructs a CommonTask object with the provided name and description, setting duration and completion to 0
      *
@@ -88,18 +86,9 @@ public class CommonTask implements Task {
         return (completion >= COMPLETION_LOWER_BOUND && completion <= COMPLETION_UPPER_BOUND);
     }
 
-    //Private
-    /**
-     * Gets the ID for the next task in memory
-     */
-    private static int getNextID() {
-        return taskCount++;
-    }
-
     /* **************** *\
     *  Attribute Access  *
     \* **************** */
-
     // Getters
     /**
      * Get this CommonTask's completion level.
@@ -139,16 +128,6 @@ public class CommonTask implements Task {
     @Override
     public int getId() {
         return this.id;
-    }
-
-    /**
-     * Get the total amount of tasks there are.
-     *
-     * @return the static taskCount attribute
-     */
-    @Override
-    public int getTaskCount() {
-        return taskCount;
     }
 
     /**

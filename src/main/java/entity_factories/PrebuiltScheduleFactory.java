@@ -14,8 +14,14 @@ import java.util.ArrayList;
  */
 public class PrebuiltScheduleFactory implements ScheduleFactory {
 
+    /* ********** *\
+    *  Attributes  *
+    \* ********** */
     private final TimeBlockManagerFactory blockManagerFactory = new CommonTimeBlockManagerFactory();
 
+    /* ************* *\
+    *  Functionality  *
+    \* ************* */
     /**
      * Creates an empty Schedule object.
      */

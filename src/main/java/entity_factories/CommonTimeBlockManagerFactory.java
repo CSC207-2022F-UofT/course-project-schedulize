@@ -16,6 +16,9 @@ import java.util.List;
  */
 public class CommonTimeBlockManagerFactory implements TimeBlockManagerFactory {
 
+    /* ************* *\
+    *  Functionality  *
+    \* ************* */
     /**
      * Returns a newly created object of type CommonTimeBlockManager with no TimeBlocks
      *

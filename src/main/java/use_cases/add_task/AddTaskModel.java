@@ -2,7 +2,6 @@ package use_cases.add_task;
 
 /**
  * A model class for packaging the required info needed by the AddTaskPresenter.
- *
  * Created: 11/20/2022
  * Last updated: 11/21/2022
  *
@@ -17,6 +16,7 @@ public class AddTaskModel {
 
     /**
      * Add Task Model Constructor method.
+     *
      * @param taskName the name of the task being added.
      * @param taskDescription the description of the task being added.
      * @param curriculumName the name of the curriculum that the task is being added to.

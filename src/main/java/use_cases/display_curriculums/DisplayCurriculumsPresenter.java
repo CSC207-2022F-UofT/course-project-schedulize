@@ -4,7 +4,6 @@ import java.util.List;
 
 /**
  * A presenter class that provides output data to the dashboard
- *
  * Created: 11/30/2022
  * Last updated: 12/01/2022
  *
@@ -14,6 +13,11 @@ public class DisplayCurriculumsPresenter implements DisplayCurriculumsOutputBoun
 
     private final List<DisplayCurriculumsInterface> viewObservers;
 
+    /**
+     * Constructs a DisplayCurriculumsPresenter
+     *
+     * @param viewObservers This presenter's list of observing Views
+     */
     public DisplayCurriculumsPresenter(List<DisplayCurriculumsInterface> viewObservers) {
         this.viewObservers = viewObservers;
     }
@@ -27,6 +31,11 @@ public class DisplayCurriculumsPresenter implements DisplayCurriculumsOutputBoun
         this.viewObservers.get(0).displayCurriculums(curriculumsModel);
     }
 
+    /**
+     * Add an observer View to this presenter's observers
+     *
+     * @param viewObserver an observing view
+     */
     @Override
     public void addViewObserver(DisplayCurriculumsInterface viewObserver) {
         this.viewObservers.add(viewObserver);

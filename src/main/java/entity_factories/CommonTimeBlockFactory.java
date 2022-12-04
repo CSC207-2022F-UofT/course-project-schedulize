@@ -14,6 +14,9 @@ import java.time.LocalDateTime;
  */
 public class CommonTimeBlockFactory implements TimeBlockFactory {
 
+    /* ************* *\
+    *  Functionality  *
+    \* ************* */
     /**
      * Creates a TimeBlock with the provided start and end times.
      *

@@ -14,6 +14,11 @@ import java.util.List;
 public class DisplayAvailabilityTimeBlockInteractor implements DisplayAvailabilityTimeBlockInputBoundary {
     private final DisplayAvailabilityTimeBlockOutputBoundary presenter;
 
+    /**
+     * Constructs a DisplayAvailabilityTimeBlockInteractor
+     *
+     * @param presenter the out boundary this interactor will use to relay information back to the view
+     */
     public DisplayAvailabilityTimeBlockInteractor(DisplayAvailabilityTimeBlockOutputBoundary presenter) {
         this.presenter = presenter;
     }
