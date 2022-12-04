@@ -79,7 +79,7 @@ public class DisplayAvailabilityTestCase {
     }
 
     /**
-     * Tests that the return output from the presenter is the expected return output, based on the time right now
+     * Tests that the return output from the presenter is the expected return output, based on an inputted test time
      */
     @Test
     public void testDisplayUserAvailability(){
@@ -91,17 +91,19 @@ public class DisplayAvailabilityTestCase {
 
         // add the 'now' time block to the user's availability
         CommonTimeBlockFactory factory = new CommonTimeBlockFactory();
-        user.getSchedule().addAvailabilityBlock(factory.create(LocalDateTime.now(), LocalDateTime.now()));
+
+        LocalDateTime testTime = LocalDateTime.of(2022, 10, 1, 10, 0);
+        user.getSchedule().addAvailabilityBlock(factory.create(testTime, testTime));
         displayController.displayAvailabilityTimeBlock();
 
         // compare expected and actual start time
         for (String startBlock: view.getStartTimes()) {
-            assert startBlock.equals(((Integer) (LocalDateTime.now().getHour())).toString());
+            assert startBlock.equals(((Integer) (testTime.getHour())).toString());
         }
 
         // compare expected and actual end time
         for (String startBlock: view.getEndTimes()) {
-            assert startBlock.equals(((Integer) (LocalDateTime.now().getHour())).toString());
+            assert startBlock.equals(((Integer) (testTime.getHour())).toString());
         }
     }
 
