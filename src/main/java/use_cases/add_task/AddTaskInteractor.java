@@ -5,7 +5,6 @@ import entity_layer.*;
 
 /**
  * Use Case for adding a task.
- *
  * Created: 11/20/2022
  * Last updated: 11/21/2022
  *
@@ -50,8 +49,6 @@ public class AddTaskInteractor implements AddTaskInputBoundary{
 
         TaskTree newTaskTree = this.taskTreeFactory.createWithTask(taskName, taskDescription);
         Task newTask = newTaskTree.getTask();
-        //TaskTree newTaskTree = this.taskTreeFactory.create();
-        // may need to implement a new line if we want to create a new task with a duration.
 
         Schedule schedule = InMemoryUser.getActiveUser().getSchedule();
         Curriculum curriculum = schedule.getCurriculum(curriculumId);
