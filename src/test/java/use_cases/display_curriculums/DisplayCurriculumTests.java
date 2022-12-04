@@ -8,7 +8,7 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.Map;
 
 /**
  * A class that tests the display use case for curriculums on the dashboard
@@ -26,14 +26,14 @@ public class DisplayCurriculumTests {
      * updates
      */
     private static class TestView implements DisplayCurriculumsInterface {
-        private HashMap<Integer, String> curriculums;
+        private Map<Integer, String> curriculums;
 
         @Override
         public void displayCurriculums(CurriculumsModel curriculumsModel) {
             this.curriculums = curriculumsModel.getCurriculums();
         }
 
-        public HashMap<Integer, String> getCurriculums() {
+        public Map<Integer, String> getCurriculums() {
             return this.curriculums;
         }
     }

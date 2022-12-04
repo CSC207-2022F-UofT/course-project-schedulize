@@ -2,7 +2,6 @@ package use_cases.display_curriculums;
 
 /**
  * A controller class called to display curriculums on the dashboard
- *
  * Created: 11/30/2022
  * Last updated: 12/01/2022
  *

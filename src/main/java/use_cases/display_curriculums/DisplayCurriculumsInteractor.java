@@ -8,7 +8,6 @@ import java.util.HashMap;
 
 /**
  * Collects user schedule information to present to the Dashboard UI
- *
  * Created: 11/30/2022
  * Last updated: 12/01/2022
  *
@@ -18,10 +17,18 @@ public class DisplayCurriculumsInteractor implements DisplayCurriculumsInputBoun
 
     private final DisplayCurriculumsOutputBoundary presenter;
 
+    /**
+     * Constructs a DisplayCurriculumsInteractor
+     *
+     * @param presenter the output boundary this interactor will use to pass information through to the View
+     */
     public DisplayCurriculumsInteractor(DisplayCurriculumsOutputBoundary presenter) {
         this.presenter = presenter;
     }
 
+    /**
+     * Prepare the required Schedule's curriculums for the View
+     */
     @Override
     public void displayCurriculums() {
         Schedule schedule = InMemoryUser.getActiveUser().getSchedule();
