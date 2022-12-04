@@ -25,7 +25,11 @@ functionality we may want to add in the future.
 ### Singletons
 Our program includes a Singleton for the logged-in user, saved in the InMemoryUser class. This allows all interactors
 to reference the currently logged-in user without having an actual reference to the user in their code, which 
-makes it far more difficult to create any errors as far as changing the attributes of an inactive user
+makes it far more difficult to create any errors as far as changing the attributes of an inactive user.
+
+Additionally, the PathManager for the program is also a Singleton, so that we can reconfigure paths to access icons, and 
+saved users all in one single place, and with a single instance of the class across any part of the program that requires 
+access to files.
 
 ### Observers
 We came across an issue while designing out UIs: we knew that UIs had to depend on controllers, so we built our controllers
