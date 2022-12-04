@@ -6,7 +6,6 @@ import entity_layer.Task;
 
 /**
  * Interactor class for the display task use case
- *
  * Created: 11/26/2022
  * Last updated: 11/29/2022
  *
@@ -14,6 +13,12 @@ import entity_layer.Task;
  */
 public class TaskUiInteractor implements TaskUiInputBoundary {
     private final TaskUiOutputBoundary presenter;
+
+    /**
+     * Constructs a TaskUiInteractor
+     *
+     * @param presenter the output boundary used to relay entity information to the view
+     */
     public TaskUiInteractor(TaskUiOutputBoundary presenter) {
         this.presenter = presenter;
     }

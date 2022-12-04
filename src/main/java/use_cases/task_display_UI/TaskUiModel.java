@@ -2,7 +2,6 @@ package use_cases.task_display_UI;
 
 /**
  * Model class that packages the required information used by TaskUiModelPresenter
- *
  * Created: 11/26/2022
  * Last updated: 11/29/2022
  *
@@ -14,6 +13,16 @@ public class TaskUiModel {
     int completion;
     int curriculumID;
     int taskID;
+
+    /**
+     * Constructs a model of a Task for the TaskUI
+     *
+     * @param name the model task's name
+     * @param description the model task's description
+     * @param completion the model task's completion
+     * @param curriculumID the id of the curriculum the original task belonged to
+     * @param taskID the id of the original task entity
+     */
     public TaskUiModel(String name, String description, int completion, int curriculumID, int taskID) {
         this.name = name;
         this.description = description;
