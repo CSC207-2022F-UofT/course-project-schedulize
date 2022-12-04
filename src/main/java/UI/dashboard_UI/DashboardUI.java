@@ -32,6 +32,7 @@ public class DashboardUI extends CentralWindow implements DisplayCurriculumsInte
     private JTextField curriculumIdField;
     private JButton loadCurriculumButton;
     private JButton availabilityButton;
+    private JLabel errorLabel;
     private final WindowManager programWindows;
     private final DisplayCurriculumsController displayerController;
     private final CreateCurriculumController createCurriculumController;
@@ -97,10 +98,16 @@ public class DashboardUI extends CentralWindow implements DisplayCurriculumsInte
      */
     private void loadCurriculumListener() {
         this.loadCurriculumButton.addActionListener(actionEvent -> {
-            CurriculumDependentWindow taskTreeUI = (CurriculumDependentWindow) this.programWindows.getWindow(WindowManager.TASKTREE_REFERENCE_KEY);
-            taskTreeUI.setCurriculumID(Integer.parseInt(curriculumIdField.getText()));
+            CurriculumDependentWindow taskTreeUI =
+                    (CurriculumDependentWindow) this.programWindows.getWindow(WindowManager.TASKTREE_REFERENCE_KEY);
+            try {
+                taskTreeUI.setCurriculumID(Integer.parseInt(curriculumIdField.getText()));
+                this.programWindows.openWindow(WindowManager.TASKTREE_REFERENCE_KEY);
+            } catch (NullPointerException | NumberFormatException e) {
+                this.errorLabel.setText("Must Input Valid Curriculum ID");
+                return;
+            }
             this.programWindows.closeWindow(WindowManager.DASHBOARD_REFERENCE_KEY);
-            this.programWindows.openWindow(WindowManager.TASKTREE_REFERENCE_KEY);
         });
     }
 
@@ -115,12 +122,11 @@ public class DashboardUI extends CentralWindow implements DisplayCurriculumsInte
     public void setVisible(boolean visible) {
         super.setVisible(visible);
         this.curriculumName.setText("");
+        this.errorLabel.setText("");
         this.displayerController.openDashboard();
         // recenter the window
         this.centreWindow();
     }
-
-    // TODO: Open time block manager UI
 
     @Override
     public void displayCurriculums(CurriculumsModel curriculumsModel) {

@@ -221,6 +221,7 @@ public class TaskTreeUI extends CentralWindow implements CurriculumDependentWind
     @Override
     public void setCurriculumID(int id) {
         this.displayId = id;
+        this.treeSetUp();
     }
 }
 
