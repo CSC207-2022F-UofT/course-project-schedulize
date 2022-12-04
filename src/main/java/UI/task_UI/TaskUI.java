@@ -28,6 +28,13 @@ public class TaskUI extends CentralWindow implements TaskUiViewInterface {
     private final TaskUiController displayController;
     private final WindowManager programWindows;
 
+    /**
+     * Constructs a TaskUI JPanel object
+     *
+     * @param existingWindows The WindowManager responsible for this window
+     * @param controller A controller to initialize the complete task use case
+     * @param displayController A controller to populate this view with relevant Task information
+     */
     public TaskUI(WindowManager existingWindows, CompleteTaskController controller, TaskUiController displayController) {
         super();
         this.programWindows = existingWindows;

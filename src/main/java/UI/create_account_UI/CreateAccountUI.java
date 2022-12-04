@@ -40,6 +40,10 @@ public class CreateAccountUI extends CentralWindow {
 
     /**
      * Default constructor for the create account window
+     *
+     * @param existingWindows The WindowManager this window will be directed by
+     * @param registrationController A controller for initializing the creation of a User entity
+     * @param pwSuggestionController A controller for initializing the suggestion of a password
      */
     public CreateAccountUI(WindowManager existingWindows, UserRegistrationController registrationController,
                            PasswordSuggestionController pwSuggestionController) {

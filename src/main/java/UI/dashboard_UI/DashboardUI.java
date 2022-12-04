@@ -127,6 +127,11 @@ public class DashboardUI extends CentralWindow implements DisplayCurriculumsInte
         this.centreWindow();
     }
 
+    /**
+     * Populates the view with the passed in curriculums
+     *
+     * @param curriculumsModel A model for a list of Curriculum objects
+     */
     @Override
     public void displayCurriculums(CurriculumsModel curriculumsModel) {
         List<String> curriculums = new ArrayList<>();

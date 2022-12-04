@@ -29,12 +29,13 @@ public class DisplayAvailabilityTimeBlockUI extends CentralWindow implements Ava
 
     /**
      * Default constructor for the view availability window
+     *
+     * @param existingWindows The WindowManager responsible for this window
+     * @param displayController The controller reponsible for providing the view with relevent entity information
      */
-
     public DisplayAvailabilityTimeBlockUI(WindowManager existingWindows,
                                           DisplayAvailabilityTimeBlockController displayController) {
         super();
-//         store reference to existing windows in program
         this.programWindows = existingWindows;
         this.programWindows.addWindow(WindowManager.AVAILABILITY_REFERENCE_KEY, this);
         this.displayController = displayController;
@@ -82,8 +83,7 @@ public class DisplayAvailabilityTimeBlockUI extends CentralWindow implements Ava
     }
 
     /**
-     * Table of two columns; day of the week and times.
-     *
+     * Generates the table of available times per this Schedule's availability
      */
     private void createTable(List<DisplayAvailabilityTimeBlockModel> availabilities){
         String[][] times = new String[7][2];
@@ -122,6 +122,11 @@ public class DisplayAvailabilityTimeBlockUI extends CentralWindow implements Ava
         this.displayController.displayAvailabilityTimeBlock();
     }
 
+    /**
+     * Populate this screen's availabilities with information from the availability model
+     *
+     * @param availability the availability model
+     */
     @Override
     public void drawAvailabilities(List<DisplayAvailabilityTimeBlockModel> availability) {
         this.createTable(availability);

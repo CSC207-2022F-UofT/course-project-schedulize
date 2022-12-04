@@ -29,6 +29,9 @@ public class LoginUI extends CentralWindow {
 
     /**
      * Default constructor for Login UI
+     *
+     * @param existingWindows The WindowManager responsible for this window
+     * @param controller The controller for the user login use case
      */
     public LoginUI(WindowManager existingWindows, LoginController controller) {
         super();

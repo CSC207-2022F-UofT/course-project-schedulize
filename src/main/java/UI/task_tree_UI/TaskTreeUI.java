@@ -34,6 +34,9 @@ public class TaskTreeUI extends CentralWindow implements CurriculumDependentWind
 
     /**
      * Default constructor for TaskTree UI
+     *
+     * @param windowManager The WindowManager responsible for this window
+     * @param displayController The controller responsible for beginning the display task tree use case
      */
     public TaskTreeUI(WindowManager windowManager, DisplayTaskTreeController displayController) {
         this.programWindows = windowManager;

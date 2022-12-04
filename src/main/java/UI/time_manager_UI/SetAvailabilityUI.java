@@ -1,13 +1,5 @@
 package UI.time_manager_UI;
 
-/**
- * A SetAvailabilityUI that uses JFrame to allow a User to input their available time during the days of the week.
- * Created:2022-12-01
- * Last updated:2022-12-02
- *
- * @author Amir Bare
- */
-
 import UI.CentralWindow;
 import UI.WindowManager;
 import use_cases.set_availability.SetAvailabilityController;
@@ -17,9 +9,15 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
+/**
+ * A SetAvailabilityUI that uses JFrame to allow a User to input their available time during the days of the week.
+ * Created:2022-12-01
+ * Last updated:2022-12-02
+ *
+ * @author Amir Bare
+ */
 public class SetAvailabilityUI extends CentralWindow implements SetAvailabilityViewInterface {
 
     private JTextField sundayFrom;
@@ -44,7 +42,7 @@ public class SetAvailabilityUI extends CentralWindow implements SetAvailabilityV
     private final WindowManager programWindows;
 
     /**
-     * Default constructor for the UI
+     * Default constructor for the SetAvailabilityUI
      *
      * @param existingWindows the reference to the window manager for opening and closing other windows
      * @param controller controller that gets info that the UI can then show to the user
