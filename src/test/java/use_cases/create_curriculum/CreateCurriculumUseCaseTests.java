@@ -1,14 +1,11 @@
 package use_cases.create_curriculum;
 
+import entity_factories.CommonUserFactory;
 import entity_factories.CurriculumFactory;
 import entity_factories.PrebuiltCurriculumFactory;
+import entity_layer.InMemoryUser;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
-import use_cases.display_curriculums.CurriculumsModel;
-import use_cases.display_curriculums.DisplayCurriculumsInterface;
-
-import java.util.ArrayList;
-import java.util.HashMap;
 
 public class CreateCurriculumUseCaseTests {
     static CreateCurriculumController controller;
@@ -20,22 +17,14 @@ public class CreateCurriculumUseCaseTests {
         controller = new CreateCurriculumController(interactor);
     }
 
-    static class TestView implements DisplayCurriculumsInterface {
-
-        private HashMap<Integer, String> curriculums;
-
-        @Override
-        public void displayCurriculums(CurriculumsModel curriculumsModel) {
-            this.curriculums = curriculumsModel.getCurriculums();
-        }
-
-        public HashMap<Integer, String> getCurriculums() {
-            return this.curriculums;
-        }
-    }
-
     @Test
-    private void testCurriculumCreation() {
+    public void testCurriculumCreation() {
+        InMemoryUser.setActiveUser(new CommonUserFactory().create("username", "like@yaho.co",
+                "password"));
+        controller.createCurriculum("new_curriculum");
+        controller.createCurriculum("new_curriculum");
+        controller.createCurriculum("new_curriculum");
 
+        assert InMemoryUser.getActiveUser().getSchedule().getCurriculums().size() == 3;
     }
 }
