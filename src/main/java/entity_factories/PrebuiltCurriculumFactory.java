@@ -2,7 +2,6 @@ package entity_factories;
 
 import entity_layer.CommonCurriculum;
 import entity_layer.Curriculum;
-import entity_layer.Task;
 import entity_layer.TaskTree;
 
 /**
@@ -14,9 +13,15 @@ import entity_layer.TaskTree;
  */
 public class PrebuiltCurriculumFactory implements CurriculumFactory {
 
+    /* ********** *\
+    *  Attributes  *
+    \* ********** */
     private final TaskTreeFactory taskTreeFactory = new CommonTaskTreeFactory();
     private final TimeBlockManagerFactory timeBlockManagerFactory = new CommonTimeBlockManagerFactory();
 
+    /* ************* *\
+    *  Functionality  *
+    \* ************* */
     /**
      * Returns a new Curriculum object assigned the given name
      *

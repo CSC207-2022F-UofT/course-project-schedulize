@@ -11,6 +11,12 @@ public class LoginRequest {
     private final String username;
     private final String password;
 
+    /**
+     * Constructs a LoginRequest model
+     *
+     * @param username the username provided
+     * @param password the password provided
+     */
     public LoginRequest(String username, String password) {
         this.username = username;
         this.password = password;

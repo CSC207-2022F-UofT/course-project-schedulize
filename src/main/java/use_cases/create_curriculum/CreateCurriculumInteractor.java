@@ -18,15 +18,17 @@ public class CreateCurriculumInteractor implements CreateCurriculumInputBoundary
     *  Attributes  *
     \* ********** */
     private final CurriculumFactory curriculumFactory;
-    private final CreateCurriculumOutputBoundary outputBoundary;
 
     /* ************ *\
     *  Constructors  *
     \* ************ */
-    public CreateCurriculumInteractor(CurriculumFactory curriculumFactory,
-                                      CreateCurriculumOutputBoundary outputBoundary) {
+    /**
+     * Constructs a CreateCurriculumInteractor
+     *
+     * @param curriculumFactory The CurriculumFactory this interactor will use to create new curriculums
+     */
+    public CreateCurriculumInteractor(CurriculumFactory curriculumFactory) {
         this.curriculumFactory = curriculumFactory;
-        this.outputBoundary = outputBoundary;
     }
 
     /* ************* *\
@@ -42,9 +44,6 @@ public class CreateCurriculumInteractor implements CreateCurriculumInputBoundary
         Schedule activeUserSchedule = InMemoryUser.getActiveUser().getSchedule();
         Curriculum newCurriculum = curriculumFactory.create(name);
         activeUserSchedule.addCurriculum(newCurriculum);
-
-        CurriculumModel curriculumModel = new CurriculumModel(newCurriculum.getName(), newCurriculum.getID());
-        this.outputBoundary.displayCurriculum(curriculumModel);
     }
 
 }

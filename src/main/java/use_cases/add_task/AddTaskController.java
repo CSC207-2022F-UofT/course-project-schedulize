@@ -2,14 +2,13 @@ package use_cases.add_task;
 
 /**
  * Controller for the Add Task use case; receives user input from the UI.
- *
  * Created: 11/20/2022
  * Last updated: 11/21/2022
  *
  * @author Bmguiler
  */
 public class AddTaskController {
-    private AddTaskInputBoundary userInput;
+    private final AddTaskInputBoundary userInput;
 
     /**
      * Controller constructor.
@@ -34,6 +33,4 @@ public class AddTaskController {
                         int curriculumId){
         this.userInput.addTask(taskName, taskDescription, parentId, curriculumId);
     }
-
-    // TODO: what if there is no parent task?
 }

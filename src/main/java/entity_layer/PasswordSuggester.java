@@ -8,6 +8,11 @@ package entity_layer;
  * @author David Adler
  */
 public interface PasswordSuggester {
+    /**
+     * Returns a suggested password option.
+     *
+     * @return A possible password.
+     */
     String suggestPassword();
     int MIN_PASSWORD_LEN = 10;
 }

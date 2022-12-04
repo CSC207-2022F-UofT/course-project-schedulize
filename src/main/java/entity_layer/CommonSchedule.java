@@ -14,12 +14,18 @@ public class CommonSchedule implements Schedule {
     /* ********** *\
     *  Attributes  *
     \* ********** */
-    List<Curriculum> curriculums;
-    TimeBlockManager availability;
+    private final List<Curriculum> curriculums;
+    private final TimeBlockManager availability;
 
     /* ************ *\
     *  Constructors  *
     \* ************ */
+    /**
+     * Constructs a CommonSchedule
+     *
+     * @param curriculums The list of Curriculums included in this schedule
+     * @param availability The TimeBlockManager dictating when the associated User is available to work within this Schedule
+     */
     public CommonSchedule(List<Curriculum> curriculums, TimeBlockManager availability) {
         this.curriculums = curriculums;
         this.availability = availability;

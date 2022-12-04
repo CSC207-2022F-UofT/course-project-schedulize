@@ -14,12 +14,26 @@ import java.util.ArrayList;
  */
 public class CommonScheduleFactory implements ScheduleFactory {
 
+    /* ********** *\
+    *  Attributes  *
+    \* ********** */
     private final TimeBlockManagerFactory blockManagerFactory;
 
+    /* ************ *\
+    *  Constructors  *
+    \* ************ */
+    /**
+     * Constructs a CommonScheduleFactory
+     *
+     * @param blockManagerFactory The TimeBlockManager factory this will use to create an empty availabilities list
+     */
     public CommonScheduleFactory(TimeBlockManagerFactory blockManagerFactory) {
         this.blockManagerFactory = blockManagerFactory;
     }
 
+    /* ************* *\
+    *  Functionality  *
+    \* ************* */
     /**
      * Creates an empty CommonSchedule object.
      */

@@ -2,7 +2,6 @@ package use_cases.complete_task;
 
 /**
  * A model class for packaging the required info needed by the completeTaskPresenter.
- *
  * Created: 11/18/2022
  * Last updated: 11/18/2022
  *
@@ -13,6 +12,11 @@ public class CompletedTaskModel {
     private final String curriculumName;
     private final String taskName;
 
+    /**
+     * Constructs a CompletedTaskModel
+     * @param curriculumName The curriculum this Task would belong to
+     * @param taskName The Task's name
+     */
     public CompletedTaskModel(String curriculumName, String taskName){
         this.curriculumName = curriculumName;
         this.taskName = taskName;

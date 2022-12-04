@@ -2,11 +2,8 @@ package UI;
 
 import use_cases.save_user.SaveUserController;
 
-import javax.management.openmbean.InvalidKeyException;
 import javax.swing.*;
 import java.awt.event.WindowEvent;
-import java.security.KeyException;
-import java.util.Collection;
 import java.util.HashMap;
 
 /**
@@ -27,7 +24,7 @@ public class CommonWindowManager implements WindowManager {
      */
     public CommonWindowManager(SaveUserController saveController) {
         this.saveController = saveController;
-        this.existingWindows = new HashMap<String, JFrame>();
+        this.existingWindows = new HashMap<>();
         this.numOpenWindows = 0;
     }
 
@@ -59,8 +56,8 @@ public class CommonWindowManager implements WindowManager {
      */
     @Override
     public void openWindow(String key) {
+        if (!this.existingWindows.get(key).isVisible()) this.numOpenWindows += 1;
         this.existingWindows.get(key).setVisible(true);
-        this.numOpenWindows += 1;
     }
 
     /**
@@ -69,9 +66,9 @@ public class CommonWindowManager implements WindowManager {
      */
     @Override
     public void closeWindow(String key) {
+        if (this.existingWindows.get(key).isVisible()) this.numOpenWindows -= 1;
         this.existingWindows.get(key).setVisible(false);
         this.saveController.saveInMemoryUser();
-        this.numOpenWindows -= 1;
     }
 
     /**

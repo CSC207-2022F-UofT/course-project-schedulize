@@ -56,6 +56,7 @@ public class RandomPasswordGenerator implements PasswordSuggester {
 
     /**
      * Gets the capital letters to put in the new random password
+     *
      * @return a random number of capital letters in a char array
      */
     private char[] getCapitalCharacters() {
@@ -67,6 +68,7 @@ public class RandomPasswordGenerator implements PasswordSuggester {
 
     /**
      * Gets the special characters to put in the new random password
+     *
      * @return a random number of special characters in a char array
      */
     private char[] getSpecialCharacters() {
@@ -78,6 +80,7 @@ public class RandomPasswordGenerator implements PasswordSuggester {
 
     /**
      * Gets the number characters to put in the new random password
+     *
      * @return a random number of number characters in a char array
      */
     private char[] getNumberCharacters() {
@@ -90,6 +93,7 @@ public class RandomPasswordGenerator implements PasswordSuggester {
     /**
      * Gets the maximum number of the random int to select + 1, since the upperBound of the getRandomInt function is
      * non-inclusive
+     *
      * @return an integer representing the maximum number of characters that can be selected + 1
      */
     private int getUpperBound() {
@@ -100,6 +104,7 @@ public class RandomPasswordGenerator implements PasswordSuggester {
     /**
      * Gets the number of regular letter characters to add to this password, using the remaining number of characters
      * to obtain the requested length
+     *
      * @return lower case letters in a char array
      */
     private char[] getNormalCharacters() {
@@ -109,6 +114,7 @@ public class RandomPasswordGenerator implements PasswordSuggester {
     /**
      * Gets a random int using an IntStream that is greater than or equal to lowerBound and less than upperBound
      * If the bounds are invalid, the lowerBound is returned
+     *
      * @param lowerBound the lowest possible int returned
      * @param upperBound the highest possible int returned + 1
      * @return a random int between lower and upper bound values
@@ -124,6 +130,7 @@ public class RandomPasswordGenerator implements PasswordSuggester {
 
     /**
      * Gets numRequested number of random characters with ASCII values between the upper and lower bounds
+     *
      * @param numRequested number of characters to return
      * @param lowerBound the lowest ASCII value of the characters generated
      * @param upperBound the highest possible ASCII value of the characters generated + 1
@@ -143,6 +150,7 @@ public class RandomPasswordGenerator implements PasswordSuggester {
 
     /**
      * Shuffles the characters in a StringBuilder, and returns a new StringBuilder with the characters shuffled
+     *
      * @param original the StringBuilder with characters to shuffle
      * @return a new StringBuilder with the same characters as the original but in a different random order
      */

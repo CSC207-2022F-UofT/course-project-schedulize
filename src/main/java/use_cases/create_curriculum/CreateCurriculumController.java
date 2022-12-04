@@ -17,6 +17,11 @@ public class CreateCurriculumController {
     /* ************ *\
     *  Constructors  *
     \* ************ */
+    /**
+     * Constructs a CreateCurriculumController
+     *
+     * @param inputBoundary the input boundary this controller will use to access the entity layer
+     */
     public CreateCurriculumController(CreateCurriculumInputBoundary inputBoundary) {
         this.inputBoundary = inputBoundary;
     }

@@ -3,6 +3,10 @@
 Schedulize is a desktop application that allows users to keep track of tasks, when
 they committed to working on them, and keep track of multiple task groups - called "curriculums" - at the same time.
 
+**A small note on errors**, because of the way we utilize a WindowManager to keep track of the windows in function throughout
+the program lifetime, IntelliJ will say that certain UI classes in Main are never used. While they are never called
+explicitly from Main after initialization, they are added to the WindowManager on construction, and thus kept track of.
+
 ## Design Patterns
 
 With the significant size of our project, it was paramount that we include various design patterns to avoid
@@ -23,9 +27,13 @@ however, the decoupled versions still exist, should we realize they are simpler 
 functionality we may want to add in the future.
 
 ### Singletons
-Our program includes a Singleton for the logged-in user, saved in the InMemoryUser class. This allows all interactors
+Our program employs the use of two Singletons. One is for the logged-in user, saved in the InMemoryUser class. This allows all interactors
 to reference the currently logged-in user without having an actual reference to the user in their code, which 
-makes it far more difficult to create any errors as far as changing the attributes of an inactive user
+makes it far more difficult to create any errors as far as changing the attributes of an inactive user.
+
+The second, the PathManager. This class allows us to easily reconfigure the paths to access certain icons, and it also allows
+for easy user saving in a consistent directory within the program files. Furthermore, this class allows us to adhere strictly
+to SRP by delegating file access to only one class that holds all relevant information about where requisite data is being stored.
 
 ### Observers
 We came across an issue while designing out UIs: we knew that UIs had to depend on controllers, so we built our controllers
@@ -38,12 +46,20 @@ Observer pattern: instead of having the presenter be directly dependent on an in
 give the presenter a list of these interfaces as observers which would be empty at initialization. Then, when all the other
 classes were complete, we would add the UI as an observer _to_ that presenter, thus closing the loop. This
 allows for void-return controllers that do not provide output, while simultaneously giving the presenters the necessary
-information from the entities layer.
+information from the entities layer. All presenters in the use_cases package follow this design pattern except 
+for the display_task_tree use case.
 
 ### Iterators
 The TimeBlockManager interface extends the Iterable interface, allowing client code to loop over the TimeBlocks
 while encapsulating the particular implementation of the aforementioned TimeBlocks. This allows very easy change in the
 implementation of how TimeBlocks are stored; client code doesn't need to be readjusted after this change is made.
+
+### Patterns not implemented
+#### Builders
+In creating the CreateCurriculum use case, it seemed like a reasonable decision to use a Builder for the creation of a curriculum,
+rather than using a simple factory. A curriculum has a lot of attributes, and perhaps segmenting the assignment of these
+attributes would have made for cleaner code. This is certainly an alternative that may be considered in the future life
+of this project.
 
 ## SOLID / Clean Architecture
 Following from our TA, we made sure to continue writing our program to adhere to the principles learned in class
@@ -73,4 +89,10 @@ In order to properly run this program, a few configurations must be set:
 4. Apply changes
 
 From here, the program should run, and the user should be greeted with a login screen.
+
+**Running Tests**
+
+1. Following the same steps from above, ensure that you run the _test_ module using Gradle
+2. NOTE: Some tests may appear as having errors because your IDE may not detect classes from within the testing module, 
+but when runnning the testing module they will still compile and pass.
 

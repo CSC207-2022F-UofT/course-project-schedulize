@@ -11,6 +11,10 @@ import entity_layer.CommonTask;
  * @author MMachadoUofT
  */
 public class CommonTaskFactory implements TaskFactory {
+
+    /* ************* *\
+    *  Functionality  *
+    \* ************* */
     /**
      * Create a CommonTask object with the given name and description
      *

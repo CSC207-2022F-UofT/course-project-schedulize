@@ -14,10 +14,23 @@ import entity_layer.TaskTree;
  */
 public class CommonCurriculumFactory implements CurriculumFactory {
 
+    /* ********** *\
+    *  Attributes  *
+    \* ********** */
     private final TaskTreeFactory taskTreeFactory;
     private final TaskFactory taskFactory;
     private final TimeBlockManagerFactory timeBlockManagerFactory;
 
+    /* ************ *\
+    *  Constructors  *
+    \* ************ */
+    /**
+     * A constructor for the CommonCurriculumFactory
+     *
+     * @param taskTreeFactory The TaskTreeFactory this will use to build the root TaskTree
+     * @param taskFactory The TaskFactory this will use to build the root Task in the TaskTree
+     * @param timeBlockManagerFactory The TimeBlockManagerFactory this will use to create the default worktimes
+     */
     public CommonCurriculumFactory(TaskTreeFactory taskTreeFactory, TaskFactory taskFactory,
                                    TimeBlockManagerFactory timeBlockManagerFactory) {
         this.taskTreeFactory = taskTreeFactory;
@@ -25,6 +38,9 @@ public class CommonCurriculumFactory implements CurriculumFactory {
         this.timeBlockManagerFactory = timeBlockManagerFactory;
     }
 
+    /* ************* *\
+    *  Functionality  *
+    \* ************* */
     /**
      * Returns a new CommonCurriculum object assigned the given name
      *

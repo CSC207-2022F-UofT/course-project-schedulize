@@ -14,7 +14,7 @@ public class DisplayAvailabilityTimeBlockController {
      * Default constructor
      * @param interactor for this controller.
      */
-    public DisplayAvailabilityTimeBlockController(DisplayAvailabilityTimeBlockInteractor interactor) {
+    public DisplayAvailabilityTimeBlockController(DisplayAvailabilityTimeBlockInputBoundary interactor) {
         this.displayAvailabilityTimeBlockInteractor = interactor;
     }
 

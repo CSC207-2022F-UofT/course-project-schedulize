@@ -20,6 +20,7 @@ public class CommonTimeBlockTests {
         assertFalse(t1.equals(t2));
     }
 
+    @SuppressWarnings("UnnecessaryLocalVariable")
     @Test
     public void testEqualsReflexive() {
         LocalDateTime start = LocalDateTime.of(2022, Month.JULY, 14, 11, 30);

@@ -19,6 +19,10 @@ public class CommonUser implements User {
 
     /**
      * Constructor for new empty user
+     *
+     * @param username This CommonUser's username
+     * @param email This CommonUser's email
+     * @param password This CommonUser's password
      */
     public CommonUser(String username, String email, String password) {
         this.username = username;

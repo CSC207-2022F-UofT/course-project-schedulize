@@ -2,9 +2,7 @@ package config;
 
 import entity_layer.User;
 
-import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.io.StreamCorruptedException;
 
 /**
  * An interface for interacting with the data storage

@@ -20,15 +20,22 @@ public class CommonCurriculum implements Curriculum {
     private final TimeBlockManager workTimes;
     private final TimeBlockManager weekSchedule;
     private String name;
-    private final transient int id = getNextID();
+    private final int id = this.hashCode();
 
     // Static
-    private static int curriculumCount = 0;
     private static final int HOURS_IN_WEEK = 168;
 
     /* ************ *\
     *  Constructors  *
     \* ************ */
+    /**
+     * Constructs a CommonCurriculum
+     *
+     * @param goal The CommonCurriculum's root TaskTree
+     * @param workTimes The TimeManager dictating when this curriculum is to be worked on
+     * @param weekSchedule The TimeManager dictating what times, this week, this curriculum is to be worked on
+     * @param name The CommonCurriculum's name
+     */
     public CommonCurriculum(TaskTree goal, TimeBlockManager workTimes, TimeBlockManager weekSchedule, String name) {
         this.goal = goal;
         this.workTimes = workTimes;
@@ -80,15 +87,6 @@ public class CommonCurriculum implements Curriculum {
     @Override
     public TaskTree getTaskTreeByID(int taskID) {
         return this.goal.getChildTaskTreeByID(taskID);
-    }
-
-    /**
-     * Return a unique ID to be assigned to the next constructed CommonCurriculum
-     *
-     * @return the next ID to be assigned
-     */
-    private static int getNextID() {
-        return curriculumCount++;
     }
 
     // Private
