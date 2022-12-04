@@ -16,8 +16,7 @@ public class CreateCurriculumUseCaseTests {
     @BeforeAll
     public static void setUp() {
         CurriculumFactory factory = new PrebuiltCurriculumFactory();
-        CreateCurriculumOutputBoundary presenter = new CreateCurriculumPresenter(new ArrayList<>());
-        CreateCurriculumInputBoundary interactor = new CreateCurriculumInteractor(factory, presenter);
+        CreateCurriculumInputBoundary interactor = new CreateCurriculumInteractor(factory);
         controller = new CreateCurriculumController(interactor);
     }
 

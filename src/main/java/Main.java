@@ -66,14 +66,12 @@ public class Main {
         DisplayCurriculumsInputBoundary dashboardViewInteractor = new DisplayCurriculumsInteractor(dashboardViewPresenter);
         DisplayCurriculumsController dashboardViewController = new DisplayCurriculumsController(dashboardViewInteractor);
 
-        CreateCurriculumOutputBoundary createCurriculumPresenter = new CreateCurriculumPresenter(new ArrayList<>());
         CurriculumFactory curriculumFactory = new PrebuiltCurriculumFactory();
-        CreateCurriculumInputBoundary createCurriculumInteractor = new CreateCurriculumInteractor(curriculumFactory, createCurriculumPresenter);
+        CreateCurriculumInputBoundary createCurriculumInteractor = new CreateCurriculumInteractor(curriculumFactory);
         CreateCurriculumController createCurriculumController = new CreateCurriculumController(createCurriculumInteractor);
 
         DashboardUI dashboard = new DashboardUI(windows, dashboardViewController, createCurriculumController);
         dashboardViewPresenter.addViewObserver(dashboard);
-        createCurriculumPresenter.addViewObserver(dashboard);
 
         DisplayTaskTreeOutputBoundary displayTaskTreePresenter = new DisplayTaskTreePresenter();
         DisplayTaskTreeInputBoundary displayTaskTreeInteractor = new DisplayTaskTreeInteractor(displayTaskTreePresenter);

@@ -4,7 +4,6 @@ import UI.CentralWindow;
 import UI.CurriculumDependentWindow;
 import UI.WindowManager;
 import use_cases.create_curriculum.CreateCurriculumController;
-import use_cases.create_curriculum.DashboardUiInterface;
 import use_cases.display_curriculums.CurriculumsModel;
 import use_cases.display_curriculums.DisplayCurriculumsController;
 import use_cases.display_curriculums.DisplayCurriculumsInterface;
@@ -23,7 +22,7 @@ import java.util.Vector;
  * @author Oswin Gan
  */
 
-public class DashboardUI extends CentralWindow implements DisplayCurriculumsInterface, DashboardUiInterface {
+public class DashboardUI extends CentralWindow implements DisplayCurriculumsInterface {
     private JTextField curriculumName;
     private JList<String> curriculumList;
     private JButton createButton;
@@ -137,11 +136,5 @@ public class DashboardUI extends CentralWindow implements DisplayCurriculumsInte
         }
         Vector<String> curriculumsVector = new Vector<>(curriculums);
         this.curriculumList.setListData(curriculumsVector);
-    }
-
-    @Override
-    public void createdCurriculum(String message) {
-        return;
-        // TODO: Implement a message of successful creation later
     }
 }
