@@ -42,7 +42,8 @@ Observer pattern: instead of having the presenter be directly dependent on an in
 give the presenter a list of these interfaces as observers which would be empty at initialization. Then, when all the other
 classes were complete, we would add the UI as an observer _to_ that presenter, thus closing the loop. This
 allows for void-return controllers that do not provide output, while simultaneously giving the presenters the necessary
-information from the entities layer.
+information from the entities layer. All presenters in the use_cases package follow this design pattern except 
+for the display_task_tree use case.
 
 ### Iterators
 The TimeBlockManager interface extends the Iterable interface, allowing client code to loop over the TimeBlocks
@@ -77,4 +78,10 @@ In order to properly run this program, a few configurations must be set:
 4. Apply changes
 
 From here, the program should run, and the user should be greeted with a login screen.
+
+**Running Tests**
+
+1. Following the same steps from above, ensure that you run the _test_ module using Gradle
+2. NOTE: Some tests may appear as having errors because your IDE may not detect classes from within the testing module, 
+but when runnning the testing module they will still compile and pass.
 
