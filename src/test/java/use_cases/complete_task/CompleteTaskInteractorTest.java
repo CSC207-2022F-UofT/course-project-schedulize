@@ -65,10 +65,10 @@ public class CompleteTaskInteractorTest {
         String actualPresenter = presenter.taskCompleted(model);
 
         assertEquals(expectedPresenter, actualPresenter);
-        assertEquals(readTextbook.getCompletion(), 100);
+        assertEquals(100, readTextbook.getCompletion());
         assertTrue(readTextbook.isComplete());
-        assertEquals(curriculum.getGoal().getTask().getCompletion(), 50);
-        assertEquals(attendClass.getCompletion(), 0);
+        assertEquals(50, curriculum.getGoal().getTask().getCompletion());
+        assertEquals(0, attendClass.getCompletion());
     }
 
     /**
@@ -87,8 +87,57 @@ public class CompleteTaskInteractorTest {
         String actualPresenter = presenter.taskCompleted(model);
 
         assertEquals(expectedPresenter, actualPresenter);
-        assertEquals(attendClass.getCompletion(), 100);
-        assertEquals(curriculum.getGoal().getTask().getCompletion(), 100);
+        assertEquals(100, attendClass.getCompletion());
+        assertEquals(100, curriculum.getGoal().getTask().getCompletion());
         assertTrue(attendClass.isComplete());
+    }
+
+    @Test
+    public void testUncomplete1Task(){
+        InMemoryUser.setActiveUser(activeUser);
+        curriculum.getTaskTreeByID(readTextbook.getId()).completeTask();
+        curriculum.getTaskTreeByID(attendClass.getId()).completeTask();
+
+        assertEquals(100, attendClass.getCompletion());
+        assertEquals(100, readTextbook.getCompletion());
+        assertEquals(100, curriculum.getGoal().getTask().getCompletion());
+        assertTrue(attendClass.isComplete());
+
+        CompletedTaskModel model = new CompletedTaskModel(curriculum.getName(), attendClass.getName());
+        controller.uncompleteTask(curriculum.getID(), attendClass.getId());
+
+        String expectedPresenter = "The task Attend Lecture from CSC207 was successfully uncompleted.";
+        String actualPresenter = presenter.taskUncompleted(model);
+
+        assertEquals(expectedPresenter, actualPresenter);
+        assertEquals(0, attendClass.getCompletion());
+    }
+
+    @Test
+    public void testUncompleteAllTasks(){
+        InMemoryUser.setActiveUser(activeUser);
+        curriculum.getTaskTreeByID(readTextbook.getId()).completeTask();
+        curriculum.getTaskTreeByID(attendClass.getId()).completeTask();
+
+        assertEquals(100, attendClass.getCompletion());
+        assertEquals(100, readTextbook.getCompletion());
+        assertEquals(100, curriculum.getGoal().getTask().getCompletion());
+
+        CompletedTaskModel model1 = new CompletedTaskModel(curriculum.getName(), attendClass.getName());
+        controller.uncompleteTask(curriculum.getID(), attendClass.getId());
+
+        String expectedPresenter1 = "The task Attend Lecture from CSC207 was successfully uncompleted.";
+        String actualPresenter1 = presenter.taskUncompleted(model1);
+        assertEquals(expectedPresenter1, actualPresenter1);
+        assertEquals(0, attendClass.getCompletion());
+        assertEquals(50, curriculum.getGoal().getTask().getCompletion());
+
+        CompletedTaskModel model2 = new CompletedTaskModel(curriculum.getName(), readTextbook.getName());
+        controller.uncompleteTask(curriculum.getID(), readTextbook.getId());
+        String expectedPresenter2 = "The task Read Textbook from CSC207 was successfully uncompleted.";
+        String actualPresenter2 = presenter.taskUncompleted(model2);
+        assertEquals(expectedPresenter2, actualPresenter2);
+        assertEquals(0, readTextbook.getCompletion());
+        assertEquals(0, curriculum.getGoal().getTask().getCompletion());
     }
 }

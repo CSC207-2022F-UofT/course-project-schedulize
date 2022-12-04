@@ -15,4 +15,5 @@ public interface CompleteTaskOutputBoundary {
      * @return A success message
      */
     String taskCompleted(CompletedTaskModel completedTask);
+    String taskUncompleted(CompletedTaskModel uncompletedTask);
 }

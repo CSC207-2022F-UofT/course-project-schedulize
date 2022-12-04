@@ -17,4 +17,5 @@ public interface CompleteTaskInputBoundary {
      * @param taskId The ID of the task we are looking for
      */
     void completeTask(int curriculumId, int taskId);
+    void uncompleteTask(int curriculumId, int taskId);
 }

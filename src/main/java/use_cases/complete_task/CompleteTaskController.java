@@ -28,4 +28,7 @@ public class CompleteTaskController {
     public void completeTask(int curriculumId, int taskId){
         this.userInput.completeTask(curriculumId, taskId);
     }
+    public void uncompleteTask(int curriculumId, int taskId){
+        this.userInput.uncompleteTask(curriculumId, taskId);
+    }
 }

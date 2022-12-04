@@ -41,4 +41,19 @@ public class CompleteTaskInteractor implements CompleteTaskInputBoundary {
         presenter.taskCompleted(completedTask);
     }
 
+    @Override
+    public void uncompleteTask(int taskCurriculumId, int taskId){
+        Schedule schedule = InMemoryUser.getActiveUser().getSchedule();
+        Curriculum taskCurriculum = schedule.getCurriculum(taskCurriculumId);
+        TaskTree taskTree = taskCurriculum.getTaskTreeByID(taskId);
+        taskTree.resetTask();
+
+        String taskName = taskTree.getTask().getName();
+        CompletedTaskModel uncompletedTask = new CompletedTaskModel
+                (taskCurriculum.getName(), taskName);
+
+        presenter.taskUncompleted(uncompletedTask);
+
+    }
+
 }
