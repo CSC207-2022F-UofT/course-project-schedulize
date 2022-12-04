@@ -23,13 +23,13 @@ however, the decoupled versions still exist, should we realize they are simpler 
 functionality we may want to add in the future.
 
 ### Singletons
-Our program includes a Singleton for the logged-in user, saved in the InMemoryUser class. This allows all interactors
+Our program employs the use of two Singletons. One is for the logged-in user, saved in the InMemoryUser class. This allows all interactors
 to reference the currently logged-in user without having an actual reference to the user in their code, which 
 makes it far more difficult to create any errors as far as changing the attributes of an inactive user.
 
-Additionally, the PathManager for the program is also a Singleton, so that we can reconfigure paths to access icons, and 
-saved users all in one single place, and with a single instance of the class across any part of the program that requires 
-access to files.
+The second, the PathManager. This class allows us to easily reconfigure the paths to access certain icons, and it also allows
+for easy user saving in a consistent directory within the program files. Furthermore, this class allows us to adhere strictly
+to SRP by delegating file access to only one class that holds all relevant information about where requisite data is being stored.
 
 ### Observers
 We came across an issue while designing out UIs: we knew that UIs had to depend on controllers, so we built our controllers
@@ -49,6 +49,13 @@ for the display_task_tree use case.
 The TimeBlockManager interface extends the Iterable interface, allowing client code to loop over the TimeBlocks
 while encapsulating the particular implementation of the aforementioned TimeBlocks. This allows very easy change in the
 implementation of how TimeBlocks are stored; client code doesn't need to be readjusted after this change is made.
+
+### Patterns not implemented
+#### Builders
+In creating the CreateCurriculum use case, it seemed like a reasonable decision to use a Builder for the creation of a curriculum,
+rather than using a simple factory. A curriculum has a lot of attributes, and perhaps segmenting the assignment of these
+attributes would have made for cleaner code. This is certainly an alternative that may be considered in the future life
+of this project.
 
 ## SOLID / Clean Architecture
 Following from our TA, we made sure to continue writing our program to adhere to the principles learned in class
