@@ -42,20 +42,22 @@ public class SetAvailabilityUseCase implements SetAvailabilityInputBoundary {
         //Update TimeBlockManager to have availabilityInputs as LocalDate times
         Schedule schedule = InMemoryUser.getActiveUser().getSchedule();
         TimeBlockManager timeBlockManager = schedule.getAvailability();
+        timeBlockManager.clear();
 
-        for (String s : availabilityInputs) {
+        for (int i = 0; i < availabilityInputs.length; i++) {
 //            int len = s.length();
-
-            LocalDate startDate = LocalDate.of(LocalDate.now().getYear(), LocalDate.now().getMonth(),
-                    LocalDate.now().getDayOfWeek().getValue());
+            LocalDate now = LocalDate.now();
+            LocalDate dayOf = now.plusDays(i);
+            LocalDate startDate = LocalDate.of(dayOf.getYear(), dayOf.getMonth(),
+                    dayOf.getDayOfWeek().getValue());
             LocalTime startTime = LocalTime.of(
-                    Integer.parseInt(s.substring(0, 2)) % 24,
+                    Integer.parseInt(availabilityInputs[i].substring(0, 2)) % 24,
                     0, 0);
 
-            LocalDate endDate = LocalDate.of(LocalDate.now().getYear(), LocalDate.now().getMonth(),
-                    LocalDate.now().getDayOfWeek().getValue());
+            LocalDate endDate = LocalDate.of(dayOf.getYear(), dayOf.getMonth(),
+                    dayOf.getDayOfWeek().getValue());
             LocalTime endTime = LocalTime.of(
-                    Integer.parseInt(s.substring(2, 4)) % 24,
+                    Integer.parseInt(availabilityInputs[i].substring(2, 4)) % 24,
                     0, 0);
 
             LocalDateTime start = LocalDateTime.of(startDate, startTime);
@@ -67,7 +69,6 @@ public class SetAvailabilityUseCase implements SetAvailabilityInputBoundary {
             TimeBlock timeBlock = timeBlockFactory.create(start, end);
             timeBlockManager.addTimeBlock(timeBlock);
         }
-
         //Send info as Presenter model through Presenter
         availabilityPresenter.availabilitiesSet("Availability has been set.");
     }

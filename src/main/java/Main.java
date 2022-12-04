@@ -11,7 +11,12 @@ import task_display_ui.*;
 import task_tree_UI.TaskTreeUI;
 import use_cases.add_task.*;
 import use_cases.complete_task.*;
+import time_manager_UI.SetAvailabilityUI;
+import time_manager_UI.DisplayAvailabilityTimeBlockUI;
 import use_cases.create_curriculum.*;
+import use_cases.display_availability_timeblocks.DisplayAvailabilityTimeBlockController;
+import use_cases.display_availability_timeblocks.DisplayAvailabilityTimeBlockInteractor;
+import use_cases.display_availability_timeblocks.DisplayAvailabilityTimeBlockPresenter;
 import use_cases.display_curriculums.*;
 import use_cases.display_task_tree.*;
 import use_cases.login.LoginController;
@@ -20,6 +25,9 @@ import use_cases.login.LoginInteractor;
 import use_cases.save_user.SaveUserController;
 import use_cases.save_user.SaveUserInputBoundary;
 import use_cases.save_user.SaveUserInteractor;
+import use_cases.set_availability.SetAvailabilityController;
+import use_cases.set_availability.SetAvailabilityPresenter;
+import use_cases.set_availability.SetAvailabilityUseCase;
 import use_cases.suggest_password.PasswordSuggestionController;
 import use_cases.suggest_password.PasswordSuggestionInputBoundary;
 import use_cases.suggest_password.PasswordSuggestionInteractor;
@@ -67,8 +75,23 @@ public class Main {
         DisplayTaskTreeInputBoundary displayTaskTreeInteractor = new DisplayTaskTreeInteractor(displayTaskTreePresenter);
         DisplayTaskTreeController displayTaskTreeController = new DisplayTaskTreeController(displayTaskTreeInteractor);
         TaskTreeUI taskTreeUI = new TaskTreeUI(windows, displayTaskTreeController);
+        //createCurriculumPresenter.
 
-        CompleteTaskOutputBoundary completeTaskPresenter = new CompleteTaskPresenter();
+        DisplayAvailabilityTimeBlockPresenter availabilityPresenter = new DisplayAvailabilityTimeBlockPresenter(new ArrayList<>());
+        DisplayAvailabilityTimeBlockInteractor availabilityInteractor = new DisplayAvailabilityTimeBlockInteractor(availabilityPresenter);
+        DisplayAvailabilityTimeBlockController controller = new DisplayAvailabilityTimeBlockController(availabilityInteractor);
+        DisplayAvailabilityTimeBlockUI view = new DisplayAvailabilityTimeBlockUI(windows, controller);
+        availabilityPresenter.addAvailabilityObserver(view);
+
+        SetAvailabilityPresenter setAvailabilityPresenter = new SetAvailabilityPresenter(new ArrayList<>());
+        SetAvailabilityUseCase setAvailabilityUseCase = new SetAvailabilityUseCase(setAvailabilityPresenter);
+        SetAvailabilityController setAvailabilityController = new SetAvailabilityController(setAvailabilityUseCase);
+        SetAvailabilityUI setAvailabilitViewUI = new SetAvailabilityUI(windows, setAvailabilityController);
+        setAvailabilityPresenter.addViewObserver(setAvailabilitViewUI);
+
+
+
+        CompleteTaskOutputBoundary completeTaskPresenter = new CompleteTaskPresenter(new ArrayList<>());
         CompleteTaskInputBoundary completeTaskInteractor = new CompleteTaskUseCase(completeTaskPresenter);
         CompleteTaskController completeTaskController = new CompleteTaskController(completeTaskInteractor);
 
