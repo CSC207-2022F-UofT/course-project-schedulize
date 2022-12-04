@@ -20,10 +20,10 @@ import javax.swing.*;
 public class TaskUI extends CentralWindow implements TaskUiViewInterface {
     private JPanel mainPanel;
     private JProgressBar progressBar1;
-    private JCheckBox completeCheck;
-    private JButton deleteTaskButton;
     private JLabel descriptionLabel;
-    private final CompleteTaskController controller;
+    private JButton completeButton;
+    private JButton undoButton;
+    private final CompleteTaskController completeTaskController;
     private TaskUiModel taskUiModel;
     private final TaskUiController displayController;
     private final WindowManager programWindows;
@@ -42,7 +42,7 @@ public class TaskUI extends CentralWindow implements TaskUiViewInterface {
         // configure default frame attributes
         this.configureFrame();
         this.setListeners();
-        this.controller = controller;
+        this.completeTaskController = controller;
         this.displayController = displayController;
     }
 
@@ -67,7 +67,6 @@ public class TaskUI extends CentralWindow implements TaskUiViewInterface {
      */
     private void setListeners() {
         this.setCompletionListener();
-        this.setDeleteTaskListener();
     }
 
     /**
@@ -87,20 +86,13 @@ public class TaskUI extends CentralWindow implements TaskUiViewInterface {
      * Listener for setting the task as complete
      */
     private void setCompletionListener(){
-        this.completeCheck.addActionListener(actionEvent -> {
-            if (completeCheck.isSelected()) {
-                controller.completeTask(taskUiModel.getCurriculumID(), taskUiModel.getTaskID());
-            }
+        this.completeButton.addActionListener(actionEvent -> {
+            completeTaskController.completeTask(taskUiModel.getCurriculumID(), taskUiModel.getTaskID());
+            this.progressBar1.setValue(100);
         });
-    }
-
-    /**
-     * Listener for setting the task as complete
-     */
-    private void setDeleteTaskListener(){
-        this.deleteTaskButton.addActionListener(actionEvent -> {
-            programWindows.closeWindow(WindowManager.TASK_REFERENCE_KEY);
-            programWindows.openWindow(WindowManager.TASKTREE_REFERENCE_KEY);
+        this.undoButton.addActionListener(actionEvent -> {
+            completeTaskController.uncompleteTask(taskUiModel.getCurriculumID(), taskUiModel.getTaskID());
+            this.progressBar1.setValue(0);
         });
     }
 
@@ -116,7 +108,6 @@ public class TaskUI extends CentralWindow implements TaskUiViewInterface {
     @Override
     public void setVisible(boolean visible) {
         super.setVisible(visible);
-        this.completeCheck.setSelected(false);
         // recenter the window
         this.centreWindow();
     }
