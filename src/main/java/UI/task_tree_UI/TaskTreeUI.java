@@ -174,13 +174,11 @@ public class TaskTreeUI extends CentralWindow implements CurriculumDependentWind
         this.addTaskButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                // TODO: Connect to Add Task window
                 JFrame createTaskWindow = programWindows.getWindow(WindowManager.CREATE_TASK_REFERENCE_KEY);
-                int requestedTaskID = 0;
                 DefaultMutableTreeNode node = (DefaultMutableTreeNode)
                         taskTree.getLastSelectedPathComponent();
                 if (node == null) {
-                    ((TaskDependentWindow) createTaskWindow).setTaskID(displayId);
+                    ((TaskDependentWindow) createTaskWindow).setTaskID(displayController.getRoot(displayId).getId());
                 } else {
                     String nodeInfo = (String) node.getUserObject();
                     ((TaskDependentWindow) createTaskWindow).setTaskID(parseNodeTextForID(nodeInfo));
