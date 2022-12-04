@@ -13,8 +13,14 @@ import entity_layer.TaskTree;
  */
 public class CommonTaskTreeFactory implements TaskTreeFactory {
 
+    /* ********** *\
+    *  Attributes  *
+    \* ********** */
     private final TaskFactory taskFactory = new CommonTaskFactory();
 
+    /* ************* *\
+    *  Functionality  *
+    \* ************* */
     /**
      * Creates an instance of a CommonTaskTree object
      *
