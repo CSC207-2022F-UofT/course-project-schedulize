@@ -17,6 +17,10 @@ import java.util.List;
 
 /**
  * Class for testing the display availability use case
+ * Created: 12/03/2022
+ * Last updated: 12/03/2022
+ *
+ * @author amira, David Adler
  */
 public class DisplayAvailabilityTestCase {
     static DisplayAvailabilityTimeBlockController displayController;

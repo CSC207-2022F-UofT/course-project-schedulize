@@ -21,7 +21,6 @@ public class DisplayAvailabilityTimeBlockPresenter implements DisplayAvailabilit
      * Display a message that the task was completed.
      *
      * @param availabilityTimeBlockModels model containing display availability time block info.
-     * @return a list of start times and end times of a user's availability.
      */
     @Override
     public void availabilityTimeBlockDisplayed(List<DisplayAvailabilityTimeBlockModel> availabilityTimeBlockModels) {
