@@ -10,8 +10,20 @@ package use_cases.display_task_tree;
 
 public interface DisplayTaskTreeInputBoundary {
 
+    /**
+     * Get the root of the desired curriculum, repackaged as a model
+     *
+     * @param curriculumID the ID of the desired curriculum
+     * @return A TaskTree model
+     */
     TaskTreeDisplayModel getRoot(int curriculumID);
 
+    /**
+     * Creates a list of TaskTree models for each subtree of the tree holding the task with the provided ID
+     *
+     * @param curriculumID the ID of the curriculum this task belongs to
+     * @param taskID the ID of the task with the desired subtrees
+     */
     TaskTreeDisplayModel[] getSubtrees(int curriculumID, int taskID);
 }
 
