@@ -8,11 +8,11 @@ package use_cases.task_display_UI;
  * @author Oswin Gan
  */
 public class TaskUiModel {
-    String name;
-    String description;
-    int completion;
-    int curriculumID;
-    int taskID;
+    private final String name;
+    private final String description;
+    private final int completion;
+    private final int curriculumID;
+    private final int taskID;
 
     /**
      * Constructs a model of a Task for the TaskUI

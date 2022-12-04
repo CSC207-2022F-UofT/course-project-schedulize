@@ -4,8 +4,6 @@ import UI.*;
 import use_cases.add_task.*;
 
 import javax.swing.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 /**
  * A UI class for inputting information to create a new task
@@ -97,16 +95,13 @@ public class CreateTaskUI extends CentralWindow implements TaskDependentWindow, 
      * Creates and configures the action listener for the confirm button -- when clicked, generates the new task
      */
     private void confirmButtonListener() {
-        this.confirmButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                String name = taskNameField.getText();
-                String description = descriptionPane.getText();
-                if (!name.equals("")) {
-                    taskController.addTask(name, description, parentTaskId, parentCurriculumId);
-                    programWindows.openWindow(WindowManager.TASKTREE_REFERENCE_KEY);
-                    programWindows.closeWindow(WindowManager.CREATE_TASK_REFERENCE_KEY);
-                }
+        this.confirmButton.addActionListener(e -> {
+            String name = taskNameField.getText();
+            String description = descriptionPane.getText();
+            if (!name.equals("")) {
+                taskController.addTask(name, description, parentTaskId, parentCurriculumId);
+                programWindows.openWindow(WindowManager.TASKTREE_REFERENCE_KEY);
+                programWindows.closeWindow(WindowManager.CREATE_TASK_REFERENCE_KEY);
             }
         });
     }
@@ -115,12 +110,9 @@ public class CreateTaskUI extends CentralWindow implements TaskDependentWindow, 
      * Creates and configures the action listener for the cancel button -- closes this window
      */
     private void cancelButtonListener() {
-        this.cancelButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                programWindows.openWindow(WindowManager.TASKTREE_REFERENCE_KEY);
-                programWindows.closeWindow(WindowManager.CREATE_TASK_REFERENCE_KEY);
-            }
+        this.cancelButton.addActionListener(e -> {
+            programWindows.openWindow(WindowManager.TASKTREE_REFERENCE_KEY);
+            programWindows.closeWindow(WindowManager.CREATE_TASK_REFERENCE_KEY);
         });
     }
 }

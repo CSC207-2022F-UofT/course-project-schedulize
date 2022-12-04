@@ -14,8 +14,8 @@ import java.time.LocalTime;
  */
 public class SetAvailabilityInteractor implements SetAvailabilityInputBoundary {
 
-    SetAvailabilityOutputBoundary availabilityPresenter;
-    TimeBlockFactory timeBlockFactory;
+    private final SetAvailabilityOutputBoundary availabilityPresenter;
+    private final TimeBlockFactory timeBlockFactory;
 
     /**
      * Sets this class's presenter to the one provided in the parameter,
@@ -45,7 +45,6 @@ public class SetAvailabilityInteractor implements SetAvailabilityInputBoundary {
         timeBlockManager.clear();
 
         for (int i = 0; i < availabilityInputs.length; i++) {
-//            int len = s.length();
             LocalDate now = LocalDate.now();
             LocalDate dayOf = now.plusDays(i);
             LocalDate startDate = LocalDate.of(dayOf.getYear(), dayOf.getMonth(),
@@ -62,9 +61,6 @@ public class SetAvailabilityInteractor implements SetAvailabilityInputBoundary {
 
             LocalDateTime start = LocalDateTime.of(startDate, startTime);
             LocalDateTime end = LocalDateTime.of(endDate, endTime);
-
-//            LocalDateTime start = LocalDateTime.parse(s.substring(0, len/2));
-//            LocalDateTime end = LocalDateTime.parse(s.substring(len/2, len));
 
             TimeBlock timeBlock = timeBlockFactory.create(start, end);
             timeBlockManager.addTimeBlock(timeBlock);

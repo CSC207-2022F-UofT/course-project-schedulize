@@ -1,5 +1,4 @@
 package use_cases.add_task;
-import entity_factories.TaskFactory;
 import entity_factories.TaskTreeFactory;
 import entity_layer.*;
 
@@ -14,7 +13,6 @@ import entity_layer.*;
 public class AddTaskInteractor implements AddTaskInputBoundary{
 
     private final AddTaskOutputBoundary presenter;
-    private final TaskFactory taskFactory;
     private final TaskTreeFactory taskTreeFactory;
 
 
@@ -22,13 +20,10 @@ public class AddTaskInteractor implements AddTaskInputBoundary{
      * Add Task Use Case constructor method.
      *
      * @param presenter the presenter class for thr UI.
-     * @param taskFactory creates a new Task object.
      * @param taskTreeFactory creates a new Task Tree object.
      */
-    public AddTaskInteractor(AddTaskOutputBoundary presenter,
-                             TaskFactory taskFactory, TaskTreeFactory taskTreeFactory){
+    public AddTaskInteractor(AddTaskOutputBoundary presenter, TaskTreeFactory taskTreeFactory){
         this.presenter = presenter;
-        this.taskFactory = taskFactory;
         this.taskTreeFactory = taskTreeFactory;
     }
 
@@ -48,7 +43,6 @@ public class AddTaskInteractor implements AddTaskInputBoundary{
                         int curriculumId) {
 
         TaskTree newTaskTree = this.taskTreeFactory.createWithTask(taskName, taskDescription);
-        Task newTask = newTaskTree.getTask();
 
         Schedule schedule = InMemoryUser.getActiveUser().getSchedule();
         Curriculum curriculum = schedule.getCurriculum(curriculumId);

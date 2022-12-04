@@ -23,7 +23,6 @@ public class CommonCurriculum implements Curriculum {
     private final int id = this.hashCode();
 
     // Static
-    private static int curriculumCount = 0;
     private static final int HOURS_IN_WEEK = 168;
 
     /* ************ *\
@@ -88,15 +87,6 @@ public class CommonCurriculum implements Curriculum {
     @Override
     public TaskTree getTaskTreeByID(int taskID) {
         return this.goal.getChildTaskTreeByID(taskID);
-    }
-
-    /**
-     * Return a unique ID to be assigned to the next constructed CommonCurriculum
-     *
-     * @return the next ID to be assigned
-     */
-    private static int getNextID() {
-        return curriculumCount++;
     }
 
     // Private

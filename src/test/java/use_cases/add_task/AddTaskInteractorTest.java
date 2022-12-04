@@ -8,7 +8,6 @@ import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Class for testing the Add Task Use Case.
- *
  * date created: 12/1/2022
  * last updated: 12/1/2022
  *
@@ -29,10 +28,9 @@ public class AddTaskInteractorTest {
      */
     @BeforeAll
     public static void setup(){
-        TaskFactory taskFactory = new CommonTaskFactory();
         TaskTreeFactory taskTreeFactory= new CommonTaskTreeFactory();
         presenter = new AddTaskPresenter();
-        interactor = new AddTaskInteractor(presenter, taskFactory, taskTreeFactory);
+        interactor = new AddTaskInteractor(presenter, taskTreeFactory);
         controller = new AddTaskController(interactor);
     }
 

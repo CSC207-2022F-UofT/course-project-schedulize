@@ -8,7 +8,7 @@ import entity_layer.User;
  */
 public class CommonUserFactory implements UserFactory {
 
-    ScheduleFactory scheduleFactory = new CommonScheduleFactory(new CommonTimeBlockManagerFactory());
+    private final ScheduleFactory scheduleFactory = new CommonScheduleFactory(new CommonTimeBlockManagerFactory());
 
     /**
      * Creates a CommonUser object

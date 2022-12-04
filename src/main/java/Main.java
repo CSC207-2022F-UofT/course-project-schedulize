@@ -113,9 +113,8 @@ public class Main {
 
         // Add task use case
         TaskTreeFactory taskTreeFactory = new CommonTaskTreeFactory();
-        TaskFactory taskFactory = new CommonTaskFactory();
         AddTaskOutputBoundary addTaskPresenter = new AddTaskPresenter();
-        AddTaskInputBoundary addTaskInteractor = new AddTaskInteractor(addTaskPresenter, taskFactory, taskTreeFactory);
+        AddTaskInputBoundary addTaskInteractor = new AddTaskInteractor(addTaskPresenter, taskTreeFactory);
         AddTaskController addingTask = new AddTaskController(addTaskInteractor);
         JFrame createTaskUI = new CreateTaskUI(windows, addingTask);
 

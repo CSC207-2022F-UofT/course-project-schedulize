@@ -14,8 +14,8 @@ public class CommonSchedule implements Schedule {
     /* ********** *\
     *  Attributes  *
     \* ********** */
-    List<Curriculum> curriculums;
-    TimeBlockManager availability;
+    private final List<Curriculum> curriculums;
+    private final TimeBlockManager availability;
 
     /* ************ *\
     *  Constructors  *

@@ -9,6 +9,7 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
 import java.util.List;
 
 import org.junit.jupiter.api.*;
@@ -31,7 +32,7 @@ public class SetAvailabilityTests {
     static User activeUser;
     static Schedule schedule;
     static Curriculum curriculum;
-    static HashMap<Integer, Integer> timeBlockTimes = new HashMap<>();
+    static Map<Integer, Integer> timeBlockTimes = new HashMap<>();
 
     /**
      * Setting up the user's schedule with a curriculum called "CSC207", and creating instances of the

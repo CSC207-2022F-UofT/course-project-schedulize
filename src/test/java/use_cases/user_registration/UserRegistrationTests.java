@@ -2,7 +2,6 @@ package use_cases.user_registration;
 
 import entity_layer.InMemoryUser;
 import entity_layer.User;
-import use_cases.user_registration.UserRegistrationController;
 import config.CommonCryptograph;
 import config.Cryptograph;
 import config.UserDataStoreGateway;
@@ -12,7 +11,6 @@ import config.UserStorage;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.AfterAll;
-import use_cases.user_registration.*;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 

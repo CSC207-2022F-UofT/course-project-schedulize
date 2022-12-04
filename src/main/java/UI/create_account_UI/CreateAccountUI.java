@@ -8,8 +8,6 @@ import use_cases.user_registration.UserRegistrationController;
 import use_cases.user_registration.UserRegistrationError;
 
 import javax.swing.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
@@ -124,20 +122,17 @@ public class CreateAccountUI extends CentralWindow {
      * Action Listener for loginButton clicked
      */
     private void createAccountListener() {
-        this.createAccountButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                try {
-                    registrationController.create(emailField.getText(), usernameField.getText(),
-                            passwordField.getText(), new String(confirmPasswordField.getPassword()));
-                } catch (UserRegistrationError error) {
-                    errorLabel.setText(error.getMessage());
-                    return;
-                }
-                errorLabel.setText("");
-                programWindows.closeWindow(WindowManager.REGISTRATION_REFERENCE_KEY);
-                programWindows.openWindow(WindowManager.DASHBOARD_REFERENCE_KEY);
+        this.createAccountButton.addActionListener(e -> {
+            try {
+                registrationController.create(emailField.getText(), usernameField.getText(),
+                        passwordField.getText(), new String(confirmPasswordField.getPassword()));
+            } catch (UserRegistrationError error) {
+                errorLabel.setText(error.getMessage());
+                return;
             }
+            errorLabel.setText("");
+            programWindows.closeWindow(WindowManager.REGISTRATION_REFERENCE_KEY);
+            programWindows.openWindow(WindowManager.DASHBOARD_REFERENCE_KEY);
         });
     }
 

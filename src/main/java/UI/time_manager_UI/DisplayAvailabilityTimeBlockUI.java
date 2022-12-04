@@ -7,8 +7,6 @@ import UI.CentralWindow;
 import UI.WindowManager;
 import use_cases.display_availability_timeblocks.*;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.List;
 
 
@@ -48,12 +46,9 @@ public class DisplayAvailabilityTimeBlockUI extends CentralWindow implements Ava
      * Action Listener for the set availability button
      */
     private void setAvailabilityButtonListener() {
-        setAvailabilityButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                programWindows.closeWindow(WindowManager.AVAILABILITY_REFERENCE_KEY);
-                programWindows.openWindow(WindowManager.SET_AVAILABILITY_REFERENCE_KEY);
-            }
+        setAvailabilityButton.addActionListener(e -> {
+            programWindows.closeWindow(WindowManager.AVAILABILITY_REFERENCE_KEY);
+            programWindows.openWindow(WindowManager.SET_AVAILABILITY_REFERENCE_KEY);
         });
     }
 
@@ -61,12 +56,9 @@ public class DisplayAvailabilityTimeBlockUI extends CentralWindow implements Ava
      * Action Listener for the back button
      */
     private void backbuttonListener() {
-        backbutton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                programWindows.closeWindow(WindowManager.AVAILABILITY_REFERENCE_KEY);
-                programWindows.openWindow(WindowManager.DASHBOARD_REFERENCE_KEY);
-            }
+        backbutton.addActionListener(e -> {
+            programWindows.closeWindow(WindowManager.AVAILABILITY_REFERENCE_KEY);
+            programWindows.openWindow(WindowManager.DASHBOARD_REFERENCE_KEY);
         });
     }
 

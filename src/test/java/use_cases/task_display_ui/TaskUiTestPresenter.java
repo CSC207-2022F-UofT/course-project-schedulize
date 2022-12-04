@@ -14,7 +14,6 @@ public class TaskUiTestPresenter implements TaskUiOutputBoundary {
 
     @Override
     public void addViewObserver(TaskUiViewInterface view) {
-        return;
     }
 
     public TaskUiModel getTaskUiModel() {

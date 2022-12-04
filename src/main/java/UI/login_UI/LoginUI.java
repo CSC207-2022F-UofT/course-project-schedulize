@@ -72,19 +72,16 @@ public class LoginUI extends CentralWindow {
      * Action Listener for loginButton clicked
      */
     private void loginListener() {
-        loginButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                try {
-                    controller.login(userInputField.getText(), passwordField.getText());
-                } catch (LoginException error){
-                    errorLabel.setText(error.getMessage());
-                    return;
-                }
-                errorLabel.setText("");
-                programWindows.closeWindow(WindowManager.LOGIN_REFERENCE_KEY);
-                programWindows.openWindow(WindowManager.DASHBOARD_REFERENCE_KEY);
+        loginButton.addActionListener(e -> {
+            try {
+                controller.login(userInputField.getText(), passwordField.getText());
+            } catch (LoginException error){
+                errorLabel.setText(error.getMessage());
+                return;
             }
+            errorLabel.setText("");
+            programWindows.closeWindow(WindowManager.LOGIN_REFERENCE_KEY);
+            programWindows.openWindow(WindowManager.DASHBOARD_REFERENCE_KEY);
         });
     }
 

@@ -3,6 +3,10 @@
 Schedulize is a desktop application that allows users to keep track of tasks, when
 they committed to working on them, and keep track of multiple task groups - called "curriculums" - at the same time.
 
+**A small note on errors**, because of the way we utilize a WindowManager to keep track of the windows in function throughout
+the program lifetime, IntelliJ will say that certain UI classes in Main are never used. While they are never called
+explicitly from Main after initialization, they are added to the WindowManager on construction, and thus kept track of.
+
 ## Design Patterns
 
 With the significant size of our project, it was paramount that we include various design patterns to avoid

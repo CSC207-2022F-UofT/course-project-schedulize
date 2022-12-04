@@ -32,8 +32,6 @@ public class CompleteTaskInteractorTest {
         schedule = new PrebuiltScheduleFactory().create();
         activeUser = new CommonUserFactory().create
                 ("username", "email@email.com", "password");
-        //readTextbook = new CommonTaskFactory().create("Read Textbook", "Read chapter 1 of Clean Architecture");
-        //attendClass = new CommonTaskFactory().create("Attend Lecture", "Tuesday 6-8pm at Bahen Centre");
 
         activeUser.setSchedule(schedule);
         schedule.addCurriculum(curriculum);

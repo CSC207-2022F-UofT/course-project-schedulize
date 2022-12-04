@@ -13,7 +13,6 @@ public class CommonTask implements Task {
     *  Attributes  *
     \* ********** */
     // Static
-    private static int taskCount = 0;
     private static final int COMPLETION_LOWER_BOUND = 0;
     private static final int COMPLETION_UPPER_BOUND = 100;
 
@@ -67,7 +66,6 @@ public class CommonTask implements Task {
     /* ************* *\
     *  Functionality  *
     \* ************* */
-    // Public
     /**
      * Returns whether this CommonTask's completion is set to 100.
      *
@@ -86,14 +84,6 @@ public class CommonTask implements Task {
      */
     private static boolean completionWithinBounds(int completion) {
         return (completion >= COMPLETION_LOWER_BOUND && completion <= COMPLETION_UPPER_BOUND);
-    }
-
-    //Private
-    /**
-     * Gets the ID for the next task in memory
-     */
-    private static int getNextID() {
-        return taskCount++;
     }
 
     /* **************** *\
@@ -138,16 +128,6 @@ public class CommonTask implements Task {
     @Override
     public int getId() {
         return this.id;
-    }
-
-    /**
-     * Get the total amount of tasks there are.
-     *
-     * @return the static taskCount attribute
-     */
-    @Override
-    public int getTaskCount() {
-        return taskCount;
     }
 
     /**

@@ -8,8 +8,6 @@ import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.*;
 import javax.swing.tree.DefaultTreeModel;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
@@ -174,23 +172,20 @@ public class TaskTreeUI extends CentralWindow implements CurriculumDependentWind
      * A button listener to add tasks
      */
     private void addTaskListener() {
-        this.addTaskButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                JFrame createTaskWindow = programWindows.getWindow(WindowManager.CREATE_TASK_REFERENCE_KEY);
-                DefaultMutableTreeNode node = (DefaultMutableTreeNode)
-                        taskTree.getLastSelectedPathComponent();
-                if (node == null) {
-                    ((TaskDependentWindow) createTaskWindow).setTaskID(displayController.getRoot(displayId).getId());
-                } else {
-                    String nodeInfo = (String) node.getUserObject();
-                    ((TaskDependentWindow) createTaskWindow).setTaskID(parseNodeTextForID(nodeInfo));
-                }
-                ((CurriculumDependentWindow) createTaskWindow).setCurriculumID(displayId);
-                programWindows.openWindow(WindowManager.CREATE_TASK_REFERENCE_KEY);
-                programWindows.closeWindow(WindowManager.TASKTREE_REFERENCE_KEY);
-                programWindows.closeWindow(WindowManager.TASK_REFERENCE_KEY);
+        this.addTaskButton.addActionListener(e -> {
+            JFrame createTaskWindow = programWindows.getWindow(WindowManager.CREATE_TASK_REFERENCE_KEY);
+            DefaultMutableTreeNode node = (DefaultMutableTreeNode)
+                    taskTree.getLastSelectedPathComponent();
+            if (node == null) {
+                ((TaskDependentWindow) createTaskWindow).setTaskID(displayController.getRoot(displayId).getId());
+            } else {
+                String nodeInfo = (String) node.getUserObject();
+                ((TaskDependentWindow) createTaskWindow).setTaskID(parseNodeTextForID(nodeInfo));
             }
+            ((CurriculumDependentWindow) createTaskWindow).setCurriculumID(displayId);
+            programWindows.openWindow(WindowManager.CREATE_TASK_REFERENCE_KEY);
+            programWindows.closeWindow(WindowManager.TASKTREE_REFERENCE_KEY);
+            programWindows.closeWindow(WindowManager.TASK_REFERENCE_KEY);
         });
     }
 
@@ -198,13 +193,10 @@ public class TaskTreeUI extends CentralWindow implements CurriculumDependentWind
      * A button listener to go back to the dashboard
      */
     private void backButtonListener() {
-        this.backButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                programWindows.openWindow(WindowManager.DASHBOARD_REFERENCE_KEY);
-                programWindows.closeWindow(WindowManager.TASKTREE_REFERENCE_KEY);
-                programWindows.closeWindow(WindowManager.TASK_REFERENCE_KEY);
-            }
+        this.backButton.addActionListener(e -> {
+            programWindows.openWindow(WindowManager.DASHBOARD_REFERENCE_KEY);
+            programWindows.closeWindow(WindowManager.TASKTREE_REFERENCE_KEY);
+            programWindows.closeWindow(WindowManager.TASK_REFERENCE_KEY);
         });
     }
 

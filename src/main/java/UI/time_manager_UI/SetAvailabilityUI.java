@@ -6,8 +6,6 @@ import use_cases.set_availability.SetAvailabilityController;
 import use_cases.set_availability.SetAvailabilityViewInterface;
 
 import javax.swing.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -93,13 +91,10 @@ public class SetAvailabilityUI extends CentralWindow implements SetAvailabilityV
      * Action Listener for Back Button
      */
     private void setBackButtonListener() {
-        backButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                errorLabel.setText("");
-                programWindows.openWindow(WindowManager.AVAILABILITY_REFERENCE_KEY);
-                programWindows.closeWindow(WindowManager.SET_AVAILABILITY_REFERENCE_KEY);
-            }
+        backButton.addActionListener(e -> {
+            errorLabel.setText("");
+            programWindows.openWindow(WindowManager.AVAILABILITY_REFERENCE_KEY);
+            programWindows.closeWindow(WindowManager.SET_AVAILABILITY_REFERENCE_KEY);
         });
     }
 
@@ -117,29 +112,26 @@ public class SetAvailabilityUI extends CentralWindow implements SetAvailabilityV
      * Action Listener for Confirm Button
      */
     private void confirmListener() {
-        confirmButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                List<String> text = new ArrayList<>();
-                text.add(mondayFrom.getText() + mondayTo.getText());
-                text.add(tuesdayFrom.getText() + tuesdayTo.getText());
-                text.add(wednesdayFrom.getText() + wednesdayTo.getText());
-                text.add(thursdayFrom.getText() + thursdayTo.getText());
-                text.add(fridayFrom.getText() + fridayTo.getText());
-                text.add(saturdayFrom.getText() + saturdayTo.getText());
-                text.add(sundayFrom.getText() + sundayTo.getText());
-                String[] avaiabilityArray = new String[text.size()];
-                text.toArray(avaiabilityArray);
-                for (String availability: avaiabilityArray) {
-                    if (availability.length() != 4) {
-                        errorLabel.setText("Must give two digits for hours");
-                        return;
-                    }
+        confirmButton.addActionListener(e -> {
+            List<String> text = new ArrayList<>();
+            text.add(mondayFrom.getText() + mondayTo.getText());
+            text.add(tuesdayFrom.getText() + tuesdayTo.getText());
+            text.add(wednesdayFrom.getText() + wednesdayTo.getText());
+            text.add(thursdayFrom.getText() + thursdayTo.getText());
+            text.add(fridayFrom.getText() + fridayTo.getText());
+            text.add(saturdayFrom.getText() + saturdayTo.getText());
+            text.add(sundayFrom.getText() + sundayTo.getText());
+            String[] avaiabilityArray = new String[text.size()];
+            text.toArray(avaiabilityArray);
+            for (String availability: avaiabilityArray) {
+                if (availability.length() != 4) {
+                    errorLabel.setText("Must give two digits for hours");
+                    return;
                 }
-                errorLabel.setText("");
-                controller.create(avaiabilityArray);
-                programWindows.openWindow(WindowManager.SET_AVAILABILITY_REFERENCE_KEY);
             }
+            errorLabel.setText("");
+            controller.create(avaiabilityArray);
+            programWindows.openWindow(WindowManager.SET_AVAILABILITY_REFERENCE_KEY);
         });
     }
 }
