@@ -25,6 +25,12 @@ public class CommonTimeBlockManager implements TimeBlockManager {
     /* ************ *\
     *  Constructors  *
     \* ************ */
+    /**
+     * Constructs a CommonTimeBlockManager
+     *
+     * @param timeBlocks A starting list of TimeBlocks for this CommonTimeBlockManager to hold
+     * @param timeBlockFactory A factory with which to create new TimeBlocks
+     */
     public CommonTimeBlockManager(List<TimeBlock> timeBlocks, TimeBlockFactory timeBlockFactory) {
         this.timeBlockFactory = timeBlockFactory;
         for (TimeBlock t : timeBlocks) {

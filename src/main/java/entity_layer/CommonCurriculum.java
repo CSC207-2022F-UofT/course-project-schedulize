@@ -29,6 +29,14 @@ public class CommonCurriculum implements Curriculum {
     /* ************ *\
     *  Constructors  *
     \* ************ */
+    /**
+     * Constructs a CommonCurriculum
+     *
+     * @param goal The CommonCurriculum's root TaskTree
+     * @param workTimes The TimeManager dictating when this curriculum is to be worked on
+     * @param weekSchedule The TimeManager dictating what times, this week, this curriculum is to be worked on
+     * @param name The CommonCurriculum's name
+     */
     public CommonCurriculum(TaskTree goal, TimeBlockManager workTimes, TimeBlockManager weekSchedule, String name) {
         this.goal = goal;
         this.workTimes = workTimes;

@@ -21,6 +21,12 @@ public class CommonTimeBlock implements TimeBlock {
     /* ************ *\
     *  Constructors  *
     \* ************ */
+    /**
+     * Constructs a CommonTimeBlock
+     *
+     * @param startTime When this CommonTimeBlock begins
+     * @param endTime When this CommonTimeBlock ends
+     */
     public CommonTimeBlock(LocalDateTime startTime, LocalDateTime endTime) {
         this.startTime = startTime;
         this.endTime = endTime;

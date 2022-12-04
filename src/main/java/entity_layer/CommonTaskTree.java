@@ -54,9 +54,6 @@ public class CommonTaskTree implements TaskTree {
         taskTree.setSuperTaskTree(this);
 
         this.updateTask();
-
-        // TODO: Because this involves updating trees, there might be an error at some point if a tree doesn't
-        //  have a task. I might make an exception class for when a tree doesn't have a task, and it was supposed to.
     }
 
     /**
@@ -68,15 +65,12 @@ public class CommonTaskTree implements TaskTree {
      */
     @Override
     public boolean removeChildTaskTree(TaskTree taskTree) {
-        // Check if it's a direct subtree
         if (this.removeSubTaskTree(taskTree))
             return true;
-        // Recurse on all subtrees
         else {
             for (TaskTree subTaskTree : this.subTaskTrees) {
                 if (subTaskTree.removeChildTaskTree(taskTree)) return true;
             }
-            // If we never returned, then we never had a true removal of the taskTree, so it was not removed.
             return false;
         }
     }
@@ -90,13 +84,10 @@ public class CommonTaskTree implements TaskTree {
      */
     @Override
     public TaskTree getChildTaskTreeByTask(Task task) {
-        // Check if this is the matching tree
         if (this.task == task)
             return this;
-        // Next, check if any of the subtrees might have it
         else {
             for (TaskTree taskTree : this.subTaskTrees) {
-                // Store this given subTree's candidate to be compared
                 TaskTree candidate = taskTree.getChildTaskTreeByTask(task);
                 if (candidate != null)
                     return candidate;
@@ -193,9 +184,6 @@ public class CommonTaskTree implements TaskTree {
 
         if (this.superTaskTree != null)
             this.superTaskTree.updateTask();
-
-        // Now that I'm writing this, I'm realizing that the recursive call to this TaskTree's subTaskTrees will cause
-        //  updateTask() to be called over and over again. I'll have to think of a way to optimize this.
     }
 
     /**
@@ -220,8 +208,6 @@ public class CommonTaskTree implements TaskTree {
      */
     @Override
     public void updateTask() {
-        // TODO: This is a TEMPORARY FIX. If there is no task here, it just returns none. This is just so that the tests
-        //  that test other aspects of the code will run, regardless of whether this is implemented yet.
         if (this.task == null)
             return;
 

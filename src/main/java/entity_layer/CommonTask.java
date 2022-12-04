@@ -27,7 +27,6 @@ public class CommonTask implements Task {
     /* ************ *\
     *  Constructors  *
     \* ************ */
-
     /**
      * Constructs a CommonTask object with the provided name and description, setting duration and completion to 0
      *
@@ -68,6 +67,7 @@ public class CommonTask implements Task {
     /* ************* *\
     *  Functionality  *
     \* ************* */
+    // Public
     /**
      * Returns whether this CommonTask's completion is set to 100.
      *
@@ -99,7 +99,6 @@ public class CommonTask implements Task {
     /* **************** *\
     *  Attribute Access  *
     \* **************** */
-
     // Getters
     /**
      * Get this CommonTask's completion level.
